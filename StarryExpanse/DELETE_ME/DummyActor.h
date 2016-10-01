@@ -6,9 +6,9 @@
 UCLASS()
 class STARRYEXPANSE_API ADummyActor : public AActor
 {
-	GENERATED_BODY()
-	
-public:	
-	ADummyActor();
+   GENERATED_BODY()
+
+public:
+   ADummyActor();
 
 };

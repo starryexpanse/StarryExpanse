@@ -5,7 +5,7 @@
 ASECharacterState::ASECharacterState() : Super()
 {
     #if WITH_EDITOR
-	   CursorState = ECharacterCursorState::Uncontrolled;
+      CursorState = ECharacterCursorState::Uncontrolled;
     #else
         CursorState = ECharacterCursorState::Locked;
     #endif

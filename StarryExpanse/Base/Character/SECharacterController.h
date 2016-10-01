@@ -7,13 +7,13 @@
 UCLASS(Config = Game)
 class STARRYEXPANSE_API ASECharacterController : public APlayerController
 {
-	GENERATED_BODY()
+   GENERATED_BODY()
 
 public:
-	/* Class Contructor */
-	ASECharacterController();
+   /* Class Contructor */
+   ASECharacterController();
 
-	/* Public Overrides */
-	virtual void BeginPlay() override;
-	virtual void Tick(float DeltaSeconds) override;
+   /* Public Overrides */
+   virtual void BeginPlay() override;
+   virtual void Tick(float DeltaSeconds) override;
 };

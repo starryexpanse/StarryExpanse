@@ -3,5 +3,5 @@
 
 ADummyActor::ADummyActor()
 {
-	PrimaryActorTick.bCanEverTick = true;
+   PrimaryActorTick.bCanEverTick = true;
 }

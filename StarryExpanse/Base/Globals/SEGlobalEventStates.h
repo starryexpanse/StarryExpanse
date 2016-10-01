@@ -12,9 +12,9 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FSEActorClickedEvent, AActor*, Acto
 UCLASS()
 class USEGlobalEventStates : public UObject
 {
-	GENERATED_BODY()
+   GENERATED_BODY()
 
 public:
-	static FSEActorInitializedEvent OnActorInitialized;
-	static FSEActorClickedEvent OnActorClicked;
+   static FSEActorInitializedEvent OnActorInitialized;
+   static FSEActorClickedEvent OnActorClicked;
 };
