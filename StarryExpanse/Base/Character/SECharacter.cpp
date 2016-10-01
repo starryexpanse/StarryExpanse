@@ -39,7 +39,7 @@ void ASECharacter::BeginPlay()
    Super::BeginPlay();
 
    auto PC = Cast<APlayerController>(Controller);
-   if (false && PC) {
+   if (PC) {
       PC->bShowMouseCursor = false;
       PC->bEnableClickEvents = true;
       PC->bEnableMouseOverEvents = true;
