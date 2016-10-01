@@ -1,0 +1,162 @@
+#include "StarryExpanse.h"
+#include "GameFramework/InputSettings.h"
+#include "SECharacterState.h"
+#include "SECharacter.h"
+
+DEFINE_LOG_CATEGORY_STATIC(LogFPChar, Warning, All);
+
+//////////////////////////////////////////////////////////////////////////
+// ASECharacter
+
+ASECharacter::ASECharacter() : Super()
+{
+	// Set size for collision capsule
+	GetCapsuleComponent()->InitCapsuleSize(5.421325f, 44.f);
+
+	// Set our turn rates for input
+	BaseTurnRate = 45.f;
+	BaseLookUpRate = 45.f;
+	auto movement = CastChecked<UCharacterMovementComponent>(GetMovementComponent());
+	movement->MaxWalkSpeed = 100.f;
+
+	// Create a CameraComponent
+	CameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
+	CameraComponent->AttachParent = GetCapsuleComponent();
+	CameraComponent->RelativeLocation = FVector(0.f, 0.f, GetCapsuleComponent()->GetUnscaledCapsuleHalfHeight()); // Position the camera
+	CameraComponent->bUsePawnControlRotation = true;
+}
+
+void ASECharacter::BeginPlay()
+{
+	Super::BeginPlay();
+
+	auto PC = Cast<APlayerController>(Controller);
+	if (PC) {
+		PC->bShowMouseCursor = false;
+		PC->bEnableClickEvents = true;
+		PC->bEnableMouseOverEvents = true;
+	}
+}
+
+//////////////////////////////////////////////////////////////////////////
+// Input
+
+void ASECharacter::SetupPlayerInputComponent(class UInputComponent* InputComponent)
+{
+	Super::SetupPlayerInputComponent(InputComponent);
+
+	// set up gameplay key bindings
+	check(InputComponent);
+
+	InputComponent->BindAction("Toggle Cursor Mode", EInputEvent::IE_Pressed, this, &ASECharacter::ToggleCursorMode);
+	InputComponent->BindAction("Debug_ToggleZoomMode", EInputEvent::IE_Pressed, this, &ASECharacter::ToggleZoomMode);
+	InputComponent->BindAxis("MoveForward", this, &ASECharacter::MoveForward);
+	InputComponent->BindAxis("MoveRight", this, &ASECharacter::MoveRight);
+
+	// We have 2 versions of the rotation bindings to handle different kinds of devices differently
+	// "turn" handles devices that provide an absolute delta, such as a mouse.
+	// "turnrate" is for devices that we choose to treat as a rate of change, such as an analog joystick
+	InputComponent->BindAxis("Turn", this, &ASECharacter::Turn);
+	InputComponent->BindAxis("TurnRate", this, &ASECharacter::TurnAtRate);
+	InputComponent->BindAxis("LookUp", this, &ASECharacter::LookUp);
+	InputComponent->BindAxis("LookUpRate", this, &ASECharacter::LookUpAtRate);
+}
+
+void ASECharacter::ToggleCursorMode()
+{
+	if (auto PS = CastChecked<ASECharacterState>(PlayerState))
+	{
+		switch (PS->CursorState)
+		{
+		case ECharacterCursorState::Locked:
+			PS->CursorState = ECharacterCursorState::Free;
+			break;
+		case ECharacterCursorState::Free:
+		default:
+			PS->CursorState = ECharacterCursorState::Locked;
+			break;
+		}
+	}
+}
+
+void ASECharacter::ToggleZoomMode()
+{
+	auto ZoomStateString = FString();
+	switch (ZoomState)
+	{
+	case ECharacterZoomState::Outward:
+		ZoomStateString = TEXT("None");
+		ZoomState = ECharacterZoomState::None;
+		break;
+	case ECharacterZoomState::Inward:
+		ZoomStateString = TEXT("Outward");
+		ZoomState = ECharacterZoomState::Outward;
+		break;
+	case ECharacterZoomState::None:
+	default:
+		ZoomStateString = TEXT("Inward");
+		ZoomState = ECharacterZoomState::Inward;
+		break;
+	}
+
+	auto Message = FString(TEXT("ZoomState set to: ")).Append(ZoomStateString);
+	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Cyan, Message);
+}
+
+void ASECharacter::MoveForward(float Value)
+{
+	if (State != ECharacterState::Idle || ZoomState != ECharacterZoomState::None)
+		return;
+
+	auto PS = CastChecked<ASECharacterState>(PlayerState);
+	if (!PS) return;
+
+	if (PS->CursorState == ECharacterCursorState::Locked && Value != 0.0f)
+		AddMovementInput(GetActorForwardVector(), Value);
+}
+
+void ASECharacter::MoveRight(float Value)
+{
+	if (State != ECharacterState::Idle || ZoomState != ECharacterZoomState::None)
+		return;
+
+	auto PS = CastChecked<ASECharacterState>(PlayerState);
+	if (!PS) return;
+
+	if (PS->CursorState == ECharacterCursorState::Locked && Value != 0.0f)
+		AddMovementInput(GetActorRightVector(), Value);
+}
+
+void ASECharacter::Turn(float Val)
+{
+	if (State != ECharacterState::Idle || ZoomState != ECharacterZoomState::None)
+		return;
+
+	auto PS = CastChecked<ASECharacterState>(PlayerState);
+	if (!PS) return;
+
+	if (PS->CursorState == ECharacterCursorState::Locked)
+		AddControllerYawInput(Val);
+}
+
+void ASECharacter::LookUp(float Val)
+{
+	if (State != ECharacterState::Idle || ZoomState != ECharacterZoomState::None)
+		return;
+
+	auto PS = CastChecked<ASECharacterState>(PlayerState);
+	if (!PS) return;
+
+	if (PS->CursorState == ECharacterCursorState::Locked)
+		AddControllerPitchInput(Val);
+}
+
+void ASECharacter::TurnAtRate(float Rate)
+{
+	Turn(Rate * BaseTurnRate * GetWorld()->GetDeltaSeconds());
+}
+
+void ASECharacter::LookUpAtRate(float Rate)
+{
+	LookUp(Rate * BaseLookUpRate * GetWorld()->GetDeltaSeconds());
+}
