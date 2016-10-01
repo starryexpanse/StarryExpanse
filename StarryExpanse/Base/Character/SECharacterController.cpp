@@ -5,6 +5,11 @@
 
 ASECharacterController::ASECharacterController() : Super()
 {
+	#if WITH_EDITOR
+    	this->bShowMouseCursor = true;
+    #else
+    	this->bShowMouseCursor = false;
+    #endif
 }
 
 void ASECharacterController::BeginPlay()
@@ -25,13 +30,21 @@ void ASECharacterController::Tick(float DeltaSeconds)
 		FViewport* Viewport = ViewportClient->Viewport;
 		FVector2D ViewportSize;
 
+
 		switch (PS->CursorState)
 		{
+		case ECharacterCursorState::Uncontrolled:
+			this->bShowMouseCursor = true;
+			Viewport->LockMouseToViewport(false);
+			Viewport->CaptureMouse(false);
+			break;
 		case ECharacterCursorState::Free:
+    		this->bShowMouseCursor = false;
 			Viewport->LockMouseToViewport(true);
 			Viewport->CaptureMouse(false);
 			break;
 		case ECharacterCursorState::Locked:
+    		this->bShowMouseCursor = false;
 			Viewport->LockMouseToViewport(true);
 			Viewport->CaptureMouse(true);
 			ViewportClient->GetViewportSize(ViewportSize);

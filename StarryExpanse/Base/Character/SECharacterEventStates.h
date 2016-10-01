@@ -29,9 +29,13 @@ enum class ECharacterZoomState : uint8
 UENUM(BlueprintType)
 enum class ECharacterCursorState : uint8
 {
-	// Locked:		Cursor is locked to the center of the screen
+	// Uncontrolled: Cursor is not controlled at all by the engine
+	Uncontrolled    UMETA(DisplayName = "Uncontrolled"),
+
+	// Locked: Cursor is locked to the center of the screen
 	Locked			UMETA(DisplayName = "Locked"),
-	// Free:		View is locked, but cursor can roam freely
+
+	// Free: View is locked, but cursor can roam freely
 	Free			UMETA(DisplayName = "Free")
 };
 

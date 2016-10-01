@@ -18,6 +18,7 @@ void ASEHUD::DrawHUD()
 {
 	Super::DrawHUD();
 
+	/*
 	if (IsValid(CursorTexture.Texture))
 	{
 		// Find center of the Canvas
@@ -44,6 +45,7 @@ void ASEHUD::DrawHUD()
 		TileItem.SetColor(FLinearColor::FromSRGBColor(FColor::White.WithAlpha(uint8(CursorOpacity * float(255)))));
 		Canvas->DrawItem(TileItem);
 	}
+	*/
 }
 
 UTexture2D *ASEHUD::GetCursorTexture() {

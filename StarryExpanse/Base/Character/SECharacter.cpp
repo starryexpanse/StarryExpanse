@@ -26,12 +26,20 @@ ASECharacter::ASECharacter() : Super()
 	CameraComponent->bUsePawnControlRotation = true;
 }
 
+void ASECharacter::FreeCursor()
+{
+	auto PS = CastChecked<ASECharacterState>(PlayerState);
+	if (PS != nullptr) {
+		PS->CursorState = ECharacterCursorState::Uncontrolled;
+	}
+}
+
 void ASECharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
 	auto PC = Cast<APlayerController>(Controller);
-	if (PC) {
+	if (false && PC) {
 		PC->bShowMouseCursor = false;
 		PC->bEnableClickEvents = true;
 		PC->bEnableMouseOverEvents = true;

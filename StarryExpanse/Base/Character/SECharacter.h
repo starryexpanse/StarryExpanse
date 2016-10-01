@@ -15,41 +15,43 @@ class ASECharacter : public ACharacter
 	GENERATED_BODY()
 
 public:
-	/* Class Contructor */
+
+
+
 	ASECharacter();
 
-	/* Public Overrides */
 	virtual void BeginPlay() override;
 
-	/* Public Exposed Methods */
+	// Public Exposed Methods
 	UFUNCTION(BlueprintCallable, Category = "StarryExpanse|Character|Input")
 	void ToggleCursorMode();
 	UFUNCTION(BlueprintCallable, Category = "StarryExpanse|Character|Input")
 	void ToggleZoomMode();
 
-	/* Public Exposed Variables */
+	// Public Exposed Variables
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
 	float BaseTurnRate;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
 	float BaseLookUpRate;
 
-	/* Component Getters/Setters */
+	UFUNCTION(exec)
+	void FreeCursor();
+
 	FORCEINLINE UCameraComponent* GetCameraComponent() const {
 		return CameraComponent;
 	}
 
-	/* Public Member Variables */
 	ECharacterState				State;
 	ECharacterZoomState			ZoomState; // TODO: Remove this, and replace it's functionality based upon if we click inside/outside of an object
 	FSECharacterStateChanged	OnCharacterStateChanged;
 
 protected:
-	/* Protected Overrides */
+	// Protected Overrides
 	virtual void SetupPlayerInputComponent(UInputComponent* InputComponent) override;
 
-	/* Protected Event Callbacks */
+	// Protected Event Callbacks
 
-	/* Protected Methods */
+	// Protected Methods
 	void MoveForward(float Val);
 	void MoveRight(float Val);
 	void Turn(float Val);
@@ -58,7 +60,7 @@ protected:
 	void LookUpAtRate(float Rate);
 
 private:
-	/* Private Exposed Variables */
+	// Private Exposed Variables
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent*		CameraComponent;
 
