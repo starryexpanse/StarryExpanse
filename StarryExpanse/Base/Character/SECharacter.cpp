@@ -21,7 +21,7 @@ ASECharacter::ASECharacter() : Super()
 
 	// Create a CameraComponent
 	CameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
-	CameraComponent->AttachParent = GetCapsuleComponent();
+	CameraComponent->AttachToComponent(GetCapsuleComponent(), FAttachmentTransformRules::KeepWorldTransform);
 	CameraComponent->RelativeLocation = FVector(0.f, 0.f, GetCapsuleComponent()->GetUnscaledCapsuleHalfHeight()); // Position the camera
 	CameraComponent->bUsePawnControlRotation = true;
 }
