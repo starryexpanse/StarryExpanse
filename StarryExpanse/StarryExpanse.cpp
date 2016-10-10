@@ -3,5 +3,6 @@
 #include "StarryExpanse.h"
 
 
-IMPLEMENT_PRIMARY_GAME_MODULE( FDefaultGameModuleImpl, StarryExpanse, "StarryExpanse" );
- 
+IMPLEMENT_PRIMARY_GAME_MODULE(FDefaultGameModuleImpl, StarryExpanse, "StarryExpanse");
+DEFINE_LOG_CATEGORY(StarryDebug);
+

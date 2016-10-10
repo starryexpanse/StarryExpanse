@@ -4,8 +4,6 @@
 #include "Base/Character/SECharacterController.h"
 #include "Base/Character/SECharacterState.h"
 #include "SEGameMode.h"
-#include "EverPresent/EverpresentLoadGroupManager.h"
-
 
 ASEGameMode::ASEGameMode() : Super()
 {
@@ -29,9 +27,5 @@ ASEGameMode::ASEGameMode() : Super()
 }
 
 void ASEGameMode::BeginPlay() {
-
-
-  if (LoadGroupManagerComponent) {
-    LoadGroupManagerComponent->InferLoadedLevels();
-  }
+  LoadGroupManagerComponent->LoadLoadGroup();
 }

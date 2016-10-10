@@ -6,4 +6,6 @@
 #include "Engine.h"
 #include "Base/Globals/SEGlobalEventStates.h"
 
+DECLARE_LOG_CATEGORY_EXTERN(StarryDebug, Log, All);
+
 #endif

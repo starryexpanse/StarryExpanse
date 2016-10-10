@@ -11,6 +11,8 @@ public:
     // Class Constructor
     ULoadGroupManagerComponent();
 
-    void InferLoadedLevels();
+    UFUNCTION(Category = "Callbacks")
+    void LevelLoaded();
 
+    void LoadLoadGroup();
 };
