@@ -9,23 +9,22 @@
 
 ASEGameMode::ASEGameMode() : Super()
 {
-   // Use our custom Character pawn class
-   DefaultPawnClass = ASECharacter::StaticClass();
+  // Use our custom Character pawn class
+  DefaultPawnClass = ASECharacter::StaticClass();
 
-   // Use our custom PlayerController class
-   PlayerControllerClass = ASECharacterController::StaticClass();
+  // Use our custom PlayerController class
+  PlayerControllerClass = ASECharacterController::StaticClass();
 
-   // Use our custom PlayerState class
-   PlayerStateClass = ASECharacterState::StaticClass();
+  // Use our custom PlayerState class
+  PlayerStateClass = ASECharacterState::StaticClass();
 
-   // Use our custom HUD class
-   HUDClass = ASEHUD::StaticClass();
+  // Use our custom HUD class
+  HUDClass = ASEHUD::StaticClass();
 
-    // Components
-    LoadGroupManagerComponent = CreateDefaultSubobject<ULoadGroupManagerComponent>(
-        TEXT("LoadGroupManager")
-    );
-
+  // Components
+  LoadGroupManagerComponent = CreateDefaultSubobject<ULoadGroupManagerComponent>(
+    TEXT("LoadGroupManager")
+  );
 }
 
 void ASEGameMode::BeginPlay() {

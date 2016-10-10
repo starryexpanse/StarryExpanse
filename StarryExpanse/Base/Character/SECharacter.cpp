@@ -1,7 +1,7 @@
 #include "StarryExpanse.h"
+#include "SECharacter.h"
 #include "GameFramework/InputSettings.h"
 #include "SECharacterState.h"
-#include "SECharacter.h"
 
 DEFINE_LOG_CATEGORY_STATIC(LogFPChar, Warning, All);
 
