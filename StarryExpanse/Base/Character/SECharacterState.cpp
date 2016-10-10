@@ -4,6 +4,7 @@
 
 ASECharacterState::ASECharacterState() : Super()
 {
+    // TODO(philip): Should this be in BeginPlay?
     #if WITH_EDITOR
       CursorState = ECharacterCursorState::Uncontrolled;
     #else
