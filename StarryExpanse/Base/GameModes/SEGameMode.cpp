@@ -21,6 +21,7 @@ ASEGameMode::ASEGameMode() : Super()
   // Use our custom HUD class
   HUDClass = ASEHUD::StaticClass();
 
+
   // Components
   LoadGroupManagerComponent = CreateDefaultSubobject<ULoadGroupManagerComponent>(
     TEXT("LoadGroupManager")
@@ -28,5 +29,9 @@ ASEGameMode::ASEGameMode() : Super()
 }
 
 void ASEGameMode::BeginPlay() {
-    auto world = GetWorld();
+
+
+  if (LoadGroupManagerComponent) {
+    LoadGroupManagerComponent->InferLoadedLevels();
+  }
 }

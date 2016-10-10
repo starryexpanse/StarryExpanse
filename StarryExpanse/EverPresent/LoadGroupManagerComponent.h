@@ -11,5 +11,6 @@ public:
     // Class Constructor
     ULoadGroupManagerComponent();
 
+    void InferLoadedLevels();
 
 };
