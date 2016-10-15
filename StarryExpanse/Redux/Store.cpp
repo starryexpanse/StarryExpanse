@@ -88,6 +88,9 @@ class Store
 {
     typedef function<State(State, const Action&)> Reducer;
 
+    typedef function<void(shared_ptr<Action>)> DispatchFunctionType;
+    typedef function<void(DispatchFunctionType)> ActionCreator;
+
     class Dispatcher {
         Store& store;
         bool dispatching;
@@ -108,11 +111,19 @@ class Store
                 }
                 unhandledActions.push_back(action);
                 dispatching = true;
-                handleStuff();
+                handleOutstandingActions();
                 dispatching = false;
             }
 
-            void handleStuff() {
+            void dispatch(ActionCreator ac)
+            {
+                auto func = [&] (shared_ptr<Action> action) {
+                    dispatch(action);
+                };
+                ac(func);
+            }
+
+            void handleOutstandingActions() {
                 State currentState = store.state;
 
                 for (auto actionIt = begin(unhandledActions); actionIt != end(unhandledActions); actionIt++) {
@@ -138,24 +149,27 @@ class Store
         unique_ptr<Dispatcher> dispatcher;
 
         Store() {
-            this->dispatcher = unique_ptr<Dispatcher>(new Dispatcher(*this));
+            dispatcher = unique_ptr<Dispatcher>(new Dispatcher(*this));
         }
 };
 
-Store<State, Action> myStore;
 
 int main()
 {
+    Store<State, Action> myStore;
     myStore.dispatcher->registerReducer(mathReducer);
 
-    SetRegB act(32);
-    myStore.dispatcher->dispatch(shared_ptr<Action>(&act));
+    shared_ptr<Action> act = shared_ptr<Action>(new SetRegB(32));
+    myStore.dispatcher->dispatch(act);
 
-    SetRegA act2(1);
-    myStore.dispatcher->dispatch(shared_ptr<Action>(&act2));
+    auto anActionCreator = [] (function<void(shared_ptr<Action>)> dispatch) {
+        auto act2 = shared_ptr<Action>(new SetRegA(2));
+        dispatch(act2);
 
-    AddAB act3;
-    myStore.dispatcher->dispatch(shared_ptr<Action>(&act3));
+        auto act3 = shared_ptr<Action>(new AddAB());
+        dispatch(act3);
+    };
+    myStore.dispatcher->dispatch(anActionCreator);
 
     cout << "Result is " << myStore.state.resultRegister << endl;
 
