@@ -9,7 +9,8 @@ class ASEGameMode : public AGameMode
    GENERATED_BODY()
 
 public:
-   ASEGameMode();
+    ASEGameMode();
+
     virtual void BeginPlay() override;
 
     UPROPERTY(BlueprintReadOnly)
