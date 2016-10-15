@@ -7,60 +7,54 @@
 
 using namespace std;
 
-class State
+struct State
 {
-    public:
-        int registerA;
-        int registerB;
-        int resultRegister;
-        void print() {
-            cout << "regA: " << registerA << endl;
-            cout << "regB: " << registerB << endl;
-            cout << "result: " << resultRegister << endl;
-        }
-};
-
-
-
-
-class Action
-{
-    public:
-        string type;
-        string module;
-};
-
-class SetRegA : public Action
-{
-    public:
-        int nextRegA;
-
-    SetRegA(int nextRegA) : nextRegA(nextRegA) {
-        type = "SetRegA";
-        module = "Foo";
+    int registerA;
+    int registerB;
+    int resultRegister;
+    void print() {
+        cout << "regA: " << registerA << endl;
+        cout << "regB: " << registerB << endl;
+        cout << "result: " << resultRegister << endl;
     }
 };
 
-class SetRegB : public Action
+struct Action
 {
-    public:
-        int nextRegB;
+    string type;
+    string module;
+    Action (string type, string module): type(type), module(module) {}
+};
 
-    SetRegB(int nextRegB) : nextRegB(nextRegB) {
-        type = "SetRegB";
-        module = "Foo";
+struct SetRegA : Action
+{
+    int nextRegA;
+
+    SetRegA(int nextRegA) :
+        Action("SetRegA", "MATH"),
+        nextRegA(nextRegA)
+    {
     }
 };
 
-class AddAB : public Action
+struct SetRegB : Action
 {
-    public:
-    AddAB() {
-        type = "AddAB";
-        module = "Foo";
+    int nextRegB;
+
+    SetRegB(int nextRegB) :
+        Action("SetRegB", "MATH"),
+        nextRegB(nextRegB)
+    {
     }
 };
 
+struct AddAB : Action
+{
+    AddAB() :
+        Action("AddAB", "MATH")
+    {
+    }
+};
 
 State handleSetRegA(State state, const SetRegA& action) {
     state.registerA = action.nextRegA;
@@ -77,14 +71,15 @@ State handleAddAB(State state, const AddAB& action) {
     return state;
 }
 
-
 State mathReducer(State state, const Action& action) {
-    if (action.type == "SetRegA")
-        return handleSetRegA(state, static_cast<const SetRegA&>(action));
-    if (action.type == "SetRegB")
-        return handleSetRegB(state, static_cast<const SetRegB&>(action));
-    if (action.type == "AddAB")
-        return handleAddAB(state, static_cast<const AddAB&>(action));
+    if (action.module == "MATH") {
+        if (action.type == "SetRegA")
+            return handleSetRegA(state, static_cast<const SetRegA&>(action));
+        if (action.type == "SetRegB")
+            return handleSetRegB(state, static_cast<const SetRegB&>(action));
+        if (action.type == "AddAB")
+            return handleAddAB(state, static_cast<const AddAB&>(action));
+    }
     return state;
 }
 
@@ -97,7 +92,7 @@ class Store
         Store& store;
         bool dispatching;
         vector<Reducer> reducers;
-        deque<Action*> unhandledActions;
+        deque< shared_ptr<Action> > unhandledActions;
 
         public:
             Dispatcher(Store& store)
@@ -105,7 +100,7 @@ class Store
             {
             }
 
-            void dispatch(Action* action)
+            void dispatch(shared_ptr<Action> action)
             {
                 if (dispatching) {
                     cout << "Cannot dispatch inside of a reducer!" << endl;
@@ -140,10 +135,10 @@ class Store
 
     public:
         State state;
-        Dispatcher* dispatcher;
+        unique_ptr<Dispatcher> dispatcher;
 
         Store() {
-            this->dispatcher = new Dispatcher(*this);
+            this->dispatcher = unique_ptr<Dispatcher>(new Dispatcher(*this));
         }
 };
 
@@ -154,13 +149,13 @@ int main()
     myStore.dispatcher->registerReducer(mathReducer);
 
     SetRegB act(32);
-    myStore.dispatcher->dispatch(&act);
+    myStore.dispatcher->dispatch(shared_ptr<Action>(&act));
 
     SetRegA act2(1);
-    myStore.dispatcher->dispatch(&act2);
+    myStore.dispatcher->dispatch(shared_ptr<Action>(&act2));
 
     AddAB act3;
-    myStore.dispatcher->dispatch(&act3);
+    myStore.dispatcher->dispatch(shared_ptr<Action>(&act3));
 
     cout << "Result is " << myStore.state.resultRegister << endl;
 
