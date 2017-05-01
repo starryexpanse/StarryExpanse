@@ -21,7 +21,7 @@ ASECharacter::ASECharacter() : Super()
 
    // Create a CameraComponent
    CameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
-   CameraComponent->AttachToComponent(GetCapsuleComponent(), FAttachmentTransformRules::KeepWorldTransform);
+   CameraComponent->SetupAttachment(GetCapsuleComponent());
    CameraComponent->RelativeLocation = FVector(0.f, 0.f, GetCapsuleComponent()->GetUnscaledCapsuleHalfHeight()); // Position the camera
    CameraComponent->bUsePawnControlRotation = true;
 }
@@ -49,25 +49,25 @@ void ASECharacter::BeginPlay()
 //////////////////////////////////////////////////////////////////////////
 // Input
 
-void ASECharacter::SetupPlayerInputComponent(class UInputComponent* InputComponent)
+void ASECharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
-   Super::SetupPlayerInputComponent(InputComponent);
+   Super::SetupPlayerInputComponent(PlayerInputComponent);
 
    // set up gameplay key bindings
-   check(InputComponent);
+   check(PlayerInputComponent);
 
-   InputComponent->BindAction("Toggle Cursor Mode", EInputEvent::IE_Pressed, this, &ASECharacter::ToggleCursorMode);
-   InputComponent->BindAction("Debug_ToggleZoomMode", EInputEvent::IE_Pressed, this, &ASECharacter::ToggleZoomMode);
-   InputComponent->BindAxis("MoveForward", this, &ASECharacter::MoveForward);
-   InputComponent->BindAxis("MoveRight", this, &ASECharacter::MoveRight);
+   PlayerInputComponent->BindAction("Toggle Cursor Mode", EInputEvent::IE_Pressed, this, &ASECharacter::ToggleCursorMode);
+   PlayerInputComponent->BindAction("Debug_ToggleZoomMode", EInputEvent::IE_Pressed, this, &ASECharacter::ToggleZoomMode);
+   PlayerInputComponent->BindAxis("MoveForward", this, &ASECharacter::MoveForward);
+   PlayerInputComponent->BindAxis("MoveRight", this, &ASECharacter::MoveRight);
 
    // We have 2 versions of the rotation bindings to handle different kinds of devices differently
    // "turn" handles devices that provide an absolute delta, such as a mouse.
    // "turnrate" is for devices that we choose to treat as a rate of change, such as an analog joystick
-   InputComponent->BindAxis("Turn", this, &ASECharacter::Turn);
-   InputComponent->BindAxis("TurnRate", this, &ASECharacter::TurnAtRate);
-   InputComponent->BindAxis("LookUp", this, &ASECharacter::LookUp);
-   InputComponent->BindAxis("LookUpRate", this, &ASECharacter::LookUpAtRate);
+   PlayerInputComponent->BindAxis("Turn", this, &ASECharacter::Turn);
+   PlayerInputComponent->BindAxis("TurnRate", this, &ASECharacter::TurnAtRate);
+   PlayerInputComponent->BindAxis("LookUp", this, &ASECharacter::LookUp);
+   PlayerInputComponent->BindAxis("LookUpRate", this, &ASECharacter::LookUpAtRate);
 }
 
 void ASECharacter::ToggleCursorMode()

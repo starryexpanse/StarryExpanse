@@ -47,7 +47,7 @@ public:
 
 protected:
    // Protected Overrides
-   virtual void SetupPlayerInputComponent(UInputComponent* InputComponent) override;
+   void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 
    // Protected Event Callbacks
 
