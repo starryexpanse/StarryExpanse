@@ -4,8 +4,8 @@ using UnrealBuildTool;
 
 public class StarryExpanse : ModuleRules
 {
-   public StarryExpanse(TargetInfo Target)
-   {
-        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "UMG", "Slate", "SlateCore" });
-   }
+	public StarryExpanse(ReadOnlyTargetRules Target) : base(Target)
+	{
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "HeadMountedDisplay", "Slate" });
+	}
 }

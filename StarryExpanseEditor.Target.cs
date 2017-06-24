@@ -5,21 +5,9 @@ using System.Collections.Generic;
 
 public class StarryExpanseEditorTarget : TargetRules
 {
-	public StarryExpanseEditorTarget(TargetInfo Target)
+	public StarryExpanseEditorTarget(TargetInfo Target) : base(Target)
 	{
 		Type = TargetType.Editor;
-	}
-
-	//
-	// TargetRules interface.
-	//
-
-	public override void SetupBinaries(
-		TargetInfo Target,
-		ref List<UEBuildBinaryConfiguration> OutBuildBinaryConfigurations,
-		ref List<string> OutExtraModuleNames
-		)
-	{
-		OutExtraModuleNames.Add("StarryExpanse");
+		ExtraModuleNames.Add("StarryExpanse");
 	}
 }
