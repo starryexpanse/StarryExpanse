@@ -23,8 +23,6 @@ void ASEHUD::DrawHUD()
       // Find center of the Canvas
       const FVector2D Center(Canvas->ClipX * 0.5f, Canvas->ClipY * 0.5f);
 
-      auto Character = CastChecked<ASECharacter>(GetOwningPawn());
-      auto aspect = Character->GetCameraComponent()->AspectRatio;
       auto MousePosition = FVector2D::ZeroVector;
       if (!GetOwningPlayerController()->GetMousePosition(MousePosition.X, MousePosition.Y))
          MousePosition = Center;
