@@ -1,7 +1,0 @@
-During the cleanup process, several actors were reparented to use DummyActor, allowing the ability to remove several other references.
-I could've just used the base Actor class, but this helped to disambiguate what was already a standard Actor vs what was changed in the project.
-The idea behind doing it this way was to keep have placed objects (particularly in /O) keep their current transforms within the level.
-Now that cleanup has been finished, the only remaining task is to remove DummyActor (and the corresponding DELETE_ME folder).
-But unfortunately, removing the DummyActor reference would require the removal of a few other placed objects.
-And for whatever reason, one of those references appears to be very difficult to remove without using "force delete", which is bad news.
-So for the time being, this folder stays put until it is safe to get rid of.
