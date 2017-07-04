@@ -1,3 +1,9 @@
 {
-   "default_line_ending": "windows",
+	"default_line_ending": "windows",
+	"folders":
+	[
+		{
+			"path": "/C/Users/ironmagma/Desktop/SE/starryexpanse/UE4/StarryExpanse/Source"
+		}
+	]
 }

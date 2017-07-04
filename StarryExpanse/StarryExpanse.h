@@ -1,8 +1,8 @@
-// Copyright 1998-2015 Epic Games, Inc. All Rights Reserved.
+// Copyright 1998-2017 Epic Games, Inc. All Rights Reserved.
 
 #pragma once
 
-#include "Engine.h"
-#include "Base/Globals/SEGlobalEventStates.h"
+#include "CoreMinimal.h"
 
+// Debugging Log
 DECLARE_LOG_CATEGORY_EXTERN(StarryDebug, Log, All);

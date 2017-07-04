@@ -6,7 +6,7 @@
 #include <vector>
 
 #include "Kismet/BlueprintFunctionLibrary.h"
-#include "Config/ELoadGroups.h"
+#include "ELoadGroups.h"
 #include "LoadGroupInfo.generated.h"
 
 typedef std::set<FName> SetType;
@@ -21,6 +21,8 @@ class STARRYEXPANSE_API ULoadGroupInfo : public UBlueprintFunctionLibrary
 
    UFUNCTION(BlueprintPure, BlueprintCallable, Category = "Load Groups")
    static bool IsLevelInLoadGroup(FName level, ELoadGroups lg);
+
+   static SetType GetLevelsInLoadGroup(ELoadGroups lg);
 
    //UFUNCTION(BlueprintPure, BlueprintCallable, Category = "Load Groups")
    ///   static void LoadGroupDifference(ELoadGroups Current, ELoadGroups Next, TArray<FName>& Unload, TArray<FName>& Load);

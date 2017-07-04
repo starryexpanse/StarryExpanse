@@ -1,0 +1,52 @@
+# A: All-Encompassing
+AGeneral: &AGeneral
+   - A_Journals
+
+# B: Boiler Island
+BCartTrackAboveWater: []
+BCartCave: []
+BTerrainOuter: []
+BDomePipe: []
+BTerrainInner: []
+BLakeArea: []
+BBoilerOutlet: []
+BTerrainPath: []
+BYtramCave: []
+BFiremarbleCave: []
+BBridgeCave: []
+BBoilerToTempleBridge: []
+BYtramDuct: []
+BOfficeExterior: []
+BOfficeInterior: []
+BMagLevDock: []
+
+# S: Shared
+SRiven: &SRiven
+   - S_Lighting_Riven
+   - S_PostProcessing_Riven
+   - S_Ocean_Riven
+
+# G: Garden Island
+   # Bases
+GBase: &GBase
+   - *AGeneral
+   - *SRiven
+GUpsideBase: &GUpsideBase
+   - G_Terrain
+   - G_WahrkTankUpper
+   - G_BubbleGarden
+   - G_Connector
+
+# Specifics
+GUpsideExterior:
+   - *GBase
+   - *GUpsideBase
+   - G_SpikeGarden
+GUpsideInterior:
+   - *GBase
+   - *GUpsideBase
+   - G_MaglevDock_B
+GDownside:
+   - *GBase
+   - G_MaglevDock_J
+   - G_WahrkTankLower

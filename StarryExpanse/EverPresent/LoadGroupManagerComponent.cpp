@@ -1,9 +1,8 @@
-#include "StarryExpanse.h"
 #include "LoadGroupManagerComponent.h"
+#include "Kismet/GameplayStatics.h"
+#include "StarryExpanse.h"
 
-/* Class constructor */
-ULoadGroupManagerComponent::ULoadGroupManagerComponent() : Super()
-{
+ULoadGroupManagerComponent::ULoadGroupManagerComponent() {
 
 }
 
