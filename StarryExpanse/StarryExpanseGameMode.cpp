@@ -9,7 +9,7 @@ AStarryExpanseGameMode::AStarryExpanseGameMode()
 {
 	// set default pawn class to our Blueprinted character
 	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnClassFinder(
-		TEXT("Blueprint'/Game/FirstPersonBP/Blueprints/FirstPersonCharacter.FirstPersonCharacter'")
+		TEXT("/Game/FirstPersonBP/Blueprints/FirstPersonCharacter")
 	);
 	DefaultPawnClass = PlayerPawnClassFinder.Class;
 
