@@ -21,7 +21,7 @@ BOfficeInterior: []
 BMagLevDock: []
 
 # S: Shared
-SRiven: &SRiven
+SRivenBase: &SRivenBase
    - S_Lighting_Riven
    - S_PostProcessing_Riven
    - S_Ocean_Riven
@@ -30,14 +30,14 @@ SRiven: &SRiven
    # Bases
 GBase: &GBase
    - *AGeneral
-   - *SRiven
+   - *SRivenBase
 GUpsideBase: &GUpsideBase
    - G_Terrain
    - G_WahrkTankUpper
    - G_BubbleGarden
    - G_Connector
 
-# Specifics
+   # Specifics
 GUpsideExterior:
    - *GBase
    - *GUpsideBase
@@ -50,3 +50,34 @@ GDownside:
    - *GBase
    - G_MaglevDock_J
    - G_WahrkTankLower
+
+# T: Temple Island
+   # Bases
+TBase: &TBase
+   - *AGeneral
+   - *SRivenBase
+   - T_Terrain
+
+   # Specifics
+TWestSide:
+   - *TBase
+   - S_GreatBridge
+   - T_SuperDome
+
+TNorthSide:
+   - *TBase
+   - S_GreatBridge
+   - T_Backstage
+   - T_Gateroom
+
+TFissureDistrict:
+   - *TBase
+   - T_Backstage
+   - T_Gateroom
+   - T_Plateaus
+   - T_NewTempleArea
+
+TSpiderTunnelDistrict:
+   - *TBase
+   - T_NewTempleArea
+   - S_Maglev_TJ

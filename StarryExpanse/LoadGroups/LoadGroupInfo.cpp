@@ -154,7 +154,7 @@ ULoadGroupInfo::ULoadGroupInfo(const FObjectInitializer& ObjectInitializer)
    ));
 
    LoadGroups.insert(Pair(
-       ELoadGroups::SRiven,
+       ELoadGroups::SRivenBase,
        {
            TEXT("S_Lighting_Riven"),
            TEXT("S_PostProcessing_Riven"),
@@ -221,6 +221,72 @@ ULoadGroupInfo::ULoadGroupInfo(const FObjectInitializer& ObjectInitializer)
            TEXT("S_Ocean_Riven"),
            TEXT("G_MaglevDock_J"),
            TEXT("G_WahrkTankLower")
+       }
+   ));
+
+   LoadGroups.insert(Pair(
+       ELoadGroups::TBase,
+       {
+           TEXT("A_Journals"),
+           TEXT("S_Lighting_Riven"),
+           TEXT("S_PostProcessing_Riven"),
+           TEXT("S_Ocean_Riven"),
+           TEXT("T_Terrain")
+       }
+   ));
+
+   LoadGroups.insert(Pair(
+       ELoadGroups::TWestSide,
+       {
+           TEXT("A_Journals"),
+           TEXT("S_Lighting_Riven"),
+           TEXT("S_PostProcessing_Riven"),
+           TEXT("S_Ocean_Riven"),
+           TEXT("T_Terrain"),
+           TEXT("S_GreatBridge"),
+           TEXT("T_SuperDome")
+       }
+   ));
+
+   LoadGroups.insert(Pair(
+       ELoadGroups::TNorthSide,
+       {
+           TEXT("A_Journals"),
+           TEXT("S_Lighting_Riven"),
+           TEXT("S_PostProcessing_Riven"),
+           TEXT("S_Ocean_Riven"),
+           TEXT("T_Terrain"),
+           TEXT("S_GreatBridge"),
+           TEXT("T_Backstage"),
+           TEXT("T_Gateroom")
+       }
+   ));
+
+   LoadGroups.insert(Pair(
+       ELoadGroups::TFissureDistrict,
+       {
+           TEXT("A_Journals"),
+           TEXT("S_Lighting_Riven"),
+           TEXT("S_PostProcessing_Riven"),
+           TEXT("S_Ocean_Riven"),
+           TEXT("T_Terrain"),
+           TEXT("T_Backstage"),
+           TEXT("T_Gateroom"),
+           TEXT("T_Plateaus"),
+           TEXT("T_NewTempleArea")
+       }
+   ));
+
+   LoadGroups.insert(Pair(
+       ELoadGroups::TSpiderTunnelDistrict,
+       {
+           TEXT("A_Journals"),
+           TEXT("S_Lighting_Riven"),
+           TEXT("S_PostProcessing_Riven"),
+           TEXT("S_Ocean_Riven"),
+           TEXT("T_Terrain"),
+           TEXT("T_NewTempleArea"),
+           TEXT("S_Maglev_TJ")
        }
    ));
 

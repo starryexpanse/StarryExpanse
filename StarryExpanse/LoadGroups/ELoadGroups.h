@@ -59,6 +59,11 @@ enum class ELoadGroups : uint8
    GUpsideBase		UMETA(DisplayName = "G: Upside Base"),
    GUpsideExterior		UMETA(DisplayName = "G: Upside Exterior"),
    GUpsideInterior		UMETA(DisplayName = "G: Upside Interior"),
-   SRiven		UMETA(DisplayName = "S: Riven")
+   SRivenBase		UMETA(DisplayName = "S: Riven Base"),
+   TBase		UMETA(DisplayName = "T: Base"),
+   TFissureDistrict		UMETA(DisplayName = "T: Fissure District"),
+   TNorthSide		UMETA(DisplayName = "T: North Side"),
+   TSpiderTunnelDistrict		UMETA(DisplayName = "T: Spider Tunnel District"),
+   TWestSide		UMETA(DisplayName = "T: West Side")
    // [[[end]]]
 };
