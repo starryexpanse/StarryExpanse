@@ -7,6 +7,7 @@
 UENUM(BlueprintType)
 enum class ELoadGroups : uint8
 {
+   AAbsoluteZero    UMETA(DisplayName = "A: Absolute Zero (aka NONE)"),
    /*
    [[[cog
    import cog

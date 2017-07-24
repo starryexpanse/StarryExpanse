@@ -31,12 +31,21 @@ public:
    UFUNCTION(Category = "Callbacks")
       void LevelLoaded();
 
+   UFUNCTION(Category = "Callbacks")
+      void LevelUnloaded();
+
 	UFUNCTION(Category = "LoadGroups", BlueprintCallable)
 		void LoadLoadGroup(ELoadGroups groupToLoad);
 
-	int levelsWaitingOn = 0;
-    int levelLoadUuidCounter = 0;
+   UFUNCTION(Category = "LoadGroups", BlueprintCallable)
+      void LoadLevelsNow();
+
+   int levelsWaitingOnUnload = 0;
+	int levelsWaitingOnLoad = 0;
+   int levelLatentActionInfoCounter = 0;
 	bool isInitialLoad = false;
+   ELoadGroups currentLoadGroup = ELoadGroups::AAbsoluteZero;
+   ELoadGroups wantedLoadGroup = ELoadGroups::AAbsoluteZero;
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

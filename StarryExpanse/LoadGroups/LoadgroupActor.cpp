@@ -2,6 +2,9 @@
 
 #include "LoadgroupActor.h"
 #include <algorithm>
+#include "Engine/LevelStreaming.h"
+#include "Classes/Kismet/GameplayStatics.h"
+#include "Runtime/Engine/Public/LevelUtils.h"
 #include "LoadGroups/ELoadGroups.h"
 #include "LoadGroups/LoadGroupInfo.h"
 #include "Kismet/GameplayStatics.h"
@@ -16,30 +19,74 @@ ALoadgroupActor::ALoadgroupActor()
 
 }
 
-
 void ALoadgroupActor::LevelLoaded() {
-   this->levelsWaitingOn--;
-   if (this->levelsWaitingOn == 0) {
+   this->levelsWaitingOnLoad--;
+   if (this->levelsWaitingOnLoad == 0) {
+      this->currentLoadGroup = this->wantedLoadGroup;
       LoadgroupLoadedEvent.Broadcast();
    }
-	UE_LOG(StarryDebug, Warning, TEXT("I loaded it! %d"), this->levelsWaitingOn);
+
+   auto wningWorld = this->GetWorld();
+   auto journals = UGameplayStatics::GetStreamingLevel(this, TEXT("A_Journals"));
+   if (journals) {
+      auto x = journals->GetName();
+      UE_LOG(StarryDebug, Warning, TEXT("I loaded it!"));
+   }
+   // FLevelUtils::MarkLevelForUnloading();
+	UE_LOG(StarryDebug, Warning, TEXT("I loaded it! %d"), this->levelsWaitingOnLoad);
 }
 
-void ALoadgroupActor::LoadLoadGroup(ELoadGroups groupToLoad) {
-   auto levels = ULoadGroupInfo::GetLevelsInLoadGroup(groupToLoad);
-   this->levelsWaitingOn = levels.size();
+void ALoadgroupActor::LevelUnloaded() {
+   this->levelsWaitingOnUnload--;
+   if (this->levelsWaitingOnUnload == 0) {
+      this->LoadLevelsNow();
+   }
+}
 
+void ALoadgroupActor::LoadLevelsNow() {
+   auto levels = ULoadGroupInfo::GetLevelsInLoadGroup(this->wantedLoadGroup);
+   // TODO don't re-load already-loaded levels
+   this->levelsWaitingOnLoad = levels.size();
    for (const auto& levelName : levels) {
-      this->levelLoadUuidCounter += 1;
+      this->levelLatentActionInfoCounter += 1;
 
       FLatentActionInfo LatentInfo;
-      LatentInfo.UUID = this->levelLoadUuidCounter;
+      LatentInfo.UUID = this->levelLatentActionInfoCounter;
       LatentInfo.Linkage = 0;
       LatentInfo.CallbackTarget = this;
       LatentInfo.ExecutionFunction = FName("LevelLoaded");
 
       UGameplayStatics::LoadStreamLevel(this, FName(levelName), true, false, LatentInfo);
    }
+}
+
+void ALoadgroupActor::LoadLoadGroup(ELoadGroups groupToLoad) {
+   this->previouslyLoadedLoadGroup = this->currentLoadGroup;
+   this->wantedLoadGroup = groupToLoad;
+
+   // Determine levels to unload
+   auto levelsToUnload = ULoadGroupInfo::GetLevelsToBeUnloaded(this->currentLoadGroup, this->wantedLoadGroup);
+
+   if (levelsToUnload.size() == 0) {
+      this->LoadLevelsNow();
+   } else {
+      this->levelsWaitingOnUnload = levelsToUnload.size();
+      for (const auto& levelName : levelsToUnload) {
+         levelLatentActionInfoCounter += 1;
+
+         FLatentActionInfo LatentInfo;
+         LatentInfo.UUID = this->levelLatentActionInfoCounter;
+         LatentInfo.Linkage = 0;
+         LatentInfo.CallbackTarget = this;
+         LatentInfo.ExecutionFunction = FName("LevelUnloaded");
+
+         UGameplayStatics::UnloadStreamLevel(this, FName(levelName), LatentInfo);
+      }
+   }
+
+   // auto level = FindStreamingLevel(UWorld* InWorld, const TCHAR* PackageName);
+
+   
 }
 
 // Called every frame

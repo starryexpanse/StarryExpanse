@@ -9,12 +9,10 @@ ULoadGroupInfo::ULoadGroupInfo(const FObjectInitializer& ObjectInitializer)
 
    typedef std::pair<ELoadGroups, std::set<FName>> Pair;
 
-
    LoadGroups.insert(Pair(
-      ELoadGroups::BLakeArea,
-      {
-         TEXT("J_Basin")
-      }
+       ELoadGroups::AAbsoluteZero,
+       {
+       }
    ));
 
    /*
@@ -314,8 +312,21 @@ SetType ULoadGroupInfo::GetLevelsInLoadGroup(ELoadGroups lg) {
       return SetType();
    }
 
-   SetType map = it->second;
-   return map;
+   SetType levels = it->second;
+   return levels;
+}
+
+
+SetType ULoadGroupInfo::GetLevelsToBeUnloaded(ELoadGroups lgCurrent, ELoadGroups lgNext) {
+  auto currentSet = ULoadGroupInfo::GetLevelsInLoadGroup(lgCurrent);
+  auto nextSet = ULoadGroupInfo::GetLevelsInLoadGroup(lgNext);
+  SetType unloadingSet;
+  for (const auto& levelName : currentSet) {
+    if (nextSet.count(levelName) == 0) {
+      unloadingSet.insert(levelName);
+    }
+  }
+  return unloadingSet;
 }
 
 //
