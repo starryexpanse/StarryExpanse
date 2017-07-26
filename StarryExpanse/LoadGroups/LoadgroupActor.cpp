@@ -61,7 +61,6 @@ void ALoadgroupActor::LoadLevelsNow() {
 }
 
 void ALoadgroupActor::LoadLoadGroup(ELoadGroups groupToLoad) {
-   this->previouslyLoadedLoadGroup = this->currentLoadGroup;
    this->wantedLoadGroup = groupToLoad;
 
    // Determine levels to unload
