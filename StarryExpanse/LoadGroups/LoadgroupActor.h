@@ -11,11 +11,11 @@
 UCLASS()
 class STARRYEXPANSE_API ALoadgroupActor : public AActor
 {
-	GENERATED_BODY()
-	
-public:	
-	// Sets default values for this actor's properties
-	ALoadgroupActor();
+   GENERATED_BODY()
+
+public:
+   // Sets default values for this actor's properties
+   ALoadgroupActor();
 
    DECLARE_DYNAMIC_MULTICAST_DELEGATE(FLoadgroupLoadedEvent);
 
@@ -34,21 +34,28 @@ public:
    UFUNCTION(Category = "Callbacks")
       void LevelUnloaded();
 
-	UFUNCTION(Category = "LoadGroups", BlueprintCallable)
-		void LoadLoadGroup(ELoadGroups groupToLoad);
+   UFUNCTION(Category = "LoadGroups", BlueprintCallable)
+      void LoadLoadGroup(ELoadGroups groupToLoad);
 
    UFUNCTION(Category = "LoadGroups", BlueprintCallable)
       void LoadLevelsNow();
 
+   UPROPERTY(BlueprintReadOnly)
    int levelsWaitingOnUnload = 0;
-	int levelsWaitingOnLoad = 0;
+
+   UPROPERTY(BlueprintReadOnly)
+   int levelsWaitingOnLoad = 0;
+   
+   UPROPERTY(BlueprintReadOnly)
    int levelLatentActionInfoCounter = 0;
-	bool isInitialLoad = false;
+   
+   UPROPERTY(BlueprintReadOnly)
+   bool isInitialLoad = false;
    ELoadGroups currentLoadGroup = ELoadGroups::AAbsoluteZero;
    ELoadGroups wantedLoadGroup = ELoadGroups::AAbsoluteZero;
    ELoadGroups previouslyLoadedLoadGroup = ELoadGroups::AAbsoluteZero;
 
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+   // Called every frame
+   virtual void Tick(float DeltaTime) override;
 };
 

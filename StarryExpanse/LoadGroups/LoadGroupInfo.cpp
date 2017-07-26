@@ -256,7 +256,8 @@ ULoadGroupInfo::ULoadGroupInfo(const FObjectInitializer& ObjectInitializer)
            TEXT("T_Terrain"),
            TEXT("S_GreatBridge"),
            TEXT("T_Backstage"),
-           TEXT("T_Gateroom")
+           TEXT("T_GateRoom"),
+           TEXT("T_SuperDome")
        }
    ));
 
@@ -269,9 +270,10 @@ ULoadGroupInfo::ULoadGroupInfo(const FObjectInitializer& ObjectInitializer)
            TEXT("S_Ocean_Riven"),
            TEXT("T_Terrain"),
            TEXT("T_Backstage"),
-           TEXT("T_Gateroom"),
+           TEXT("T_GateRoom"),
            TEXT("T_Plateaus"),
-           TEXT("T_NewTempleArea")
+           TEXT("T_NewTempleArea"),
+           TEXT("T_SuperDome")
        }
    ));
 
@@ -283,8 +285,11 @@ ULoadGroupInfo::ULoadGroupInfo(const FObjectInitializer& ObjectInitializer)
            TEXT("S_PostProcessing_Riven"),
            TEXT("S_Ocean_Riven"),
            TEXT("T_Terrain"),
+           TEXT("T_GateRoom"),
+           TEXT("T_Plateaus"),
            TEXT("T_NewTempleArea"),
-           TEXT("S_Maglev_TJ")
+           TEXT("S_Maglev_TJ"),
+           TEXT("T_SuperDome")
        }
    ));
 
