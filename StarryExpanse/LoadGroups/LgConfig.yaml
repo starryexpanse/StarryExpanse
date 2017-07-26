@@ -68,19 +68,21 @@ TNorthSide:
    - *TBase
    - S_GreatBridge
    - T_Backstage
-   - T_Gateroom
+   - T_GateRoom
    - T_SuperDome
 
 TFissureDistrict:
    - *TBase
    - T_Backstage
-   - T_Gateroom
+   - T_GateRoom
    - T_Plateaus
    - T_NewTempleArea
    - T_SuperDome
 
 TSpiderTunnelDistrict:
    - *TBase
+   - T_GateRoom
+   - T_Plateaus
    - T_NewTempleArea
    - S_Maglev_TJ
    - T_SuperDome # Ideally can split this, so it's just the superdome exterior

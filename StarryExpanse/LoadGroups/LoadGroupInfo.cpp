@@ -329,6 +329,19 @@ SetType ULoadGroupInfo::GetLevelsToBeUnloaded(ELoadGroups lgCurrent, ELoadGroups
   return unloadingSet;
 }
 
+
+SetType ULoadGroupInfo::GetLevelsToBeLoaded(ELoadGroups lgCurrent, ELoadGroups lgNext) {
+  auto currentSet = ULoadGroupInfo::GetLevelsInLoadGroup(lgCurrent);
+  auto nextSet = ULoadGroupInfo::GetLevelsInLoadGroup(lgNext);
+  SetType loadingSet;
+  for (const auto& levelName : nextSet) {
+    if (currentSet.count(levelName) == 0) {
+      loadingSet.insert(levelName);
+    }
+  }
+  return loadingSet;
+}
+
 //
 //void ULoadGroupInfo::LoadGroupDifference(ELoadGroups Current, ELoadGroups Next, TArray<FName>& Unload, TArray<FName>& Load) {
 //   //std::vector<FName>

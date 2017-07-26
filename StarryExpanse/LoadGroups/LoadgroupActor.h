@@ -46,6 +46,7 @@ public:
 	bool isInitialLoad = false;
    ELoadGroups currentLoadGroup = ELoadGroups::AAbsoluteZero;
    ELoadGroups wantedLoadGroup = ELoadGroups::AAbsoluteZero;
+   ELoadGroups previouslyLoadedLoadGroup = ELoadGroups::AAbsoluteZero;
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

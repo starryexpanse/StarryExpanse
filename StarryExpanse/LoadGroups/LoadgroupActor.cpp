@@ -44,7 +44,8 @@ void ALoadgroupActor::LevelUnloaded() {
 }
 
 void ALoadgroupActor::LoadLevelsNow() {
-   auto levels = ULoadGroupInfo::GetLevelsInLoadGroup(this->wantedLoadGroup);
+   auto levels = ULoadGroupInfo::GetLevelsToBeLoaded(this->previouslyLoadedLoadGroup, this->wantedLoadGroup);
+
    // TODO don't re-load already-loaded levels
    this->levelsWaitingOnLoad = levels.size();
    for (const auto& levelName : levels) {
@@ -61,6 +62,7 @@ void ALoadgroupActor::LoadLevelsNow() {
 }
 
 void ALoadgroupActor::LoadLoadGroup(ELoadGroups groupToLoad) {
+   this->previouslyLoadedLoadGroup = this->currentLoadGroup;
    this->wantedLoadGroup = groupToLoad;
 
    // Determine levels to unload
@@ -82,9 +84,7 @@ void ALoadgroupActor::LoadLoadGroup(ELoadGroups groupToLoad) {
          UGameplayStatics::UnloadStreamLevel(this, FName(levelName), LatentInfo);
       }
    }
-
    // auto level = FindStreamingLevel(UWorld* InWorld, const TCHAR* PackageName);
-
    
 }
 

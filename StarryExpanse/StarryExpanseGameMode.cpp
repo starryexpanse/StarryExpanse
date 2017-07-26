@@ -2,6 +2,7 @@
 
 #include "StarryExpanseGameMode.h"
 #include "StarryExpanseHUD.h"
+#include "Kismet/GameplayStatics.h"
 #include "UObject/ConstructorHelpers.h"
 
 AStarryExpanseGameMode::AStarryExpanseGameMode()
@@ -13,6 +14,17 @@ AStarryExpanseGameMode::AStarryExpanseGameMode()
 	);
 	DefaultPawnClass = PlayerPawnClassFinder.Class;
 
+	// set default pawn class to our Blueprinted character
+	static ConstructorHelpers::FClassFinder<AController> PlayerControllerClassFinder(
+		TEXT("/Game/StarryExpanse/Core/Engine/RivenPlayerController")
+	);
+	PlayerControllerClass = PlayerControllerClassFinder.Class;
+
+   static ConstructorHelpers::FClassFinder<AHUD> HudClassFinder(
+      TEXT("/Game/StarryExpanse/Core/Engine/Gui/loadingHUD")
+   );
+   HUDClass = HudClassFinder.Class;
+
 	// use our custom HUD class
-	HUDClass = AStarryExpanseHUD::StaticClass();
+	// HUDClass = AStarryExpanseHUD::StaticClass();
 }

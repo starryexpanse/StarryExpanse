@@ -24,6 +24,8 @@ class STARRYEXPANSE_API ULoadGroupInfo : public UBlueprintFunctionLibrary
 
    static SetType GetLevelsInLoadGroup(ELoadGroups lg);
    static SetType GetLevelsToBeUnloaded(ELoadGroups lgCurrent, ELoadGroups lgNext);
+   static SetType GetLevelsToBeLoaded(ELoadGroups currentSet, ELoadGroups futureSet);
+
 
    //UFUNCTION(BlueprintPure, BlueprintCallable, Category = "Load Groups")
    ///   static void LoadGroupDifference(ELoadGroups Current, ELoadGroups Next, TArray<FName>& Unload, TArray<FName>& Load);
