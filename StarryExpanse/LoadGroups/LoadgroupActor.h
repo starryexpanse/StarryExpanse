@@ -51,8 +51,14 @@ public:
    
    UPROPERTY(BlueprintReadOnly)
    bool isInitialLoad = false;
+
+   UPROPERTY(BlueprintReadOnly)
    ELoadGroups currentLoadGroup = ELoadGroups::AAbsoluteZero;
+
+   UPROPERTY(BlueprintReadOnly)
    ELoadGroups wantedLoadGroup = ELoadGroups::AAbsoluteZero;
+
+   UPROPERTY(BlueprintReadOnly)
    ELoadGroups previouslyLoadedLoadGroup = ELoadGroups::AAbsoluteZero;
 
    // Called every frame

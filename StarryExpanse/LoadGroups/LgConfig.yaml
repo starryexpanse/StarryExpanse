@@ -14,11 +14,11 @@ BTerrainPath: []
 BYtramCave: []
 BFiremarbleCave: []
 BBridgeCave: []
-BBoilerToTempleBridge: []
 BYtramDuct: []
 BOfficeExterior: []
 BOfficeInterior: []
 BMagLevDock: []
+BBoilerToTempleBridge: []
 
 # S: Shared
 SRivenBase: &SRivenBase
