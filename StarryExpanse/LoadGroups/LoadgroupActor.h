@@ -25,13 +25,13 @@ public:
    }
 
    */
-   UPROPERTY(BlueprintAssignable)
+   UPROPERTY(BlueprintAssignable, Category = "LoadGroups")
       FLoadgroupLoadedEvent LoadgroupLoadedEvent;
 
-   UFUNCTION(Category = "Callbacks")
+   UFUNCTION(Category = "LoadGroups")
       void LevelLoaded();
 
-   UFUNCTION(Category = "Callbacks")
+   UFUNCTION(Category = "LoadGroups")
       void LevelUnloaded();
 
    UFUNCTION(Category = "LoadGroups", BlueprintCallable)
@@ -40,26 +40,29 @@ public:
    UFUNCTION(Category = "LoadGroups", BlueprintCallable)
       void LoadLevelsNow();
 
-   UPROPERTY(BlueprintReadOnly)
-   int levelsWaitingOnUnload = 0;
+   UFUNCTION(Category = "LoadGroups", BlueprintCallable)
+      bool IsLoading();
 
-   UPROPERTY(BlueprintReadOnly)
-   int levelsWaitingOnLoad = 0;
+   UPROPERTY(BlueprintReadOnly, Category = "LoadGroups")
+      int levelsWaitingOnUnload = 0;
+
+   UPROPERTY(BlueprintReadOnly, Category = "LoadGroups")
+      int levelsWaitingOnLoad = 0;
    
-   UPROPERTY(BlueprintReadOnly)
-   int levelLatentActionInfoCounter = 0;
+   UPROPERTY(BlueprintReadOnly, Category = "LoadGroups")
+      int levelLatentActionInfoCounter = 0;
    
-   UPROPERTY(BlueprintReadOnly)
-   bool isInitialLoad = false;
+   UPROPERTY(BlueprintReadOnly, Category = "LoadGroups")
+      bool isInitialLoad = false;
 
-   UPROPERTY(BlueprintReadOnly)
-   ELoadGroups currentLoadGroup = ELoadGroups::AAbsoluteZero;
+   UPROPERTY(BlueprintReadOnly, Category = "LoadGroups")
+      ELoadGroups currentLoadGroup = ELoadGroups::AAbsoluteZero;
 
-   UPROPERTY(BlueprintReadOnly)
-   ELoadGroups wantedLoadGroup = ELoadGroups::AAbsoluteZero;
+   UPROPERTY(BlueprintReadOnly, Category = "LoadGroups")
+      ELoadGroups wantedLoadGroup = ELoadGroups::AAbsoluteZero;
 
-   UPROPERTY(BlueprintReadOnly)
-   ELoadGroups previouslyLoadedLoadGroup = ELoadGroups::AAbsoluteZero;
+   UPROPERTY(BlueprintReadOnly, Category = "LoadGroups")
+      ELoadGroups previouslyLoadedLoadGroup = ELoadGroups::AAbsoluteZero;
 
    // Called every frame
    virtual void Tick(float DeltaTime) override;

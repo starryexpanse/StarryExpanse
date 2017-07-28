@@ -88,6 +88,10 @@ void ALoadgroupActor::LoadLoadGroup(ELoadGroups groupToLoad) {
    
 }
 
+bool ALoadgroupActor::IsLoading() {
+   return this->currentLoadGroup != this->wantedLoadGroup;
+}
+
 // Called every frame
 void ALoadgroupActor::Tick(float DeltaTime)
 {
