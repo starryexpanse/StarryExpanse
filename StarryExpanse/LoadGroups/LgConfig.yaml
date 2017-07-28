@@ -2,6 +2,12 @@
 AGeneral: &AGeneral
    - A_Journals
 
+# S: Shared
+SRivenBase: &SRivenBase
+   - S_Lighting_Riven
+   - S_PostProcessing_Riven
+   - S_Ocean_Riven
+
 # B: Boiler Island
 BCartTrackAboveWater: []
 BCartCave: []
@@ -18,13 +24,18 @@ BYtramDuct: []
 BOfficeExterior: []
 BOfficeInterior: []
 BMagLevDock: []
-BBoilerToTempleBridge: []
 
-# S: Shared
-SRivenBase: &SRivenBase
-   - S_Lighting_Riven
-   - S_PostProcessing_Riven
-   - S_Ocean_Riven
+BBase: &BBase
+   - *AGeneral
+   - *SRivenBase
+   - B_Terrain # TODO separate into parts
+
+BEastSide:
+   - *BBase
+   - S_GreatBridge
+   - B_MiniLakeTunnel
+   - T_SuperDome
+   - T_Terrain
 
 # G: Garden Island
    # Bases
@@ -63,6 +74,7 @@ TWestSide:
    - *TBase
    - S_GreatBridge
    - T_SuperDome
+   - T_GateRoom
 
 TNorthSide:
    - *TBase
@@ -85,4 +97,4 @@ TSpiderTunnelDistrict:
    - T_Plateaus
    - T_NewTempleArea
    - S_Maglev_TJ
-   - T_SuperDome # Ideally can split this, so it's just the superdome exterior
+   - T_SuperDome # TODO can split this, so it's just the superdome exterior

@@ -56,6 +56,15 @@ ULoadGroupInfo::ULoadGroupInfo(const FObjectInitializer& ObjectInitializer)
    ));
 
    LoadGroups.insert(Pair(
+       ELoadGroups::SRivenBase,
+       {
+           TEXT("S_Lighting_Riven"),
+           TEXT("S_PostProcessing_Riven"),
+           TEXT("S_Ocean_Riven")
+       }
+   ));
+
+   LoadGroups.insert(Pair(
        ELoadGroups::BCartTrackAboveWater,
        {
        }
@@ -122,12 +131,6 @@ ULoadGroupInfo::ULoadGroupInfo(const FObjectInitializer& ObjectInitializer)
    ));
 
    LoadGroups.insert(Pair(
-       ELoadGroups::BBoilerToTempleBridge,
-       {
-       }
-   ));
-
-   LoadGroups.insert(Pair(
        ELoadGroups::BYtramDuct,
        {
        }
@@ -152,11 +155,27 @@ ULoadGroupInfo::ULoadGroupInfo(const FObjectInitializer& ObjectInitializer)
    ));
 
    LoadGroups.insert(Pair(
-       ELoadGroups::SRivenBase,
+       ELoadGroups::BBase,
        {
+           TEXT("A_Journals"),
            TEXT("S_Lighting_Riven"),
            TEXT("S_PostProcessing_Riven"),
-           TEXT("S_Ocean_Riven")
+           TEXT("S_Ocean_Riven"),
+           TEXT("B_Terrain")
+       }
+   ));
+
+   LoadGroups.insert(Pair(
+       ELoadGroups::BEastSide,
+       {
+           TEXT("A_Journals"),
+           TEXT("S_Lighting_Riven"),
+           TEXT("S_PostProcessing_Riven"),
+           TEXT("S_Ocean_Riven"),
+           TEXT("B_Terrain"),
+           TEXT("S_GreatBridge"),
+           TEXT("B_MiniLakeTunnel"),
+           TEXT("T_SuperDome")
        }
    ));
 
@@ -242,7 +261,8 @@ ULoadGroupInfo::ULoadGroupInfo(const FObjectInitializer& ObjectInitializer)
            TEXT("S_Ocean_Riven"),
            TEXT("T_Terrain"),
            TEXT("S_GreatBridge"),
-           TEXT("T_SuperDome")
+           TEXT("T_SuperDome"),
+           TEXT("T_GateRoom")
        }
    ));
 

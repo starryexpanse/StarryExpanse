@@ -39,12 +39,13 @@ enum class ELoadGroups : uint8
       cog.outl('%s\t\tUMETA(DisplayName = "%s")%s' % (loadgroup, display, comma))
    ]]] */
    AGeneral		UMETA(DisplayName = "A: General"),
+   BBase		UMETA(DisplayName = "B: Base"),
    BBoilerOutlet		UMETA(DisplayName = "B: Boiler Outlet"),
-   BBoilerToTempleBridge		UMETA(DisplayName = "B: Boiler To Temple Bridge"),
    BBridgeCave		UMETA(DisplayName = "B: Bridge Cave"),
    BCartCave		UMETA(DisplayName = "B: Cart Cave"),
    BCartTrackAboveWater		UMETA(DisplayName = "B: Cart Track Above Water"),
    BDomePipe		UMETA(DisplayName = "B: Dome Pipe"),
+   BEastSide		UMETA(DisplayName = "B: East Side"),
    BFiremarbleCave		UMETA(DisplayName = "B: Firemarble Cave"),
    BLakeArea		UMETA(DisplayName = "B: Lake Area"),
    BMagLevDock		UMETA(DisplayName = "B: Mag Lev Dock"),
