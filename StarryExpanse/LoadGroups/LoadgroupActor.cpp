@@ -55,19 +55,25 @@ void ALoadgroupActor::LevelUnloaded() {
 void ALoadgroupActor::LoadLevelsNow() {
    auto levels = ULoadGroupInfo::GetLevelsToBeLoaded(this->previouslyLoadedLoadGroup, this->wantedLoadGroup);
 
-   // TODO don't re-load already-loaded levels
    this->levelsWaitingOnLoad = levels.size();
-   for (const auto& levelName : levels) {
-      this->levelLatentActionInfoCounter += 1;
 
-      FLatentActionInfo LatentInfo;
-      LatentInfo.UUID = this->levelLatentActionInfoCounter;
-      LatentInfo.Linkage = 0;
-      LatentInfo.CallbackTarget = this;
-      LatentInfo.ExecutionFunction = FName("LevelLoaded");
+   if (this->levelsWaitingOnLoad == 0) {
+	   this->currentLoadGroup = this->wantedLoadGroup;
+	   LoadgroupLoadedEvent.Broadcast();
+   }
+   else {
+	   for (const auto& levelName : levels) {
+		   this->levelLatentActionInfoCounter += 1;
 
-	  bool shouldShow = false;
-      UGameplayStatics::LoadStreamLevel(this, FName(levelName), shouldShow, false, LatentInfo);
+		   FLatentActionInfo LatentInfo;
+		   LatentInfo.UUID = this->levelLatentActionInfoCounter;
+		   LatentInfo.Linkage = 0;
+		   LatentInfo.CallbackTarget = this;
+		   LatentInfo.ExecutionFunction = FName("LevelLoaded");
+
+		   bool shouldShow = false;
+		   UGameplayStatics::LoadStreamLevel(this, FName(levelName), shouldShow, false, LatentInfo);
+	   }
    }
 }
 
