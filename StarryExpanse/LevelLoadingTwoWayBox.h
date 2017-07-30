@@ -5,6 +5,8 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Classes/Components/BoxComponent.h"
+#include "LoadGroups/ELoadGroups.h"
+#include "RivenGameInstance.h"
 #include "LevelLoadingTwoWayBox.generated.h"
 
 UCLASS()
@@ -25,21 +27,35 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 		float Separation;
 
-	void EnterATowardsB();
+	void IntersectATowardB();
+	void IntersectAAwayFromB();
+	void IntersectBTowardA();
+	void IntersectBAwayFromA();
+
+	bool bShouldRecycle = false;
+
+	UPROPERTY(BlueprintReadWrite)
+	ELoadGroups BSideLoadGroup;
+
+	UPROPERTY(BlueprintReadWrite)
+	ELoadGroups ASideLoadGroup;
 
 	// Delegates
 	TScriptDelegate<FWeakObjectPtr> BLoaded_AfterIntersectATowardB;
 	TScriptDelegate<FWeakObjectPtr> ALoaded_AfterBLoaded_AfterIntersectATowardB;
 	TScriptDelegate<FWeakObjectPtr> ALoaded_AfterIntersectAAwayFromB;
 
+	// Callbacks
+	void Cbk_IntersectA(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+	void Cbk_IntersectB(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+	void Cbk_BLoaded_AfterIntersectATowardB();
+	void Cbk_ALoaded_AfterBLoaded_AfterIntersectATowardB();
+	void Cbk_ALoaded_AfterIntersectAAwayFromB();
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 	virtual void OnConstruction(const FTransform & Transform) override;
-
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-	
-	
+	virtual void PostInitializeComponents();
+		
 };

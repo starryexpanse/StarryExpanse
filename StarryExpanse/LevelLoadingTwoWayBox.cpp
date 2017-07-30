@@ -9,9 +9,6 @@
 ALevelLoadingTwoWayBox::ALevelLoadingTwoWayBox(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
-
 	RootComponent = ObjectInitializer.CreateDefaultSubobject<USceneComponent>(this, TEXT("RootComponent"));
 
 	BoxA = ObjectInitializer.CreateDefaultSubobject<UBoxComponent>(this, TEXT("BoxA"));
@@ -21,9 +18,9 @@ ALevelLoadingTwoWayBox::ALevelLoadingTwoWayBox(const FObjectInitializer& ObjectI
 	BoxB->SetupAttachment(RootComponent);
 	
 	// Bind Delegates
-	BLoaded_AfterIntersectATowardB.BindUFunction(this, "BLoaded_AfterIntersectATowardB");
-	ALoaded_AfterBLoaded_AfterIntersectATowardB.BindUFunction(this, "ALoaded_AfterBLoaded_AfterIntersectATowardB");
-	ALoaded_AfterIntersectAAwayFromB.BindUFunction(this, "ALoaded_AfterIntersectAAwayFromB");
+	BLoaded_AfterIntersectATowardB.BindUFunction(this, "Cbk_BLoaded_AfterIntersectATowardB");
+	ALoaded_AfterBLoaded_AfterIntersectATowardB.BindUFunction(this, "Cbk_ALoaded_AfterBLoaded_AfterIntersectATowardB");
+	ALoaded_AfterIntersectAAwayFromB.BindUFunction(this, "Cbk_ALoaded_AfterIntersectAAwayFromB");
 
 }
 
@@ -43,6 +40,13 @@ void ALevelLoadingTwoWayBox::OnConstruction(const FTransform& Transform)
 	BoxB->RelativeLocation = FVector(0, Separation, 0);
 }
 
+void ALevelLoadingTwoWayBox::PostInitializeComponents()
+{
+	Super::PostInitializeComponents();
+	BoxA->OnComponentBeginOverlap.AddDynamic(this, &ALevelLoadingTwoWayBox::Cbk_IntersectA);
+	BoxB->OnComponentBeginOverlap.AddDynamic(this, &ALevelLoadingTwoWayBox::Cbk_IntersectB);
+}
+
 // Called when the game starts or when spawned
 void ALevelLoadingTwoWayBox::BeginPlay()
 {
@@ -50,22 +54,60 @@ void ALevelLoadingTwoWayBox::BeginPlay()
 	
 }
 
-// Called every frame
-void ALevelLoadingTwoWayBox::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
+void ALevelLoadingTwoWayBox::Cbk_BLoaded_AfterIntersectATowardB() {
+	auto gameInstance = (URivenGameInstance*)GetWorld()->GetGameInstance();
+	ALoadgroupActor *Queen = gameInstance->LoadgroupQueen;
+	Queen->LoadgroupLoadedEvent.Remove(BLoaded_AfterIntersectATowardB);
+
+	if (bShouldRecycle) {
+		bShouldRecycle = false;
+		Queen->LoadgroupLoadedEvent.Add(ALoaded_AfterBLoaded_AfterIntersectATowardB);
+		Queen->LoadLoadGroup(this->ASideLoadGroup);
+	} else {
+		gameInstance->SetIsFrozenForLoading(false);
+	}
+}
+
+void ALevelLoadingTwoWayBox::Cbk_ALoaded_AfterBLoaded_AfterIntersectATowardB() {
+	auto gameInstance = (URivenGameInstance*)GetWorld()->GetGameInstance();
+	gameInstance->SetIsFrozenForLoading(false);
+}
+
+void ALevelLoadingTwoWayBox::IntersectATowardB() {
+	auto gameInstance = (URivenGameInstance*)GetWorld()->GetGameInstance();
+	ALoadgroupActor *Queen = gameInstance->LoadgroupQueen;
+	Queen->LoadgroupLoadedEvent.Add(this->BLoaded_AfterIntersectATowardB);
+	Queen->LoadLoadGroup(this->BSideLoadGroup);
+}
+
+void ALevelLoadingTwoWayBox::Cbk_ALoaded_AfterIntersectAAwayFromB() {
+	auto gameInstance = (URivenGameInstance*)GetWorld()->GetGameInstance();
+	gameInstance->SetIsFrozenForLoading(false);
+}
+
+void ALevelLoadingTwoWayBox::IntersectAAwayFromB() {
+	auto gameInstance = (URivenGameInstance*)GetWorld()->GetGameInstance();
+	ALoadgroupActor *Queen = gameInstance->LoadgroupQueen;
+	
+	if (Queen->IsLoading()) {
+		if (Queen->wantedLoadGroup == BSideLoadGroup) {
+			bShouldRecycle = true;
+			gameInstance->SetIsFrozenForLoading(true);
+		} else if (Queen->wantedLoadGroup == ASideLoadGroup) {
+			bShouldRecycle = false;
+			gameInstance->SetIsFrozenForLoading(true);
+		}
+	} else if (Queen->currentLoadGroup == BSideLoadGroup) {
+		gameInstance->SetIsFrozenForLoading(true);
+		Queen->LoadgroupLoadedEvent.Add(ALoaded_AfterIntersectAAwayFromB);
+		Queen->LoadLoadGroup(this->ASideLoadGroup);
+	}
+}
+
+void ALevelLoadingTwoWayBox::Cbk_IntersectA(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {
 
 }
 
-void ALevelLoadingTwoWayBox::EnterATowardsB() {
-	ALoadgroupActor *Queen;
-	for (TActorIterator<ALoadgroupActor> ActorItr(GetWorld()); ActorItr; ++ActorItr)
-	{
-		// Same as with the Object Iterator, access the subclass instance with the * or -> operators.
-		Queen = *ActorItr;
-	}
+void ALevelLoadingTwoWayBox::Cbk_IntersectB(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {
 
-
-//	Queen->LoadgroupLoadedEvent.Add();
-	//Queen->LoadgroupLoadedEvent.Remove;
 }
