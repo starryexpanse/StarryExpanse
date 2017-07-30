@@ -105,10 +105,7 @@ ULoadGroupInfo::ULoadGroupInfo(const FObjectInitializer& ObjectInitializer)
            TEXT("B_UpperWalkwayTunnel"),
            TEXT("T_SuperDome"),
            TEXT("T_Terrain"),
-           TEXT("B_Stuff"),
-           TEXT("O_Master"),
-           TEXT("J_Basin"),
-           TEXT("J_School")
+           TEXT("B_Stuff")
        }
    ));
 
@@ -201,6 +198,14 @@ ULoadGroupInfo::ULoadGroupInfo(const FObjectInitializer& ObjectInitializer)
    ));
 
    LoadGroups.insert(Pair(
+       ELoadGroups::TCommonOutside,
+       {
+           TEXT("B_UpperWalkwayTunnel"),
+           TEXT("B_Terrain")
+       }
+   ));
+
+   LoadGroups.insert(Pair(
        ELoadGroups::TWestSide,
        {
            TEXT("A_Journals"),
@@ -211,6 +216,8 @@ ULoadGroupInfo::ULoadGroupInfo(const FObjectInitializer& ObjectInitializer)
            TEXT("S_PostProcessing_Riven"),
            TEXT("S_Ocean_Riven"),
            TEXT("T_Terrain"),
+           TEXT("B_UpperWalkwayTunnel"),
+           TEXT("B_Terrain"),
            TEXT("S_GreatBridge"),
            TEXT("T_SuperDome"),
            TEXT("T_GateRoom")
@@ -228,6 +235,8 @@ ULoadGroupInfo::ULoadGroupInfo(const FObjectInitializer& ObjectInitializer)
            TEXT("S_PostProcessing_Riven"),
            TEXT("S_Ocean_Riven"),
            TEXT("T_Terrain"),
+           TEXT("B_UpperWalkwayTunnel"),
+           TEXT("B_Terrain"),
            TEXT("S_GreatBridge"),
            TEXT("T_GateRoom"),
            TEXT("T_SuperDome")
@@ -247,7 +256,7 @@ ULoadGroupInfo::ULoadGroupInfo(const FObjectInitializer& ObjectInitializer)
            TEXT("T_Terrain"),
            TEXT("T_GateRoom"),
            TEXT("T_Plateaus"),
-           TEXT("T_NewTempleArea"),
+           TEXT("T_NewTemple"),
            TEXT("T_SuperDome")
        }
    ));
@@ -269,6 +278,23 @@ ULoadGroupInfo::ULoadGroupInfo(const FObjectInitializer& ObjectInitializer)
            TEXT("T_NewTemple"),
            TEXT("S_Maglev_TJ"),
            TEXT("T_SuperDome")
+       }
+   ));
+
+   LoadGroups.insert(Pair(
+       ELoadGroups::TMaglevDistrict,
+       {
+           TEXT("A_Journals"),
+           TEXT("G_BubbleGarden"),
+           TEXT("G_Terrain"),
+           TEXT("G_SpikeGarden"),
+           TEXT("S_Lighting_Riven"),
+           TEXT("S_PostProcessing_Riven"),
+           TEXT("S_Ocean_Riven"),
+           TEXT("T_Terrain"),
+           TEXT("B_UpperWalkwayTunnel"),
+           TEXT("B_Terrain"),
+           TEXT("S_Maglev_TJ")
        }
    ));
 

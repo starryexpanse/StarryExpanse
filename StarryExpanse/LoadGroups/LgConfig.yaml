@@ -1,21 +1,21 @@
-# Just for Mysterium
+# Just for Mysterium (We need to downgrade them [i.e. replace with low-poly facsimiles] afterwards)
 MysteriumShowOff: &MysteriumShowOff
    - G_BubbleGarden
    - G_Terrain
    - G_SpikeGarden
 
-# A: All-Encompassing
+## A: All-Encompassing
 AGeneral: &AGeneral
    - A_Journals
    - *MysteriumShowOff
 
-# S: Shared
+## S: Shared
 SRivenBase: &SRivenBase
    - S_Lighting_Riven
    - S_PostProcessing_Riven
    - S_Ocean_Riven
 
-# B: Boiler Island
+## B: Boiler Island
 BBase: &BBase
    - *AGeneral
    - *SRivenBase
@@ -27,12 +27,9 @@ BEastSide:
    - T_SuperDome
    - T_Terrain
    - B_Stuff
-   - O_Master
-   - J_Basin
-   - J_School
 
-# G: Garden Island
-   # Bases
+## G: Garden Island
+# Bases
 GBase: &GBase
    - *AGeneral
    - *SRivenBase
@@ -41,8 +38,7 @@ GUpsideBase: &GUpsideBase
    - G_WahrkTankUpper
    - G_BubbleGarden
    - G_Connector
-
-   # Specifics
+# Specifics
 GUpsideExterior:
    - *GBase
    - *GUpsideBase
@@ -56,38 +52,43 @@ GDownside:
    - G_MaglevDock_J
    - G_WahrkTankLower
 
-# T: Temple Island
-   # Bases
+## T: Temple Island
+# Bases
 TBase: &TBase
    - *AGeneral
    - *SRivenBase
    - T_Terrain
-
-   # Specifics
+TCommonOutside: &TCommonOutside
+   # These should be removed or at least downgraded after Mysterium:
+   - B_UpperWalkwayTunnel
+   - B_Terrain
 TWestSide:
    - *TBase
+   - *TCommonOutside
    - S_GreatBridge
    - T_SuperDome
    - T_GateRoom
-
 TNorthSide:
    - *TBase
+   - *TCommonOutside
    - S_GreatBridge
    - T_GateRoom
    - T_SuperDome
-
 TFissureDistrict:
    - *TBase
    - T_GateRoom
    - T_Plateaus
-   - T_NewTempleArea
+   - T_NewTemple
    - T_SuperDome
-
 TSpiderTunnelDistrict:
    - *TBase
-   - T_GateRoom
+   - T_GateRoom # :( wish we didn't need this
    - T_Plateaus
    - T_SpiderChairRoomInterior
    - T_NewTemple
    - S_Maglev_TJ
-   - T_SuperDome # TODO can split this, so it's just the superdome exterior
+   - T_SuperDome # TODO can downgrade this, so it's just the superdome exterior
+TMaglevDistrict:
+   - *TBase
+   - *TCommonOutside
+   - S_Maglev_TJ

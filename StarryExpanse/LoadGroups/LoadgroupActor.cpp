@@ -9,6 +9,8 @@
 #include "LoadGroups/LoadGroupInfo.h"
 #include "Kismet/GameplayStatics.h"
 #include "Engine/LatentActionManager.h"
+#include "RivenGameInstance.h"
+#include "Classes/Engine/World.h"
 #include "StarryExpanse.h"
 
 // Sets default values
@@ -17,10 +19,16 @@ ALoadgroupActor::ALoadgroupActor()
 
 }
 
+void ALoadgroupActor::BeginPlay() {
+	auto gameInstance = Cast<URivenGameInstance>(GetWorld()->GetGameInstance());
+	gameInstance->RegisterLoadgroupQueen(this);
+}
+
 void ALoadgroupActor::LevelLoaded() {
    this->levelsWaitingOnLoad--;
    if (this->levelsWaitingOnLoad == 0) {
       this->currentLoadGroup = this->wantedLoadGroup;
+      UE_LOG(StarryDebug, Display, TEXT("Finished loading LG."));
 
 	  auto levels = ULoadGroupInfo::GetLevelsInLoadGroup(this->wantedLoadGroup);
 	  for (const auto& levelName : levels) {
@@ -35,15 +43,6 @@ void ALoadgroupActor::LevelLoaded() {
 
       LoadgroupLoadedEvent.Broadcast();
    }
-
-   auto wningWorld = this->GetWorld();
-   auto journals = UGameplayStatics::GetStreamingLevel(this, TEXT("A_Journals"));
-   if (journals) {
-      auto x = journals->GetName();
-      UE_LOG(StarryDebug, Warning, TEXT("I loaded it!"));
-   }
-   // FLevelUtils::MarkLevelForUnloading();
-	UE_LOG(StarryDebug, Warning, TEXT("I loaded it! %d"), this->levelsWaitingOnLoad);
 }
 
 void ALoadgroupActor::LevelUnloaded() {

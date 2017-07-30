@@ -19,12 +19,8 @@ public:
 
    DECLARE_DYNAMIC_MULTICAST_DELEGATE(FLoadgroupLoadedEvent);
 
-   /*
-   FLoadgroupLoadedEvent& OnLoadgroupLoaded() {
-      return LoadgroupLoadedEvent;
-   }
+   virtual void BeginPlay() override;
 
-   */
    UPROPERTY(BlueprintAssignable, Category = "LoadGroups")
       FLoadgroupLoadedEvent LoadgroupLoadedEvent;
 

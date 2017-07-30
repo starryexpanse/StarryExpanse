@@ -34,23 +34,44 @@ public:
 
 	bool bShouldRecycle = false;
 
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	ELoadGroups BSideLoadGroup;
 
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	ELoadGroups ASideLoadGroup;
 
 	// Delegates
 	TScriptDelegate<FWeakObjectPtr> BLoaded_AfterIntersectATowardB;
 	TScriptDelegate<FWeakObjectPtr> ALoaded_AfterBLoaded_AfterIntersectATowardB;
 	TScriptDelegate<FWeakObjectPtr> ALoaded_AfterIntersectAAwayFromB;
+	TScriptDelegate<FWeakObjectPtr> ALoaded_AfterIntersectBTowardA;
+	TScriptDelegate<FWeakObjectPtr> BLoaded_AfterALoaded_AfterIntersectBTowardA;
+	TScriptDelegate<FWeakObjectPtr> BLoaded_AfterIntersectBAwayFromA;
 
 	// Callbacks
-	void Cbk_IntersectA(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
-	void Cbk_IntersectB(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
-	void Cbk_BLoaded_AfterIntersectATowardB();
-	void Cbk_ALoaded_AfterBLoaded_AfterIntersectATowardB();
-	void Cbk_ALoaded_AfterIntersectAAwayFromB();
+	UFUNCTION()
+		void Cbk_IntersectA(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+	
+	UFUNCTION()
+		void Cbk_IntersectB(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+	
+	UFUNCTION()
+		void Cbk_BLoaded_AfterIntersectATowardB();
+	
+	UFUNCTION()
+		void Cbk_ALoaded_AfterBLoaded_AfterIntersectATowardB();
+	
+	UFUNCTION()
+		void Cbk_ALoaded_AfterIntersectAAwayFromB();
+
+	UFUNCTION()
+		void Cbk_ALoaded_AfterIntersectBTowardA();
+
+	UFUNCTION()
+		void Cbk_BLoaded_AfterALoaded_AfterIntersectBTowardA();
+
+	UFUNCTION()
+		void Cbk_BLoaded_AfterIntersectBAwayFromA();
 
 protected:
 	// Called when the game starts or when spawned
