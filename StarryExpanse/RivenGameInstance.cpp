@@ -4,7 +4,7 @@
 #include "LoadGroups/LoadgroupActor.h"
 
 	
-void URivenGameInstance::SetFrozenForLoading(bool newFrozen) {
+void URivenGameInstance::SetIsFrozenForLoading(bool newFrozen) {
 	bool changed = newFrozen != this->bIsFrozenForLoading;
 	this->bIsFrozenForLoading = newFrozen;
 	if (changed) {

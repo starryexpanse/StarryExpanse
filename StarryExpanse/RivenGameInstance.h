@@ -30,10 +30,10 @@ public:
 		ALoadgroupActor* LoadgroupQueen;
 
 	// Methods
-	UFUNCTION(Category = "LoadGroups")
+	UFUNCTION(BlueprintCallable, Category = "LoadGroups")
 	void RegisterLoadgroupQueen(ALoadgroupActor* newQueen);
 
-	UFUNCTION(Category = "LoadGroups")
-	void SetFrozenForLoading(bool newFrozen);
+	UFUNCTION(BlueprintCallable, Category = "LoadGroups")
+	void SetIsFrozenForLoading(bool newFrozen);
 
 };
