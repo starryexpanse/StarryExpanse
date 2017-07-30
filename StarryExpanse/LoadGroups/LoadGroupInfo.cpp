@@ -49,9 +49,21 @@ ULoadGroupInfo::ULoadGroupInfo(const FObjectInitializer& ObjectInitializer)
       cog.outl('')
    ]]] */
    LoadGroups.insert(Pair(
+       ELoadGroups::MysteriumShowOff,
+       {
+           TEXT("G_BubbleGarden"),
+           TEXT("G_Terrain"),
+           TEXT("G_SpikeGarden")
+       }
+   ));
+
+   LoadGroups.insert(Pair(
        ELoadGroups::AGeneral,
        {
-           TEXT("A_Journals")
+           TEXT("A_Journals"),
+           TEXT("G_BubbleGarden"),
+           TEXT("G_Terrain"),
+           TEXT("G_SpikeGarden")
        }
    ));
 
@@ -65,99 +77,12 @@ ULoadGroupInfo::ULoadGroupInfo(const FObjectInitializer& ObjectInitializer)
    ));
 
    LoadGroups.insert(Pair(
-       ELoadGroups::BCartTrackAboveWater,
-       {
-       }
-   ));
-
-   LoadGroups.insert(Pair(
-       ELoadGroups::BCartCave,
-       {
-       }
-   ));
-
-   LoadGroups.insert(Pair(
-       ELoadGroups::BTerrainOuter,
-       {
-       }
-   ));
-
-   LoadGroups.insert(Pair(
-       ELoadGroups::BDomePipe,
-       {
-       }
-   ));
-
-   LoadGroups.insert(Pair(
-       ELoadGroups::BTerrainInner,
-       {
-       }
-   ));
-
-   LoadGroups.insert(Pair(
-       ELoadGroups::BLakeArea,
-       {
-       }
-   ));
-
-   LoadGroups.insert(Pair(
-       ELoadGroups::BBoilerOutlet,
-       {
-       }
-   ));
-
-   LoadGroups.insert(Pair(
-       ELoadGroups::BTerrainPath,
-       {
-       }
-   ));
-
-   LoadGroups.insert(Pair(
-       ELoadGroups::BYtramCave,
-       {
-       }
-   ));
-
-   LoadGroups.insert(Pair(
-       ELoadGroups::BFiremarbleCave,
-       {
-       }
-   ));
-
-   LoadGroups.insert(Pair(
-       ELoadGroups::BBridgeCave,
-       {
-       }
-   ));
-
-   LoadGroups.insert(Pair(
-       ELoadGroups::BYtramDuct,
-       {
-       }
-   ));
-
-   LoadGroups.insert(Pair(
-       ELoadGroups::BOfficeExterior,
-       {
-       }
-   ));
-
-   LoadGroups.insert(Pair(
-       ELoadGroups::BOfficeInterior,
-       {
-       }
-   ));
-
-   LoadGroups.insert(Pair(
-       ELoadGroups::BMagLevDock,
-       {
-       }
-   ));
-
-   LoadGroups.insert(Pair(
        ELoadGroups::BBase,
        {
            TEXT("A_Journals"),
+           TEXT("G_BubbleGarden"),
+           TEXT("G_Terrain"),
+           TEXT("G_SpikeGarden"),
            TEXT("S_Lighting_Riven"),
            TEXT("S_PostProcessing_Riven"),
            TEXT("S_Ocean_Riven"),
@@ -169,13 +94,21 @@ ULoadGroupInfo::ULoadGroupInfo(const FObjectInitializer& ObjectInitializer)
        ELoadGroups::BEastSide,
        {
            TEXT("A_Journals"),
+           TEXT("G_BubbleGarden"),
+           TEXT("G_Terrain"),
+           TEXT("G_SpikeGarden"),
            TEXT("S_Lighting_Riven"),
            TEXT("S_PostProcessing_Riven"),
            TEXT("S_Ocean_Riven"),
            TEXT("B_Terrain"),
            TEXT("S_GreatBridge"),
-           TEXT("B_MiniLakeTunnel"),
-           TEXT("T_SuperDome")
+           TEXT("B_UpperWalkwayTunnel"),
+           TEXT("T_SuperDome"),
+           TEXT("T_Terrain"),
+           TEXT("B_Stuff"),
+           TEXT("O_Master"),
+           TEXT("J_Basin"),
+           TEXT("J_School")
        }
    ));
 
@@ -183,6 +116,9 @@ ULoadGroupInfo::ULoadGroupInfo(const FObjectInitializer& ObjectInitializer)
        ELoadGroups::GBase,
        {
            TEXT("A_Journals"),
+           TEXT("G_BubbleGarden"),
+           TEXT("G_Terrain"),
+           TEXT("G_SpikeGarden"),
            TEXT("S_Lighting_Riven"),
            TEXT("S_PostProcessing_Riven"),
            TEXT("S_Ocean_Riven")
@@ -203,6 +139,9 @@ ULoadGroupInfo::ULoadGroupInfo(const FObjectInitializer& ObjectInitializer)
        ELoadGroups::GUpsideExterior,
        {
            TEXT("A_Journals"),
+           TEXT("G_BubbleGarden"),
+           TEXT("G_Terrain"),
+           TEXT("G_SpikeGarden"),
            TEXT("S_Lighting_Riven"),
            TEXT("S_PostProcessing_Riven"),
            TEXT("S_Ocean_Riven"),
@@ -218,6 +157,9 @@ ULoadGroupInfo::ULoadGroupInfo(const FObjectInitializer& ObjectInitializer)
        ELoadGroups::GUpsideInterior,
        {
            TEXT("A_Journals"),
+           TEXT("G_BubbleGarden"),
+           TEXT("G_Terrain"),
+           TEXT("G_SpikeGarden"),
            TEXT("S_Lighting_Riven"),
            TEXT("S_PostProcessing_Riven"),
            TEXT("S_Ocean_Riven"),
@@ -233,6 +175,9 @@ ULoadGroupInfo::ULoadGroupInfo(const FObjectInitializer& ObjectInitializer)
        ELoadGroups::GDownside,
        {
            TEXT("A_Journals"),
+           TEXT("G_BubbleGarden"),
+           TEXT("G_Terrain"),
+           TEXT("G_SpikeGarden"),
            TEXT("S_Lighting_Riven"),
            TEXT("S_PostProcessing_Riven"),
            TEXT("S_Ocean_Riven"),
@@ -245,6 +190,9 @@ ULoadGroupInfo::ULoadGroupInfo(const FObjectInitializer& ObjectInitializer)
        ELoadGroups::TBase,
        {
            TEXT("A_Journals"),
+           TEXT("G_BubbleGarden"),
+           TEXT("G_Terrain"),
+           TEXT("G_SpikeGarden"),
            TEXT("S_Lighting_Riven"),
            TEXT("S_PostProcessing_Riven"),
            TEXT("S_Ocean_Riven"),
@@ -256,6 +204,9 @@ ULoadGroupInfo::ULoadGroupInfo(const FObjectInitializer& ObjectInitializer)
        ELoadGroups::TWestSide,
        {
            TEXT("A_Journals"),
+           TEXT("G_BubbleGarden"),
+           TEXT("G_Terrain"),
+           TEXT("G_SpikeGarden"),
            TEXT("S_Lighting_Riven"),
            TEXT("S_PostProcessing_Riven"),
            TEXT("S_Ocean_Riven"),
@@ -270,12 +221,14 @@ ULoadGroupInfo::ULoadGroupInfo(const FObjectInitializer& ObjectInitializer)
        ELoadGroups::TNorthSide,
        {
            TEXT("A_Journals"),
+           TEXT("G_BubbleGarden"),
+           TEXT("G_Terrain"),
+           TEXT("G_SpikeGarden"),
            TEXT("S_Lighting_Riven"),
            TEXT("S_PostProcessing_Riven"),
            TEXT("S_Ocean_Riven"),
            TEXT("T_Terrain"),
            TEXT("S_GreatBridge"),
-           TEXT("T_Backstage"),
            TEXT("T_GateRoom"),
            TEXT("T_SuperDome")
        }
@@ -285,11 +238,13 @@ ULoadGroupInfo::ULoadGroupInfo(const FObjectInitializer& ObjectInitializer)
        ELoadGroups::TFissureDistrict,
        {
            TEXT("A_Journals"),
+           TEXT("G_BubbleGarden"),
+           TEXT("G_Terrain"),
+           TEXT("G_SpikeGarden"),
            TEXT("S_Lighting_Riven"),
            TEXT("S_PostProcessing_Riven"),
            TEXT("S_Ocean_Riven"),
            TEXT("T_Terrain"),
-           TEXT("T_Backstage"),
            TEXT("T_GateRoom"),
            TEXT("T_Plateaus"),
            TEXT("T_NewTempleArea"),
@@ -301,13 +256,17 @@ ULoadGroupInfo::ULoadGroupInfo(const FObjectInitializer& ObjectInitializer)
        ELoadGroups::TSpiderTunnelDistrict,
        {
            TEXT("A_Journals"),
+           TEXT("G_BubbleGarden"),
+           TEXT("G_Terrain"),
+           TEXT("G_SpikeGarden"),
            TEXT("S_Lighting_Riven"),
            TEXT("S_PostProcessing_Riven"),
            TEXT("S_Ocean_Riven"),
            TEXT("T_Terrain"),
            TEXT("T_GateRoom"),
            TEXT("T_Plateaus"),
-           TEXT("T_NewTempleArea"),
+           TEXT("T_SpiderChairRoomInterior"),
+           TEXT("T_NewTemple"),
            TEXT("S_Maglev_TJ"),
            TEXT("T_SuperDome")
        }

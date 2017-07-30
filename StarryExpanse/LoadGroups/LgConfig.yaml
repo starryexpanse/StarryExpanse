@@ -1,6 +1,13 @@
+# Just for Mysterium
+MysteriumShowOff: &MysteriumShowOff
+   - G_BubbleGarden
+   - G_Terrain
+   - G_SpikeGarden
+
 # A: All-Encompassing
 AGeneral: &AGeneral
    - A_Journals
+   - *MysteriumShowOff
 
 # S: Shared
 SRivenBase: &SRivenBase
@@ -9,33 +16,20 @@ SRivenBase: &SRivenBase
    - S_Ocean_Riven
 
 # B: Boiler Island
-BCartTrackAboveWater: []
-BCartCave: []
-BTerrainOuter: []
-BDomePipe: []
-BTerrainInner: []
-BLakeArea: []
-BBoilerOutlet: []
-BTerrainPath: []
-BYtramCave: []
-BFiremarbleCave: []
-BBridgeCave: []
-BYtramDuct: []
-BOfficeExterior: []
-BOfficeInterior: []
-BMagLevDock: []
-
 BBase: &BBase
    - *AGeneral
    - *SRivenBase
    - B_Terrain # TODO separate into parts
-
 BEastSide:
    - *BBase
    - S_GreatBridge
-   - B_MiniLakeTunnel
+   - B_UpperWalkwayTunnel
    - T_SuperDome
    - T_Terrain
+   - B_Stuff
+   - O_Master
+   - J_Basin
+   - J_School
 
 # G: Garden Island
    # Bases
@@ -79,13 +73,11 @@ TWestSide:
 TNorthSide:
    - *TBase
    - S_GreatBridge
-   - T_Backstage
    - T_GateRoom
    - T_SuperDome
 
 TFissureDistrict:
    - *TBase
-   - T_Backstage
    - T_GateRoom
    - T_Plateaus
    - T_NewTempleArea
@@ -95,6 +87,7 @@ TSpiderTunnelDistrict:
    - *TBase
    - T_GateRoom
    - T_Plateaus
-   - T_NewTempleArea
+   - T_SpiderChairRoomInterior
+   - T_NewTemple
    - S_Maglev_TJ
    - T_SuperDome # TODO can split this, so it's just the superdome exterior

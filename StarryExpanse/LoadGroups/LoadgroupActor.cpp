@@ -14,8 +14,6 @@
 // Sets default values
 ALoadgroupActor::ALoadgroupActor()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
 
 }
 
@@ -23,6 +21,18 @@ void ALoadgroupActor::LevelLoaded() {
    this->levelsWaitingOnLoad--;
    if (this->levelsWaitingOnLoad == 0) {
       this->currentLoadGroup = this->wantedLoadGroup;
+
+	  auto levels = ULoadGroupInfo::GetLevelsInLoadGroup(this->wantedLoadGroup);
+	  for (const auto& levelName : levels) {
+		  auto level = UGameplayStatics::GetStreamingLevel(this, levelName);
+		  if (level == nullptr) {
+			  level = level;
+		  }
+		  if (level != nullptr) {
+			  level->bShouldBeVisible = true;
+		  }
+	  }
+
       LoadgroupLoadedEvent.Broadcast();
    }
 
@@ -57,7 +67,8 @@ void ALoadgroupActor::LoadLevelsNow() {
       LatentInfo.CallbackTarget = this;
       LatentInfo.ExecutionFunction = FName("LevelLoaded");
 
-      UGameplayStatics::LoadStreamLevel(this, FName(levelName), true, false, LatentInfo);
+	  bool shouldShow = false;
+      UGameplayStatics::LoadStreamLevel(this, FName(levelName), shouldShow, false, LatentInfo);
    }
 }
 
@@ -84,17 +95,14 @@ void ALoadgroupActor::LoadLoadGroup(ELoadGroups groupToLoad) {
          UGameplayStatics::UnloadStreamLevel(this, FName(levelName), LatentInfo);
       }
    }
-   // auto level = FindStreamingLevel(UWorld* InWorld, const TCHAR* PackageName);
    
 }
 
 bool ALoadgroupActor::IsLoading() {
-   return this->currentLoadGroup != this->wantedLoadGroup;
-}
-
-// Called every frame
-void ALoadgroupActor::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
+   bool result = this->currentLoadGroup != this->wantedLoadGroup;
+   if (result) {
+	   result = result;
+   }
+   return result;
 }
 

@@ -64,7 +64,5 @@ public:
    UPROPERTY(BlueprintReadOnly, Category = "LoadGroups")
       ELoadGroups previouslyLoadedLoadGroup = ELoadGroups::AAbsoluteZero;
 
-   // Called every frame
-   virtual void Tick(float DeltaTime) override;
 };
 
