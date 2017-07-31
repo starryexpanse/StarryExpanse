@@ -9,6 +9,8 @@
 #include "EngineUtils.h"
 #include "StarryExpanse.h"
 
+auto HitSphereComponentName = FString("LoadgroupHitSphere");
+
 // Sets default values
 ALevelLoadingTwoWayBox::ALevelLoadingTwoWayBox(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
@@ -104,8 +106,7 @@ void ALevelLoadingTwoWayBox::Cbk_IntersectA(UPrimitiveComponent* OverlappedCompo
 	if (Cast<ACharacter>(OtherActor) != Character) {
 		return;
 	}
-	auto Capsule = Character->GetCapsuleComponent();
-	if (Capsule == nullptr || OtherComp == nullptr || Cast<UCapsuleComponent>(OtherComp) != Capsule) {
+	if (OtherComp == nullptr || OtherComp->GetName() != HitSphereComponentName) {
 		return;
 	}
 	auto vel = OtherActor->GetVelocity();
@@ -191,8 +192,8 @@ void ALevelLoadingTwoWayBox::Cbk_IntersectB(UPrimitiveComponent* OverlappedCompo
 		return;
 	}
 	auto Capsule = Character->GetCapsuleComponent();
-	if (Capsule == nullptr || OtherComp == nullptr || Cast<UCapsuleComponent>(OtherComp) != Capsule) {
-		return;
+	if (OtherComp == nullptr || OtherComp->GetName() != HitSphereComponentName) {
+			return;
 	}
 	auto vel = OtherActor->GetVelocity();
 	auto transform = this->GetTransform();

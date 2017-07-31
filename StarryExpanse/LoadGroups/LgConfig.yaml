@@ -23,10 +23,11 @@ BBase: &BBase
 BEastSide:
    - *BBase
    - S_GreatBridge
-   - B_UpperWalkwayTunnel
    - T_SuperDome
    - T_Terrain
+   - B_UpperWalkwayTunnel
    - B_Stuff
+   - B_GehnLab
 
 ## G: Garden Island
 # Bases

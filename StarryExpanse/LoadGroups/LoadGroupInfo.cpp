@@ -102,10 +102,11 @@ ULoadGroupInfo::ULoadGroupInfo(const FObjectInitializer& ObjectInitializer)
            TEXT("S_Ocean_Riven"),
            TEXT("B_Terrain"),
            TEXT("S_GreatBridge"),
-           TEXT("B_UpperWalkwayTunnel"),
            TEXT("T_SuperDome"),
            TEXT("T_Terrain"),
-           TEXT("B_Stuff")
+           TEXT("B_UpperWalkwayTunnel"),
+           TEXT("B_Stuff"),
+           TEXT("B_GehnLab")
        }
    ));
 
