@@ -34,7 +34,7 @@ void ALoadgroupActor::LevelLoaded() {
 	  for (const auto& levelName : levels) {
 		  auto level = UGameplayStatics::GetStreamingLevel(this, levelName);
 		  if (level == nullptr) {
-			  level = level;
+			  //level = level;
 		  }
 		  if (level != nullptr) {
 			  level->bShouldBeVisible = true;
@@ -104,10 +104,6 @@ void ALoadgroupActor::LoadLoadGroup(ELoadGroups groupToLoad) {
 }
 
 bool ALoadgroupActor::IsLoading() {
-   bool result = this->currentLoadGroup != this->wantedLoadGroup;
-   if (result) {
-	   result = result;
-   }
-   return result;
+   return this->currentLoadGroup != this->wantedLoadGroup;
 }
 
