@@ -13,70 +13,73 @@ UCLASS()
 class STARRYEXPANSE_API ALevelLoadingTwoWayBox : public AActor
 {
 	GENERATED_BODY()
-	
-public:	
+
+public:
 	// Sets default values for this actor's properties
 	ALevelLoadingTwoWayBox(const FObjectInitializer& ObjectInitializer);
 
 	UPROPERTY(BlueprintReadWrite)
-	UBoxComponent* BoxA;
+		UBoxComponent* BoxA;
 
 	UPROPERTY(BlueprintReadWrite)
-	UBoxComponent* BoxB;
+		UBoxComponent* BoxB;
+
+	UPROPERTY(BlueprintReadWrite)
+		UBoxComponent* MainBox;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 		float Separation;
 
-	void IntersectATowardB();
-	void IntersectAAwayFromB();
-	void IntersectBTowardA();
-	void IntersectBAwayFromA();
+	void IntersectFromB();
+	void IntersectFromA();
+	void LeaveToA();
+	void LeaveToB();
 
 	bool bShouldRecycle = false;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	ELoadGroups BSideLoadGroup;
+		ELoadGroups BSideLoadGroup;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	ELoadGroups ASideLoadGroup;
+		ELoadGroups ASideLoadGroup;
 
 	// Delegates
-	TScriptDelegate<FWeakObjectPtr> BLoaded_AfterIntersectATowardB;
-	TScriptDelegate<FWeakObjectPtr> ALoaded_AfterBLoaded_AfterIntersectATowardB;
-	TScriptDelegate<FWeakObjectPtr> ALoaded_AfterIntersectAAwayFromB;
-	TScriptDelegate<FWeakObjectPtr> ALoaded_AfterIntersectBTowardA;
-	TScriptDelegate<FWeakObjectPtr> BLoaded_AfterALoaded_AfterIntersectBTowardA;
-	TScriptDelegate<FWeakObjectPtr> BLoaded_AfterIntersectBAwayFromA;
+	TScriptDelegate<FWeakObjectPtr> BLoaded_AfterIntersectFromA;
+	TScriptDelegate<FWeakObjectPtr> ALoaded_AfterBLoaded_AfterIntersectFromA;
+	TScriptDelegate<FWeakObjectPtr> ALoaded_AfterLeaveToA;
+	TScriptDelegate<FWeakObjectPtr> ALoaded_AfterIntersectFromB;
+	TScriptDelegate<FWeakObjectPtr> BLoaded_AfterALoaded_AfterIntersectFromB;
+	TScriptDelegate<FWeakObjectPtr> BLoaded_AfterLeaveToB;
 
 	// Callbacks
 	UFUNCTION()
-		void Cbk_IntersectA(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
-	
-	UFUNCTION()
-		void Cbk_IntersectB(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
-	
-	UFUNCTION()
-		void Cbk_BLoaded_AfterIntersectATowardB();
-	
-	UFUNCTION()
-		void Cbk_ALoaded_AfterBLoaded_AfterIntersectATowardB();
-	
-	UFUNCTION()
-		void Cbk_ALoaded_AfterIntersectAAwayFromB();
+		void Cbk_Intersect(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 	UFUNCTION()
-		void Cbk_ALoaded_AfterIntersectBTowardA();
+		void Cbk_Leave(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
 	UFUNCTION()
-		void Cbk_BLoaded_AfterALoaded_AfterIntersectBTowardA();
+		void Cbk_BLoaded_AfterIntersectFromA();
 
 	UFUNCTION()
-		void Cbk_BLoaded_AfterIntersectBAwayFromA();
+		void Cbk_ALoaded_AfterBLoaded_AfterIntersectFromA();
+
+	UFUNCTION()
+		void Cbk_ALoaded_AfterIntersectFromB();
+
+	UFUNCTION()
+		void Cbk_BLoaded_AfterALoaded_AfterIntersectFromB();
+
+	UFUNCTION()
+		void Cbk_BLoaded_AfterLeaveToB();
+	
+	UFUNCTION()
+		void Cbk_ALoaded_AfterLeaveToA();
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 	virtual void OnConstruction(const FTransform & Transform) override;
 	virtual void PostInitializeComponents();
-		
+
 };

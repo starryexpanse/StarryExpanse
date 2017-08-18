@@ -16,19 +16,21 @@ ALevelLoadingTwoWayBox::ALevelLoadingTwoWayBox(const FObjectInitializer& ObjectI
 {
 	auto DefaultSceneRoot = ObjectInitializer.CreateDefaultSubobject<USceneComponent>(this, TEXT("DefaultSceneRoot"));
 
+	MainBox = ObjectInitializer.CreateDefaultSubobject<UBoxComponent>(this, TEXT("Box"));
 	BoxA = ObjectInitializer.CreateDefaultSubobject<UBoxComponent>(this, TEXT("BoxA"));
 	BoxB = ObjectInitializer.CreateDefaultSubobject<UBoxComponent>(this, TEXT("BoxB"));
 
+	MainBox->SetupAttachment(DefaultSceneRoot);
 	BoxA->SetupAttachment(DefaultSceneRoot);
 	BoxB->SetupAttachment(DefaultSceneRoot);
 	
 	// Bind Delegates
-	BLoaded_AfterIntersectATowardB.BindUFunction(this, "Cbk_BLoaded_AfterIntersectATowardB");
-	ALoaded_AfterBLoaded_AfterIntersectATowardB.BindUFunction(this, "Cbk_ALoaded_AfterBLoaded_AfterIntersectATowardB");
-	ALoaded_AfterIntersectAAwayFromB.BindUFunction(this, "Cbk_ALoaded_AfterIntersectAAwayFromB");
-	ALoaded_AfterIntersectBTowardA.BindUFunction(this, "Cbk_ALoaded_AfterIntersectBTowardA");
-	BLoaded_AfterALoaded_AfterIntersectBTowardA.BindUFunction(this, "Cbk_BLoaded_AfterALoaded_AfterIntersectBTowardA");
-	BLoaded_AfterIntersectBAwayFromA.BindUFunction(this, "Cbk_BLoaded_AfterIntersectBAwayFromA");
+	BLoaded_AfterIntersectFromA.BindUFunction(this, "Cbk_BLoaded_AfterIntersectFromA");
+	BLoaded_AfterALoaded_AfterIntersectFromB.BindUFunction(this, "Cbk_BLoaded_AfterALoaded_AfterIntersectFromB");
+	BLoaded_AfterLeaveToB.BindUFunction(this, "Cbk_BLoaded_AfterLeaveToB");
+	ALoaded_AfterBLoaded_AfterIntersectFromA.BindUFunction(this, "Cbk_ALoaded_AfterBLoaded_AfterIntersectFromA");
+	ALoaded_AfterIntersectFromB.BindUFunction(this, "Cbk_AfterALoaded_AfterIntersectFromB");
+	ALoaded_AfterLeaveToA.BindUFunction(this, "Cbk_ALoaded_AfterLeaveToA");
 }
 
 void ALevelLoadingTwoWayBox::OnConstruction(const FTransform& Transform)
@@ -36,22 +38,26 @@ void ALevelLoadingTwoWayBox::OnConstruction(const FTransform& Transform)
 	AActor::OnConstruction(Transform);
 
 	auto PlayerDiameter = 40; // from Character configuration
-	auto playerLocalScale = PlayerDiameter / this->GetActorTransform().GetScale3D().Y;
+	auto playerLocalScale = PlayerDiameter / GetActorTransform().GetScale3D().Y;
 	Separation = FMath::Max(Separation, playerLocalScale);
 
-	auto extent = FVector(90, 0.15, 300);
+	MainBox->SetBoxExtent(FVector(90, Separation, 300));
+	MainBox->RelativeLocation = FVector::ZeroVector;
+
+	auto outerBoxPosition = Separation + playerLocalScale;
+	auto extent = FVector(90, playerLocalScale, 300);
 	BoxA->SetBoxExtent(extent);
-	BoxA->RelativeLocation = FVector(0, -Separation, 0);
+	BoxA->RelativeLocation = FVector(0, -outerBoxPosition, 0);
 
 	BoxB->SetBoxExtent(extent);
-	BoxB->RelativeLocation = FVector(0, Separation, 0);
+	BoxB->RelativeLocation = FVector(0, outerBoxPosition, 0);
 }
 
 void ALevelLoadingTwoWayBox::PostInitializeComponents()
 {
 	Super::PostInitializeComponents();
-	BoxA->OnComponentBeginOverlap.AddDynamic(this, &ALevelLoadingTwoWayBox::Cbk_IntersectA);
-	BoxB->OnComponentBeginOverlap.AddDynamic(this, &ALevelLoadingTwoWayBox::Cbk_IntersectB);
+	MainBox->OnComponentBeginOverlap.AddDynamic(this, &ALevelLoadingTwoWayBox::Cbk_Intersect);
+	MainBox->OnComponentEndOverlap.AddDynamic(this, &ALevelLoadingTwoWayBox::Cbk_Leave);
 }
 
 // Called when the game starts or when spawned
@@ -60,172 +66,164 @@ void ALevelLoadingTwoWayBox::BeginPlay()
 	Super::BeginPlay();	
 }
 
-// Intersect A Callbacks
-
-void ALevelLoadingTwoWayBox::Cbk_BLoaded_AfterIntersectATowardB() {
-	auto gameInstance = (URivenGameInstance*)GetWorld()->GetGameInstance();
-	ALoadgroupActor *Queen = gameInstance->LoadgroupQueen;
-	Queen->LoadgroupLoadedEvent.Remove(BLoaded_AfterIntersectATowardB);
-
-	if (bShouldRecycle) {
-		bShouldRecycle = false;
-		Queen->LoadgroupLoadedEvent.Add(ALoaded_AfterBLoaded_AfterIntersectATowardB);
-		Queen->LoadLoadGroup(this->ASideLoadGroup);
-	} else {
-		gameInstance->SetIsFrozenForLoading(false);
-	}
-}
-
-void ALevelLoadingTwoWayBox::Cbk_ALoaded_AfterBLoaded_AfterIntersectATowardB() {
-	auto gameInstance = (URivenGameInstance*)GetWorld()->GetGameInstance();
-	gameInstance->SetIsFrozenForLoading(false);
-	ALoadgroupActor *Queen = gameInstance->LoadgroupQueen;
-	Queen->LoadgroupLoadedEvent.Remove(ALoaded_AfterBLoaded_AfterIntersectATowardB);
-}
-
-void ALevelLoadingTwoWayBox::Cbk_ALoaded_AfterIntersectAAwayFromB() {
-	auto gameInstance = (URivenGameInstance*)GetWorld()->GetGameInstance();
-	gameInstance->SetIsFrozenForLoading(false);
-	ALoadgroupActor *Queen = gameInstance->LoadgroupQueen;
-	Queen->LoadgroupLoadedEvent.Remove(ALoaded_AfterIntersectAAwayFromB);
-}
-
-void ALevelLoadingTwoWayBox::IntersectATowardB() {
-	auto gameInstance = (URivenGameInstance*)GetWorld()->GetGameInstance();
-	ALoadgroupActor *Queen = gameInstance->LoadgroupQueen;
-	Queen->LoadgroupLoadedEvent.Add(this->BLoaded_AfterIntersectATowardB);
-	Queen->LoadLoadGroup(this->BSideLoadGroup);
-	UE_LOG(StarryDebug, Display, TEXT("Inter A toward B"));
-}
-
-void ALevelLoadingTwoWayBox::Cbk_IntersectA(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {
+void ALevelLoadingTwoWayBox::Cbk_Intersect(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {
 	auto Character = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
-	if (Character == nullptr) {
-		return;
-	}
-	if (Cast<ACharacter>(OtherActor) != Character) {
-		return;
-	}
-	if (OtherComp == nullptr || OtherComp->GetName() != HitSphereComponentName) {
-		return;
-	}
-	auto vel = OtherActor->GetVelocity();
-	auto transform = this->GetTransform();
-	auto velLocal = transform.TransformVector(vel);
-	bool fromBToA = velLocal.Y >= 0;
-	if (fromBToA) {
-		this->IntersectAAwayFromB();
-	}
-	else {
-		this->IntersectATowardB();
-	}
-}
-
-void ALevelLoadingTwoWayBox::IntersectAAwayFromB() {
-	UE_LOG(StarryDebug, Display, TEXT("Inter A away from B"));
-
-	auto gameInstance = (URivenGameInstance*)GetWorld()->GetGameInstance();
-	ALoadgroupActor *Queen = gameInstance->LoadgroupQueen;
-
-	if (Queen->IsLoading()) {
-		if (Queen->wantedLoadGroup == BSideLoadGroup) {
-			bShouldRecycle = true;
-			gameInstance->SetIsFrozenForLoading(true);
-		}
-		else if (Queen->wantedLoadGroup == ASideLoadGroup) {
-			bShouldRecycle = false;
-			gameInstance->SetIsFrozenForLoading(true);
-		}
-	}
-	else if (Queen->currentLoadGroup == BSideLoadGroup) {
-		gameInstance->SetIsFrozenForLoading(true);
-		Queen->LoadgroupLoadedEvent.Add(ALoaded_AfterIntersectAAwayFromB);
-		Queen->LoadLoadGroup(this->ASideLoadGroup);
-	}
-}
-
-// Intersect B Callbacks
-
-void ALevelLoadingTwoWayBox::Cbk_ALoaded_AfterIntersectBTowardA() {
-	auto gameInstance = (URivenGameInstance*)GetWorld()->GetGameInstance();
-	ALoadgroupActor *Queen = gameInstance->LoadgroupQueen;
-	Queen->LoadgroupLoadedEvent.Remove(ALoaded_AfterIntersectBTowardA);
-
-	if (bShouldRecycle) {
-		bShouldRecycle = false;
-		Queen->LoadgroupLoadedEvent.Add(BLoaded_AfterALoaded_AfterIntersectBTowardA);
-		Queen->LoadLoadGroup(this->BSideLoadGroup);
-	}
-	else {
-		gameInstance->SetIsFrozenForLoading(false);
-	}
-}
-
-void ALevelLoadingTwoWayBox::Cbk_BLoaded_AfterALoaded_AfterIntersectBTowardA() {
-	auto gameInstance = (URivenGameInstance*)GetWorld()->GetGameInstance();
-	gameInstance->SetIsFrozenForLoading(false);
-	ALoadgroupActor *Queen = gameInstance->LoadgroupQueen;
-	Queen->LoadgroupLoadedEvent.Remove(BLoaded_AfterALoaded_AfterIntersectBTowardA);
-}
-
-void ALevelLoadingTwoWayBox::Cbk_BLoaded_AfterIntersectBAwayFromA() {
-	auto gameInstance = (URivenGameInstance*)GetWorld()->GetGameInstance();
-	gameInstance->SetIsFrozenForLoading(false);
-	ALoadgroupActor *Queen = gameInstance->LoadgroupQueen;
-	Queen->LoadgroupLoadedEvent.Remove(BLoaded_AfterIntersectBAwayFromA);
-}
-
-void ALevelLoadingTwoWayBox::IntersectBTowardA() {
-	auto gameInstance = (URivenGameInstance*)GetWorld()->GetGameInstance();
-	ALoadgroupActor *Queen = gameInstance->LoadgroupQueen;
-	Queen->LoadgroupLoadedEvent.Add(this->ALoaded_AfterIntersectBTowardA);
-	Queen->LoadLoadGroup(this->ASideLoadGroup);
-	UE_LOG(StarryDebug, Display, TEXT("Inter B toward A"));
-}
-
-void ALevelLoadingTwoWayBox::Cbk_IntersectB(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {
-	auto Character = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
-	if (Character == nullptr) {
-		return;
-	}
-	if (Cast<ACharacter>(OtherActor) != Character) {
+	if (Character == nullptr || Cast<ACharacter>(OtherActor) != Character) {
 		return;
 	}
 	auto Capsule = Character->GetCapsuleComponent();
 	if (OtherComp == nullptr || OtherComp->GetName() != HitSphereComponentName) {
-			return;
+		return;
 	}
 	auto vel = OtherActor->GetVelocity();
-	auto transform = this->GetTransform();
+	auto transform = GetTransform();
 	auto velLocal = transform.TransformVector(vel);
-	bool fromBToA = velLocal.Y >= 0;
-	if (fromBToA) {
-		this->IntersectBTowardA();
+	bool toRight = velLocal.Y >= 0;
+	if (toRight) {
+		IntersectFromA();
 	}
 	else {
-		this->IntersectBAwayFromA();
+		IntersectFromB();
 	}
 }
 
-void ALevelLoadingTwoWayBox::IntersectBAwayFromA() {
-	UE_LOG(StarryDebug, Display, TEXT("Inter B away from A"));
+void ALevelLoadingTwoWayBox::Cbk_Leave(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex) {
+	auto Character = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
+	if (Character == nullptr || Cast<ACharacter>(OtherActor) != Character) {
+		return;
+	}
+	auto Capsule = Character->GetCapsuleComponent();
+	if (OtherComp == nullptr || OtherComp->GetName() != HitSphereComponentName) {
+		return;
+	}
+	auto vel = OtherActor->GetVelocity();
+	auto transform = GetTransform();
+	auto velLocal = transform.TransformVector(vel);
+	bool toB = velLocal.Y >= 0;
+	if (toB) {
+		LeaveToB();
+	}
+	else {
+		LeaveToA();
+	}
+}
 
+// Left to right flow
+
+void ALevelLoadingTwoWayBox::IntersectFromA() {
 	auto gameInstance = (URivenGameInstance*)GetWorld()->GetGameInstance();
 	ALoadgroupActor *Queen = gameInstance->LoadgroupQueen;
+	Queen->LoadgroupLoadedEvent.Add(BLoaded_AfterIntersectFromA);
+	Queen->LoadLoadGroup(BSideLoadGroup);
+	UE_LOG(StarryDebug, Display, TEXT("Intersect from A"));
+}
 
+void ALevelLoadingTwoWayBox::Cbk_BLoaded_AfterIntersectFromA() {
+	UE_LOG(StarryDebug, Display, TEXT("B loaded after intersect from A"));
+	auto gameInstance = (URivenGameInstance*)GetWorld()->GetGameInstance();
+	ALoadgroupActor *Queen = gameInstance->LoadgroupQueen;
+	Queen->LoadgroupLoadedEvent.Remove(BLoaded_AfterIntersectFromA);
+
+	if (bShouldRecycle) {
+		UE_LOG(StarryDebug, Display, TEXT("should recycle? yes"));
+		bShouldRecycle = false;
+		Queen->LoadgroupLoadedEvent.Add(ALoaded_AfterBLoaded_AfterIntersectFromA);
+		Queen->LoadLoadGroup(ASideLoadGroup);
+	}
+	else {
+		UE_LOG(StarryDebug, Display, TEXT("should recycle? no"));
+		gameInstance->SetIsFrozenForLoading(false);
+	}
+}
+
+void ALevelLoadingTwoWayBox::Cbk_ALoaded_AfterBLoaded_AfterIntersectFromA() {
+	auto gameInstance = (URivenGameInstance*)GetWorld()->GetGameInstance();
+	gameInstance->SetIsFrozenForLoading(false);
+	ALoadgroupActor *Queen = gameInstance->LoadgroupQueen;
+	Queen->LoadgroupLoadedEvent.Remove(ALoaded_AfterBLoaded_AfterIntersectFromA);
+}
+
+void ALevelLoadingTwoWayBox::LeaveToB() {
+	auto gameInstance = (URivenGameInstance*)GetWorld()->GetGameInstance();
+	ALoadgroupActor *Queen = gameInstance->LoadgroupQueen;
+	if (Queen->IsLoading()) {
+		if (Queen->wantedLoadGroup == BSideLoadGroup) {
+			gameInstance->SetIsFrozenForLoading(true);
+		}
+		else {
+			bShouldRecycle = true;
+		}
+	}
+	else {
+		gameInstance->SetIsFrozenForLoading(true);
+		Queen->LoadgroupLoadedEvent.Add(BLoaded_AfterLeaveToB);
+		Queen->LoadLoadGroup(BSideLoadGroup);
+	}
+	UE_LOG(StarryDebug, Display, TEXT("Leave to B"));
+}
+
+void ALevelLoadingTwoWayBox::Cbk_BLoaded_AfterLeaveToB() {
+	auto gameInstance = (URivenGameInstance*)GetWorld()->GetGameInstance();
+	gameInstance->SetIsFrozenForLoading(false);
+	ALoadgroupActor *Queen = gameInstance->LoadgroupQueen;
+	Queen->LoadgroupLoadedEvent.Remove(BLoaded_AfterLeaveToB);
+}
+
+
+// Right to left flow
+
+void ALevelLoadingTwoWayBox::IntersectFromB() {
+	auto gameInstance = (URivenGameInstance*)GetWorld()->GetGameInstance();
+	ALoadgroupActor *Queen = gameInstance->LoadgroupQueen;
+	Queen->LoadgroupLoadedEvent.Add(ALoaded_AfterIntersectFromB);
+	Queen->LoadLoadGroup(ASideLoadGroup);
+	UE_LOG(StarryDebug, Display, TEXT("Intersect from B"));
+}
+
+void ALevelLoadingTwoWayBox::Cbk_ALoaded_AfterIntersectFromB() {
+	auto gameInstance = (URivenGameInstance*)GetWorld()->GetGameInstance();
+	ALoadgroupActor *Queen = gameInstance->LoadgroupQueen;
+	Queen->LoadgroupLoadedEvent.Remove(ALoaded_AfterIntersectFromB);
+
+	if (bShouldRecycle) {
+		bShouldRecycle = false;
+		Queen->LoadgroupLoadedEvent.Add(BLoaded_AfterALoaded_AfterIntersectFromB);
+		Queen->LoadLoadGroup(BSideLoadGroup);
+	}
+	else {
+		gameInstance->SetIsFrozenForLoading(false);
+	}
+}
+
+void ALevelLoadingTwoWayBox::Cbk_BLoaded_AfterALoaded_AfterIntersectFromB() {
+	auto gameInstance = (URivenGameInstance*)GetWorld()->GetGameInstance();
+	gameInstance->SetIsFrozenForLoading(false);
+	ALoadgroupActor *Queen = gameInstance->LoadgroupQueen;
+	Queen->LoadgroupLoadedEvent.Remove(BLoaded_AfterALoaded_AfterIntersectFromB);
+}
+
+void ALevelLoadingTwoWayBox::LeaveToA() {
+	auto gameInstance = (URivenGameInstance*)GetWorld()->GetGameInstance();
+	ALoadgroupActor *Queen = gameInstance->LoadgroupQueen;
 	if (Queen->IsLoading()) {
 		if (Queen->wantedLoadGroup == ASideLoadGroup) {
+			gameInstance->SetIsFrozenForLoading(true);
+		}
+		else {
 			bShouldRecycle = true;
-			gameInstance->SetIsFrozenForLoading(true);
-		}
-		else if (Queen->wantedLoadGroup == BSideLoadGroup) {
-			bShouldRecycle = false;
-			gameInstance->SetIsFrozenForLoading(true);
 		}
 	}
-	else if (Queen->currentLoadGroup == ASideLoadGroup) {
+	else {
 		gameInstance->SetIsFrozenForLoading(true);
-		Queen->LoadgroupLoadedEvent.Add(BLoaded_AfterIntersectBAwayFromA);
-		Queen->LoadLoadGroup(this->BSideLoadGroup);
+		Queen->LoadgroupLoadedEvent.Add(ALoaded_AfterLeaveToA);
+		Queen->LoadLoadGroup(ASideLoadGroup);
 	}
+	UE_LOG(StarryDebug, Display, TEXT("Leave to A"));
+}
+
+void ALevelLoadingTwoWayBox::Cbk_ALoaded_AfterLeaveToA() {
+	auto gameInstance = (URivenGameInstance*)GetWorld()->GetGameInstance();
+	gameInstance->SetIsFrozenForLoading(false);
+	ALoadgroupActor *Queen = gameInstance->LoadgroupQueen;
+	Queen->LoadgroupLoadedEvent.Remove(ALoaded_AfterLeaveToA);
 }
