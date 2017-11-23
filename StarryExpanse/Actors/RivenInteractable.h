@@ -1,0 +1,32 @@
+//
+// Copyright 2017 59 Volt Entertainment, all rights reserved.
+//
+#pragma once
+
+#include "Object.h"
+#include "RivenInteractable.generated.h"
+
+// https://wiki.unrealengine.com/Blueprints,_Empower_Your_Entire_Team_With_BlueprintImplementableEvent
+// https://wiki.unrealengine.com/Interfaces_in_C%2B%2B
+
+UINTERFACE()
+class STARRYEXPANSE_API URivenInteractable : public UInterface
+{
+  GENERATED_UINTERFACE_BODY()
+};
+
+class IRivenInteractable
+{
+  GENERATED_IINTERFACE_BODY()
+
+public:
+  UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Gameplay)
+    void Initialize(EInteractable interactable, UStaticMeshComponent* moveablePart, float animDuration,
+      EAxis::Type axis, float animStartVal, float animEndVal);
+
+  UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Gameplay)
+    void LookingAt();
+
+  UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Gameplay)
+    void Touched();
+};

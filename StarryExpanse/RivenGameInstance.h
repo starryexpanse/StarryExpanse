@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Engine/GameInstance.h"
 #include "LoadGroups/LoadgroupActor.h"
+#include "Actors/EInteractable.h"
 #include "RivenGameInstance.generated.h"
 
 /**
@@ -36,4 +37,13 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "LoadGroups")
 	void SetIsFrozenForLoading(bool newFrozen);
 
+  UFUNCTION(BlueprintCallable, Category = Gameplay)
+  void SetInteractableState(EInteractable interactable, float state);
+
+  UFUNCTION(BlueprintCallable, Category = Gameplay)
+  float GetInteractableState(EInteractable interactable);
+
+private:
+  // Temporary hack. Will move into a proper game state object.
+  float m_fissurePlateauLeverState = 1.0;
 };

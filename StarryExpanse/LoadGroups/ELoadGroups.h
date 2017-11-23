@@ -25,8 +25,8 @@ enum class ELoadGroups : uint8
       for item in l:
          if type(item) == list:
             accum = accum + item
-      else:
-         accum.append(item)
+         else:
+            accum.append(item)
       return accum
 
    groupnames = list(data.keys())
