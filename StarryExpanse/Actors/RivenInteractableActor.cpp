@@ -3,7 +3,6 @@
 //
 #include "RivenInteractableActor.h"
 #include "Engine/Engine.h"
-#include "Editor/UnrealEd/Classes/Editor/EditorEngine.h"
 #include "Runtime/Engine/Classes/Engine/GameViewportClient.h"
 #include "RivenGameInstance.h"
 #include "Runtime/CoreUObject/Public/UObject/ConstructorHelpers.h"
@@ -30,25 +29,6 @@ void ARivenInteractableActor::SetRotation(float val) {
     break;
   }
   m_moveablePart->SetRelativeRotation(rotator);
-#if 0
-  auto game = static_cast<URivenGameInstance*>(GetGameInstance());
-  if (!game)
-    return;
-  UEngine* engine = game->GetEngine();
-  if (engine) {
-    engine->AddOnScreenDebugMessage(INDEX_NONE, 10, FColor::Yellow, FString::Printf(TEXT("update %f."), val));
-  }
-#endif
-#if 0
-  auto game = static_cast<URivenGameInstance*>(GetGameInstance());
-  if (!game)
-    return;
-  UGameViewportClient* client = game->GetGameViewportClient();
-  client->RedrawRequested();
-  
-  UEditorEngine* editor = nullptr;
-  editor->RedrawAllViewports();
-#endif
 }
 
 void ARivenInteractableActor::AnimationProgressCallback(float val)
@@ -72,14 +52,6 @@ void ARivenInteractableActor::Tick(float DeltaTime)
 {
   Super::Tick(DeltaTime);
   m_timeline.TickTimeline(DeltaTime);
-
-#if 0
-  auto game = static_cast<URivenGameInstance*>(GetGameInstance());
-  if (!game)
-    return;
-  UGameViewportClient* client = game->GetGameViewportClient();
-  client->Tick(DeltaTime);
-#endif
 }
 
 void ARivenInteractableActor::Initialize_Implementation(EInteractable interactable,
