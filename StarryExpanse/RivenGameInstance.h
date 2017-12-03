@@ -2,10 +2,12 @@
 
 #pragma once
 
+#include <set>
 #include "CoreMinimal.h"
 #include "Engine/GameInstance.h"
 #include "LoadGroups/LoadgroupActor.h"
 #include "Actors/EInteractable.h"
+#include "SaveGame/RivenSaveGame.h"
 #include "RivenGameInstance.generated.h"
 
 /**
@@ -24,13 +26,25 @@ public:
 		FFrozenForLoadingChangedEvent FrozenForLoadingChangedEvent;
 
 	// Properties
+
+	std::set<FName> OutstandingSaveGameBlockers;
+
 	UPROPERTY(BlueprintReadOnly)
 		bool bIsFrozenForLoading;
 
 	UPROPERTY(BlueprintReadOnly)
 		ALoadgroupActor* LoadgroupQueen;
 
+	UPROPERTY(BlueprintReadOnly)
+		URivenSaveGame* Last_Savable_SaveGame;
+
 	// Methods
+	UFUNCTION(BlueprintCallable, Category = "SaveGame")
+		void RegisterSaveGameBlocker(FName blockerName);
+
+	UFUNCTION(BlueprintCallable, Category = "SaveGame")
+		void UnregisterSaveGameBlocker(FName blockerName);
+
 	UFUNCTION(BlueprintCallable, Category = "LoadGroups")
 	void RegisterLoadgroupQueen(ALoadgroupActor* newQueen);
 

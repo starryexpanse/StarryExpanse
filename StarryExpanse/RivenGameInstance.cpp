@@ -17,6 +17,14 @@ void URivenGameInstance::RegisterLoadgroupQueen(ALoadgroupActor* newQueen) {
   this->LoadgroupQueen = newQueen;
 }
 
+void URivenGameInstance::RegisterSaveGameBlocker(FName blockerName) {
+	OutstandingSaveGameBlockers.insert(blockerName);
+}
+
+void URivenGameInstance::UnregisterSaveGameBlocker(FName blockerName) {
+	OutstandingSaveGameBlockers.erase(blockerName);
+}
+
 void URivenGameInstance::SetInteractableState(EInteractable interactable, float state) {
   switch (interactable) {
   case EInteractable::T_FissurePlateau_Lever:
