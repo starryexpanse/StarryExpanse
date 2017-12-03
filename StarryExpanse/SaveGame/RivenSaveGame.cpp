@@ -52,10 +52,11 @@ bool URivenSaveGame::GetBooleanBySaveGameField(ESaveGameField fieldName) {
 	fieldName == ESaveGameField::B_GehnHasVisited
 
 	) {
-
+    return true;
 	// [[[end]]]
 	} else {
 		UE_LOG(StarryDebug, Error, TEXT("That field is not a boolean."));
+    return false;
 	}
 }
 
