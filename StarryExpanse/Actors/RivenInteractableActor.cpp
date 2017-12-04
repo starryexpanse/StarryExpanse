@@ -46,6 +46,10 @@ void ARivenInteractableActor::AnimationDone() {
   auto saveGame = gs->Instantaneous_SaveGame;
   check(saveGame);
 
+  if (!saveGame) {
+    return;
+  }
+
   auto at_end = m_timeline.GetPlaybackPosition() > 0; // TODO: "&& isAnimating"
   saveGame->SetBooleanBySaveGameField(m_save_game_field, at_end); // TODO: ^ is_false_at_end
 }
@@ -94,11 +98,10 @@ void ARivenInteractableActor::Initialize(FInteractableSettingsAxial settings) {
   }
 
   auto saveGame = gs->Instantaneous_SaveGame;
+  check(saveGame);
   if (!saveGame) {
     return;
   }
-  
-  check(saveGame);
 
   auto isInInitialPosition = !saveGame->GetBooleanBySaveGameField(m_save_game_field); // TODO: ^ is_false_at_end
 

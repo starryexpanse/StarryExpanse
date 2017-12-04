@@ -8,6 +8,9 @@ ARivenGameState::ARivenGameState()
 	: Super()
 {
   auto world = this->GetWorld();
+  if (!world) {
+    return;
+  }
   auto initialSavegame = NewObject<URivenSaveGame>();
   auto gs = static_cast<ARivenGameState*>(world->GetGameState());
   if (!gs) {
@@ -18,6 +21,9 @@ ARivenGameState::ARivenGameState()
 
 void ARivenGameState::HandleBeginPlay() {
   auto world = this->GetWorld();
+  if (!world) {
+    return;
+  }
   auto initialSavegame = NewObject<URivenSaveGame>();
   auto gs = static_cast<ARivenGameState*>(world->GetGameState());
   if (!gs) {
