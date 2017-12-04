@@ -3,8 +3,9 @@
 //
 #include "RivenInteractableActor.h"
 #include "Engine/Engine.h"
+#include "Actors/InteractableSettingsAxial.h"
 #include "Runtime/Engine/Classes/Engine/GameViewportClient.h"
-#include "RivenGameInstance.h"
+#include "RivenGameState.h"
 #include "Runtime/CoreUObject/Public/UObject/ConstructorHelpers.h"
 
 ARivenInteractableActor::ARivenInteractableActor(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
@@ -37,10 +38,16 @@ void ARivenInteractableActor::AnimationProgressCallback(float val)
 }
 
 void ARivenInteractableActor::AnimationDone() {
-  auto game = static_cast<URivenGameInstance*>(GetGameInstance());
-  if (!game)
+  auto gs = static_cast<ARivenGameState*>(GetWorld()->GetGameState());
+  if (!gs) {
     return;
-  game->SetInteractableState(m_interactable, m_timeline.GetPlaybackPosition());
+  }
+
+  auto saveGame = gs->Instantaneous_SaveGame;
+  check(saveGame);
+
+  auto at_end = m_timeline.GetPlaybackPosition() > 0; // TODO: "&& isAnimating"
+  saveGame->SetBooleanBySaveGameField(m_save_game_field, at_end); // TODO: ^ is_false_at_end
 }
 
 void ARivenInteractableActor::BeginPlay()
@@ -54,13 +61,10 @@ void ARivenInteractableActor::Tick(float DeltaTime)
   m_timeline.TickTimeline(DeltaTime);
 }
 
-void ARivenInteractableActor::Initialize_Implementation(EInteractable interactable,
-  UStaticMeshComponent* moveablePart, float animDuration, EAxis::Type axis,
-  float animStartVal, float animEndVal) {
-
-  m_interactable = interactable;
-  m_moveablePart = moveablePart;
-  m_axis = axis;
+void ARivenInteractableActor::Initialize(FInteractableSettingsAxial settings) {
+  m_save_game_field = settings.SaveGameField;
+  m_moveablePart = settings.MoveablePart;
+  m_axis = settings.Axis;
 
   FOnTimelineFloat progressCallback{};
   progressCallback.BindUFunction(this, FName{ TEXT("AnimationProgressCallback") });
@@ -70,27 +74,41 @@ void ARivenInteractableActor::Initialize_Implementation(EInteractable interactab
 
   auto floatCurve = NewObject<UCurveFloat>();
 
-  auto startKey = floatCurve->FloatCurve.AddKey(0, animStartVal);
-  auto endKey = floatCurve->FloatCurve.AddKey(animDuration, animEndVal);
+  auto startKey = floatCurve->FloatCurve.AddKey(0, settings.AnimationStartValue);
+  auto endKey = floatCurve->FloatCurve.AddKey(settings.AnimationDuration, settings.AnimationEndValue);
   floatCurve->FloatCurve.SetKeyTime(startKey, 0);
-  floatCurve->FloatCurve.SetKeyTime(endKey, animDuration);
+  floatCurve->FloatCurve.SetKeyTime(endKey, settings.AnimationDuration);
   floatCurve->FloatCurve.SetKeyInterpMode(endKey, RCIM_Cubic);
   floatCurve->FloatCurve.SetKeyTangentMode(endKey, RCTM_Auto);
 
-  check(floatCurve->GetFloatValue(0.0) == animStartVal);
-  check(floatCurve->GetFloatValue(animDuration) == animEndVal);
+  check(floatCurve->GetFloatValue(0.0) == settings.AnimationStartValue);
+  check(floatCurve->GetFloatValue(settings.AnimationDuration) == settings.AnimationEndValue);
 
-  m_timeline.SetTimelineLength(animDuration);
+  m_timeline.SetTimelineLength(settings.AnimationDuration);
   m_timeline.AddInterpFloat(floatCurve, progressCallback, FName{ TEXT("InteractableTimelineAnimation") });
   m_timeline.SetTimelineFinishedFunc(finishedCallback);
 
-  auto game = static_cast<URivenGameInstance*>(GetGameInstance());
-  if (!game)
+  auto gs = static_cast<ARivenGameState*>(GetWorld()->GetGameState());
+  if (!gs) {
     return;
-  float rotation = game->GetInteractableState(m_interactable);
-  SetRotation(rotation);
-  if (rotation > animStartVal) {
-    m_timeline.SetNewTime(animDuration);
+  }
+
+  auto saveGame = gs->Instantaneous_SaveGame;
+  if (!saveGame) {
+    return;
+  }
+  
+  check(saveGame);
+
+  auto isInInitialPosition = !saveGame->GetBooleanBySaveGameField(m_save_game_field); // TODO: ^ is_false_at_end
+
+  if (isInInitialPosition) {
+    SetRotation(settings.AnimationStartValue);
+    m_timeline.SetNewTime(0);
+  }
+  else {
+    SetRotation(settings.AnimationEndValue);
+    m_timeline.SetNewTime(settings.AnimationDuration);
   }
 }
 

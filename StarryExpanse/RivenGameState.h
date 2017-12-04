@@ -13,6 +13,9 @@ class ARivenGameState : public AGameStateBase
 public:
 	ARivenGameState();
 
+  void HandleBeginPlay() override;
+
+
 	UPROPERTY(BlueprintReadOnly)
 		URivenSaveGame* Instantaneous_SaveGame;
 };
