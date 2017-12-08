@@ -35,19 +35,6 @@ URivenSaveGame::URivenSaveGame(const FObjectInitializer& ObjectInitializer)
 bool URivenSaveGame::GetBooleanBySaveGameField(ESaveGameField fieldName) {
 	/*
 	[[[cog
-
-<<<<<<< HEAD
-	fieldName == ESaveGameField::T_FissurePlateau_CageLever_Closed ||
-
-	fieldName == ESaveGameField::T_FissurePlateau_ChoStillPassedOut ||
-
-	fieldName == ESaveGameField::S_SeenScribe ||
-
-	fieldName == ESaveGameField::B_GehnHasVisited
-
-	) {
-    return true;
-=======
       vars_of_type, n = vars('bool')
       for i, b in enumerate(vars_of_type):
         first = i == 0
