@@ -33,118 +33,101 @@ URivenSaveGame::URivenSaveGame(const FObjectInitializer& ObjectInitializer)
 }
 
 bool URivenSaveGame::GetBooleanBySaveGameField(ESaveGameField fieldName) {
-	/*
-	[[[cog
-      vars_of_type, n = vars('bool')
-      for i, b in enumerate(vars_of_type):
-        first = i == 0
-        last = i == n - 1
-        p('  %sif (fieldName == %s) { ' % ('' if first else 'else ', wrap(b[1])))
-        p('    return this->%s;' % (b[1],))
-        p('}')
-
-	]]] */
-	  if (fieldName == ESaveGameField::CurrentZoomedLinkingBookIsOpen) { 
-	    return this->CurrentZoomedLinkingBookIsOpen;
-	}
-	  else if (fieldName == ESaveGameField::GehnIsTrapped) { 
-	    return this->GehnIsTrapped;
-	}
-	  else if (fieldName == ESaveGameField::HaveTrapBook) { 
-	    return this->HaveTrapBook;
-	}
-	  else if (fieldName == ESaveGameField::CatherineIsFree) { 
-	    return this->CatherineIsFree;
-	}
-	  else if (fieldName == ESaveGameField::J_SeenCreepyGirl) { 
-	    return this->J_SeenCreepyGirl;
-	}
-	  else if (fieldName == ESaveGameField::O_OvenIsOn) { 
-	    return this->O_OvenIsOn;
-	}
-	  else if (fieldName == ESaveGameField::O_CageIsUp) { 
-	    return this->O_CageIsUp;
-	}
-	  else if (fieldName == ESaveGameField::T_NewTemple_DoorMain_Open) { 
-	    return this->T_NewTemple_DoorMain_Open;
-	}
-	  else if (fieldName == ESaveGameField::T_NewTemple_DoorSide_Open) { 
-	    return this->T_NewTemple_DoorSide_Open;
-	}
-	  else if (fieldName == ESaveGameField::T_FissurePlateau_CageLever_Closed) { 
-	    return this->T_FissurePlateau_CageLever_Closed;
-	}
-	  else if (fieldName == ESaveGameField::T_FissurePlateau_ChoStillPassedOut) { 
-	    return this->T_FissurePlateau_ChoStillPassedOut;
-	}
-	  else if (fieldName == ESaveGameField::S_SeenScribe) { 
-	    return this->S_SeenScribe;
-	}
-	  else if (fieldName == ESaveGameField::B_GehnHasVisited) { 
-	    return this->B_GehnHasVisited;
-	}
-	// [[[end]]]
-	else {
-		UE_LOG(StarryDebug, Error, TEXT("That field is not a boolean."));
-    return false;
-	}
+  switch (fieldName) {
+    /*
+    [[[cog
+        vars_of_type, n = vars('bool')
+        for i, b in enumerate(vars_of_type):
+          p('  case %s:' % wrap(b[1]))
+          p('    return this->%s;' % (b[1],))
+    ]]] */
+    case ESaveGameField::CurrentZoomedLinkingBookIsOpen:
+      return this->CurrentZoomedLinkingBookIsOpen;
+    case ESaveGameField::GehnIsTrapped:
+      return this->GehnIsTrapped;
+    case ESaveGameField::HaveTrapBook:
+      return this->HaveTrapBook;
+    case ESaveGameField::CatherineIsFree:
+      return this->CatherineIsFree;
+    case ESaveGameField::J_SeenCreepyGirl:
+      return this->J_SeenCreepyGirl;
+    case ESaveGameField::O_OvenIsOn:
+      return this->O_OvenIsOn;
+    case ESaveGameField::O_CageIsUp:
+      return this->O_CageIsUp;
+    case ESaveGameField::T_NewTemple_DoorMain_Open:
+      return this->T_NewTemple_DoorMain_Open;
+    case ESaveGameField::T_NewTemple_DoorSide_Open:
+      return this->T_NewTemple_DoorSide_Open;
+    case ESaveGameField::T_FissurePlateau_CageLever_Closed:
+      return this->T_FissurePlateau_CageLever_Closed;
+    case ESaveGameField::T_FissurePlateau_ChoStillPassedOut:
+      return this->T_FissurePlateau_ChoStillPassedOut;
+    case ESaveGameField::S_SeenScribe:
+      return this->S_SeenScribe;
+    case ESaveGameField::B_GehnHasVisited:
+      return this->B_GehnHasVisited;
+    // [[[end]]]
+    default:
+      UE_LOG(StarryDebug, Error, TEXT("That field is not a boolean."));
+      return false;
+  }
 }
 
 void URivenSaveGame::SetBooleanBySaveGameField(ESaveGameField fieldName, bool nextVal) {
-  /*
-  [[[cog
+  switch (fieldName) {
+    /*
+    [[[cog
 
-  vars_of_type, n = vars('bool')
-  for i, b in enumerate(vars_of_type):
-    first = i == 0
-    last = i == n - 1
-    p('  %sif (fieldName == %s) { ' % ('' if first else 'else ', wrap(b[1])))
-    p('    this->%s = nextVal;' % (b[1],))
-    p('}')
+    vars_of_type, n = vars('bool')
+    for i, b in enumerate(vars_of_type):
+      p('    case %s:' % wrap(b[1]))
+      p('      this->%s = nextVal;' % b[1])
+      p('      break;')
 
-  ]]] */
-    if (fieldName == ESaveGameField::CurrentZoomedLinkingBookIsOpen) { 
+    ]]] */
+    case ESaveGameField::CurrentZoomedLinkingBookIsOpen:
       this->CurrentZoomedLinkingBookIsOpen = nextVal;
-  }
-    else if (fieldName == ESaveGameField::GehnIsTrapped) { 
+      break;
+    case ESaveGameField::GehnIsTrapped:
       this->GehnIsTrapped = nextVal;
-  }
-    else if (fieldName == ESaveGameField::HaveTrapBook) { 
+      break;
+    case ESaveGameField::HaveTrapBook:
       this->HaveTrapBook = nextVal;
-  }
-    else if (fieldName == ESaveGameField::CatherineIsFree) { 
+      break;
+    case ESaveGameField::CatherineIsFree:
       this->CatherineIsFree = nextVal;
-  }
-    else if (fieldName == ESaveGameField::J_SeenCreepyGirl) { 
+      break;
+    case ESaveGameField::J_SeenCreepyGirl:
       this->J_SeenCreepyGirl = nextVal;
-  }
-    else if (fieldName == ESaveGameField::O_OvenIsOn) { 
+      break;
+    case ESaveGameField::O_OvenIsOn:
       this->O_OvenIsOn = nextVal;
-  }
-    else if (fieldName == ESaveGameField::O_CageIsUp) { 
+      break;
+    case ESaveGameField::O_CageIsUp:
       this->O_CageIsUp = nextVal;
-  }
-    else if (fieldName == ESaveGameField::T_NewTemple_DoorMain_Open) { 
+      break;
+    case ESaveGameField::T_NewTemple_DoorMain_Open:
       this->T_NewTemple_DoorMain_Open = nextVal;
-  }
-    else if (fieldName == ESaveGameField::T_NewTemple_DoorSide_Open) { 
+      break;
+    case ESaveGameField::T_NewTemple_DoorSide_Open:
       this->T_NewTemple_DoorSide_Open = nextVal;
-  }
-    else if (fieldName == ESaveGameField::T_FissurePlateau_CageLever_Closed) { 
+      break;
+    case ESaveGameField::T_FissurePlateau_CageLever_Closed:
       this->T_FissurePlateau_CageLever_Closed = nextVal;
-  }
-    else if (fieldName == ESaveGameField::T_FissurePlateau_ChoStillPassedOut) { 
+      break;
+    case ESaveGameField::T_FissurePlateau_ChoStillPassedOut:
       this->T_FissurePlateau_ChoStillPassedOut = nextVal;
-  }
-    else if (fieldName == ESaveGameField::S_SeenScribe) { 
+      break;
+    case ESaveGameField::S_SeenScribe:
       this->S_SeenScribe = nextVal;
-  }
-    else if (fieldName == ESaveGameField::B_GehnHasVisited) { 
+      break;
+    case ESaveGameField::B_GehnHasVisited:
       this->B_GehnHasVisited = nextVal;
-  }
-  // [[[end]]]
-  else {
-    UE_LOG(StarryDebug, Error, TEXT("That field is not a boolean."));
+      break;
+    // [[[end]]]
+    default:
+      UE_LOG(StarryDebug, Error, TEXT("That field is not a boolean."));
   }
 }
 
