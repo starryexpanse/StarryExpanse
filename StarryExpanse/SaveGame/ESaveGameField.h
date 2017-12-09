@@ -5,8 +5,6 @@
 #pragma once
 
 #include "Engine/UserDefinedEnum.h"
-#include "ESaveGameField.generated.h"
-
 
 UENUM(BlueprintType)
 enum class ESaveGameField : uint8
