@@ -71,7 +71,7 @@ bool URivenSaveGame::GetBooleanBySaveGameField(ESaveGameField fieldName) {
       return this->B_GehnHasVisited;
     // [[[end]]]
     default:
-      UE_LOG(StarryDebug, Error, TEXT("That field is not a boolean."));
+      UE_LOG(StarryDebug, Error, TEXT("%s is not a boolean."), *GetSaveGameFieldAsString(fieldName));
       return false;
   }
 }
@@ -129,7 +129,7 @@ void URivenSaveGame::SetBooleanBySaveGameField(ESaveGameField fieldName, bool ne
       break;
     // [[[end]]]
     default:
-      UE_LOG(StarryDebug, Error, TEXT("That field is not a boolean."));
+      UE_LOG(StarryDebug, Error, TEXT("%s is not a boolean."), *GetSaveGameFieldAsString(fieldName));
   }
 }
 

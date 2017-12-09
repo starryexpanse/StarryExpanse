@@ -56,3 +56,5 @@ enum class ESaveGameField : uint8
 	// [[[end]]]
 	
 };
+
+FString GetSaveGameFieldAsString(ESaveGameField field);
