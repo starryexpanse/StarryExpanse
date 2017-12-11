@@ -13,8 +13,7 @@ class ARivenGameState : public AGameStateBase
 public:
 	ARivenGameState();
 
-  void HandleBeginPlay() override;
-
+  void OnConstruction(const FTransform & Transform) override;
 
 	UPROPERTY(BlueprintReadOnly)
 		URivenSaveGame* Instantaneous_SaveGame;

@@ -3,31 +3,18 @@
 #include "Kismet/GameplayStatics.h"
 #include "UObject/ConstructorHelpers.h"
 #include "Engine/Engine.h"
+#include "RivenGameInstance.h"
+#include "StarryExpanse.h"
 
 ARivenGameState::ARivenGameState()
 	: Super()
 {
-  auto world = this->GetWorld();
-  if (!world) {
-    return;
-  }
-  auto initialSavegame = NewObject<URivenSaveGame>();
-  auto gs = static_cast<ARivenGameState*>(world->GetGameState());
-  if (!gs) {
-    return;
-  }
-  gs->Instantaneous_SaveGame = initialSavegame;
 }
 
-void ARivenGameState::HandleBeginPlay() {
-  auto world = this->GetWorld();
-  if (!world) {
-    return;
-  }
+void ARivenGameState::OnConstruction(const FTransform & Transform) {
   auto initialSavegame = NewObject<URivenSaveGame>();
-  auto gs = static_cast<ARivenGameState*>(world->GetGameState());
-  if (!gs) {
-    return;
-  }
-  gs->Instantaneous_SaveGame = initialSavegame;
+  this->Instantaneous_SaveGame = initialSavegame;
+  auto gameInstance = GetWorld()->GetGameInstance<URivenGameInstance>();
+  gameInstance->Last_Savable_SaveGame = initialSavegame;
 }
+

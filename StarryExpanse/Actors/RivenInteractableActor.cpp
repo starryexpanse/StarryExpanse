@@ -6,6 +6,7 @@
 #include "Actors/InteractableSettingsAxial.h"
 #include "Runtime/Engine/Classes/Engine/GameViewportClient.h"
 #include "RivenGameState.h"
+#include "Kismet/GameplayStatics.h"
 #include "Runtime/CoreUObject/Public/UObject/ConstructorHelpers.h"
 
 ARivenInteractableActor::ARivenInteractableActor(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
@@ -38,13 +39,13 @@ void ARivenInteractableActor::AnimationProgressCallback(float val)
 }
 
 void ARivenInteractableActor::AnimationDone() {
-  auto gs = static_cast<ARivenGameState*>(GetWorld()->GetGameState());
+  auto gs = Cast<ARivenGameState>(GetWorld()->GetGameState());
+
   if (!gs) {
     return;
   }
 
   auto saveGame = gs->Instantaneous_SaveGame;
-  check(saveGame);
 
   if (!saveGame) {
     return;
@@ -92,13 +93,14 @@ void ARivenInteractableActor::Initialize(FInteractableSettingsAxial settings) {
   m_timeline.AddInterpFloat(floatCurve, progressCallback, FName{ TEXT("InteractableTimelineAnimation") });
   m_timeline.SetTimelineFinishedFunc(finishedCallback);
 
-  auto gs = static_cast<ARivenGameState*>(GetWorld()->GetGameState());
+  auto gs = Cast<ARivenGameState>(GetWorld()->GetGameState());
+
   if (!gs) {
     return;
   }
 
   auto saveGame = gs->Instantaneous_SaveGame;
-  check(saveGame);
+
   if (!saveGame) {
     return;
   }
