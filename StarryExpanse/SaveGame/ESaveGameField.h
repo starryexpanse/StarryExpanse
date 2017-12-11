@@ -1,10 +1,10 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+//
+// Copyright 2017 59 Volt Entertainment, all rights reserved.
+//
 
 #pragma once
 
 #include "Engine/UserDefinedEnum.h"
-#include "ESaveGameField.generated.h"
-
 
 UENUM(BlueprintType)
 enum class ESaveGameField : uint8
@@ -54,3 +54,5 @@ enum class ESaveGameField : uint8
 	// [[[end]]]
 	
 };
+
+FString GetSaveGameFieldAsString(ESaveGameField field);
