@@ -2,6 +2,7 @@
 
 #include "StarryExpanseGameMode.h"
 #include "StarryExpanseHUD.h"
+#include "RivenGameState.h"
 #include "Kismet/GameplayStatics.h"
 #include "UObject/ConstructorHelpers.h"
 
@@ -20,10 +21,12 @@ AStarryExpanseGameMode::AStarryExpanseGameMode()
 	);
 	PlayerControllerClass = PlayerControllerClassFinder.Class;
 
-   static ConstructorHelpers::FClassFinder<AHUD> HudClassFinder(
-      TEXT("/Game/StarryExpanse/Core/Engine/Gui/loadingHUD")
-   );
-   HUDClass = HudClassFinder.Class;
+  static ConstructorHelpers::FClassFinder<AHUD> HudClassFinder(
+    TEXT("/Game/StarryExpanse/Core/Engine/Gui/loadingHUD")
+  );
+  HUDClass = HudClassFinder.Class;
+
+  GameStateClass = ARivenGameState::StaticClass();
 
 	// use our custom HUD class
 	// HUDClass = AStarryExpanseHUD::StaticClass();

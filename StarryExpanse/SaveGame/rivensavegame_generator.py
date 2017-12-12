@@ -2,7 +2,7 @@ import cog
 
 def p(x):
     # Easy hack to make the line endings consistently DOS-style
-    cog.outl(x+"\r")
+    cog.outl(x)
 
 vars = [
 

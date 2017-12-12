@@ -39,6 +39,9 @@ public:
 		URivenSaveGame* Last_Savable_SaveGame;
 
 	// Methods
+
+  void Init() override;
+
 	UFUNCTION(BlueprintCallable, Category = "SaveGame")
 		void RegisterSaveGameBlocker(FName blockerName);
 

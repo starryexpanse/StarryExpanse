@@ -1,9 +1,13 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "RivenGameInstance.h"
+#include "SaveGame/RivenSaveGame.h"
+#include "RivenGameState.h"
 #include "LoadGroups/LoadgroupActor.h"
 #include "Engine/Engine.h"
 
+void URivenGameInstance::Init() {
+}
 
 void URivenGameInstance::SetIsFrozenForLoading(bool newFrozen) {
   bool changed = newFrozen != this->bIsFrozenForLoading;

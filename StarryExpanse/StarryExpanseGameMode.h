@@ -6,7 +6,7 @@
 #include "GameFramework/GameModeBase.h"
 #include "StarryExpanseGameMode.generated.h"
 
-UCLASS(minimalapi)
+UCLASS()
 class AStarryExpanseGameMode : public AGameModeBase
 {
 	GENERATED_BODY()

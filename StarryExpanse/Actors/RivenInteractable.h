@@ -21,10 +21,6 @@ class IRivenInteractable
 
 public:
   UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Gameplay)
-    void Initialize(EInteractable interactable, UStaticMeshComponent* moveablePart, float animDuration,
-      EAxis::Type axis, float animStartVal, float animEndVal);
-
-  UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Gameplay)
     void LookingAt();
 
   UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Gameplay)
