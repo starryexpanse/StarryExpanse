@@ -8,6 +8,7 @@
 #include "LoadGroups/LoadgroupActor.h"
 #include "Actors/EInteractable.h"
 #include "SaveGame/RivenSaveGame.h"
+#include "Structs/RivenGameInstanceVars.h"
 #include "RivenGameInstance.generated.h"
 
 /**
@@ -20,10 +21,14 @@ class STARRYEXPANSE_API URivenGameInstance : public UGameInstance
 
 public:
 
-	// Events
-	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFrozenForLoadingChangedEvent);
-	UPROPERTY(BlueprintAssignable, Category = "Loading State")
-		FFrozenForLoadingChangedEvent FrozenForLoadingChangedEvent;
+  UPROPERTY(BlueprintReadOnly)
+    FRivenGameInstanceVars GameInstanceVars;
+
+  // "Game instance vars" have changed. This is generally whenever some global shared state has changed.
+  // Try to keep this to a minimum as it is a little expensive.
+  DECLARE_DYNAMIC_MULTICAST_DELEGATE(FGameInstanceVarsChanged);
+  UPROPERTY(BlueprintAssignable, Category = "Game Instance Vars")
+    FGameInstanceVarsChanged GameInstanceVarsChanged;
 
 	// Properties
 

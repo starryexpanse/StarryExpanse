@@ -6,7 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "RivenInteractable.h"
 #include "Actors/EInteractable.h"
-#include "Actors/InteractableSettingsAxial.h"
+#include "Structs/InteractableSettingsAxial.h"
 #include "SaveGame/ESaveGameField.h"
 #include "Runtime/Engine/Classes/Components/StaticMeshComponent.h"
 #include "Runtime/Engine/Classes/Components/TimelineComponent.h"

@@ -3,7 +3,7 @@
 //
 #include "RivenInteractableActor.h"
 #include "Engine/Engine.h"
-#include "Actors/InteractableSettingsAxial.h"
+#include "Structs/InteractableSettingsAxial.h"
 #include "Runtime/Engine/Classes/Engine/GameViewportClient.h"
 #include "RivenGameState.h"
 #include "Kismet/GameplayStatics.h"

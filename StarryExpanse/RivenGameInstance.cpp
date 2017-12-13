@@ -10,10 +10,10 @@ void URivenGameInstance::Init() {
 }
 
 void URivenGameInstance::SetIsFrozenForLoading(bool newFrozen) {
-  bool changed = newFrozen != this->bIsFrozenForLoading;
-  this->bIsFrozenForLoading = newFrozen;
+  bool changed = newFrozen != GameInstanceVars.IsFrozenForLoading;
   if (changed) {
-    FrozenForLoadingChangedEvent.Broadcast();
+    GameInstanceVars.IsFrozenForLoading = newFrozen;
+    GameInstanceVarsChanged.Broadcast();
   }
 }
 
