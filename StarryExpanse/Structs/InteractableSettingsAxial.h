@@ -6,8 +6,8 @@
 #include "Actors/EInteractable.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "InteractableSettingsAxial.generated.h"
 #include "SaveGame/ESaveGameField.h"
+#include "InteractableSettingsAxial.generated.h"
 
 USTRUCT(BlueprintType)
 struct FInteractableSettingsAxial {

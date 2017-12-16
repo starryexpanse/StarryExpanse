@@ -1,7 +1,7 @@
 #pragma once
 
-#include "ELoadGroups.generated.h"
 #include "Engine/UserDefinedEnum.h"
+#include "ELoadGroups.generated.h"
 
 UENUM(BlueprintType)
 enum class ELoadGroups : uint8 {

@@ -8,11 +8,11 @@
 #include "Enums/ESubPosRot.h"
 #include "GameFramework/SaveGame.h"
 #include "LoadGroups/ELoadGroups.h"
-#include "RivenSaveGame.generated.h"
 #include "SaveGame/ESaveGameField.h"
 #include <string>
 #include <tuple>
 #include <vector>
+#include "RivenSaveGame.generated.h"
 
 /**
  *

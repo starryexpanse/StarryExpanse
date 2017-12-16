@@ -5,9 +5,9 @@
 #include "Classes/Components/BoxComponent.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "LevelLoadingTwoWayBox.generated.h"
 #include "LoadGroups/ELoadGroups.h"
 #include "RivenGameInstance.h"
+#include "LevelLoadingTwoWayBox.generated.h"
 
 UCLASS()
 class STARRYEXPANSE_API ALevelLoadingTwoWayBox : public AActor {

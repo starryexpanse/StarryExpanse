@@ -1,6 +1,6 @@
 #pragma once
-#include "LoadGroupManagerComponent.generated.h"
 #include "LoadGroups/ELoadGroups.h"
+#include "LoadGroupManagerComponent.generated.h"
 
 UCLASS(Blueprintable, Config = Game)
 class ULoadGroupManagerComponent : public UActorComponent {

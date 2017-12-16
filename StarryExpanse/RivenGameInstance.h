@@ -6,10 +6,10 @@
 #include "CoreMinimal.h"
 #include "Engine/GameInstance.h"
 #include "LoadGroups/LoadgroupActor.h"
-#include "RivenGameInstance.generated.h"
 #include "SaveGame/RivenSaveGame.h"
 #include "Structs/RivenGameInstanceVars.h"
 #include <set>
+#include "RivenGameInstance.generated.h"
 
 /**
  *

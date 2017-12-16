@@ -6,11 +6,11 @@
 #include "Actors/EInteractable.h"
 #include "GameFramework/Actor.h"
 #include "RivenInteractable.h"
-#include "RivenInteractableActor.generated.h"
 #include "Runtime/Engine/Classes/Components/StaticMeshComponent.h"
 #include "Runtime/Engine/Classes/Components/TimelineComponent.h"
 #include "SaveGame/ESaveGameField.h"
 #include "Structs/InteractableSettingsAxial.h"
+#include "RivenInteractableActor.generated.h"
 
 //
 // An actor with a single moveable component (static mesh). This class handles

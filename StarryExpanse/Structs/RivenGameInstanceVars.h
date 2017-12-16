@@ -6,8 +6,8 @@
 #include "Actors/EInteractable.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "RivenGameInstanceVars.generated.h"
 #include "SaveGame/ESaveGameField.h"
+#include "RivenGameInstanceVars.generated.h"
 
 USTRUCT(BlueprintType)
 struct FRivenGameInstanceVars {

@@ -5,8 +5,8 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "LoadGroups/ELoadGroups.h"
-#include "LoadgroupActor.generated.h"
 #include <set>
+#include "LoadgroupActor.generated.h"
 
 UCLASS()
 class STARRYEXPANSE_API ALoadgroupActor : public AActor {

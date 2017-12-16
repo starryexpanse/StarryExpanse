@@ -1,7 +1,7 @@
 #pragma once
 
-#include "EMapNames.generated.h"
 #include "Engine/UserDefinedEnum.h"
+#include "EMapNames.generated.h"
 
 UENUM(BlueprintType)
 enum class EMapNames : uint8 {

@@ -2,8 +2,8 @@
 
 #pragma once
 
-#include "EMarionettist.generated.h"
 #include "Engine/UserDefinedEnum.h"
+#include "EMarionettist.generated.h"
 
 UENUM(BlueprintType)
 enum class EMarionettist : uint8 {

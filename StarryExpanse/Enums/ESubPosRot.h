@@ -2,8 +2,8 @@
 
 #pragma once
 
-#include "ESubPosRot.generated.h"
 #include "Engine/UserDefinedEnum.h"
+#include "ESubPosRot.generated.h"
 
 UENUM(BlueprintType)
 enum class ESubPosRot : uint8 {
