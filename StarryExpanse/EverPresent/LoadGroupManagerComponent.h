@@ -3,15 +3,14 @@
 #include "LoadGroupManagerComponent.generated.h"
 
 UCLASS(Blueprintable, Config = Game)
-class ULoadGroupManagerComponent : public UActorComponent
-{
+class ULoadGroupManagerComponent : public UActorComponent {
 public:
-   GENERATED_BODY()
-      // Class Constructor
-    ULoadGroupManagerComponent();
+  GENERATED_BODY()
+  // Class Constructor
+  ULoadGroupManagerComponent();
 
-    UFUNCTION(Category = "Callbacks")
-    void LevelLoaded();
+  UFUNCTION(Category = "Callbacks")
+  void LevelLoaded();
 
-    void LoadLoadGroup();
+  void LoadLoadGroup();
 };

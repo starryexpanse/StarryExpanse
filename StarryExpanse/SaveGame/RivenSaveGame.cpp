@@ -7,268 +7,270 @@
 #include "StarryExpanse.h"
 
 /* [[[cog
-    import cog
-    from rivensavegame_generator import vars as allvars, p
+import cog
+from rivensavegame_generator import vars as allvars, p
 
-    def vars(type):
-      vars_of_type = [var for var in allvars if var[0] == type]
-      return (vars_of_type, len(vars_of_type))
+def vars(type):
+  vars_of_type = [var for var in allvars if var[0] == type]
+  return (vars_of_type, len(vars_of_type))
 
-    def wrap(ident):
-      return "ESaveGameField::" + ident
+def wrap(ident):
+  return "ESaveGameField::" + ident
 
-    def if_check(type):
-      vars_of_type, n = vars(type)
-      p('if (')
-      for i, b in enumerate(vars_of_type):
-        last = i == n - 1
-        p('fieldName == %s%s' % (wrap(b[1]), ' ||' if not last else ''))
-      p(') {')
+def if_check(type):
+  vars_of_type, n = vars(type)
+  p('if (')
+  for i, b in enumerate(vars_of_type):
+    last = i == n - 1
+    p('fieldName == %s%s' % (wrap(b[1]), ' ||' if not last else ''))
+  p(') {')
 
- ]]] */
+]]] */
 // [[[end]]]
 
-URivenSaveGame::URivenSaveGame(const FObjectInitializer& ObjectInitializer)
-   : Super(ObjectInitializer)
-{
-   this->RestoreNewGameDefaults();
+URivenSaveGame::URivenSaveGame(const FObjectInitializer &ObjectInitializer)
+    : Super(ObjectInitializer) {
+  this->RestoreNewGameDefaults();
 }
 
 bool URivenSaveGame::GetBooleanBySaveGameField(ESaveGameField fieldName) {
   switch (fieldName) {
-    /*
-    [[[cog
-        vars_of_type, n = vars('bool')
-        for i, b in enumerate(vars_of_type):
-          p('  case %s:' % wrap(b[1]))
-          p('    return this->%s;' % (b[1],))
-    ]]] */
-    case ESaveGameField::CurrentZoomedLinkingBookIsOpen:
-      return this->CurrentZoomedLinkingBookIsOpen;
-    case ESaveGameField::GehnIsTrapped:
-      return this->GehnIsTrapped;
-    case ESaveGameField::HaveTrapBook:
-      return this->HaveTrapBook;
-    case ESaveGameField::CatherineIsFree:
-      return this->CatherineIsFree;
-    case ESaveGameField::J_SeenCreepyGirl:
-      return this->J_SeenCreepyGirl;
-    case ESaveGameField::O_OvenIsOn:
-      return this->O_OvenIsOn;
-    case ESaveGameField::O_CageIsUp:
-      return this->O_CageIsUp;
-    case ESaveGameField::T_NewTemple_DoorMain_Open:
-      return this->T_NewTemple_DoorMain_Open;
-    case ESaveGameField::T_NewTemple_DoorSide_Open:
-      return this->T_NewTemple_DoorSide_Open;
-    case ESaveGameField::T_FissurePlateau_CageLever_Closed:
-      return this->T_FissurePlateau_CageLever_Closed;
-    case ESaveGameField::T_FissurePlateau_ChoStillPassedOut:
-      return this->T_FissurePlateau_ChoStillPassedOut;
-    case ESaveGameField::S_SeenScribe:
-      return this->S_SeenScribe;
-    case ESaveGameField::B_GehnHasVisited:
-      return this->B_GehnHasVisited;
-    // [[[end]]]
-    default:
-      UE_LOG(StarryDebug, Error, TEXT("%s is not a boolean."), *GetSaveGameFieldAsString(fieldName));
-      return false;
+  /*
+  [[[cog
+      vars_of_type, n = vars('bool')
+      for i, b in enumerate(vars_of_type):
+        p('  case %s:' % wrap(b[1]))
+        p('    return this->%s;' % (b[1],))
+  ]]] */
+  case ESaveGameField::CurrentZoomedLinkingBookIsOpen:
+    return this->CurrentZoomedLinkingBookIsOpen;
+  case ESaveGameField::GehnIsTrapped:
+    return this->GehnIsTrapped;
+  case ESaveGameField::HaveTrapBook:
+    return this->HaveTrapBook;
+  case ESaveGameField::CatherineIsFree:
+    return this->CatherineIsFree;
+  case ESaveGameField::J_SeenCreepyGirl:
+    return this->J_SeenCreepyGirl;
+  case ESaveGameField::O_OvenIsOn:
+    return this->O_OvenIsOn;
+  case ESaveGameField::O_CageIsUp:
+    return this->O_CageIsUp;
+  case ESaveGameField::T_NewTemple_DoorMain_Open:
+    return this->T_NewTemple_DoorMain_Open;
+  case ESaveGameField::T_NewTemple_DoorSide_Open:
+    return this->T_NewTemple_DoorSide_Open;
+  case ESaveGameField::T_FissurePlateau_CageLever_Closed:
+    return this->T_FissurePlateau_CageLever_Closed;
+  case ESaveGameField::T_FissurePlateau_ChoStillPassedOut:
+    return this->T_FissurePlateau_ChoStillPassedOut;
+  case ESaveGameField::S_SeenScribe:
+    return this->S_SeenScribe;
+  case ESaveGameField::B_GehnHasVisited:
+    return this->B_GehnHasVisited;
+  // [[[end]]]
+  default:
+    UE_LOG(StarryDebug, Error, TEXT("%s is not a boolean."),
+           *GetSaveGameFieldAsString(fieldName));
+    return false;
   }
 }
 
-void URivenSaveGame::SetBooleanBySaveGameField(ESaveGameField fieldName, bool nextVal) {
+void URivenSaveGame::SetBooleanBySaveGameField(ESaveGameField fieldName,
+                                               bool nextVal) {
   switch (fieldName) {
-    /*
-    [[[cog
+  /*
+  [[[cog
 
-    vars_of_type, n = vars('bool')
-    for i, b in enumerate(vars_of_type):
-      p('    case %s:' % wrap(b[1]))
-      p('      this->%s = nextVal;' % b[1])
-      p('      break;')
+  vars_of_type, n = vars('bool')
+  for i, b in enumerate(vars_of_type):
+    p('    case %s:' % wrap(b[1]))
+    p('      this->%s = nextVal;' % b[1])
+    p('      break;')
 
-    ]]] */
-    case ESaveGameField::CurrentZoomedLinkingBookIsOpen:
-      this->CurrentZoomedLinkingBookIsOpen = nextVal;
-      break;
-    case ESaveGameField::GehnIsTrapped:
-      this->GehnIsTrapped = nextVal;
-      break;
-    case ESaveGameField::HaveTrapBook:
-      this->HaveTrapBook = nextVal;
-      break;
-    case ESaveGameField::CatherineIsFree:
-      this->CatherineIsFree = nextVal;
-      break;
-    case ESaveGameField::J_SeenCreepyGirl:
-      this->J_SeenCreepyGirl = nextVal;
-      break;
-    case ESaveGameField::O_OvenIsOn:
-      this->O_OvenIsOn = nextVal;
-      break;
-    case ESaveGameField::O_CageIsUp:
-      this->O_CageIsUp = nextVal;
-      break;
-    case ESaveGameField::T_NewTemple_DoorMain_Open:
-      this->T_NewTemple_DoorMain_Open = nextVal;
-      break;
-    case ESaveGameField::T_NewTemple_DoorSide_Open:
-      this->T_NewTemple_DoorSide_Open = nextVal;
-      break;
-    case ESaveGameField::T_FissurePlateau_CageLever_Closed:
-      this->T_FissurePlateau_CageLever_Closed = nextVal;
-      break;
-    case ESaveGameField::T_FissurePlateau_ChoStillPassedOut:
-      this->T_FissurePlateau_ChoStillPassedOut = nextVal;
-      break;
-    case ESaveGameField::S_SeenScribe:
-      this->S_SeenScribe = nextVal;
-      break;
-    case ESaveGameField::B_GehnHasVisited:
-      this->B_GehnHasVisited = nextVal;
-      break;
-    // [[[end]]]
-    default:
-      UE_LOG(StarryDebug, Error, TEXT("%s is not a boolean."), *GetSaveGameFieldAsString(fieldName));
+  ]]] */
+  case ESaveGameField::CurrentZoomedLinkingBookIsOpen:
+    this->CurrentZoomedLinkingBookIsOpen = nextVal;
+    break;
+  case ESaveGameField::GehnIsTrapped:
+    this->GehnIsTrapped = nextVal;
+    break;
+  case ESaveGameField::HaveTrapBook:
+    this->HaveTrapBook = nextVal;
+    break;
+  case ESaveGameField::CatherineIsFree:
+    this->CatherineIsFree = nextVal;
+    break;
+  case ESaveGameField::J_SeenCreepyGirl:
+    this->J_SeenCreepyGirl = nextVal;
+    break;
+  case ESaveGameField::O_OvenIsOn:
+    this->O_OvenIsOn = nextVal;
+    break;
+  case ESaveGameField::O_CageIsUp:
+    this->O_CageIsUp = nextVal;
+    break;
+  case ESaveGameField::T_NewTemple_DoorMain_Open:
+    this->T_NewTemple_DoorMain_Open = nextVal;
+    break;
+  case ESaveGameField::T_NewTemple_DoorSide_Open:
+    this->T_NewTemple_DoorSide_Open = nextVal;
+    break;
+  case ESaveGameField::T_FissurePlateau_CageLever_Closed:
+    this->T_FissurePlateau_CageLever_Closed = nextVal;
+    break;
+  case ESaveGameField::T_FissurePlateau_ChoStillPassedOut:
+    this->T_FissurePlateau_ChoStillPassedOut = nextVal;
+    break;
+  case ESaveGameField::S_SeenScribe:
+    this->S_SeenScribe = nextVal;
+    break;
+  case ESaveGameField::B_GehnHasVisited:
+    this->B_GehnHasVisited = nextVal;
+    break;
+  // [[[end]]]
+  default:
+    UE_LOG(StarryDebug, Error, TEXT("%s is not a boolean."),
+           *GetSaveGameFieldAsString(fieldName));
   }
 }
 
 void URivenSaveGame::RestoreNewGameDefaults() {
-   /*
-   [[[cog
-      import cog
-      from rivensavegame_generator import vars, p
+  /*
+  [[[cog
+     import cog
+     from rivensavegame_generator import vars, p
 
-      for var in vars:
-         p('this->%s = %s;' % (var[1], var[2]))
-   ]]] */
-   this->CurrentLoadGroup = ELoadGroups::TFissureDistrict;
-   this->CurrentMarionettist = EMarionettist::NoMarionettist;
-   this->CurrentZoomedLinkingBookIsOpen = false;
-   this->GehnIsTrapped = false;
-   this->HaveTrapBook = true;
-   this->CatherineIsFree = false;
-   this->CharacterTransform = FTransform::Identity;
-   this->TelescopeCodeA = -1;
-   this->TelescopeCodeB = -1;
-   this->TelescopeCodeC = -1;
-   this->TelescopeCodeD = -1;
-   this->TelescopeCodeE = -1;
-   this->PrisonCodeA = -1;
-   this->PrisonCodeB = -1;
-   this->PrisonCodeC = -1;
-   this->PrisonCodeD = -1;
-   this->PrisonCodeE = -1;
-   this->DomeCodeA = -1;
-   this->DomeCodeB = -1;
-   this->DomeCodeC = -1;
-   this->DomeCodeD = -1;
-   this->DomeCodeE = -1;
-   this->SubPosRot = ESubPosRot::Plat_N;
-   this->J_SeenCreepyGirl = false;
-   this->J_WahrkElevatorPosition = 0;
-   this->O_OvenIsOn = false;
-   this->O_CageIsUp = true;
-   this->O_TimesGehnSignaled = 0;
-   this->T_NewTemple_DoorMain_Open = false;
-   this->T_NewTemple_DoorSide_Open = false;
-   this->T_FissurePlateau_CageLever_Closed = true;
-   this->T_FissurePlateau_ChoStillPassedOut = true;
-   this->S_SeenScribe = false;
-   this->B_GehnHasVisited = false;
-   /* [[[end]]]*/
+     for var in vars:
+        p('this->%s = %s;' % (var[1], var[2]))
+  ]]] */
+  this->CurrentLoadGroup = ELoadGroups::TFissureDistrict;
+  this->CurrentMarionettist = EMarionettist::NoMarionettist;
+  this->CurrentZoomedLinkingBookIsOpen = false;
+  this->GehnIsTrapped = false;
+  this->HaveTrapBook = true;
+  this->CatherineIsFree = false;
+  this->CharacterTransform = FTransform::Identity;
+  this->TelescopeCodeA = -1;
+  this->TelescopeCodeB = -1;
+  this->TelescopeCodeC = -1;
+  this->TelescopeCodeD = -1;
+  this->TelescopeCodeE = -1;
+  this->PrisonCodeA = -1;
+  this->PrisonCodeB = -1;
+  this->PrisonCodeC = -1;
+  this->PrisonCodeD = -1;
+  this->PrisonCodeE = -1;
+  this->DomeCodeA = -1;
+  this->DomeCodeB = -1;
+  this->DomeCodeC = -1;
+  this->DomeCodeD = -1;
+  this->DomeCodeE = -1;
+  this->SubPosRot = ESubPosRot::Plat_N;
+  this->J_SeenCreepyGirl = false;
+  this->J_WahrkElevatorPosition = 0;
+  this->O_OvenIsOn = false;
+  this->O_CageIsUp = true;
+  this->O_TimesGehnSignaled = 0;
+  this->T_NewTemple_DoorMain_Open = false;
+  this->T_NewTemple_DoorSide_Open = false;
+  this->T_FissurePlateau_CageLever_Closed = true;
+  this->T_FissurePlateau_ChoStillPassedOut = true;
+  this->S_SeenScribe = false;
+  this->B_GehnHasVisited = false;
+  /* [[[end]]]*/
 
-   this->TelescopeCodeA = FMath::RandRange(0,4);
-   this->TelescopeCodeB = FMath::RandRange(0,4);
-   this->TelescopeCodeC = FMath::RandRange(0,4);
-   this->TelescopeCodeD = FMath::RandRange(0,4);
-   this->TelescopeCodeE = FMath::RandRange(0,4);
+  this->TelescopeCodeA = FMath::RandRange(0, 4);
+  this->TelescopeCodeB = FMath::RandRange(0, 4);
+  this->TelescopeCodeC = FMath::RandRange(0, 4);
+  this->TelescopeCodeD = FMath::RandRange(0, 4);
+  this->TelescopeCodeE = FMath::RandRange(0, 4);
 
-   // Generate dome code. I tried a more constant-time way but it had pretty uneven distributions.
-   // There's another way to accomplish the same task in constant time, but this is simple.
-   {
-      TArray<int> DomeCode;
+  // Generate dome code. I tried a more constant-time way but it had pretty
+  // uneven distributions. There's another way to accomplish the same task in
+  // constant time, but this is simple.
+  {
+    TArray<int> DomeCode;
 
-      bool slots[25];
-      for (int i = 0; i < 25; i++) {
-         slots[i] = 0;
+    bool slots[25];
+    for (int i = 0; i < 25; i++) {
+      slots[i] = 0;
+    }
+
+    int hits = 0;
+    while (hits < 5) {
+      int dartShot = FMath::RandRange(0, 25);
+      if (!slots[dartShot]) {
+        slots[dartShot] = true;
+        DomeCode.Add(dartShot);
+        hits++;
       }
+    }
 
-      int hits = 0;
-      while (hits < 5) {
-         int dartShot = FMath::RandRange(0,25);
-         if (!slots[dartShot]) {
-            slots[dartShot] = true;
-            DomeCode.Add(dartShot);
-            hits++;
-         }
-      }
+    DomeCode.Sort();
 
-      DomeCode.Sort();
-
-      this->DomeCodeA = DomeCode[0];
-      this->DomeCodeB = DomeCode[1];
-      this->DomeCodeC = DomeCode[2];
-      this->DomeCodeD = DomeCode[3];
-      this->DomeCodeE = DomeCode[4];
-   }
-
+    this->DomeCodeA = DomeCode[0];
+    this->DomeCodeB = DomeCode[1];
+    this->DomeCodeC = DomeCode[2];
+    this->DomeCodeD = DomeCode[3];
+    this->DomeCodeE = DomeCode[4];
+  }
 }
 
-std::vector<std::tuple<std::string, std::string>> URivenSaveGame::GetSavegameFields() {
-   std::vector < std::tuple<std::string, std::string> > vars;
+std::vector<std::tuple<std::string, std::string>>
+URivenSaveGame::GetSavegameFields() {
+  std::vector<std::tuple<std::string, std::string>> vars;
 
-   /*
-   [[[cog
-      import cog
-      from rivensavegame_generator import vars, p
+  /*[[[cog
+    def wrap(text):
+      return '"%s"' % text.replace("\"", "\\\"")
 
-      def wrap(text):
-         return '"%s"' % text.replace("\"", "\\\"")
+    for var in vars:
+      p('vars.push_back(std::make_tuple(%s, %s));' % (
+        wrap(var[0]),
+        wrap(var[1])
+      ))
+  ]]] */
+  vars.push_back(std::make_tuple("ELoadGroups", "CurrentLoadGroup"));
+  vars.push_back(std::make_tuple("EMarionettist", "CurrentMarionettist"));
+  vars.push_back(std::make_tuple("bool", "CurrentZoomedLinkingBookIsOpen"));
+  vars.push_back(std::make_tuple("bool", "GehnIsTrapped"));
+  vars.push_back(std::make_tuple("bool", "HaveTrapBook"));
+  vars.push_back(std::make_tuple("bool", "CatherineIsFree"));
+  vars.push_back(std::make_tuple("FTransform", "CharacterTransform"));
+  vars.push_back(std::make_tuple("int32", "TelescopeCodeA"));
+  vars.push_back(std::make_tuple("int32", "TelescopeCodeB"));
+  vars.push_back(std::make_tuple("int32", "TelescopeCodeC"));
+  vars.push_back(std::make_tuple("int32", "TelescopeCodeD"));
+  vars.push_back(std::make_tuple("int32", "TelescopeCodeE"));
+  vars.push_back(std::make_tuple("int32", "PrisonCodeA"));
+  vars.push_back(std::make_tuple("int32", "PrisonCodeB"));
+  vars.push_back(std::make_tuple("int32", "PrisonCodeC"));
+  vars.push_back(std::make_tuple("int32", "PrisonCodeD"));
+  vars.push_back(std::make_tuple("int32", "PrisonCodeE"));
+  vars.push_back(std::make_tuple("int32", "DomeCodeA"));
+  vars.push_back(std::make_tuple("int32", "DomeCodeB"));
+  vars.push_back(std::make_tuple("int32", "DomeCodeC"));
+  vars.push_back(std::make_tuple("int32", "DomeCodeD"));
+  vars.push_back(std::make_tuple("int32", "DomeCodeE"));
+  vars.push_back(std::make_tuple("ESubPosRot", "SubPosRot"));
+  vars.push_back(std::make_tuple("bool", "J_SeenCreepyGirl"));
+  vars.push_back(std::make_tuple("int32", "J_WahrkElevatorPosition"));
+  vars.push_back(std::make_tuple("bool", "O_OvenIsOn"));
+  vars.push_back(std::make_tuple("bool", "O_CageIsUp"));
+  vars.push_back(std::make_tuple("int32", "O_TimesGehnSignaled"));
+  vars.push_back(std::make_tuple("bool", "T_NewTemple_DoorMain_Open"));
+  vars.push_back(std::make_tuple("bool", "T_NewTemple_DoorSide_Open"));
+  vars.push_back(std::make_tuple("bool", "T_FissurePlateau_CageLever_Closed"));
+  vars.push_back(std::make_tuple("bool", "T_FissurePlateau_ChoStillPassedOut"));
+  vars.push_back(std::make_tuple("bool", "S_SeenScribe"));
+  vars.push_back(std::make_tuple("bool", "B_GehnHasVisited"));
+  /* [[[end]]]*/
 
-      for var in vars:
-         p('vars.push_back(std::make_tuple(%s, %s));' % (wrap(var[0]), wrap(var[1])))
-   ]]] */
-   vars.push_back(std::make_tuple("ELoadGroups", "CurrentLoadGroup"));
-   vars.push_back(std::make_tuple("EMarionettist", "CurrentMarionettist"));
-   vars.push_back(std::make_tuple("bool", "CurrentZoomedLinkingBookIsOpen"));
-   vars.push_back(std::make_tuple("bool", "GehnIsTrapped"));
-   vars.push_back(std::make_tuple("bool", "HaveTrapBook"));
-   vars.push_back(std::make_tuple("bool", "CatherineIsFree"));
-   vars.push_back(std::make_tuple("FTransform", "CharacterTransform"));
-   vars.push_back(std::make_tuple("int32", "TelescopeCodeA"));
-   vars.push_back(std::make_tuple("int32", "TelescopeCodeB"));
-   vars.push_back(std::make_tuple("int32", "TelescopeCodeC"));
-   vars.push_back(std::make_tuple("int32", "TelescopeCodeD"));
-   vars.push_back(std::make_tuple("int32", "TelescopeCodeE"));
-   vars.push_back(std::make_tuple("int32", "PrisonCodeA"));
-   vars.push_back(std::make_tuple("int32", "PrisonCodeB"));
-   vars.push_back(std::make_tuple("int32", "PrisonCodeC"));
-   vars.push_back(std::make_tuple("int32", "PrisonCodeD"));
-   vars.push_back(std::make_tuple("int32", "PrisonCodeE"));
-   vars.push_back(std::make_tuple("int32", "DomeCodeA"));
-   vars.push_back(std::make_tuple("int32", "DomeCodeB"));
-   vars.push_back(std::make_tuple("int32", "DomeCodeC"));
-   vars.push_back(std::make_tuple("int32", "DomeCodeD"));
-   vars.push_back(std::make_tuple("int32", "DomeCodeE"));
-   vars.push_back(std::make_tuple("ESubPosRot", "SubPosRot"));
-   vars.push_back(std::make_tuple("bool", "J_SeenCreepyGirl"));
-   vars.push_back(std::make_tuple("int32", "J_WahrkElevatorPosition"));
-   vars.push_back(std::make_tuple("bool", "O_OvenIsOn"));
-   vars.push_back(std::make_tuple("bool", "O_CageIsUp"));
-   vars.push_back(std::make_tuple("int32", "O_TimesGehnSignaled"));
-   vars.push_back(std::make_tuple("bool", "T_NewTemple_DoorMain_Open"));
-   vars.push_back(std::make_tuple("bool", "T_NewTemple_DoorSide_Open"));
-   vars.push_back(std::make_tuple("bool", "T_FissurePlateau_CageLever_Closed"));
-   vars.push_back(std::make_tuple("bool", "T_FissurePlateau_ChoStillPassedOut"));
-   vars.push_back(std::make_tuple("bool", "S_SeenScribe"));
-   vars.push_back(std::make_tuple("bool", "B_GehnHasVisited"));
-   /* [[[end]]]*/
-
-   return vars;
+  return vars;
 }
 
-/* 
+/*
  * [[[cog
    import cog
    from rivensavegame_generator import vars, p

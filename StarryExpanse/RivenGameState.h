@@ -6,18 +6,14 @@
 #include "RivenGameState.generated.h"
 
 UCLASS()
-class ARivenGameState : public AGameStateBase
-{
-	GENERATED_BODY()
+class ARivenGameState : public AGameStateBase {
+  GENERATED_BODY()
 
 public:
-	ARivenGameState();
+  ARivenGameState();
 
-  void OnConstruction(const FTransform & Transform) override;
+  void OnConstruction(const FTransform &Transform) override;
 
-	UPROPERTY(BlueprintReadOnly)
-		URivenSaveGame* Instantaneous_SaveGame;
+  UPROPERTY(BlueprintReadOnly)
+  URivenSaveGame *Instantaneous_SaveGame;
 };
-
-
-

@@ -10,19 +10,17 @@
 // https://wiki.unrealengine.com/Interfaces_in_C%2B%2B
 
 UINTERFACE()
-class STARRYEXPANSE_API URivenInteractable : public UInterface
-{
+class STARRYEXPANSE_API URivenInteractable : public UInterface {
   GENERATED_UINTERFACE_BODY()
 };
 
-class IRivenInteractable
-{
+class IRivenInteractable {
   GENERATED_IINTERFACE_BODY()
 
 public:
   UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Gameplay)
-    void LookingAt();
+  void LookingAt();
 
   UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Gameplay)
-    void Touched();
+  void Touched();
 };

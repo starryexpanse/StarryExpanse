@@ -7,13 +7,9 @@
 #include "StarryExpanseGameMode.generated.h"
 
 UCLASS()
-class AStarryExpanseGameMode : public AGameModeBase
-{
-	GENERATED_BODY()
+class AStarryExpanseGameMode : public AGameModeBase {
+  GENERATED_BODY()
 
 public:
-	AStarryExpanseGameMode();
+  AStarryExpanseGameMode();
 };
-
-
-

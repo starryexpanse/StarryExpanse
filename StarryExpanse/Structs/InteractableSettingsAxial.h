@@ -3,32 +3,31 @@
 //
 #pragma once
 
+#include "Actors/EInteractable.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Actors/EInteractable.h"
 #include "SaveGame/ESaveGameField.h"
 #include "InteractableSettingsAxial.generated.h"
 
 USTRUCT(BlueprintType)
-struct FInteractableSettingsAxial
-{
+struct FInteractableSettingsAxial {
   GENERATED_BODY()
 
   UPROPERTY(BlueprintReadWrite)
-	  ESaveGameField SaveGameField;
+  ESaveGameField SaveGameField;
 
   UPROPERTY(BlueprintReadWrite)
-	  UStaticMeshComponent* MoveablePart;
-	  
-  UPROPERTY(BlueprintReadWrite)
-	  float AnimationDuration;
-  
-  UPROPERTY(BlueprintReadWrite)
-	  TEnumAsByte<EAxis::Type> Axis;
-  
-  UPROPERTY(BlueprintReadWrite)
-	  float AnimationStartValue;
+  UStaticMeshComponent *MoveablePart;
 
   UPROPERTY(BlueprintReadWrite)
-	  float AnimationEndValue;
+  float AnimationDuration;
+
+  UPROPERTY(BlueprintReadWrite)
+  TEnumAsByte<EAxis::Type> Axis;
+
+  UPROPERTY(BlueprintReadWrite)
+  float AnimationStartValue;
+
+  UPROPERTY(BlueprintReadWrite)
+  float AnimationEndValue;
 };
