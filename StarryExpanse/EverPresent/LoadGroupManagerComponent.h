@@ -1,17 +1,16 @@
 #pragma once
-#include "LoadGroups/ELoadGroups.h"
 #include "LoadGroupManagerComponent.generated.h"
+#include "LoadGroups/ELoadGroups.h"
 
 UCLASS(Blueprintable, Config = Game)
-class ULoadGroupManagerComponent : public UActorComponent
-{
+class ULoadGroupManagerComponent : public UActorComponent {
 public:
-   GENERATED_BODY()
-      // Class Constructor
-    ULoadGroupManagerComponent();
+  GENERATED_BODY()
+  // Class Constructor
+  ULoadGroupManagerComponent();
 
-    UFUNCTION(Category = "Callbacks")
-    void LevelLoaded();
+  UFUNCTION(Category = "Callbacks")
+  void LevelLoaded();
 
-    void LoadLoadGroup();
+  void LoadLoadGroup();
 };

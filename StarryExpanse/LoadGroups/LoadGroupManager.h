@@ -7,18 +7,16 @@
 #include "LoadGroupManager.generated.h"
 
 UCLASS()
-class STARRYEXPANSE_API ALoadGroupManager : public AActor
-{
-	GENERATED_BODY()
-	
-public:	
-	// Sets default values for this actor's properties
-	ALoadGroupManager();
+class STARRYEXPANSE_API ALoadGroupManager : public AActor {
+  GENERATED_BODY()
 
-   FCriticalSection mutex; 
+public:
+  // Sets default values for this actor's properties
+  ALoadGroupManager();
+
+  FCriticalSection mutex;
 
 protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-	
+  // Called when the game starts or when spawned
+  virtual void BeginPlay() override;
 };

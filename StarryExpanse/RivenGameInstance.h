@@ -2,62 +2,61 @@
 
 #pragma once
 
-#include <set>
+#include "Actors/EInteractable.h"
 #include "CoreMinimal.h"
 #include "Engine/GameInstance.h"
 #include "LoadGroups/LoadgroupActor.h"
-#include "Actors/EInteractable.h"
+#include "RivenGameInstance.generated.h"
 #include "SaveGame/RivenSaveGame.h"
 #include "Structs/RivenGameInstanceVars.h"
-#include "RivenGameInstance.generated.h"
+#include <set>
 
 /**
- * 
+ *
  */
 UCLASS()
-class STARRYEXPANSE_API URivenGameInstance : public UGameInstance
-{
-	GENERATED_BODY()
+class STARRYEXPANSE_API URivenGameInstance : public UGameInstance {
+  GENERATED_BODY()
 
 public:
-
   UPROPERTY(BlueprintReadOnly)
-    FRivenGameInstanceVars GameInstanceVars;
+  FRivenGameInstanceVars GameInstanceVars;
 
-  // "Game instance vars" have changed. This is generally whenever some global shared state has changed.
-  // Try to keep this to a minimum as it is a little expensive.
+  // "Game instance vars" have changed. This is generally whenever some global
+  // shared state has changed. Try to keep this to a minimum as it is a little
+  // expensive.
   DECLARE_DYNAMIC_MULTICAST_DELEGATE(FGameInstanceVarsChanged);
   UPROPERTY(BlueprintAssignable, Category = "Game Instance Vars")
-    FGameInstanceVarsChanged GameInstanceVarsChanged;
+  FGameInstanceVarsChanged GameInstanceVarsChanged;
 
-	// Properties
+  // Properties
 
-	std::set<FName> OutstandingSaveGameBlockers;
+  std::set<FName> OutstandingSaveGameBlockers;
 
-	UPROPERTY(BlueprintReadOnly)
-		bool bIsFrozenForLoading;
+  UPROPERTY(BlueprintReadOnly)
+  bool bIsFrozenForLoading;
 
-	UPROPERTY(BlueprintReadOnly)
-		ALoadgroupActor* LoadgroupQueen;
+  UPROPERTY(BlueprintReadOnly)
+  ALoadgroupActor *LoadgroupQueen;
 
-	UPROPERTY(BlueprintReadOnly)
-		URivenSaveGame* Last_Savable_SaveGame;
+  UPROPERTY(BlueprintReadOnly)
+  URivenSaveGame *Last_Savable_SaveGame;
 
-	// Methods
+  // Methods
 
   void Init() override;
 
-	UFUNCTION(BlueprintCallable, Category = "SaveGame")
-		void RegisterSaveGameBlocker(FName blockerName);
+  UFUNCTION(BlueprintCallable, Category = "SaveGame")
+  void RegisterSaveGameBlocker(FName blockerName);
 
-	UFUNCTION(BlueprintCallable, Category = "SaveGame")
-		void UnregisterSaveGameBlocker(FName blockerName);
+  UFUNCTION(BlueprintCallable, Category = "SaveGame")
+  void UnregisterSaveGameBlocker(FName blockerName);
 
-	UFUNCTION(BlueprintCallable, Category = "LoadGroups")
-	void RegisterLoadgroupQueen(ALoadgroupActor* newQueen);
+  UFUNCTION(BlueprintCallable, Category = "LoadGroups")
+  void RegisterLoadgroupQueen(ALoadgroupActor *newQueen);
 
-	UFUNCTION(BlueprintCallable, Category = "LoadGroups")
-	void SetIsFrozenForLoading(bool newFrozen);
+  UFUNCTION(BlueprintCallable, Category = "LoadGroups")
+  void SetIsFrozenForLoading(bool newFrozen);
 
   UFUNCTION(BlueprintCallable, Category = Gameplay)
   void SetInteractableState(EInteractable interactable, float state);

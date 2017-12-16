@@ -3,15 +3,14 @@
 //
 #pragma once
 
+#include "Actors/EInteractable.h"
 #include "GameFramework/Actor.h"
 #include "RivenInteractable.h"
-#include "Actors/EInteractable.h"
-#include "Structs/InteractableSettingsAxial.h"
-#include "SaveGame/ESaveGameField.h"
+#include "RivenInteractableActor.generated.h"
 #include "Runtime/Engine/Classes/Components/StaticMeshComponent.h"
 #include "Runtime/Engine/Classes/Components/TimelineComponent.h"
-#include "RivenInteractableActor.generated.h"
-
+#include "SaveGame/ESaveGameField.h"
+#include "Structs/InteractableSettingsAxial.h"
 
 //
 // An actor with a single moveable component (static mesh). This class handles
@@ -20,12 +19,12 @@
 // component to that rotation value when initialized.
 //
 UCLASS()
-class STARRYEXPANSE_API ARivenInteractableActor : public AActor, public IRivenInteractable
-{
+class STARRYEXPANSE_API ARivenInteractableActor : public AActor,
+                                                  public IRivenInteractable {
   GENERATED_BODY()
 
 public:
-  ARivenInteractableActor(const FObjectInitializer& ObjectInitializer);
+  ARivenInteractableActor(const FObjectInitializer &ObjectInitializer);
 
   // Methods:
   UFUNCTION(BlueprintCallable)
@@ -34,21 +33,21 @@ public:
   // Actor:
   void BeginPlay() override;
   void Tick(float DeltaTime) override;
-  
+
   // RivenInteractable:
   void LookingAt_Implementation() override;
   void Touched_Implementation() override;
 
 private:
   UFUNCTION(Category = Gameplay)
-    void AnimationProgressCallback(float val);
+  void AnimationProgressCallback(float val);
   UFUNCTION(Category = Gameplay)
-    void AnimationDone();
+  void AnimationDone();
 
   void SetRotation(float val);
 
   ESaveGameField m_save_game_field;
-  UStaticMeshComponent* m_moveablePart = nullptr;
+  UStaticMeshComponent *m_moveablePart = nullptr;
   FTimeline m_timeline;
   EAxis::Type m_axis = EAxis::None;
 };

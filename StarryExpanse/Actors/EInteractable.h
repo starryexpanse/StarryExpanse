@@ -8,10 +8,9 @@
 // Any game item that can be interacted with (directly or indirectly)
 // in the game.
 UENUM(BlueprintType)
-enum class EInteractable : uint8
-{
-  T_FissurePlateau_Lever 	UMETA(DisplayName = "T_FissurePlateau_Lever"),
-  T_Telescope_Lever 	UMETA(DisplayName = "T_Telescope_Lever"),
+enum class EInteractable : uint8 {
+  T_FissurePlateau_Lever UMETA(DisplayName = "T_FissurePlateau_Lever"),
+  T_Telescope_Lever UMETA(DisplayName = "T_Telescope_Lever"),
 };
 
 FString GetInteractableEnumAsString(EInteractable interactable);

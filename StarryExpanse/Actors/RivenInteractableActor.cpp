@@ -3,14 +3,15 @@
 //
 #include "RivenInteractableActor.h"
 #include "Engine/Engine.h"
-#include "Structs/InteractableSettingsAxial.h"
-#include "Runtime/Engine/Classes/Engine/GameViewportClient.h"
-#include "RivenGameState.h"
 #include "Kismet/GameplayStatics.h"
+#include "RivenGameState.h"
 #include "Runtime/CoreUObject/Public/UObject/ConstructorHelpers.h"
+#include "Runtime/Engine/Classes/Engine/GameViewportClient.h"
+#include "Structs/InteractableSettingsAxial.h"
 
-ARivenInteractableActor::ARivenInteractableActor(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
-{
+ARivenInteractableActor::ARivenInteractableActor(
+    const FObjectInitializer &ObjectInitializer)
+    : Super(ObjectInitializer) {
   PrimaryActorTick.bCanEverTick = true;
   // TODO(cmumford): Should only enable ticks when animation is running.
   PrimaryActorTick.bStartWithTickEnabled = true;
@@ -33,8 +34,7 @@ void ARivenInteractableActor::SetRotation(float val) {
   m_moveablePart->SetRelativeRotation(rotator);
 }
 
-void ARivenInteractableActor::AnimationProgressCallback(float val)
-{
+void ARivenInteractableActor::AnimationProgressCallback(float val) {
   SetRotation(val);
 }
 
@@ -52,16 +52,13 @@ void ARivenInteractableActor::AnimationDone() {
   }
 
   auto at_end = m_timeline.GetPlaybackPosition() > 0; // TODO: "&& isAnimating"
-  saveGame->SetBooleanBySaveGameField(m_save_game_field, at_end); // TODO: ^ is_false_at_end
+  saveGame->SetBooleanBySaveGameField(m_save_game_field,
+                                      at_end); // TODO: ^ is_false_at_end
 }
 
-void ARivenInteractableActor::BeginPlay()
-{
-  Super::BeginPlay();
-}
+void ARivenInteractableActor::BeginPlay() { Super::BeginPlay(); }
 
-void ARivenInteractableActor::Tick(float DeltaTime)
-{
+void ARivenInteractableActor::Tick(float DeltaTime) {
   Super::Tick(DeltaTime);
   m_timeline.TickTimeline(DeltaTime);
 }
@@ -72,25 +69,30 @@ void ARivenInteractableActor::Initialize(FInteractableSettingsAxial settings) {
   m_axis = settings.Axis;
 
   FOnTimelineFloat progressCallback{};
-  progressCallback.BindUFunction(this, FName{ TEXT("AnimationProgressCallback") });
+  progressCallback.BindUFunction(this,
+                                 FName{TEXT("AnimationProgressCallback")});
 
-  FOnTimelineEvent  finishedCallback{};
-  finishedCallback.BindUFunction(this, FName{ TEXT("AnimationDone") });
+  FOnTimelineEvent finishedCallback{};
+  finishedCallback.BindUFunction(this, FName{TEXT("AnimationDone")});
 
   auto floatCurve = NewObject<UCurveFloat>();
 
-  auto startKey = floatCurve->FloatCurve.AddKey(0, settings.AnimationStartValue);
-  auto endKey = floatCurve->FloatCurve.AddKey(settings.AnimationDuration, settings.AnimationEndValue);
+  auto startKey =
+      floatCurve->FloatCurve.AddKey(0, settings.AnimationStartValue);
+  auto endKey = floatCurve->FloatCurve.AddKey(settings.AnimationDuration,
+                                              settings.AnimationEndValue);
   floatCurve->FloatCurve.SetKeyTime(startKey, 0);
   floatCurve->FloatCurve.SetKeyTime(endKey, settings.AnimationDuration);
   floatCurve->FloatCurve.SetKeyInterpMode(endKey, RCIM_Cubic);
   floatCurve->FloatCurve.SetKeyTangentMode(endKey, RCTM_Auto);
 
   check(floatCurve->GetFloatValue(0.0) == settings.AnimationStartValue);
-  check(floatCurve->GetFloatValue(settings.AnimationDuration) == settings.AnimationEndValue);
+  check(floatCurve->GetFloatValue(settings.AnimationDuration) ==
+        settings.AnimationEndValue);
 
   m_timeline.SetTimelineLength(settings.AnimationDuration);
-  m_timeline.AddInterpFloat(floatCurve, progressCallback, FName{ TEXT("InteractableTimelineAnimation") });
+  m_timeline.AddInterpFloat(floatCurve, progressCallback,
+                            FName{TEXT("InteractableTimelineAnimation")});
   m_timeline.SetTimelineFinishedFunc(finishedCallback);
 
   auto gs = Cast<ARivenGameState>(GetWorld()->GetGameState());
@@ -105,25 +107,26 @@ void ARivenInteractableActor::Initialize(FInteractableSettingsAxial settings) {
     return;
   }
 
-  auto isInInitialPosition = !saveGame->GetBooleanBySaveGameField(m_save_game_field); // TODO: ^ is_false_at_end
+  auto isInInitialPosition = !saveGame->GetBooleanBySaveGameField(
+      m_save_game_field); // TODO: ^ is_false_at_end
 
   if (isInInitialPosition) {
     SetRotation(settings.AnimationStartValue);
     m_timeline.SetNewTime(0);
-  }
-  else {
+  } else {
     SetRotation(settings.AnimationEndValue);
     m_timeline.SetNewTime(settings.AnimationDuration);
   }
 }
 
 void ARivenInteractableActor::LookingAt_Implementation() {
-  UGameInstance* game = GetGameInstance();
+  UGameInstance *game = GetGameInstance();
   if (!game)
     return;
-  UEngine* engine = game->GetEngine();
+  UEngine *engine = game->GetEngine();
   if (engine) {
-    engine->AddOnScreenDebugMessage(INDEX_NONE, 10, FColor::Yellow, "Looking at the actor.");
+    engine->AddOnScreenDebugMessage(INDEX_NONE, 10, FColor::Yellow,
+                                    "Looking at the actor.");
   }
 }
 

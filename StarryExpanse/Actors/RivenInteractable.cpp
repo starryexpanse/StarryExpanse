@@ -3,12 +3,10 @@
 //
 #include "RivenInteractable.h"
 
-URivenInteractable::URivenInteractable(const FObjectInitializer& ObjectInitializer)
-  : Super(ObjectInitializer) {
-}
+URivenInteractable::URivenInteractable(
+    const FObjectInitializer &ObjectInitializer)
+    : Super(ObjectInitializer) {}
 
-void IRivenInteractable::LookingAt_Implementation() {
-}
+void IRivenInteractable::LookingAt_Implementation() {}
 
-void IRivenInteractable::Touched_Implementation() {
-}
+void IRivenInteractable::Touched_Implementation() {}

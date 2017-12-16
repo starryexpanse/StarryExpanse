@@ -1,13 +1,12 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "RivenGameInstance.h"
-#include "SaveGame/RivenSaveGame.h"
-#include "RivenGameState.h"
-#include "LoadGroups/LoadgroupActor.h"
 #include "Engine/Engine.h"
+#include "LoadGroups/LoadgroupActor.h"
+#include "RivenGameState.h"
+#include "SaveGame/RivenSaveGame.h"
 
-void URivenGameInstance::Init() {
-}
+void URivenGameInstance::Init() {}
 
 void URivenGameInstance::SetIsFrozenForLoading(bool newFrozen) {
   bool changed = newFrozen != GameInstanceVars.IsFrozenForLoading;
@@ -17,28 +16,30 @@ void URivenGameInstance::SetIsFrozenForLoading(bool newFrozen) {
   }
 }
 
-void URivenGameInstance::RegisterLoadgroupQueen(ALoadgroupActor* newQueen) {
+void URivenGameInstance::RegisterLoadgroupQueen(ALoadgroupActor *newQueen) {
   this->LoadgroupQueen = newQueen;
 }
 
 void URivenGameInstance::RegisterSaveGameBlocker(FName blockerName) {
-	OutstandingSaveGameBlockers.insert(blockerName);
+  OutstandingSaveGameBlockers.insert(blockerName);
 }
 
 void URivenGameInstance::UnregisterSaveGameBlocker(FName blockerName) {
-	OutstandingSaveGameBlockers.erase(blockerName);
+  OutstandingSaveGameBlockers.erase(blockerName);
 }
 
-void URivenGameInstance::SetInteractableState(EInteractable interactable, float state) {
+void URivenGameInstance::SetInteractableState(EInteractable interactable,
+                                              float state) {
   switch (interactable) {
   case EInteractable::T_FissurePlateau_Lever:
     m_fissurePlateauLeverState = state;
     break;
   }
-  UEngine* engine = GetEngine();
+  UEngine *engine = GetEngine();
   if (engine) {
     FString name = GetInteractableEnumAsString(interactable);
-    // this is a kludge - can't figure out how to use FString::Printf with a FString type.
+    // this is a kludge - can't figure out how to use FString::Printf with a
+    // FString type.
     FString msg = "Just set \"";
     msg += name;
     msg += FString::Printf(TEXT("\" to %f."), state);

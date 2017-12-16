@@ -2,22 +2,18 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameStateBase.h"
-#include "SaveGame/RivenSaveGame.h"
 #include "RivenGameState.generated.h"
+#include "SaveGame/RivenSaveGame.h"
 
 UCLASS()
-class ARivenGameState : public AGameStateBase
-{
-	GENERATED_BODY()
+class ARivenGameState : public AGameStateBase {
+  GENERATED_BODY()
 
 public:
-	ARivenGameState();
+  ARivenGameState();
 
-  void OnConstruction(const FTransform & Transform) override;
+  void OnConstruction(const FTransform &Transform) override;
 
-	UPROPERTY(BlueprintReadOnly)
-		URivenSaveGame* Instantaneous_SaveGame;
+  UPROPERTY(BlueprintReadOnly)
+  URivenSaveGame *Instantaneous_SaveGame;
 };
-
-
-
