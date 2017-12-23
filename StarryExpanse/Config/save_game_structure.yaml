@@ -10,6 +10,18 @@ A:
 		- { type: bool, name: IsCatherineFreed, initial: false } # True because you have it before Cho shoots you and takes it
 	RivenCharacter:
 		- { type: FTransform, name: CharacterTransform, initial: 'FTransform::Identity' }
+B:
+	Shore:
+		- { type: int32, name: ValvePosition, initial: 0 } # index of [ UpstairsFan, BoilerTankControls, Woodchipper ] TODO(philip) enumify
+	
+	## TODO check all these initial states
+	BoilerExterior:
+		- { type: bool, name: IsSelectorValveTowardsPump, initial: false }
+		- { type: bool, name: IsLevelSelectorUp, initial: false }
+		- { type: bool, name: IsHeaterOn, initial: false }
+	BoilerInterior:
+		- { type: bool, name: IsFullOfWater, initial: true } # reactive
+		- { type: bool, name: PlatformRaised, initial: false } # reactive
 J:
 	Submarine:
 		- { type: ESubPosRot, name: PositionAndRotation, initial: 'ESubPosRot::Plat_N' }
