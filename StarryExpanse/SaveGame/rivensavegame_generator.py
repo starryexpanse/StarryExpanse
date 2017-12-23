@@ -1,4 +1,5 @@
 import cog
+import sys
 import yaml
 
 root = None
@@ -7,11 +8,11 @@ with open("./Config/save_game_structure.yaml", 'r') as stream:
     try:
         root = yaml.load(stream)
     except yaml.YAMLError as exc:
-        print(exc)
+        print(exc, file=sys.stderr)
    
 def stringify(val):
     if type(val) == type(True):
-        return 'true' if val else 'false'
+        return str(val).lower()
     return str(val)
 
 vars = []
