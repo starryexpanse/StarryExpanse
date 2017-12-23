@@ -42,38 +42,38 @@ bool URivenSaveGame::GetBooleanBySaveGameField(ESaveGameField fieldName) {
         p('  case %s:' % wrap(b[1]))
         p('    return this->%s;' % (b[1],))
   ]]] */
-  case ESaveGameField::A_LoadGroupsMarionettistBooks:
-    return this->A_LoadGroupsMarionettistBooks;
-  case ESaveGameField::A_LoadGroupsMarionettistBooks:
-    return this->A_LoadGroupsMarionettistBooks;
-  case ESaveGameField::A_LoadGroupsMarionettistBooks:
-    return this->A_LoadGroupsMarionettistBooks;
-  case ESaveGameField::A_LoadGroupsMarionettistBooks:
-    return this->A_LoadGroupsMarionettistBooks;
-  case ESaveGameField::B_ShoreBoilerExterior:
-    return this->B_ShoreBoilerExterior;
-  case ESaveGameField::B_ShoreBoilerExterior:
-    return this->B_ShoreBoilerExterior;
-  case ESaveGameField::B_ShoreBoilerExterior:
-    return this->B_ShoreBoilerExterior;
-  case ESaveGameField::B_ShoreBoilerExteriorBoilerInterior:
-    return this->B_ShoreBoilerExteriorBoilerInterior;
-  case ESaveGameField::B_ShoreBoilerExteriorBoilerInterior:
-    return this->B_ShoreBoilerExteriorBoilerInterior;
-  case ESaveGameField::J_SubmarineTunnelBranch:
-    return this->J_SubmarineTunnelBranch;
-  case ESaveGameField::O_Stove:
-    return this->O_Stove;
-  case ESaveGameField::O_StoveCageButtonCageLever:
-    return this->O_StoveCageButtonCageLever;
-  case ESaveGameField::T_FissurePlateau_CageLever:
-    return this->T_FissurePlateau_CageLever;
-  case ESaveGameField::T_FissurePlateau_CageLever_Cho:
-    return this->T_FissurePlateau_CageLever_Cho;
-  case ESaveGameField::T_NewTemple_DoorMain:
-    return this->T_NewTemple_DoorMain;
-  case ESaveGameField::T_NewTemple_DoorMain_DoorSide:
-    return this->T_NewTemple_DoorMain_DoorSide;
+  case ESaveGameField::A_Books_CurrentZoomedLinkingBookIsOpen:
+    return this->A_Books_CurrentZoomedLinkingBookIsOpen;
+  case ESaveGameField::A_Books_IsGehnTrapped:
+    return this->A_Books_IsGehnTrapped;
+  case ESaveGameField::A_Books_HasTrapBook:
+    return this->A_Books_HasTrapBook;
+  case ESaveGameField::A_Books_IsCatherineFreed:
+    return this->A_Books_IsCatherineFreed;
+  case ESaveGameField::B_BoilerExterior_IsSelectorValveTowardsPump:
+    return this->B_BoilerExterior_IsSelectorValveTowardsPump;
+  case ESaveGameField::B_BoilerExterior_IsLevelSelectorUp:
+    return this->B_BoilerExterior_IsLevelSelectorUp;
+  case ESaveGameField::B_BoilerExterior_IsHeaterOn:
+    return this->B_BoilerExterior_IsHeaterOn;
+  case ESaveGameField::B_BoilerInterior_IsFullOfWater:
+    return this->B_BoilerInterior_IsFullOfWater;
+  case ESaveGameField::B_BoilerInterior_PlatformRaised:
+    return this->B_BoilerInterior_PlatformRaised;
+  case ESaveGameField::J_TunnelBranch_HasSeenCreepyGirl:
+    return this->J_TunnelBranch_HasSeenCreepyGirl;
+  case ESaveGameField::O_Stove_IsOn:
+    return this->O_Stove_IsOn;
+  case ESaveGameField::O_CageLever_IsInUnlockedState:
+    return this->O_CageLever_IsInUnlockedState;
+  case ESaveGameField::T_FissurePlateau_CageLever_IsInClosedPosition:
+    return this->T_FissurePlateau_CageLever_IsInClosedPosition;
+  case ESaveGameField::T_FissurePlateau_Cho_IsStillPassedOut:
+    return this->T_FissurePlateau_Cho_IsStillPassedOut;
+  case ESaveGameField::T_NewTemple_DoorMain_IsOpen:
+    return this->T_NewTemple_DoorMain_IsOpen;
+  case ESaveGameField::T_NewTemple_DoorSide_IsOpen:
+    return this->T_NewTemple_DoorSide_IsOpen;
   // [[[end]]]
   default:
     UE_LOG(StarryDebug, Error, TEXT("%s is not a boolean."),
@@ -95,53 +95,53 @@ void URivenSaveGame::SetBooleanBySaveGameField(ESaveGameField fieldName,
     p('      break;')
 
   ]]] */
-  case ESaveGameField::A_LoadGroupsMarionettistBooks:
-    this->A_LoadGroupsMarionettistBooks = nextVal;
+  case ESaveGameField::A_Books_CurrentZoomedLinkingBookIsOpen:
+    this->A_Books_CurrentZoomedLinkingBookIsOpen = nextVal;
     break;
-  case ESaveGameField::A_LoadGroupsMarionettistBooks:
-    this->A_LoadGroupsMarionettistBooks = nextVal;
+  case ESaveGameField::A_Books_IsGehnTrapped:
+    this->A_Books_IsGehnTrapped = nextVal;
     break;
-  case ESaveGameField::A_LoadGroupsMarionettistBooks:
-    this->A_LoadGroupsMarionettistBooks = nextVal;
+  case ESaveGameField::A_Books_HasTrapBook:
+    this->A_Books_HasTrapBook = nextVal;
     break;
-  case ESaveGameField::A_LoadGroupsMarionettistBooks:
-    this->A_LoadGroupsMarionettistBooks = nextVal;
+  case ESaveGameField::A_Books_IsCatherineFreed:
+    this->A_Books_IsCatherineFreed = nextVal;
     break;
-  case ESaveGameField::B_ShoreBoilerExterior:
-    this->B_ShoreBoilerExterior = nextVal;
+  case ESaveGameField::B_BoilerExterior_IsSelectorValveTowardsPump:
+    this->B_BoilerExterior_IsSelectorValveTowardsPump = nextVal;
     break;
-  case ESaveGameField::B_ShoreBoilerExterior:
-    this->B_ShoreBoilerExterior = nextVal;
+  case ESaveGameField::B_BoilerExterior_IsLevelSelectorUp:
+    this->B_BoilerExterior_IsLevelSelectorUp = nextVal;
     break;
-  case ESaveGameField::B_ShoreBoilerExterior:
-    this->B_ShoreBoilerExterior = nextVal;
+  case ESaveGameField::B_BoilerExterior_IsHeaterOn:
+    this->B_BoilerExterior_IsHeaterOn = nextVal;
     break;
-  case ESaveGameField::B_ShoreBoilerExteriorBoilerInterior:
-    this->B_ShoreBoilerExteriorBoilerInterior = nextVal;
+  case ESaveGameField::B_BoilerInterior_IsFullOfWater:
+    this->B_BoilerInterior_IsFullOfWater = nextVal;
     break;
-  case ESaveGameField::B_ShoreBoilerExteriorBoilerInterior:
-    this->B_ShoreBoilerExteriorBoilerInterior = nextVal;
+  case ESaveGameField::B_BoilerInterior_PlatformRaised:
+    this->B_BoilerInterior_PlatformRaised = nextVal;
     break;
-  case ESaveGameField::J_SubmarineTunnelBranch:
-    this->J_SubmarineTunnelBranch = nextVal;
+  case ESaveGameField::J_TunnelBranch_HasSeenCreepyGirl:
+    this->J_TunnelBranch_HasSeenCreepyGirl = nextVal;
     break;
-  case ESaveGameField::O_Stove:
-    this->O_Stove = nextVal;
+  case ESaveGameField::O_Stove_IsOn:
+    this->O_Stove_IsOn = nextVal;
     break;
-  case ESaveGameField::O_StoveCageButtonCageLever:
-    this->O_StoveCageButtonCageLever = nextVal;
+  case ESaveGameField::O_CageLever_IsInUnlockedState:
+    this->O_CageLever_IsInUnlockedState = nextVal;
     break;
-  case ESaveGameField::T_FissurePlateau_CageLever:
-    this->T_FissurePlateau_CageLever = nextVal;
+  case ESaveGameField::T_FissurePlateau_CageLever_IsInClosedPosition:
+    this->T_FissurePlateau_CageLever_IsInClosedPosition = nextVal;
     break;
-  case ESaveGameField::T_FissurePlateau_CageLever_Cho:
-    this->T_FissurePlateau_CageLever_Cho = nextVal;
+  case ESaveGameField::T_FissurePlateau_Cho_IsStillPassedOut:
+    this->T_FissurePlateau_Cho_IsStillPassedOut = nextVal;
     break;
-  case ESaveGameField::T_NewTemple_DoorMain:
-    this->T_NewTemple_DoorMain = nextVal;
+  case ESaveGameField::T_NewTemple_DoorMain_IsOpen:
+    this->T_NewTemple_DoorMain_IsOpen = nextVal;
     break;
-  case ESaveGameField::T_NewTemple_DoorMain_DoorSide:
-    this->T_NewTemple_DoorMain_DoorSide = nextVal;
+  case ESaveGameField::T_NewTemple_DoorSide_IsOpen:
+    this->T_NewTemple_DoorSide_IsOpen = nextVal;
     break;
   // [[[end]]]
   default:
@@ -159,44 +159,44 @@ void URivenSaveGame::RestoreNewGameDefaults() {
      for var in vars:
         p('this->%s = %s;' % (var[1], var[2]))
   ]]] */
-  this->A_LoadGroups = ELoadGroups::TFissureDistrict;
-  this->A_LoadGroupsMarionettist = EMarionettist::NoMarionettist;
-  this->A_LoadGroupsMarionettistBooks = false;
-  this->A_LoadGroupsMarionettistBooks = false;
-  this->A_LoadGroupsMarionettistBooks = true;
-  this->A_LoadGroupsMarionettistBooks = false;
-  this->A_LoadGroupsMarionettistBooksRivenCharacter = FTransform::Identity;
-  this->B_Shore = 0;
-  this->B_ShoreBoilerExterior = false;
-  this->B_ShoreBoilerExterior = false;
-  this->B_ShoreBoilerExterior = false;
-  this->B_ShoreBoilerExteriorBoilerInterior = true;
-  this->B_ShoreBoilerExteriorBoilerInterior = false;
-  this->J_Submarine = ESubPosRot::Plat_N;
-  this->J_SubmarineTunnelBranch = false;
-  this->J_SubmarineTunnelBranchIdolInterior = 1;
-  this->O_Stove = false;
-  this->O_StoveCageButton = 0;
-  this->O_StoveCageButtonCageLever = false;
-  this->S_Dome = -1;
-  this->S_Dome = -1;
-  this->S_Dome = -1;
-  this->S_Dome = -1;
-  this->S_Dome = -1;
-  this->T_FissurePlateau_CageLever = true;
-  this->T_FissurePlateau_CageLever_Cho = true;
-  this->T_FissurePlateau_CageLever_Cho_Telescope = -1;
-  this->T_FissurePlateau_CageLever_Cho_Telescope = -1;
-  this->T_FissurePlateau_CageLever_Cho_Telescope = -1;
-  this->T_FissurePlateau_CageLever_Cho_Telescope = -1;
-  this->T_FissurePlateau_CageLever_Cho_Telescope = -1;
-  this->T_NewTemple_DoorMain = false;
-  this->T_NewTemple_DoorMain_DoorSide = false;
-  this->P_Exterior_Lock = -1;
-  this->P_Exterior_Lock = -1;
-  this->P_Exterior_Lock = -1;
-  this->P_Exterior_Lock = -1;
-  this->P_Exterior_Lock = -1;
+  this->A_LoadGroups_CurrentLoadGroup = ELoadGroups::TFissureDistrict;
+  this->A_Marionettist_CurrentMarionettist = EMarionettist::NoMarionettist;
+  this->A_Books_CurrentZoomedLinkingBookIsOpen = false;
+  this->A_Books_IsGehnTrapped = false;
+  this->A_Books_HasTrapBook = true;
+  this->A_Books_IsCatherineFreed = false;
+  this->A_RivenCharacter_CharacterTransform = FTransform::Identity;
+  this->B_Shore_ValvePosition = 0;
+  this->B_BoilerExterior_IsSelectorValveTowardsPump = false;
+  this->B_BoilerExterior_IsLevelSelectorUp = false;
+  this->B_BoilerExterior_IsHeaterOn = false;
+  this->B_BoilerInterior_IsFullOfWater = true;
+  this->B_BoilerInterior_PlatformRaised = false;
+  this->J_Submarine_PositionAndRotation = ESubPosRot::Plat_N;
+  this->J_TunnelBranch_HasSeenCreepyGirl = false;
+  this->J_IdolInterior_ElevatorPosition = 1;
+  this->O_Stove_IsOn = false;
+  this->O_CageButton_TimesPressed = 0;
+  this->O_CageLever_IsInUnlockedState = false;
+  this->S_Dome_CodeA = -1;
+  this->S_Dome_CodeB = -1;
+  this->S_Dome_CodeC = -1;
+  this->S_Dome_CodeD = -1;
+  this->S_Dome_CodeE = -1;
+  this->T_FissurePlateau_CageLever_IsInClosedPosition = true;
+  this->T_FissurePlateau_Cho_IsStillPassedOut = true;
+  this->T_FissurePlateau_Telescope_CodeA = -1;
+  this->T_FissurePlateau_Telescope_CodeB = -1;
+  this->T_FissurePlateau_Telescope_CodeC = -1;
+  this->T_FissurePlateau_Telescope_CodeD = -1;
+  this->T_FissurePlateau_Telescope_CodeE = -1;
+  this->T_NewTemple_DoorMain_IsOpen = false;
+  this->T_NewTemple_DoorSide_IsOpen = false;
+  this->P_Exterior_Lock_CodeA = -1;
+  this->P_Exterior_Lock_CodeB = -1;
+  this->P_Exterior_Lock_CodeC = -1;
+  this->P_Exterior_Lock_CodeD = -1;
+  this->P_Exterior_Lock_CodeE = -1;
   /* [[[end]]]*/
 
   this->TelescopeCodeA = FMath::RandRange(0, 4);
@@ -250,44 +250,44 @@ URivenSaveGame::GetSavegameFields() {
         wrap(var[1])
       ))
   ]]] */
-  vars.push_back(std::make_tuple("ELoadGroups", "A_LoadGroups"));
-  vars.push_back(std::make_tuple("EMarionettist", "A_LoadGroupsMarionettist"));
-  vars.push_back(std::make_tuple("bool", "A_LoadGroupsMarionettistBooks"));
-  vars.push_back(std::make_tuple("bool", "A_LoadGroupsMarionettistBooks"));
-  vars.push_back(std::make_tuple("bool", "A_LoadGroupsMarionettistBooks"));
-  vars.push_back(std::make_tuple("bool", "A_LoadGroupsMarionettistBooks"));
-  vars.push_back(std::make_tuple("FTransform", "A_LoadGroupsMarionettistBooksRivenCharacter"));
-  vars.push_back(std::make_tuple("int32", "B_Shore"));
-  vars.push_back(std::make_tuple("bool", "B_ShoreBoilerExterior"));
-  vars.push_back(std::make_tuple("bool", "B_ShoreBoilerExterior"));
-  vars.push_back(std::make_tuple("bool", "B_ShoreBoilerExterior"));
-  vars.push_back(std::make_tuple("bool", "B_ShoreBoilerExteriorBoilerInterior"));
-  vars.push_back(std::make_tuple("bool", "B_ShoreBoilerExteriorBoilerInterior"));
-  vars.push_back(std::make_tuple("ESubPosRot", "J_Submarine"));
-  vars.push_back(std::make_tuple("bool", "J_SubmarineTunnelBranch"));
-  vars.push_back(std::make_tuple("int32", "J_SubmarineTunnelBranchIdolInterior"));
-  vars.push_back(std::make_tuple("bool", "O_Stove"));
-  vars.push_back(std::make_tuple("int32", "O_StoveCageButton"));
-  vars.push_back(std::make_tuple("bool", "O_StoveCageButtonCageLever"));
-  vars.push_back(std::make_tuple("int32", "S_Dome"));
-  vars.push_back(std::make_tuple("int32", "S_Dome"));
-  vars.push_back(std::make_tuple("int32", "S_Dome"));
-  vars.push_back(std::make_tuple("int32", "S_Dome"));
-  vars.push_back(std::make_tuple("int32", "S_Dome"));
-  vars.push_back(std::make_tuple("bool", "T_FissurePlateau_CageLever"));
-  vars.push_back(std::make_tuple("bool", "T_FissurePlateau_CageLever_Cho"));
-  vars.push_back(std::make_tuple("int32", "T_FissurePlateau_CageLever_Cho_Telescope"));
-  vars.push_back(std::make_tuple("int32", "T_FissurePlateau_CageLever_Cho_Telescope"));
-  vars.push_back(std::make_tuple("int32", "T_FissurePlateau_CageLever_Cho_Telescope"));
-  vars.push_back(std::make_tuple("int32", "T_FissurePlateau_CageLever_Cho_Telescope"));
-  vars.push_back(std::make_tuple("int32", "T_FissurePlateau_CageLever_Cho_Telescope"));
-  vars.push_back(std::make_tuple("bool", "T_NewTemple_DoorMain"));
-  vars.push_back(std::make_tuple("bool", "T_NewTemple_DoorMain_DoorSide"));
-  vars.push_back(std::make_tuple("int32", "P_Exterior_Lock"));
-  vars.push_back(std::make_tuple("int32", "P_Exterior_Lock"));
-  vars.push_back(std::make_tuple("int32", "P_Exterior_Lock"));
-  vars.push_back(std::make_tuple("int32", "P_Exterior_Lock"));
-  vars.push_back(std::make_tuple("int32", "P_Exterior_Lock"));
+  vars.push_back(std::make_tuple("ELoadGroups", "A_LoadGroups_CurrentLoadGroup"));
+  vars.push_back(std::make_tuple("EMarionettist", "A_Marionettist_CurrentMarionettist"));
+  vars.push_back(std::make_tuple("bool", "A_Books_CurrentZoomedLinkingBookIsOpen"));
+  vars.push_back(std::make_tuple("bool", "A_Books_IsGehnTrapped"));
+  vars.push_back(std::make_tuple("bool", "A_Books_HasTrapBook"));
+  vars.push_back(std::make_tuple("bool", "A_Books_IsCatherineFreed"));
+  vars.push_back(std::make_tuple("FTransform", "A_RivenCharacter_CharacterTransform"));
+  vars.push_back(std::make_tuple("int32", "B_Shore_ValvePosition"));
+  vars.push_back(std::make_tuple("bool", "B_BoilerExterior_IsSelectorValveTowardsPump"));
+  vars.push_back(std::make_tuple("bool", "B_BoilerExterior_IsLevelSelectorUp"));
+  vars.push_back(std::make_tuple("bool", "B_BoilerExterior_IsHeaterOn"));
+  vars.push_back(std::make_tuple("bool", "B_BoilerInterior_IsFullOfWater"));
+  vars.push_back(std::make_tuple("bool", "B_BoilerInterior_PlatformRaised"));
+  vars.push_back(std::make_tuple("ESubPosRot", "J_Submarine_PositionAndRotation"));
+  vars.push_back(std::make_tuple("bool", "J_TunnelBranch_HasSeenCreepyGirl"));
+  vars.push_back(std::make_tuple("int32", "J_IdolInterior_ElevatorPosition"));
+  vars.push_back(std::make_tuple("bool", "O_Stove_IsOn"));
+  vars.push_back(std::make_tuple("int32", "O_CageButton_TimesPressed"));
+  vars.push_back(std::make_tuple("bool", "O_CageLever_IsInUnlockedState"));
+  vars.push_back(std::make_tuple("int32", "S_Dome_CodeA"));
+  vars.push_back(std::make_tuple("int32", "S_Dome_CodeB"));
+  vars.push_back(std::make_tuple("int32", "S_Dome_CodeC"));
+  vars.push_back(std::make_tuple("int32", "S_Dome_CodeD"));
+  vars.push_back(std::make_tuple("int32", "S_Dome_CodeE"));
+  vars.push_back(std::make_tuple("bool", "T_FissurePlateau_CageLever_IsInClosedPosition"));
+  vars.push_back(std::make_tuple("bool", "T_FissurePlateau_Cho_IsStillPassedOut"));
+  vars.push_back(std::make_tuple("int32", "T_FissurePlateau_Telescope_CodeA"));
+  vars.push_back(std::make_tuple("int32", "T_FissurePlateau_Telescope_CodeB"));
+  vars.push_back(std::make_tuple("int32", "T_FissurePlateau_Telescope_CodeC"));
+  vars.push_back(std::make_tuple("int32", "T_FissurePlateau_Telescope_CodeD"));
+  vars.push_back(std::make_tuple("int32", "T_FissurePlateau_Telescope_CodeE"));
+  vars.push_back(std::make_tuple("bool", "T_NewTemple_DoorMain_IsOpen"));
+  vars.push_back(std::make_tuple("bool", "T_NewTemple_DoorSide_IsOpen"));
+  vars.push_back(std::make_tuple("int32", "P_Exterior_Lock_CodeA"));
+  vars.push_back(std::make_tuple("int32", "P_Exterior_Lock_CodeB"));
+  vars.push_back(std::make_tuple("int32", "P_Exterior_Lock_CodeC"));
+  vars.push_back(std::make_tuple("int32", "P_Exterior_Lock_CodeD"));
+  vars.push_back(std::make_tuple("int32", "P_Exterior_Lock_CodeE"));
   /* [[[end]]]*/
 
   return vars;
@@ -316,421 +316,421 @@ URivenSaveGame::GetSavegameFields() {
 
 ]]] */
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-void URivenSaveGame::Set_A_LoadGroups(ELoadGroups NewVal) {
-   this->A_LoadGroups = NewVal;
+void URivenSaveGame::Set_A_LoadGroups_CurrentLoadGroup(ELoadGroups NewVal) {
+   this->A_LoadGroups_CurrentLoadGroup = NewVal;
 }
 
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-ELoadGroups URivenSaveGame::Get_A_LoadGroups() {
-   return A_LoadGroups;
+ELoadGroups URivenSaveGame::Get_A_LoadGroups_CurrentLoadGroup() {
+   return A_LoadGroups_CurrentLoadGroup;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-void URivenSaveGame::Set_A_LoadGroupsMarionettist(EMarionettist NewVal) {
-   this->A_LoadGroupsMarionettist = NewVal;
+void URivenSaveGame::Set_A_Marionettist_CurrentMarionettist(EMarionettist NewVal) {
+   this->A_Marionettist_CurrentMarionettist = NewVal;
 }
 
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-EMarionettist URivenSaveGame::Get_A_LoadGroupsMarionettist() {
-   return A_LoadGroupsMarionettist;
+EMarionettist URivenSaveGame::Get_A_Marionettist_CurrentMarionettist() {
+   return A_Marionettist_CurrentMarionettist;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-void URivenSaveGame::Set_A_LoadGroupsMarionettistBooks(bool NewVal) {
-   this->A_LoadGroupsMarionettistBooks = NewVal;
+void URivenSaveGame::Set_A_Books_CurrentZoomedLinkingBookIsOpen(bool NewVal) {
+   this->A_Books_CurrentZoomedLinkingBookIsOpen = NewVal;
 }
 
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-bool URivenSaveGame::Get_A_LoadGroupsMarionettistBooks() {
-   return A_LoadGroupsMarionettistBooks;
+bool URivenSaveGame::Get_A_Books_CurrentZoomedLinkingBookIsOpen() {
+   return A_Books_CurrentZoomedLinkingBookIsOpen;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-void URivenSaveGame::Set_A_LoadGroupsMarionettistBooks(bool NewVal) {
-   this->A_LoadGroupsMarionettistBooks = NewVal;
+void URivenSaveGame::Set_A_Books_IsGehnTrapped(bool NewVal) {
+   this->A_Books_IsGehnTrapped = NewVal;
 }
 
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-bool URivenSaveGame::Get_A_LoadGroupsMarionettistBooks() {
-   return A_LoadGroupsMarionettistBooks;
+bool URivenSaveGame::Get_A_Books_IsGehnTrapped() {
+   return A_Books_IsGehnTrapped;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-void URivenSaveGame::Set_A_LoadGroupsMarionettistBooks(bool NewVal) {
-   this->A_LoadGroupsMarionettistBooks = NewVal;
+void URivenSaveGame::Set_A_Books_HasTrapBook(bool NewVal) {
+   this->A_Books_HasTrapBook = NewVal;
 }
 
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-bool URivenSaveGame::Get_A_LoadGroupsMarionettistBooks() {
-   return A_LoadGroupsMarionettistBooks;
+bool URivenSaveGame::Get_A_Books_HasTrapBook() {
+   return A_Books_HasTrapBook;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-void URivenSaveGame::Set_A_LoadGroupsMarionettistBooks(bool NewVal) {
-   this->A_LoadGroupsMarionettistBooks = NewVal;
+void URivenSaveGame::Set_A_Books_IsCatherineFreed(bool NewVal) {
+   this->A_Books_IsCatherineFreed = NewVal;
 }
 
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-bool URivenSaveGame::Get_A_LoadGroupsMarionettistBooks() {
-   return A_LoadGroupsMarionettistBooks;
+bool URivenSaveGame::Get_A_Books_IsCatherineFreed() {
+   return A_Books_IsCatherineFreed;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-void URivenSaveGame::Set_A_LoadGroupsMarionettistBooksRivenCharacter(FTransform NewVal) {
-   this->A_LoadGroupsMarionettistBooksRivenCharacter = NewVal;
+void URivenSaveGame::Set_A_RivenCharacter_CharacterTransform(FTransform NewVal) {
+   this->A_RivenCharacter_CharacterTransform = NewVal;
 }
 
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-FTransform URivenSaveGame::Get_A_LoadGroupsMarionettistBooksRivenCharacter() {
-   return A_LoadGroupsMarionettistBooksRivenCharacter;
+FTransform URivenSaveGame::Get_A_RivenCharacter_CharacterTransform() {
+   return A_RivenCharacter_CharacterTransform;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-void URivenSaveGame::Set_B_Shore(int32 NewVal) {
-   this->B_Shore = NewVal;
+void URivenSaveGame::Set_B_Shore_ValvePosition(int32 NewVal) {
+   this->B_Shore_ValvePosition = NewVal;
 }
 
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-int32 URivenSaveGame::Get_B_Shore() {
-   return B_Shore;
+int32 URivenSaveGame::Get_B_Shore_ValvePosition() {
+   return B_Shore_ValvePosition;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-void URivenSaveGame::Set_B_ShoreBoilerExterior(bool NewVal) {
-   this->B_ShoreBoilerExterior = NewVal;
+void URivenSaveGame::Set_B_BoilerExterior_IsSelectorValveTowardsPump(bool NewVal) {
+   this->B_BoilerExterior_IsSelectorValveTowardsPump = NewVal;
 }
 
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-bool URivenSaveGame::Get_B_ShoreBoilerExterior() {
-   return B_ShoreBoilerExterior;
+bool URivenSaveGame::Get_B_BoilerExterior_IsSelectorValveTowardsPump() {
+   return B_BoilerExterior_IsSelectorValveTowardsPump;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-void URivenSaveGame::Set_B_ShoreBoilerExterior(bool NewVal) {
-   this->B_ShoreBoilerExterior = NewVal;
+void URivenSaveGame::Set_B_BoilerExterior_IsLevelSelectorUp(bool NewVal) {
+   this->B_BoilerExterior_IsLevelSelectorUp = NewVal;
 }
 
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-bool URivenSaveGame::Get_B_ShoreBoilerExterior() {
-   return B_ShoreBoilerExterior;
+bool URivenSaveGame::Get_B_BoilerExterior_IsLevelSelectorUp() {
+   return B_BoilerExterior_IsLevelSelectorUp;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-void URivenSaveGame::Set_B_ShoreBoilerExterior(bool NewVal) {
-   this->B_ShoreBoilerExterior = NewVal;
+void URivenSaveGame::Set_B_BoilerExterior_IsHeaterOn(bool NewVal) {
+   this->B_BoilerExterior_IsHeaterOn = NewVal;
 }
 
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-bool URivenSaveGame::Get_B_ShoreBoilerExterior() {
-   return B_ShoreBoilerExterior;
+bool URivenSaveGame::Get_B_BoilerExterior_IsHeaterOn() {
+   return B_BoilerExterior_IsHeaterOn;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-void URivenSaveGame::Set_B_ShoreBoilerExteriorBoilerInterior(bool NewVal) {
-   this->B_ShoreBoilerExteriorBoilerInterior = NewVal;
+void URivenSaveGame::Set_B_BoilerInterior_IsFullOfWater(bool NewVal) {
+   this->B_BoilerInterior_IsFullOfWater = NewVal;
 }
 
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-bool URivenSaveGame::Get_B_ShoreBoilerExteriorBoilerInterior() {
-   return B_ShoreBoilerExteriorBoilerInterior;
+bool URivenSaveGame::Get_B_BoilerInterior_IsFullOfWater() {
+   return B_BoilerInterior_IsFullOfWater;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-void URivenSaveGame::Set_B_ShoreBoilerExteriorBoilerInterior(bool NewVal) {
-   this->B_ShoreBoilerExteriorBoilerInterior = NewVal;
+void URivenSaveGame::Set_B_BoilerInterior_PlatformRaised(bool NewVal) {
+   this->B_BoilerInterior_PlatformRaised = NewVal;
 }
 
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-bool URivenSaveGame::Get_B_ShoreBoilerExteriorBoilerInterior() {
-   return B_ShoreBoilerExteriorBoilerInterior;
+bool URivenSaveGame::Get_B_BoilerInterior_PlatformRaised() {
+   return B_BoilerInterior_PlatformRaised;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-void URivenSaveGame::Set_J_Submarine(ESubPosRot NewVal) {
-   this->J_Submarine = NewVal;
+void URivenSaveGame::Set_J_Submarine_PositionAndRotation(ESubPosRot NewVal) {
+   this->J_Submarine_PositionAndRotation = NewVal;
 }
 
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-ESubPosRot URivenSaveGame::Get_J_Submarine() {
-   return J_Submarine;
+ESubPosRot URivenSaveGame::Get_J_Submarine_PositionAndRotation() {
+   return J_Submarine_PositionAndRotation;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-void URivenSaveGame::Set_J_SubmarineTunnelBranch(bool NewVal) {
-   this->J_SubmarineTunnelBranch = NewVal;
+void URivenSaveGame::Set_J_TunnelBranch_HasSeenCreepyGirl(bool NewVal) {
+   this->J_TunnelBranch_HasSeenCreepyGirl = NewVal;
 }
 
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-bool URivenSaveGame::Get_J_SubmarineTunnelBranch() {
-   return J_SubmarineTunnelBranch;
+bool URivenSaveGame::Get_J_TunnelBranch_HasSeenCreepyGirl() {
+   return J_TunnelBranch_HasSeenCreepyGirl;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-void URivenSaveGame::Set_J_SubmarineTunnelBranchIdolInterior(int32 NewVal) {
-   this->J_SubmarineTunnelBranchIdolInterior = NewVal;
+void URivenSaveGame::Set_J_IdolInterior_ElevatorPosition(int32 NewVal) {
+   this->J_IdolInterior_ElevatorPosition = NewVal;
 }
 
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-int32 URivenSaveGame::Get_J_SubmarineTunnelBranchIdolInterior() {
-   return J_SubmarineTunnelBranchIdolInterior;
+int32 URivenSaveGame::Get_J_IdolInterior_ElevatorPosition() {
+   return J_IdolInterior_ElevatorPosition;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-void URivenSaveGame::Set_O_Stove(bool NewVal) {
-   this->O_Stove = NewVal;
+void URivenSaveGame::Set_O_Stove_IsOn(bool NewVal) {
+   this->O_Stove_IsOn = NewVal;
 }
 
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-bool URivenSaveGame::Get_O_Stove() {
-   return O_Stove;
+bool URivenSaveGame::Get_O_Stove_IsOn() {
+   return O_Stove_IsOn;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-void URivenSaveGame::Set_O_StoveCageButton(int32 NewVal) {
-   this->O_StoveCageButton = NewVal;
+void URivenSaveGame::Set_O_CageButton_TimesPressed(int32 NewVal) {
+   this->O_CageButton_TimesPressed = NewVal;
 }
 
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-int32 URivenSaveGame::Get_O_StoveCageButton() {
-   return O_StoveCageButton;
+int32 URivenSaveGame::Get_O_CageButton_TimesPressed() {
+   return O_CageButton_TimesPressed;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-void URivenSaveGame::Set_O_StoveCageButtonCageLever(bool NewVal) {
-   this->O_StoveCageButtonCageLever = NewVal;
+void URivenSaveGame::Set_O_CageLever_IsInUnlockedState(bool NewVal) {
+   this->O_CageLever_IsInUnlockedState = NewVal;
 }
 
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-bool URivenSaveGame::Get_O_StoveCageButtonCageLever() {
-   return O_StoveCageButtonCageLever;
+bool URivenSaveGame::Get_O_CageLever_IsInUnlockedState() {
+   return O_CageLever_IsInUnlockedState;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-void URivenSaveGame::Set_S_Dome(int32 NewVal) {
-   this->S_Dome = NewVal;
+void URivenSaveGame::Set_S_Dome_CodeA(int32 NewVal) {
+   this->S_Dome_CodeA = NewVal;
 }
 
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-int32 URivenSaveGame::Get_S_Dome() {
-   return S_Dome;
+int32 URivenSaveGame::Get_S_Dome_CodeA() {
+   return S_Dome_CodeA;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-void URivenSaveGame::Set_S_Dome(int32 NewVal) {
-   this->S_Dome = NewVal;
+void URivenSaveGame::Set_S_Dome_CodeB(int32 NewVal) {
+   this->S_Dome_CodeB = NewVal;
 }
 
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-int32 URivenSaveGame::Get_S_Dome() {
-   return S_Dome;
+int32 URivenSaveGame::Get_S_Dome_CodeB() {
+   return S_Dome_CodeB;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-void URivenSaveGame::Set_S_Dome(int32 NewVal) {
-   this->S_Dome = NewVal;
+void URivenSaveGame::Set_S_Dome_CodeC(int32 NewVal) {
+   this->S_Dome_CodeC = NewVal;
 }
 
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-int32 URivenSaveGame::Get_S_Dome() {
-   return S_Dome;
+int32 URivenSaveGame::Get_S_Dome_CodeC() {
+   return S_Dome_CodeC;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-void URivenSaveGame::Set_S_Dome(int32 NewVal) {
-   this->S_Dome = NewVal;
+void URivenSaveGame::Set_S_Dome_CodeD(int32 NewVal) {
+   this->S_Dome_CodeD = NewVal;
 }
 
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-int32 URivenSaveGame::Get_S_Dome() {
-   return S_Dome;
+int32 URivenSaveGame::Get_S_Dome_CodeD() {
+   return S_Dome_CodeD;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-void URivenSaveGame::Set_S_Dome(int32 NewVal) {
-   this->S_Dome = NewVal;
+void URivenSaveGame::Set_S_Dome_CodeE(int32 NewVal) {
+   this->S_Dome_CodeE = NewVal;
 }
 
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-int32 URivenSaveGame::Get_S_Dome() {
-   return S_Dome;
+int32 URivenSaveGame::Get_S_Dome_CodeE() {
+   return S_Dome_CodeE;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-void URivenSaveGame::Set_T_FissurePlateau_CageLever(bool NewVal) {
-   this->T_FissurePlateau_CageLever = NewVal;
+void URivenSaveGame::Set_T_FissurePlateau_CageLever_IsInClosedPosition(bool NewVal) {
+   this->T_FissurePlateau_CageLever_IsInClosedPosition = NewVal;
 }
 
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-bool URivenSaveGame::Get_T_FissurePlateau_CageLever() {
-   return T_FissurePlateau_CageLever;
+bool URivenSaveGame::Get_T_FissurePlateau_CageLever_IsInClosedPosition() {
+   return T_FissurePlateau_CageLever_IsInClosedPosition;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-void URivenSaveGame::Set_T_FissurePlateau_CageLever_Cho(bool NewVal) {
-   this->T_FissurePlateau_CageLever_Cho = NewVal;
+void URivenSaveGame::Set_T_FissurePlateau_Cho_IsStillPassedOut(bool NewVal) {
+   this->T_FissurePlateau_Cho_IsStillPassedOut = NewVal;
 }
 
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-bool URivenSaveGame::Get_T_FissurePlateau_CageLever_Cho() {
-   return T_FissurePlateau_CageLever_Cho;
+bool URivenSaveGame::Get_T_FissurePlateau_Cho_IsStillPassedOut() {
+   return T_FissurePlateau_Cho_IsStillPassedOut;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-void URivenSaveGame::Set_T_FissurePlateau_CageLever_Cho_Telescope(int32 NewVal) {
-   this->T_FissurePlateau_CageLever_Cho_Telescope = NewVal;
+void URivenSaveGame::Set_T_FissurePlateau_Telescope_CodeA(int32 NewVal) {
+   this->T_FissurePlateau_Telescope_CodeA = NewVal;
 }
 
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-int32 URivenSaveGame::Get_T_FissurePlateau_CageLever_Cho_Telescope() {
-   return T_FissurePlateau_CageLever_Cho_Telescope;
+int32 URivenSaveGame::Get_T_FissurePlateau_Telescope_CodeA() {
+   return T_FissurePlateau_Telescope_CodeA;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-void URivenSaveGame::Set_T_FissurePlateau_CageLever_Cho_Telescope(int32 NewVal) {
-   this->T_FissurePlateau_CageLever_Cho_Telescope = NewVal;
+void URivenSaveGame::Set_T_FissurePlateau_Telescope_CodeB(int32 NewVal) {
+   this->T_FissurePlateau_Telescope_CodeB = NewVal;
 }
 
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-int32 URivenSaveGame::Get_T_FissurePlateau_CageLever_Cho_Telescope() {
-   return T_FissurePlateau_CageLever_Cho_Telescope;
+int32 URivenSaveGame::Get_T_FissurePlateau_Telescope_CodeB() {
+   return T_FissurePlateau_Telescope_CodeB;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-void URivenSaveGame::Set_T_FissurePlateau_CageLever_Cho_Telescope(int32 NewVal) {
-   this->T_FissurePlateau_CageLever_Cho_Telescope = NewVal;
+void URivenSaveGame::Set_T_FissurePlateau_Telescope_CodeC(int32 NewVal) {
+   this->T_FissurePlateau_Telescope_CodeC = NewVal;
 }
 
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-int32 URivenSaveGame::Get_T_FissurePlateau_CageLever_Cho_Telescope() {
-   return T_FissurePlateau_CageLever_Cho_Telescope;
+int32 URivenSaveGame::Get_T_FissurePlateau_Telescope_CodeC() {
+   return T_FissurePlateau_Telescope_CodeC;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-void URivenSaveGame::Set_T_FissurePlateau_CageLever_Cho_Telescope(int32 NewVal) {
-   this->T_FissurePlateau_CageLever_Cho_Telescope = NewVal;
+void URivenSaveGame::Set_T_FissurePlateau_Telescope_CodeD(int32 NewVal) {
+   this->T_FissurePlateau_Telescope_CodeD = NewVal;
 }
 
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-int32 URivenSaveGame::Get_T_FissurePlateau_CageLever_Cho_Telescope() {
-   return T_FissurePlateau_CageLever_Cho_Telescope;
+int32 URivenSaveGame::Get_T_FissurePlateau_Telescope_CodeD() {
+   return T_FissurePlateau_Telescope_CodeD;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-void URivenSaveGame::Set_T_FissurePlateau_CageLever_Cho_Telescope(int32 NewVal) {
-   this->T_FissurePlateau_CageLever_Cho_Telescope = NewVal;
+void URivenSaveGame::Set_T_FissurePlateau_Telescope_CodeE(int32 NewVal) {
+   this->T_FissurePlateau_Telescope_CodeE = NewVal;
 }
 
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-int32 URivenSaveGame::Get_T_FissurePlateau_CageLever_Cho_Telescope() {
-   return T_FissurePlateau_CageLever_Cho_Telescope;
+int32 URivenSaveGame::Get_T_FissurePlateau_Telescope_CodeE() {
+   return T_FissurePlateau_Telescope_CodeE;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-void URivenSaveGame::Set_T_NewTemple_DoorMain(bool NewVal) {
-   this->T_NewTemple_DoorMain = NewVal;
+void URivenSaveGame::Set_T_NewTemple_DoorMain_IsOpen(bool NewVal) {
+   this->T_NewTemple_DoorMain_IsOpen = NewVal;
 }
 
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-bool URivenSaveGame::Get_T_NewTemple_DoorMain() {
-   return T_NewTemple_DoorMain;
+bool URivenSaveGame::Get_T_NewTemple_DoorMain_IsOpen() {
+   return T_NewTemple_DoorMain_IsOpen;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-void URivenSaveGame::Set_T_NewTemple_DoorMain_DoorSide(bool NewVal) {
-   this->T_NewTemple_DoorMain_DoorSide = NewVal;
+void URivenSaveGame::Set_T_NewTemple_DoorSide_IsOpen(bool NewVal) {
+   this->T_NewTemple_DoorSide_IsOpen = NewVal;
 }
 
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-bool URivenSaveGame::Get_T_NewTemple_DoorMain_DoorSide() {
-   return T_NewTemple_DoorMain_DoorSide;
+bool URivenSaveGame::Get_T_NewTemple_DoorSide_IsOpen() {
+   return T_NewTemple_DoorSide_IsOpen;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-void URivenSaveGame::Set_P_Exterior_Lock(int32 NewVal) {
-   this->P_Exterior_Lock = NewVal;
+void URivenSaveGame::Set_P_Exterior_Lock_CodeA(int32 NewVal) {
+   this->P_Exterior_Lock_CodeA = NewVal;
 }
 
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-int32 URivenSaveGame::Get_P_Exterior_Lock() {
-   return P_Exterior_Lock;
+int32 URivenSaveGame::Get_P_Exterior_Lock_CodeA() {
+   return P_Exterior_Lock_CodeA;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-void URivenSaveGame::Set_P_Exterior_Lock(int32 NewVal) {
-   this->P_Exterior_Lock = NewVal;
+void URivenSaveGame::Set_P_Exterior_Lock_CodeB(int32 NewVal) {
+   this->P_Exterior_Lock_CodeB = NewVal;
 }
 
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-int32 URivenSaveGame::Get_P_Exterior_Lock() {
-   return P_Exterior_Lock;
+int32 URivenSaveGame::Get_P_Exterior_Lock_CodeB() {
+   return P_Exterior_Lock_CodeB;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-void URivenSaveGame::Set_P_Exterior_Lock(int32 NewVal) {
-   this->P_Exterior_Lock = NewVal;
+void URivenSaveGame::Set_P_Exterior_Lock_CodeC(int32 NewVal) {
+   this->P_Exterior_Lock_CodeC = NewVal;
 }
 
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-int32 URivenSaveGame::Get_P_Exterior_Lock() {
-   return P_Exterior_Lock;
+int32 URivenSaveGame::Get_P_Exterior_Lock_CodeC() {
+   return P_Exterior_Lock_CodeC;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-void URivenSaveGame::Set_P_Exterior_Lock(int32 NewVal) {
-   this->P_Exterior_Lock = NewVal;
+void URivenSaveGame::Set_P_Exterior_Lock_CodeD(int32 NewVal) {
+   this->P_Exterior_Lock_CodeD = NewVal;
 }
 
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-int32 URivenSaveGame::Get_P_Exterior_Lock() {
-   return P_Exterior_Lock;
+int32 URivenSaveGame::Get_P_Exterior_Lock_CodeD() {
+   return P_Exterior_Lock_CodeD;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-void URivenSaveGame::Set_P_Exterior_Lock(int32 NewVal) {
-   this->P_Exterior_Lock = NewVal;
+void URivenSaveGame::Set_P_Exterior_Lock_CodeE(int32 NewVal) {
+   this->P_Exterior_Lock_CodeE = NewVal;
 }
 
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-int32 URivenSaveGame::Get_P_Exterior_Lock() {
-   return P_Exterior_Lock;
+int32 URivenSaveGame::Get_P_Exterior_Lock_CodeE() {
+   return P_Exterior_Lock_CodeE;
 }
 
 /* [[[end]]] */

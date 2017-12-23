@@ -56,346 +56,346 @@ class STARRYEXPANSE_API URivenSaveGame : public USaveGame {
 
   ]]] */
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
-  ELoadGroups A_LoadGroups;
+  ELoadGroups A_LoadGroups_CurrentLoadGroup;
 
   UFUNCTION(BlueprintCallable, Category = SaveGame)
-  void Set_A_LoadGroups(ELoadGroups NewVal);
+  void Set_A_LoadGroups_CurrentLoadGroup(ELoadGroups NewVal);
 
   UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
-  ELoadGroups Get_A_LoadGroups();
+  ELoadGroups Get_A_LoadGroups_CurrentLoadGroup();
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
-  EMarionettist A_LoadGroupsMarionettist;
+  EMarionettist A_Marionettist_CurrentMarionettist;
 
   UFUNCTION(BlueprintCallable, Category = SaveGame)
-  void Set_A_LoadGroupsMarionettist(EMarionettist NewVal);
+  void Set_A_Marionettist_CurrentMarionettist(EMarionettist NewVal);
 
   UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
-  EMarionettist Get_A_LoadGroupsMarionettist();
+  EMarionettist Get_A_Marionettist_CurrentMarionettist();
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
-  bool A_LoadGroupsMarionettistBooks;
+  bool A_Books_CurrentZoomedLinkingBookIsOpen;
 
   UFUNCTION(BlueprintCallable, Category = SaveGame)
-  void Set_A_LoadGroupsMarionettistBooks(bool NewVal);
+  void Set_A_Books_CurrentZoomedLinkingBookIsOpen(bool NewVal);
 
   UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
-  bool Get_A_LoadGroupsMarionettistBooks();
+  bool Get_A_Books_CurrentZoomedLinkingBookIsOpen();
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
-  bool A_LoadGroupsMarionettistBooks;
+  bool A_Books_IsGehnTrapped;
 
   UFUNCTION(BlueprintCallable, Category = SaveGame)
-  void Set_A_LoadGroupsMarionettistBooks(bool NewVal);
+  void Set_A_Books_IsGehnTrapped(bool NewVal);
 
   UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
-  bool Get_A_LoadGroupsMarionettistBooks();
+  bool Get_A_Books_IsGehnTrapped();
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
-  bool A_LoadGroupsMarionettistBooks;
+  bool A_Books_HasTrapBook;
 
   UFUNCTION(BlueprintCallable, Category = SaveGame)
-  void Set_A_LoadGroupsMarionettistBooks(bool NewVal);
+  void Set_A_Books_HasTrapBook(bool NewVal);
 
   UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
-  bool Get_A_LoadGroupsMarionettistBooks();
+  bool Get_A_Books_HasTrapBook();
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
-  bool A_LoadGroupsMarionettistBooks;
+  bool A_Books_IsCatherineFreed;
 
   UFUNCTION(BlueprintCallable, Category = SaveGame)
-  void Set_A_LoadGroupsMarionettistBooks(bool NewVal);
+  void Set_A_Books_IsCatherineFreed(bool NewVal);
 
   UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
-  bool Get_A_LoadGroupsMarionettistBooks();
+  bool Get_A_Books_IsCatherineFreed();
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
-  FTransform A_LoadGroupsMarionettistBooksRivenCharacter;
+  FTransform A_RivenCharacter_CharacterTransform;
 
   UFUNCTION(BlueprintCallable, Category = SaveGame)
-  void Set_A_LoadGroupsMarionettistBooksRivenCharacter(FTransform NewVal);
+  void Set_A_RivenCharacter_CharacterTransform(FTransform NewVal);
 
   UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
-  FTransform Get_A_LoadGroupsMarionettistBooksRivenCharacter();
+  FTransform Get_A_RivenCharacter_CharacterTransform();
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
-  int32 B_Shore;
+  int32 B_Shore_ValvePosition;
 
   UFUNCTION(BlueprintCallable, Category = SaveGame)
-  void Set_B_Shore(int32 NewVal);
+  void Set_B_Shore_ValvePosition(int32 NewVal);
 
   UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
-  int32 Get_B_Shore();
+  int32 Get_B_Shore_ValvePosition();
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
-  bool B_ShoreBoilerExterior;
+  bool B_BoilerExterior_IsSelectorValveTowardsPump;
 
   UFUNCTION(BlueprintCallable, Category = SaveGame)
-  void Set_B_ShoreBoilerExterior(bool NewVal);
+  void Set_B_BoilerExterior_IsSelectorValveTowardsPump(bool NewVal);
 
   UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
-  bool Get_B_ShoreBoilerExterior();
+  bool Get_B_BoilerExterior_IsSelectorValveTowardsPump();
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
-  bool B_ShoreBoilerExterior;
+  bool B_BoilerExterior_IsLevelSelectorUp;
 
   UFUNCTION(BlueprintCallable, Category = SaveGame)
-  void Set_B_ShoreBoilerExterior(bool NewVal);
+  void Set_B_BoilerExterior_IsLevelSelectorUp(bool NewVal);
 
   UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
-  bool Get_B_ShoreBoilerExterior();
+  bool Get_B_BoilerExterior_IsLevelSelectorUp();
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
-  bool B_ShoreBoilerExterior;
+  bool B_BoilerExterior_IsHeaterOn;
 
   UFUNCTION(BlueprintCallable, Category = SaveGame)
-  void Set_B_ShoreBoilerExterior(bool NewVal);
+  void Set_B_BoilerExterior_IsHeaterOn(bool NewVal);
 
   UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
-  bool Get_B_ShoreBoilerExterior();
+  bool Get_B_BoilerExterior_IsHeaterOn();
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
-  bool B_ShoreBoilerExteriorBoilerInterior;
+  bool B_BoilerInterior_IsFullOfWater;
 
   UFUNCTION(BlueprintCallable, Category = SaveGame)
-  void Set_B_ShoreBoilerExteriorBoilerInterior(bool NewVal);
+  void Set_B_BoilerInterior_IsFullOfWater(bool NewVal);
 
   UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
-  bool Get_B_ShoreBoilerExteriorBoilerInterior();
+  bool Get_B_BoilerInterior_IsFullOfWater();
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
-  bool B_ShoreBoilerExteriorBoilerInterior;
+  bool B_BoilerInterior_PlatformRaised;
 
   UFUNCTION(BlueprintCallable, Category = SaveGame)
-  void Set_B_ShoreBoilerExteriorBoilerInterior(bool NewVal);
+  void Set_B_BoilerInterior_PlatformRaised(bool NewVal);
 
   UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
-  bool Get_B_ShoreBoilerExteriorBoilerInterior();
+  bool Get_B_BoilerInterior_PlatformRaised();
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
-  ESubPosRot J_Submarine;
+  ESubPosRot J_Submarine_PositionAndRotation;
 
   UFUNCTION(BlueprintCallable, Category = SaveGame)
-  void Set_J_Submarine(ESubPosRot NewVal);
+  void Set_J_Submarine_PositionAndRotation(ESubPosRot NewVal);
 
   UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
-  ESubPosRot Get_J_Submarine();
+  ESubPosRot Get_J_Submarine_PositionAndRotation();
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
-  bool J_SubmarineTunnelBranch;
+  bool J_TunnelBranch_HasSeenCreepyGirl;
 
   UFUNCTION(BlueprintCallable, Category = SaveGame)
-  void Set_J_SubmarineTunnelBranch(bool NewVal);
+  void Set_J_TunnelBranch_HasSeenCreepyGirl(bool NewVal);
 
   UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
-  bool Get_J_SubmarineTunnelBranch();
+  bool Get_J_TunnelBranch_HasSeenCreepyGirl();
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
-  int32 J_SubmarineTunnelBranchIdolInterior;
+  int32 J_IdolInterior_ElevatorPosition;
 
   UFUNCTION(BlueprintCallable, Category = SaveGame)
-  void Set_J_SubmarineTunnelBranchIdolInterior(int32 NewVal);
+  void Set_J_IdolInterior_ElevatorPosition(int32 NewVal);
 
   UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
-  int32 Get_J_SubmarineTunnelBranchIdolInterior();
+  int32 Get_J_IdolInterior_ElevatorPosition();
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
-  bool O_Stove;
+  bool O_Stove_IsOn;
 
   UFUNCTION(BlueprintCallable, Category = SaveGame)
-  void Set_O_Stove(bool NewVal);
+  void Set_O_Stove_IsOn(bool NewVal);
 
   UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
-  bool Get_O_Stove();
+  bool Get_O_Stove_IsOn();
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
-  int32 O_StoveCageButton;
+  int32 O_CageButton_TimesPressed;
 
   UFUNCTION(BlueprintCallable, Category = SaveGame)
-  void Set_O_StoveCageButton(int32 NewVal);
+  void Set_O_CageButton_TimesPressed(int32 NewVal);
 
   UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
-  int32 Get_O_StoveCageButton();
+  int32 Get_O_CageButton_TimesPressed();
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
-  bool O_StoveCageButtonCageLever;
+  bool O_CageLever_IsInUnlockedState;
 
   UFUNCTION(BlueprintCallable, Category = SaveGame)
-  void Set_O_StoveCageButtonCageLever(bool NewVal);
+  void Set_O_CageLever_IsInUnlockedState(bool NewVal);
 
   UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
-  bool Get_O_StoveCageButtonCageLever();
+  bool Get_O_CageLever_IsInUnlockedState();
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
-  int32 S_Dome;
+  int32 S_Dome_CodeA;
 
   UFUNCTION(BlueprintCallable, Category = SaveGame)
-  void Set_S_Dome(int32 NewVal);
+  void Set_S_Dome_CodeA(int32 NewVal);
 
   UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
-  int32 Get_S_Dome();
+  int32 Get_S_Dome_CodeA();
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
-  int32 S_Dome;
+  int32 S_Dome_CodeB;
 
   UFUNCTION(BlueprintCallable, Category = SaveGame)
-  void Set_S_Dome(int32 NewVal);
+  void Set_S_Dome_CodeB(int32 NewVal);
 
   UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
-  int32 Get_S_Dome();
+  int32 Get_S_Dome_CodeB();
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
-  int32 S_Dome;
+  int32 S_Dome_CodeC;
 
   UFUNCTION(BlueprintCallable, Category = SaveGame)
-  void Set_S_Dome(int32 NewVal);
+  void Set_S_Dome_CodeC(int32 NewVal);
 
   UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
-  int32 Get_S_Dome();
+  int32 Get_S_Dome_CodeC();
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
-  int32 S_Dome;
+  int32 S_Dome_CodeD;
 
   UFUNCTION(BlueprintCallable, Category = SaveGame)
-  void Set_S_Dome(int32 NewVal);
+  void Set_S_Dome_CodeD(int32 NewVal);
 
   UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
-  int32 Get_S_Dome();
+  int32 Get_S_Dome_CodeD();
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
-  int32 S_Dome;
+  int32 S_Dome_CodeE;
 
   UFUNCTION(BlueprintCallable, Category = SaveGame)
-  void Set_S_Dome(int32 NewVal);
+  void Set_S_Dome_CodeE(int32 NewVal);
 
   UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
-  int32 Get_S_Dome();
+  int32 Get_S_Dome_CodeE();
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
-  bool T_FissurePlateau_CageLever;
+  bool T_FissurePlateau_CageLever_IsInClosedPosition;
 
   UFUNCTION(BlueprintCallable, Category = SaveGame)
-  void Set_T_FissurePlateau_CageLever(bool NewVal);
+  void Set_T_FissurePlateau_CageLever_IsInClosedPosition(bool NewVal);
 
   UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
-  bool Get_T_FissurePlateau_CageLever();
+  bool Get_T_FissurePlateau_CageLever_IsInClosedPosition();
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
-  bool T_FissurePlateau_CageLever_Cho;
+  bool T_FissurePlateau_Cho_IsStillPassedOut;
 
   UFUNCTION(BlueprintCallable, Category = SaveGame)
-  void Set_T_FissurePlateau_CageLever_Cho(bool NewVal);
+  void Set_T_FissurePlateau_Cho_IsStillPassedOut(bool NewVal);
 
   UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
-  bool Get_T_FissurePlateau_CageLever_Cho();
+  bool Get_T_FissurePlateau_Cho_IsStillPassedOut();
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
-  int32 T_FissurePlateau_CageLever_Cho_Telescope;
+  int32 T_FissurePlateau_Telescope_CodeA;
 
   UFUNCTION(BlueprintCallable, Category = SaveGame)
-  void Set_T_FissurePlateau_CageLever_Cho_Telescope(int32 NewVal);
+  void Set_T_FissurePlateau_Telescope_CodeA(int32 NewVal);
 
   UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
-  int32 Get_T_FissurePlateau_CageLever_Cho_Telescope();
+  int32 Get_T_FissurePlateau_Telescope_CodeA();
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
-  int32 T_FissurePlateau_CageLever_Cho_Telescope;
+  int32 T_FissurePlateau_Telescope_CodeB;
 
   UFUNCTION(BlueprintCallable, Category = SaveGame)
-  void Set_T_FissurePlateau_CageLever_Cho_Telescope(int32 NewVal);
+  void Set_T_FissurePlateau_Telescope_CodeB(int32 NewVal);
 
   UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
-  int32 Get_T_FissurePlateau_CageLever_Cho_Telescope();
+  int32 Get_T_FissurePlateau_Telescope_CodeB();
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
-  int32 T_FissurePlateau_CageLever_Cho_Telescope;
+  int32 T_FissurePlateau_Telescope_CodeC;
 
   UFUNCTION(BlueprintCallable, Category = SaveGame)
-  void Set_T_FissurePlateau_CageLever_Cho_Telescope(int32 NewVal);
+  void Set_T_FissurePlateau_Telescope_CodeC(int32 NewVal);
 
   UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
-  int32 Get_T_FissurePlateau_CageLever_Cho_Telescope();
+  int32 Get_T_FissurePlateau_Telescope_CodeC();
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
-  int32 T_FissurePlateau_CageLever_Cho_Telescope;
+  int32 T_FissurePlateau_Telescope_CodeD;
 
   UFUNCTION(BlueprintCallable, Category = SaveGame)
-  void Set_T_FissurePlateau_CageLever_Cho_Telescope(int32 NewVal);
+  void Set_T_FissurePlateau_Telescope_CodeD(int32 NewVal);
 
   UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
-  int32 Get_T_FissurePlateau_CageLever_Cho_Telescope();
+  int32 Get_T_FissurePlateau_Telescope_CodeD();
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
-  int32 T_FissurePlateau_CageLever_Cho_Telescope;
+  int32 T_FissurePlateau_Telescope_CodeE;
 
   UFUNCTION(BlueprintCallable, Category = SaveGame)
-  void Set_T_FissurePlateau_CageLever_Cho_Telescope(int32 NewVal);
+  void Set_T_FissurePlateau_Telescope_CodeE(int32 NewVal);
 
   UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
-  int32 Get_T_FissurePlateau_CageLever_Cho_Telescope();
+  int32 Get_T_FissurePlateau_Telescope_CodeE();
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
-  bool T_NewTemple_DoorMain;
+  bool T_NewTemple_DoorMain_IsOpen;
 
   UFUNCTION(BlueprintCallable, Category = SaveGame)
-  void Set_T_NewTemple_DoorMain(bool NewVal);
+  void Set_T_NewTemple_DoorMain_IsOpen(bool NewVal);
 
   UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
-  bool Get_T_NewTemple_DoorMain();
+  bool Get_T_NewTemple_DoorMain_IsOpen();
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
-  bool T_NewTemple_DoorMain_DoorSide;
+  bool T_NewTemple_DoorSide_IsOpen;
 
   UFUNCTION(BlueprintCallable, Category = SaveGame)
-  void Set_T_NewTemple_DoorMain_DoorSide(bool NewVal);
+  void Set_T_NewTemple_DoorSide_IsOpen(bool NewVal);
 
   UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
-  bool Get_T_NewTemple_DoorMain_DoorSide();
+  bool Get_T_NewTemple_DoorSide_IsOpen();
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
-  int32 P_Exterior_Lock;
+  int32 P_Exterior_Lock_CodeA;
 
   UFUNCTION(BlueprintCallable, Category = SaveGame)
-  void Set_P_Exterior_Lock(int32 NewVal);
+  void Set_P_Exterior_Lock_CodeA(int32 NewVal);
 
   UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
-  int32 Get_P_Exterior_Lock();
+  int32 Get_P_Exterior_Lock_CodeA();
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
-  int32 P_Exterior_Lock;
+  int32 P_Exterior_Lock_CodeB;
 
   UFUNCTION(BlueprintCallable, Category = SaveGame)
-  void Set_P_Exterior_Lock(int32 NewVal);
+  void Set_P_Exterior_Lock_CodeB(int32 NewVal);
 
   UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
-  int32 Get_P_Exterior_Lock();
+  int32 Get_P_Exterior_Lock_CodeB();
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
-  int32 P_Exterior_Lock;
+  int32 P_Exterior_Lock_CodeC;
 
   UFUNCTION(BlueprintCallable, Category = SaveGame)
-  void Set_P_Exterior_Lock(int32 NewVal);
+  void Set_P_Exterior_Lock_CodeC(int32 NewVal);
 
   UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
-  int32 Get_P_Exterior_Lock();
+  int32 Get_P_Exterior_Lock_CodeC();
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
-  int32 P_Exterior_Lock;
+  int32 P_Exterior_Lock_CodeD;
 
   UFUNCTION(BlueprintCallable, Category = SaveGame)
-  void Set_P_Exterior_Lock(int32 NewVal);
+  void Set_P_Exterior_Lock_CodeD(int32 NewVal);
 
   UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
-  int32 Get_P_Exterior_Lock();
+  int32 Get_P_Exterior_Lock_CodeD();
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
-  int32 P_Exterior_Lock;
+  int32 P_Exterior_Lock_CodeE;
 
   UFUNCTION(BlueprintCallable, Category = SaveGame)
-  void Set_P_Exterior_Lock(int32 NewVal);
+  void Set_P_Exterior_Lock_CodeE(int32 NewVal);
 
   UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
-  int32 Get_P_Exterior_Lock();
+  int32 Get_P_Exterior_Lock_CodeE();
 
   /* [[[end]]] */
 };

@@ -18,13 +18,12 @@ vars = []
 
 for island, areas in root.items():
     for area, atoms in areas.items():
-        name = island + '_' + area
         for atom_name in atoms.keys():
-            name = name + ('_' if area else '') + atom_name
+            name = island + '_' + area + ('_' if area else '') + atom_name
             for atom in atoms[atom_name]:
                 vars.append([
                     atom['type'],
-                    name,
+                    name + '_' + atom['name'],
                     stringify(atom['initial']),
                 ])
 
