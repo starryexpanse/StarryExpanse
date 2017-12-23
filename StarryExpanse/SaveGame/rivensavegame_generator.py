@@ -24,7 +24,7 @@ for island, areas in root.items():
             for atom in atoms[atom_name]:
                 vars.append([
                     atom['type'],
-                    atom['name'],
+                    name,
                     stringify(atom['initial']),
                 ])
 
