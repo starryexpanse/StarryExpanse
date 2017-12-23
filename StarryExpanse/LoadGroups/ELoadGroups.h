@@ -36,22 +36,22 @@ enum class ELoadGroups : uint8 {
      comma = '' if i == len(data.keys()) - 1 else ','
      cog.outl('%s\t\tUMETA(DisplayName = "%s")%s' % (loadgroup, display, comma))
   ]]] */
-  AGeneral		UMETA(DisplayName = "A: General"),
-  BBase		UMETA(DisplayName = "B: Base"),
-  BEastSide		UMETA(DisplayName = "B: East Side"),
-  GBase		UMETA(DisplayName = "G: Base"),
-  GDownside		UMETA(DisplayName = "G: Downside"),
-  GUpsideBase		UMETA(DisplayName = "G: Upside Base"),
-  GUpsideExterior		UMETA(DisplayName = "G: Upside Exterior"),
-  GUpsideInterior		UMETA(DisplayName = "G: Upside Interior"),
-  MysteriumShowOff		UMETA(DisplayName = "Mysterium: Show Off"),
-  SRivenBase		UMETA(DisplayName = "S: Riven Base"),
-  TBase		UMETA(DisplayName = "T: Base"),
-  TCommonOutside		UMETA(DisplayName = "T: Common Outside"),
-  TFissureDistrict		UMETA(DisplayName = "T: Fissure District"),
-  TMaglevDistrict		UMETA(DisplayName = "T: Maglev District"),
-  TNorthSide		UMETA(DisplayName = "T: North Side"),
-  TSpiderTunnelDistrict		UMETA(DisplayName = "T: Spider Tunnel District"),
-  TWestSide		UMETA(DisplayName = "T: West Side")
+  AGeneral UMETA(DisplayName = "A: General"),
+  BBase UMETA(DisplayName = "B: Base"),
+  BEastSide UMETA(DisplayName = "B: East Side"),
+  GBase UMETA(DisplayName = "G: Base"),
+  GDownside UMETA(DisplayName = "G: Downside"),
+  GUpsideBase UMETA(DisplayName = "G: Upside Base"),
+  GUpsideExterior UMETA(DisplayName = "G: Upside Exterior"),
+  GUpsideInterior UMETA(DisplayName = "G: Upside Interior"),
+  MysteriumShowOff UMETA(DisplayName = "Mysterium: Show Off"),
+  SRivenBase UMETA(DisplayName = "S: Riven Base"),
+  TBase UMETA(DisplayName = "T: Base"),
+  TCommonOutside UMETA(DisplayName = "T: Common Outside"),
+  TFissureDistrict UMETA(DisplayName = "T: Fissure District"),
+  TMaglevDistrict UMETA(DisplayName = "T: Maglev District"),
+  TNorthSide UMETA(DisplayName = "T: North Side"),
+  TSpiderTunnelDistrict UMETA(DisplayName = "T: Spider Tunnel District"),
+  TWestSide UMETA(DisplayName = "T: West Side")
   // [[[end]]]
 };

@@ -1,0 +1,95 @@
+# This intends to be a list of every "world state" variable in the game. It should ideally contain
+# the exact amount of information needed to restore the game from a save, no more and no less.
+# 
+# Data duplication is generally bad here. We want there to be as few variables as possible
+# to avoid the accidental achievement of an impossible state. For instance, instead of having both
+# a PagesAreRippedOut variable and a CatherineIsFree variable, let's just have a CatherineIsFree
+# variable, so we don't have to worry about whether two pieces of data that should always match, match.
+#
+# Each of these tuples is of the form (type, name, defaultValue). The first entry is the C++ type,
+# the second entry is the name of the variable (must have no spaces), and the third entry is
+# the default value it should take on. These default values are assigned during the "Restore
+# New Game Defaults" function.
+
+A:
+    '':
+        LoadGroups:
+            - { type: ELoadGroups, name: CurrentLoadGroup, initial: 'ELoadGroups::TFissureDistrict' }
+        Marionettist:
+            - { type: EMarionettist, name: CurrentMarionettist, initial: 'EMarionettist::NoMarionettist' }
+        Books:
+            - { type: bool, name: CurrentZoomedLinkingBookIsOpen, initial: false }
+            - { type: bool, name: IsGehnTrapped, initial: false }
+            - { type: bool, name: HasTrapBook, initial: true } # True because you have it before Cho shoots you and takes it
+            - { type: bool, name: IsCatherineFreed, initial: false } # True because you have it before Cho shoots you and takes it
+        RivenCharacter:
+            - { type: FTransform, name: CharacterTransform, initial: 'FTransform::Identity' }
+B:
+    '':
+        Shore:
+            - { type: int32, name: ValvePosition, initial: 0 } # index of [ UpstairsFan, BoilerTankControls, Woodchipper ] TODO(philip) enumify
+
+        ## TODO check all these initial states
+        BoilerExterior:
+            - { type: bool, name: IsSelectorValveTowardsPump, initial: false }
+            - { type: bool, name: IsLevelSelectorUp, initial: false }
+            - { type: bool, name: IsHeaterOn, initial: false }
+        BoilerInterior:
+            - { type: bool, name: IsFullOfWater, initial: true } # reactive
+            - { type: bool, name: PlatformRaised, initial: false } # reactive
+J:
+    '':
+        Submarine:
+            - { type: ESubPosRot, name: PositionAndRotation, initial: 'ESubPosRot::Plat_N' }
+        TunnelBranch:
+            - { type: bool, name: HasSeenCreepyGirl, initial: false }
+        IdolInterior:
+            # Valid Values: 0-2
+            - { type: int32, name: ElevatorPosition, initial: 1 }
+O:
+    '':
+        Stove:
+            - { type: bool, name: IsOn, initial: false }
+        CageButton:
+            - { type: int32, name: TimesPressed, initial: 0 }
+        CageLever:
+            - { type: bool, name: IsInUnlockedState, initial: false }
+S:
+    '':
+        Dome:
+            # Randomly generated at startup
+            # Valid Values: 0-24
+            - { type: int32, name: CodeA, initial: -1 }
+            - { type: int32, name: CodeB, initial: -1 }
+            - { type: int32, name: CodeC, initial: -1 }
+            - { type: int32, name: CodeD, initial: -1 }
+            - { type: int32, name: CodeE, initial: -1 }
+T:
+    FissurePlateau:
+        CageLever:
+            - { type: bool, name: IsInClosedPosition, initial: true }
+        Cho:
+            - { type: bool, name: IsStillPassedOut, initial: true }
+        Telescope:
+            # Randomly generated at startup
+            # Valid Values: 0-4
+            - { type: int32, name: CodeA, initial: -1 }
+            - { type: int32, name: CodeB, initial: -1 }
+            - { type: int32, name: CodeC, initial: -1 }
+            - { type: int32, name: CodeD, initial: -1 }
+            - { type: int32, name: CodeE, initial: -1 }
+    NewTemple:
+        DoorMain:
+            - { type: bool, name: IsOpen, initial: false }
+        DoorSide:
+            - { type: bool, name: IsOpen, initial: false }
+P:
+    Exterior:
+        Lock:
+            # Randomly generated at startup
+            # Valid Values: 0-2
+            - { type: int32, name: CodeA, initial: -1 }
+            - { type: int32, name: CodeB, initial: -1 }
+            - { type: int32, name: CodeC, initial: -1 }
+            - { type: int32, name: CodeD, initial: -1 }
+            - { type: int32, name: CodeE, initial: -1 }
