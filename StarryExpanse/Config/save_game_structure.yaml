@@ -1,0 +1,65 @@
+A:
+	LoadGroups:
+		- { type: ELoadGroups, name: CurrentLoadGroup, initial: 'ELoadGroups::TFissureDistrict' }
+	Marionettist:
+		- { type: EMarionettist, name: CurrentMarionettist, initial: 'EMarionettist::NoMarionettist' }
+	Books:
+		- { type: bool, name: CurrentZoomedLinkingBookIsOpen, initial: false }
+		- { type: bool, name: IsGehnTrapped, initial: false }
+		- { type: bool, name: HasTrapBook, initial: true } # True because you have it before Cho shoots you and takes it
+		- { type: bool, name: IsCatherineFreed, initial: false } # True because you have it before Cho shoots you and takes it
+	RivenCharacter:
+		- { type: FTransform, name: CharacterTransform, initial: 'FTransform::Identity' }
+J:
+	Submarine:
+		- { type: ESubPosRot, name: PositionAndRotation, initial: 'ESubPosRot::Plat_N' }
+	TunnelBranch:
+		- { type: bool, name: HasSeenCreepyGirl, initial: false }
+	IdolInterior:
+		# Valid Values: 0-2
+		- { type: int32, name: ElevatorPosition, initial: 1 }
+O:
+	Stove:
+		- { type: bool, name: IsOn, initial: false }
+	CageButton:
+		- { type: int32, name: TimesPressed, initial: 0 }
+	CageLever:
+		- { type: bool, name: IsInUnlockedState, initial: false }
+S:
+	Dome:
+		# Randomly generated at startup
+		# Valid Values: 0-24
+		- { type: int32, name: CodeA, initial: -1 }
+		- { type: int32, name: CodeB, initial: -1 }
+		- { type: int32, name: CodeC, initial: -1 }
+		- { type: int32, name: CodeD, initial: -1 }
+		- { type: int32, name: CodeE, initial: -1 }
+T:
+	FissurePlateau:
+		CageLever:
+			- { type: bool, name: IsInClosedPosition, initial: true }
+		Cho:
+			- { type: bool, name: IsStillPassedOut, initial: true }
+		Telescope:
+			# Randomly generated at startup
+			# Valid Values: 0-4
+			- { type: int32, name: CodeA, initial: -1 }
+			- { type: int32, name: CodeB, initial: -1 }
+			- { type: int32, name: CodeC, initial: -1 }
+			- { type: int32, name: CodeD, initial: -1 }
+			- { type: int32, name: CodeE, initial: -1 }
+	NewTemple:
+		DoorMain:
+			- { type: bool, name: IsOpen, initial: false }
+		DoorSide:
+			- { type: bool, name: IsOpen, initial: false }
+P:
+	Exterior:
+		Lock:
+			# Randomly generated at startup
+			# Valid Values: 0-2
+			- { type: int32, name: CodeA, initial: -1 }
+			- { type: int32, name: CodeB, initial: -1 }
+			- { type: int32, name: CodeC, initial: -1 }
+			- { type: int32, name: CodeD, initial: -1 }
+			- { type: int32, name: CodeE, initial: -1 }
