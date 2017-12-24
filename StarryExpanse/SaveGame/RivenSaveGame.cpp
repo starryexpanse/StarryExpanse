@@ -228,11 +228,11 @@ void URivenSaveGame::RestoreNewGameDefaults() {
 
     DomeCode.Sort();
 
-    this->DomeCodeA = DomeCode[0];
-    this->DomeCodeB = DomeCode[1];
-    this->DomeCodeC = DomeCode[2];
-    this->DomeCodeD = DomeCode[3];
-    this->DomeCodeE = DomeCode[4];
+    this->S_Dome_CodeA = DomeCode[0];
+    this->S_Dome_CodeB = DomeCode[1];
+    this->S_Dome_CodeC = DomeCode[2];
+    this->S_Dome_CodeD = DomeCode[3];
+    this->S_Dome_CodeE = DomeCode[4];
   }
 }
 
