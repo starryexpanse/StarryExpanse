@@ -20,15 +20,35 @@ A:
         RivenCharacter:
             - { type: FTransform, name: Transform, initial: 'FTransform::Identity' }
     Books:
+        CatherinesJournal:
+            - { type: bool, name: IsInPlayerPossession, initial: false }
         CurrentZoomedLinkingBook:
             - { type: bool, name: IsOpen, initial: false }
         TrapBook:
             - { type: bool, name: IsInPlayerPossession, initial: true } # True because you have it before Cho shoots you and takes it
     Characters:
-        Gehn:
-            - { type: bool, name: IsTrappedInBook, initial: false }
         Catherine:
             - { type: bool, name: IsFreed, initial: false }
+        Cho:
+            - { type: bool, name: IsStillPassedOut, initial: true }
+        Gehn:
+            - { type: bool, name: IsTrappedInBook, initial: false }
+        Wahrk:
+            - { type: int32, name: TimesBeckoned, initial: 0 }
+        CatherinesFriend:
+            - { type: bool, name: HasMadeSecondAppearance, initial: false }
+        Scribe:
+            - { type: bool, name: HasBeenSeen, initial: false }
+        JumpscareGirl:
+            - { type: bool, name: HasBeenSeen, initial: false }
+        RecluseWoman:
+            - { type: bool, name: HasBeenSeen, initial: false }
+        TowerGuard:
+            - { type: bool, name: HasBeenSeen, initial: false }
+        FleeingParentAndChild:
+            - { type: bool, name: HaveBeenSeen, initial: false }
+        Sunners:
+            - { type: bool, name: HaveBeenShooed, initial: false }
 B:
     Shore:
         Valve:
@@ -47,23 +67,46 @@ B:
             - { type: bool, name: IsPresent, initial: true } # reactive
         Platform:
             - { type: bool, name: IsRaised, initial: false } # reactive
+    # TODO: upper walkway fan state, ytram trap state, drawers, water bubble state, oven door,
+    #   boiler door locked
+G:
+    #elevator 1 
+    #elevator 2
+    #bubbles 1-5
+    #dome
+    #throne: raised/lowered, selectors
+    # elevator room door
+    # map room: rotation (WE GOTTA MAKE THIS PUZZLE BETTER)
 J:
-    Characters:
-        JumpscareGirl:
-            - { type: bool, name: HasBeenSeen, initial: false }
-        RecluseWoman:
-            - { type: bool, name: HasBeenSeen, initial: false }
-        TowerGuard:
-            - { type: bool, name: HasBeenSeen, initial: false }
-        FleeingParentAndChild:
-            - { type: bool, name: HaveBeenSeen, initial: false }
     Basin:
         Submarine:
             - { type: ESubPosRot, name: PositionAndRotation, initial: 'ESubPosRot::Plat_N' }
-    WharkIdol:
-        Elevator:
-            # Valid Values: 0-2
-            - { type: int32, name: Position, initial: 1 }
+        Gallows:
+            - { type: bool, name: IsOpen, initial: false }
+        Treehouse:
+            - { type: bool, name: IsLever1Up, initial: false }
+            - { type: bool, name: IsLever2Up, initial: false }
+            - { type: bool, name: IsLever3Up, initial: false }
+            - { type: bool, name: IsLever4Up, initial: false }
+            - { type: bool, name: IsLever5Up, initial: false }
+    Forest:
+        WharkIdol:
+            - { type: bool, name: IsMouthOpen, initial: false }
+            - { type: int32, name: ElevatorPosition, initial: 1 } # Valid Values: 0-2
+        GehnsThrone:
+            - { type: bool, name: IsRaised, initial: false }
+        Dome:
+            - { type: bool, name: IsOpen, initial: false }
+            - { type: int32, name: SliderA, initial: 0 }
+            - { type: int32, name: SliderB, initial: 1 }
+            - { type: int32, name: SliderC, initial: 2 }
+            - { type: int32, name: SliderD, initial: 3 }
+            - { type: int32, name: SliderE, initial: 4 }
+        Ladder:
+            - { type: bool, name: IsLowered, initial: false }
+    SecretTunnel:
+        Books:
+        Lights:
 O:
     Upstairs:
         Stove:
@@ -72,6 +115,11 @@ O:
             - { type: int32, name: TimesPressed, initial: 0 }
         CageLever:
             - { type: bool, name: IsUnlocked, initial: false }
+        Cannen:
+            - { type: bool, name: IsPlaying, initial: false }
+    Bedroom:
+        Drawer:
+            - { type: bool, name: IsOpen, initial: false }
 S:
     Dome:
         '':
@@ -82,13 +130,34 @@ S:
             - { type: int32, name: CodeC, initial: -1 }
             - { type: int32, name: CodeD, initial: -1 }
             - { type: int32, name: CodeE, initial: -1 }
+    Cart:
+        '':
+            - { type: bool, name: IsAtJungle, initial: true } # TODO(philip) check
+            # TODO is this even a variable?? isn't the cart just magically wherever you are?
+    MaglevTJ:
+        '':
+            - { type: bool, name: IsSpinnerToRight, initial: false } # TODO(philip) check
+            - { type: bool, name: IsAtTemple, initial: false }
+    MaglevBG:
+        '':
+            - { type: bool, name: IsSpinnerToRight, initial: false } # TODO(philip) check
+            - { type: bool, name: IsAtSurvey, initial: true } # TODO(philip) check
+    MaglevGJ:
+        '':
+            - { type: bool, name: IsSpinnerToRight, initial: false } # TODO(philip) check
+            - { type: bool, name: IsAtJungle, initial: false } # TODO(philip) check
+    
 T:
     FissurePlateau:
         CageLever:
             - { type: bool, name: IsInClosedPosition, initial: true }
-        Cho:
-            - { type: bool, name: IsStillPassedOut, initial: true }
+        Gateroom:
+            - { type: int32, name: Rotation, initial: 0 } # Values: 0 - 4 increasing in CCW order
+            - { type: int32, name: SelectedBeetle, initial: -1 } # Values: -1 through 4
         Telescope:
+            - { type: bool, name: IsBlocked, initial: true }
+            - { type: int32, name: Level, initial: 4 } # TODO(philip) check initial and range
+            
             # Randomly generated at startup
             # Valid Values: 0-4
             - { type: int32, name: CodeA, initial: -1 }
@@ -96,13 +165,47 @@ T:
             - { type: int32, name: CodeC, initial: -1 }
             - { type: int32, name: CodeD, initial: -1 }
             - { type: int32, name: CodeE, initial: -1 }
+    Airlock: # TODO reconcile name lol
+        OutsideDoor:
+            - { type: bool, name: IsOpen, initial: false } # TODO(philip) check initial
+        InsideDoor:
+            - { type: bool, name: IsOpen, initial: false } # TODO(philip) check initial
+    SteamCave:
+        Door:
+            - { type: bool, name: IsOpen, initial: false } # TODO(philip) check initial
+        Valve:
+            - { type: bool, name: IsPoweringTelescope, initial: false }
+    SpiderChairRoom:
+        Microphone:
+            - { type: bool, name: IsOn, initial: false }
     NewTemple:
         DoorMain:
             - { type: bool, name: IsOpen, initial: false }
+            # TODO where should gehn's creepy video recording go? is it a state?
         DoorSide:
             - { type: bool, name: IsOpen, initial: false }
+    Backstage:
+        Dome:
+            - { type: bool, name: IsOpen, initial: false }
+            - { type: int32, name: SliderA, initial: 0 }
+            - { type: int32, name: SliderB, initial: 1 }
+            - { type: int32, name: SliderC, initial: 2 }
+            - { type: int32, name: SliderD, initial: 3 }
+            - { type: int32, name: SliderE, initial: 4 }
+        BridgeValve:
+            - { type: bool, name: IsWastingSteam, initial: true }
+        BridgeLever:
+            - { type: bool, name: IsUp, initial: true }
+        Elevator:
+            - { type: bool, name: IsUp, initial: false }
+        SuperdomeWalkway:
+            - { type: bool, name: IsExtended, initial: false }
+        WaffleIron:
+            - { type: bool, name: IsEngaged, initial: false }
 P:
     Exterior:
+        Elevator:
+            - { type: bool, name: IsInCaptiveMode, initial: true }
         Lock:
             # Randomly generated at startup
             # Valid Values: 0-2
