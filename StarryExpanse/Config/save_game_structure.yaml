@@ -17,46 +17,64 @@ A:
             - { type: ELoadGroups, name: CurrentLoadGroup, initial: 'ELoadGroups::TFissureDistrict' }
         Marionettist:
             - { type: EMarionettist, name: CurrentMarionettist, initial: 'EMarionettist::NoMarionettist' }
-        Books:
-            - { type: bool, name: CurrentZoomedLinkingBookIsOpen, initial: false }
-            - { type: bool, name: IsGehnTrapped, initial: false }
-            - { type: bool, name: HasTrapBook, initial: true } # True because you have it before Cho shoots you and takes it
-            - { type: bool, name: IsCatherineFreed, initial: false } # True because you have it before Cho shoots you and takes it
         RivenCharacter:
-            - { type: FTransform, name: CharacterTransform, initial: 'FTransform::Identity' }
+            - { type: FTransform, name: Transform, initial: 'FTransform::Identity' }
+    Books:
+        CurrentZoomedLinkingBook:
+            - { type: bool, name: IsOpen, initial: false }
+        TrapBook:
+            - { type: bool, name: IsInPlayerPossession, initial: true } # True because you have it before Cho shoots you and takes it
+    Characters:
+        Gehn:
+            - { type: bool, name: IsTrappedInBook, initial: false }
+        Catherine:
+            - { type: bool, name: IsFreed, initial: false }
 B:
-    '':
-        Shore:
-            - { type: int32, name: ValvePosition, initial: 0 } # index of [ UpstairsFan, BoilerTankControls, Woodchipper ] TODO(philip) enumify
+    Shore:
+        Valve:
+            - { type: int32, name: Position, initial: 0 } # index of [ UpstairsFan, BoilerTankControls, Woodchipper ] TODO(philip) enumify
 
-        ## TODO check all these initial states
-        BoilerExterior:
-            - { type: bool, name: IsSelectorValveTowardsPump, initial: false }
-            - { type: bool, name: IsLevelSelectorUp, initial: false }
-            - { type: bool, name: IsHeaterOn, initial: false }
-        BoilerInterior:
-            - { type: bool, name: IsFullOfWater, initial: true } # reactive
-            - { type: bool, name: PlatformRaised, initial: false } # reactive
+    ## TODO check all these initial states
+    BoilerExterior:
+        SelectorValve:
+            - { type: bool, name: IsTowardsPump, initial: false }
+        LevelSelector:
+            - { type: bool, name: IsUp, initial: false }
+        Heater:
+            - { type: bool, name: IsOn, initial: false }
+    BoilerInterior:
+        Water:
+            - { type: bool, name: IsPresent, initial: true } # reactive
+        Platform:
+            - { type: bool, name: IsRaised, initial: false } # reactive
 J:
-    '':
+    Characters:
+        JumpscareGirl:
+            - { type: bool, name: HasBeenSeen, initial: false }
+        RecluseWoman:
+            - { type: bool, name: HasBeenSeen, initial: false }
+        TowerGuard:
+            - { type: bool, name: HasBeenSeen, initial: false }
+        FleeingParentAndChild:
+            - { type: bool, name: HaveBeenSeen, initial: false }
+    Basin:
         Submarine:
             - { type: ESubPosRot, name: PositionAndRotation, initial: 'ESubPosRot::Plat_N' }
-        TunnelBranch:
-            - { type: bool, name: HasSeenCreepyGirl, initial: false }
-        IdolInterior:
+    WharkIdol:
+        Elevator:
             # Valid Values: 0-2
-            - { type: int32, name: ElevatorPosition, initial: 1 }
+            - { type: int32, name: Position, initial: 1 }
 O:
-    '':
+    Upstairs:
         Stove:
             - { type: bool, name: IsOn, initial: false }
         CageButton:
             - { type: int32, name: TimesPressed, initial: 0 }
         CageLever:
-            - { type: bool, name: IsInUnlockedState, initial: false }
+            - { type: bool, name: IsUnlocked, initial: false }
 S:
-    '':
-        Dome:
+    Dome:
+        '':
             # Randomly generated at startup
             # Valid Values: 0-24
             - { type: int32, name: CodeA, initial: -1 }

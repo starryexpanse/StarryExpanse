@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 import cog
 import sys
 import yaml
@@ -15,18 +17,29 @@ def stringify(val):
         return str(val).lower()
     return str(val)
 
+def underscorify(path):
+    return '_'.join([section for section in path if section != ''])
+
+path = []
 vars = []
 
 for island, areas in root.items():
+    path.append(island)
     for area, atoms in areas.items():
-        for atom_name in atoms.keys():
-            name = island + '_' + area + ('_' if area else '') + atom_name
-            for atom in atoms[atom_name]:
+        path.append(area)
+        for atom_key in atoms.keys():
+            path.append(atom_key)
+            for atom in atoms[atom_key]:
+                path.append(atom['name'])
                 vars.append([
                     atom['type'],
-                    name + '_' + atom['name'],
+                    underscorify(path),
                     stringify(atom['initial']),
                 ])
+                path.pop()
+            path.pop()
+        path.pop()
+    path.pop()
 
 def p(x):
     # Easy hack to make the line endings consistently DOS-style
