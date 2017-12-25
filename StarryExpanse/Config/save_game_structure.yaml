@@ -90,6 +90,10 @@ J:
             - { type: bool, name: IsLever4Up, initial: false }
             - { type: bool, name: IsLever5Up, initial: false }
     Forest:
+        Gate1:
+            - { type: bool, name: IsOpen, initial: false }
+        Gate2:
+            - { type: bool, name: IsOpen, initial: false }
         WharkIdol:
             - { type: bool, name: IsMouthOpen, initial: false }
             - { type: int32, name: ElevatorPosition, initial: 1 } # Valid Values: 0-2
@@ -106,7 +110,17 @@ J:
             - { type: bool, name: IsLowered, initial: false }
     SecretTunnel:
         Books:
+            - { type: int32, name: SelectedStoneA, initial: -1 }
+            - { type: int32, name: SelectedStoneB, initial: -1 }
+            - { type: int32, name: SelectedStoneC, initial: -1 }
+            - { type: int32, name: SelectedStoneD, initial: -1 }
+            - { type: int32, name: SelectedStoneE, initial: -1 }
         Lights:
+            - { type: bool, name: IsLight1On, initial: false }
+            - { type: bool, name: IsLight2On, initial: false }
+            - { type: bool, name: IsLight3On, initial: false }
+            - { type: bool, name: IsLight4On, initial: false }
+            - { type: bool, name: IsLight5On, initial: false } # TODO how many?
 O:
     Upstairs:
         Stove:
