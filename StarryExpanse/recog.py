@@ -1,3 +1,4 @@
+from builtins import input
 import subprocess
 import sys
 
@@ -5,7 +6,7 @@ cog_command = []
 if sys.platform == 'darwin':
     cog_command = ['cog.py']
 else:
-    cog_command = ['python', 'C:\Python36\Scripts\cog.py']
+    cog_command = ['python', r'C:\Python36\Scripts\cog.py']
 
 files = [
     'LoadGroups/LoadGroupInfo.cpp',
@@ -16,7 +17,11 @@ files = [
     'SaveGame/ESaveGameField.h',
 ]
 
-subprocess.call(cog_command + ['-r'] + files)
+subprocess.check_call(cog_command + ['-r'] + files)
 
 print("Complete!")
-input()
+
+try:
+    raw_input()
+except NameError:
+    input()
