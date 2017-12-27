@@ -199,11 +199,11 @@ void URivenSaveGame::RestoreNewGameDefaults() {
   this->P_Exterior_Lock_CodeE = -1;
   /* [[[end]]]*/
 
-  this->TelescopeCodeA = FMath::RandRange(0, 4);
-  this->TelescopeCodeB = FMath::RandRange(0, 4);
-  this->TelescopeCodeC = FMath::RandRange(0, 4);
-  this->TelescopeCodeD = FMath::RandRange(0, 4);
-  this->TelescopeCodeE = FMath::RandRange(0, 4);
+  this->T_FissurePlateau_Telescope_CodeA = FMath::RandRange(0, 4);
+  this->T_FissurePlateau_Telescope_CodeB = FMath::RandRange(0, 4);
+  this->T_FissurePlateau_Telescope_CodeC = FMath::RandRange(0, 4);
+  this->T_FissurePlateau_Telescope_CodeD = FMath::RandRange(0, 4);
+  this->T_FissurePlateau_Telescope_CodeE = FMath::RandRange(0, 4);
 
   // Generate dome code. I tried a more constant-time way but it had pretty
   // uneven distributions. There's another way to accomplish the same task in
