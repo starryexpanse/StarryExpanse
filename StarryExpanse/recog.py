@@ -1,4 +1,7 @@
-from builtins import input
+try:
+	from builtins import input
+except:
+	pass
 import subprocess
 import sys
 
@@ -17,7 +20,10 @@ files = [
     'SaveGame/ESaveGameField.h',
 ]
 
-subprocess.check_call(cog_command + ['-r'] + files)
+try:
+    subprocess.check_call(cog_command + ['-r'] + files)
+except Exception as e:
+    print(e.message)
 
 print("Complete!")
 

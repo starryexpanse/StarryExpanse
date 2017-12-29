@@ -69,7 +69,7 @@ B:
             - { type: bool, name: IsRaised, initial: false } # reactive
     # TODO: upper walkway fan state, ytram trap state, drawers, water bubble state, oven door,
     #   boiler door locked
-G:
+#G:
     #elevator 1 
     #elevator 2
     #bubbles 1-5
