@@ -13,6 +13,7 @@ ARivenGameState::ARivenGameState() : Super() {}
 
 void ARivenGameState::OnConstruction(const FTransform &Transform) {
   auto initialSavegame = NewObject<URivenSaveGame>();
+  initialSavegame->SetSubscriber(this);
   this->Instantaneous_SaveGame = initialSavegame;
   auto gameInstance = GetWorld()->GetGameInstance<URivenGameInstance>();
   gameInstance->Last_Savable_SaveGame = initialSavegame;
