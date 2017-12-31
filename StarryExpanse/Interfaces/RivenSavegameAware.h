@@ -4,6 +4,7 @@
 #pragma once
 
 #include "Object.h"
+#include "SaveGame/RivenSaveGame.h"
 #include "RivenSavegameAware.generated.h"
 
 UINTERFACE()
@@ -16,8 +17,8 @@ class IRivenSavegameAware {
 
 public:
   UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Savegame)
-  void SavegameUpdateNotify();
+  void SavegameUpdateNotify(URivenSaveGame *OldSaveGame, URivenSaveGame *NewSaveGame);
 
   UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Savegame)
-  void SavegameInitialNotify();
+  void SavegameInitialNotify(URivenSaveGame *CurrentSaveGame);
 };
