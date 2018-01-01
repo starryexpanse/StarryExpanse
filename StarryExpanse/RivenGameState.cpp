@@ -36,6 +36,7 @@ void ARivenGameState::UnsubscribeActorFromSavegame(AActor* actor) {
 }
 
 void ARivenGameState::NotifySubscribersOfChange(URivenSaveGame *OldSaveGame) {
+  TArray<uint32> IdsToRemove;
   for (auto& Elem : SubscribedToSavegame) {
     TWeakObjectPtr<AActor> subscriberPointer = Elem.Value;
     if (
@@ -47,7 +48,11 @@ void ARivenGameState::NotifySubscribersOfChange(URivenSaveGame *OldSaveGame) {
 
       IRivenSavegameAware::Execute_SavegameUpdateNotify(subscriber, OldSaveGame, Instantaneous_SaveGame);
     } else {
-      SubscribedToSavegame.FindAndRemoveChecked(Elem.Key);
+      IdsToRemove.Add(Elem.Key);
     }
+  }
+
+  for (auto& Id : IdsToRemove) {
+    SubscribedToSavegame.FindAndRemoveChecked(Id);
   }
 }
