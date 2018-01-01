@@ -24,10 +24,10 @@ void ARivenGameState::SubscribeActorToSavegame(AActor* actor) {
   if (actor->GetClass()->ImplementsInterface(URivenSavegameAware::StaticClass())) {
     uint32 uuid = actor->GetUniqueID();
     if (SubscribedToSavegame.Contains(uuid)) {
+      checkf(false, TEXT("Actor subscribing was already subscribed"));
+    } else {
       SubscribedToSavegame.Add(uuid, TWeakObjectPtr<AActor>(actor));
       IRivenSavegameAware::Execute_SavegameInitialNotify(actor, Instantaneous_SaveGame);
-    } else {
-      checkf(false, TEXT("Actor subscribing was already subscribed"));
     }
   } else {
     checkf(false, TEXT("Actor subscribing does not implement IRivenSavegameAware interface"));
