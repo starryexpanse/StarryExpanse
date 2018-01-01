@@ -20,19 +20,17 @@ void ARivenGameState::OnConstruction(const FTransform &Transform) {
 }
 
 void ARivenGameState::SubscribeActorToSavegame(AActor* actor) {
-  if (actor != nullptr) {
-    if (actor->GetClass()->ImplementsInterface(URivenSavegameAware::StaticClass())) {
-      uint32 uuid = actor->GetUniqueID();
-      SubscribedToSavegame.Add(uuid, TWeakObjectPtr<AActor>(actor));
-    }
+  check(actor);
+  if (actor->GetClass()->ImplementsInterface(URivenSavegameAware::StaticClass())) {
+    uint32 uuid = actor->GetUniqueID();
+    SubscribedToSavegame.Add(uuid, TWeakObjectPtr<AActor>(actor));
   }
 }
 
 void ARivenGameState::UnsubscribeActorFromSavegame(AActor* actor) {
-  if (actor != nullptr) {
-    uint32 uuid = actor->GetUniqueID();
-    SubscribedToSavegame.FindAndRemoveChecked(uuid);
-  }
+  check(actor);
+  uint32 uuid = actor->GetUniqueID();
+  SubscribedToSavegame.FindAndRemoveChecked(uuid);
 }
 
 void ARivenGameState::NotifySubscribersOfChange(URivenSaveGame *OldSaveGame) {
