@@ -19,14 +19,14 @@ SRivenBase: &SRivenBase
 BBase: &BBase
    - *AGeneral
    - *SRivenBase
-   - B_Terrain # TODO separate into parts
+   - B_Terrain_Structures
 BEastSide:
    - *BBase
    - S_GreatBridge
    - T_SuperDome
    - T_Terrain
    - B_UpperWalkwayTunnel
-   - B_Stuff
+   - B_CartTrack_Structures
    - B_GehnLab
 
 ## G: Garden Island
@@ -52,26 +52,23 @@ GDownside:
    - *GBase
    - G_MaglevDock_J
    - G_WahrkTankLower
-
 ## T: Temple Island
 # Bases
 TBase: &TBase
    - *AGeneral
    - *SRivenBase
    - T_Terrain
-TCommonOutside: &TCommonOutside
-   # These should be removed or at least downgraded after Mysterium:
-   - B_UpperWalkwayTunnel
-   - B_Terrain
 TWestSide:
    - *TBase
-   - *TCommonOutside
+   - B_CartTrack_Structures
+   - B_Terrain_Structures
    - S_GreatBridge
    - T_SuperDome
    - T_GateRoom
 TNorthSide:
    - *TBase
-   - *TCommonOutside
+   - B_CartTrack_Structures
+   - B_Terrain_Structures
    - S_GreatBridge
    - T_GateRoom
    - T_SuperDome
@@ -91,5 +88,6 @@ TSpiderTunnelDistrict:
    - T_SuperDome # TODO can downgrade this, so it's just the superdome exterior
 TMaglevDistrict:
    - *TBase
-   - *TCommonOutside
+   - B_CartTrack_Structures
+   - B_Terrain_Structures
    - S_Maglev_TJ

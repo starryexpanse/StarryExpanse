@@ -47,7 +47,6 @@ enum class ELoadGroups : uint8 {
   MysteriumShowOff		UMETA(DisplayName = "Mysterium: Show Off"),
   SRivenBase		UMETA(DisplayName = "S: Riven Base"),
   TBase		UMETA(DisplayName = "T: Base"),
-  TCommonOutside		UMETA(DisplayName = "T: Common Outside"),
   TFissureDistrict		UMETA(DisplayName = "T: Fissure District"),
   TMaglevDistrict		UMETA(DisplayName = "T: Maglev District"),
   TNorthSide		UMETA(DisplayName = "T: North Side"),

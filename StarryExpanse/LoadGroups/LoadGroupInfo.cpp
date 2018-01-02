@@ -52,12 +52,12 @@ ULoadGroupInfo::ULoadGroupInfo(const FObjectInitializer &ObjectInitializer)
           TEXT("S_Lighting_Riven"),
           TEXT("S_PostProcessing_Riven"),
           TEXT("S_Ocean_Riven"),
-          TEXT("B_Terrain"),
+          TEXT("B_Terrain_Structures"),
           TEXT("S_GreatBridge"),
           TEXT("T_SuperDome"),
           TEXT("T_Terrain"),
           TEXT("B_UpperWalkwayTunnel"),
-          TEXT("B_Stuff"),
+          TEXT("B_CartTrack_Structures"),
           TEXT("B_GehnLab")
       }
   ));
@@ -181,8 +181,8 @@ ULoadGroupInfo::ULoadGroupInfo(const FObjectInitializer &ObjectInitializer)
           TEXT("S_PostProcessing_Riven"),
           TEXT("S_Ocean_Riven"),
           TEXT("T_Terrain"),
-          TEXT("B_UpperWalkwayTunnel"),
-          TEXT("B_Terrain"),
+          TEXT("B_CartTrack_Structures"),
+          TEXT("B_Terrain_Structures"),
           TEXT("S_GreatBridge"),
           TEXT("T_GateRoom"),
           TEXT("T_SuperDome")
@@ -200,19 +200,11 @@ ULoadGroupInfo::ULoadGroupInfo(const FObjectInitializer &ObjectInitializer)
           TEXT("S_PostProcessing_Riven"),
           TEXT("S_Ocean_Riven"),
           TEXT("T_Terrain"),
-          TEXT("B_UpperWalkwayTunnel"),
-          TEXT("B_Terrain"),
+          TEXT("B_CartTrack_Structures"),
+          TEXT("B_Terrain_Structures"),
           TEXT("S_GreatBridge"),
           TEXT("T_SuperDome"),
           TEXT("T_GateRoom")
-      }
-  ));
-
-  LoadGroups.insert(Pair(
-      ELoadGroups::TCommonOutside,
-      {
-          TEXT("B_UpperWalkwayTunnel"),
-          TEXT("B_Terrain")
       }
   ));
 
@@ -264,8 +256,8 @@ ULoadGroupInfo::ULoadGroupInfo(const FObjectInitializer &ObjectInitializer)
           TEXT("S_PostProcessing_Riven"),
           TEXT("S_Ocean_Riven"),
           TEXT("T_Terrain"),
-          TEXT("B_UpperWalkwayTunnel"),
-          TEXT("B_Terrain"),
+          TEXT("B_CartTrack_Structures"),
+          TEXT("B_Terrain_Structures"),
           TEXT("S_Maglev_TJ")
       }
   ));
@@ -280,7 +272,7 @@ ULoadGroupInfo::ULoadGroupInfo(const FObjectInitializer &ObjectInitializer)
           TEXT("S_Lighting_Riven"),
           TEXT("S_PostProcessing_Riven"),
           TEXT("S_Ocean_Riven"),
-          TEXT("B_Terrain")
+          TEXT("B_Terrain_Structures")
       }
   ));
 
