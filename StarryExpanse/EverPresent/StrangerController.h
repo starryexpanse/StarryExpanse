@@ -22,7 +22,7 @@ public:
   void Interact();
   
   UFUNCTION()
-  FHitResult CastInteractionRay(bool &gotHit);
+  FHitResult CastInteractionRay(bool &gotHit, bool &hadError, float xCenterOffset, float yCenterOffset);
 
 protected:
   virtual void BeginPlay() override;

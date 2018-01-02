@@ -4,6 +4,9 @@
 
 #include "StrangerController.h"
 #include "Actors/RivenInteractable.h"
+#include "Camera/CameraActor.h"
+#include "Runtime/Engine/Classes/Camera/CameraComponent.h"
+#include "Runtime/Engine/Public/CollisionQueryParams.h"
 #include "RivenGameInstance.h"
 
 AStrangerController::AStrangerController() {}
@@ -29,7 +32,8 @@ void AStrangerController::BeginPlay() {
 
 void AStrangerController::Interact() {
   bool gotHit;
-  auto hitResult = this->CastInteractionRay(gotHit);
+  bool hadError;
+  auto hitResult = this->CastInteractionRay(gotHit, hadError, 0, 0);
 
   if (gotHit) {
     auto hitActor = hitResult.GetActor();
@@ -42,7 +46,14 @@ void AStrangerController::Interact() {
   }
 }
 
-FHitResult AStrangerController::CastInteractionRay(bool &gotHit) {
+FHitResult AStrangerController::CastInteractionRay(
+  bool &gotHit,
+  bool &hadError,
+  float xCenterOffset, // range [-1, 1]
+  float yCenterOffset // range [-1, 1]
+) {
+    hadError = true;
+    gotHit = false;
     auto world = GetWorld();
     
     FVector ViewLocation;
@@ -52,21 +63,58 @@ FHitResult AStrangerController::CastInteractionRay(bool &gotHit) {
       ViewLocation,
       ViewRotation
     );
+
+    auto viewTarget = this->GetViewTarget();
     
     struct FHitResult HitResult;
-    FCollisionQueryParams Params;
-    FCollisionResponseParams ResponseParams;
-    
-    float range = 500;
-    
-    gotHit = world->LineTraceSingleByChannel(
-        HitResult,
-        ViewLocation,
-        ViewLocation + this->GetActorForwardVector() * range,
-        ECollisionChannel::ECC_Visibility,
-        Params,
-        ResponseParams
-    );
+
+    if (viewTarget != nullptr) {
+      auto Cameras = viewTarget->GetComponentsByTag(
+        UCameraComponent::StaticClass(),
+        FName("MainCamera")
+      );
+      if (Cameras.IsValidIndex(0)) {
+        auto Camera = Cast<UCameraComponent>(Cameras[0]);
+        if (Camera) {
+          FCollisionQueryParams Params = FCollisionQueryParams::DefaultQueryParam;
+          FCollisionResponseParams ResponseParams = FCollisionResponseParams::DefaultResponseParam;
+
+          float range = 500;
+          float halfHorizFov = FMath::DegreesToRadians(Camera->FieldOfView / 2.0);
+          float halfVerticalFov = FMath::DegreesToRadians((Camera->FieldOfView / Camera->AspectRatio) / 2.0);
+
+          float phi = xCenterOffset * halfHorizFov;
+          float theta = yCenterOffset * halfVerticalFov;
+
+          float sinphi = FMath::Sin(phi);
+          float sintheta = FMath::Sin(theta);
+          float cosphi = FMath::Cos(phi);
+          float costheta = FMath::Cos(theta);
+
+          float rightOffset = costheta * sinphi;
+          float forwardOffset = costheta * cosphi;
+          float upwardOffset = sintheta;
+
+          FVector localOffset(
+            forwardOffset,
+            rightOffset,
+            upwardOffset
+          );
+
+          auto transform = this->ActorToWorld();
+
+          gotHit = world->LineTraceSingleByChannel(
+            HitResult,
+            ViewLocation,
+            ViewLocation + transform.TransformVectorNoScale(localOffset) * range,
+            ECollisionChannel::ECC_Visibility,
+            Params,
+            ResponseParams
+          );
+          hadError = false;
+        }
+      }
+    }
     
     return HitResult;
 }
