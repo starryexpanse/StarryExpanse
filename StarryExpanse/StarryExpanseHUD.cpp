@@ -4,8 +4,10 @@
 #include "CanvasItem.h"
 #include "Engine/Canvas.h"
 #include "Engine/Texture2D.h"
+#include "Runtime/HeadMountedDisplay/Public/HeadMountedDisplayFunctionLibrary.h"
 #include "TextureResource.h"
 #include "UObject/ConstructorHelpers.h"
+#include <algorithm>
 
 AStarryExpanseHUD::AStarryExpanseHUD() {
   // Set the crosshair texture
@@ -16,20 +18,42 @@ AStarryExpanseHUD::AStarryExpanseHUD() {
 }
 
 void AStarryExpanseHUD::DrawHUD() {
-  Super::DrawHUD();
+  float width = Canvas->ClipX;
+  float height = Canvas->ClipY;
 
   // Draw very simple crosshair
 
   // find center of the Canvas
-  const FVector2D Center(Canvas->ClipX * 0.5f, Canvas->ClipY * 0.5f);
+  const FVector2D Center(width * 0.5f, height * 0.5f);
 
   // offset by half the texture's dimensions so that the center of the texture
   // aligns with the center of the Canvas
   const FVector2D CrosshairDrawPosition((Center.X), (Center.Y + 20.0f));
 
   // draw the crosshair
-  FCanvasTileItem TileItem(CrosshairDrawPosition, CrosshairTex->Resource,
-                           FLinearColor::White);
-  TileItem.BlendMode = SE_BLEND_Translucent;
-  Canvas->DrawItem(TileItem);
+
+  if (!UHeadMountedDisplayFunctionLibrary::IsHeadMountedDisplayEnabled()) {
+    FCanvasTileItem TileItem(
+      CrosshairDrawPosition,
+      CrosshairTex->Resource,
+      FLinearColor::White
+    );
+    TileItem.BlendMode = SE_BLEND_Translucent;
+    Canvas->DrawItem(TileItem);
+  }
+
+  int numDivisions = 50;
+  float squareSize = std::min(width / numDivisions, height / numDivisions);
+
+  for (int i = 0; i < numDivisions; i++) {
+    for (int j = 0; j < numDivisions; j++) {
+         this->DrawRect(
+            FLinearColor(1.0f, 1.0f, 0.0f, 0.3f),
+            width * i / numDivisions,
+            height * j / numDivisions,
+            squareSize,
+            squareSize
+        );
+    }
+  }
 }
