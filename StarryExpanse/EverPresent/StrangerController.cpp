@@ -3,14 +3,72 @@
 //
 
 #include "StrangerController.h"
+#include "Actors/RivenInteractable.h"
 #include "RivenGameInstance.h"
 
 AStrangerController::AStrangerController() {}
 
+void AStrangerController::SetupInputComponent() {
+  Super::SetupInputComponent();
+
+  this->InputComponent->BindAction(
+    "Interact",
+    EInputEvent::IE_Pressed,
+    this,
+    &AStrangerController::Interact
+  );
+}
+
 void AStrangerController::BeginPlay() {
   auto gameInstance = Cast<URivenGameInstance>(GetWorld()->GetGameInstance());
   gameInstance->GameInstanceVarsChanged.AddDynamic(
-      this, &AStrangerController::PossiblyFreezeOrUnfreeze);
+      this,
+      &AStrangerController::PossiblyFreezeOrUnfreeze
+  );
+}
+
+void AStrangerController::Interact() {
+  bool gotHit;
+  auto hitResult = this->CastInteractionRay(gotHit);
+
+  if (gotHit) {
+    auto hitActor = hitResult.GetActor();
+    if (
+      hitActor != nullptr &&
+      hitActor->GetClass()->ImplementsInterface(URivenInteractable::StaticClass())
+    ) {
+      IRivenInteractable::Execute_Touched(hitActor);
+    }
+  }
+}
+
+FHitResult AStrangerController::CastInteractionRay(bool &gotHit) {
+    auto world = GetWorld();
+    
+    FVector ViewLocation;
+    FRotator ViewRotation;
+    
+    this->GetPlayerViewPoint(
+      ViewLocation,
+      ViewRotation
+    );
+    
+    struct FHitResult HitResult;
+    FCollisionQueryParams Params;
+    FCollisionResponseParams ResponseParams;
+    
+    float range = 500;
+    
+    gotHit = world->LineTraceSingleByChannel(
+        HitResult,
+        ViewLocation,
+        ViewLocation + this->GetActorForwardVector() * range,
+        ECollisionChannel::ECC_Visibility,
+        Params,
+        ResponseParams
+    );
+    
+    return HitResult;
 }
 
 void AStrangerController::PossiblyFreezeOrUnfreeze() {

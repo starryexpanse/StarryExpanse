@@ -6,7 +6,6 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
-#include "RivenGameInstance.h"
 #include "StrangerController.generated.h"
 
 UCLASS()
@@ -18,8 +17,15 @@ public:
 
   UFUNCTION()
   void PossiblyFreezeOrUnfreeze();
+    
+  UFUNCTION()
+  void Interact();
+  
+  UFUNCTION()
+  FHitResult CastInteractionRay(bool &gotHit);
 
 protected:
   virtual void BeginPlay() override;
   virtual void Destroyed() override;
+  virtual void SetupInputComponent() override;
 };
