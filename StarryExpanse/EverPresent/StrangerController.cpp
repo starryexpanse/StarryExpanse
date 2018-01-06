@@ -83,8 +83,8 @@ FHitResult AStrangerController::CastInteractionRay(
           float halfHorizFov = FMath::DegreesToRadians(Camera->FieldOfView / 2.0);
           float halfVerticalFov = FMath::DegreesToRadians((Camera->FieldOfView / Camera->AspectRatio) / 2.0);
 
-          float phi = xCenterOffset * halfHorizFov;
-          float theta = yCenterOffset * halfVerticalFov;
+          float phi = FMath::Atan(xCenterOffset * FMath::Tan(halfHorizFov));
+          float theta = FMath::Atan(yCenterOffset * FMath::Tan(halfVerticalFov));
 
           float sinphi = FMath::Sin(phi);
           float sintheta = FMath::Sin(theta);

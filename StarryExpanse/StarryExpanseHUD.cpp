@@ -44,7 +44,7 @@ void AStarryExpanseHUD::DrawHUD() {
     Canvas->DrawItem(TileItem);
   }
 
-  int numDivisions = 50;
+  int numDivisions = 100;
   float squareSize = std::min(width / numDivisions, height / numDivisions);
 
   auto controller = Cast<AStrangerController>(this->GetOwningPlayerController());
@@ -57,8 +57,8 @@ void AStarryExpanseHUD::DrawHUD() {
       result = controller->CastInteractionRay(
         gotHit,
         hadError,
-        i / float(numDivisions) * 2 - 1,
-        - (j / float(numDivisions) * 2 - 1)
+        (i + 0.5) / float(numDivisions) * 2 - 1,
+        - ((j + 0.5) / float(numDivisions) * 2 - 1)
       );
 
       if (gotHit) {
