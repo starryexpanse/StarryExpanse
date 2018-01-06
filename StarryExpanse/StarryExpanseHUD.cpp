@@ -47,13 +47,13 @@ void AStarryExpanseHUD::DrawHUD() {
 
   for (int i = 0; i < numDivisions; i++) {
     for (int j = 0; j < numDivisions; j++) {
-         this->DrawRect(
-            FLinearColor(1.0f, 1.0f, 0.0f, 0.3f),
-            width * i / numDivisions,
-            height * j / numDivisions,
-            squareSize,
-            squareSize
-        );
+      this->DrawRect(
+        FLinearColor(1.0f, 1.0f, 0.0f, 0.3f),
+        width * i / numDivisions,
+        height * j / numDivisions,
+        squareSize,
+        squareSize
+      );
     }
   }
 }

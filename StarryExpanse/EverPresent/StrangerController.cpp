@@ -4,6 +4,7 @@
 
 #include "StrangerController.h"
 #include "Actors/RivenInteractable.h"
+#include "Camera/CameraActor.h"
 #include "RivenGameInstance.h"
 
 AStrangerController::AStrangerController() {}
@@ -42,7 +43,7 @@ void AStrangerController::Interact() {
   }
 }
 
-FHitResult AStrangerController::CastInteractionRay(bool &gotHit) {
+FHitResult AStrangerController::CastInteractionRay(bool &gotHit, float xFraction, float yFraction) {
     auto world = GetWorld();
     
     FVector ViewLocation;
@@ -52,21 +53,26 @@ FHitResult AStrangerController::CastInteractionRay(bool &gotHit) {
       ViewLocation,
       ViewRotation
     );
+
+    ACameraActor* CurrentCameraActor = Cast<ACameraActor>(GetViewTarget());
     
     struct FHitResult HitResult;
-    FCollisionQueryParams Params;
-    FCollisionResponseParams ResponseParams;
-    
-    float range = 500;
-    
-    gotHit = world->LineTraceSingleByChannel(
-        HitResult,
-        ViewLocation,
-        ViewLocation + this->GetActorForwardVector() * range,
-        ECollisionChannel::ECC_Visibility,
-        Params,
-        ResponseParams
-    );
+
+    if (CurrentCameraActor != nullptr) {
+      FCollisionQueryParams Params;
+      FCollisionResponseParams ResponseParams;
+      
+      float range = 500;
+      
+      gotHit = world->LineTraceSingleByChannel(
+          HitResult,
+          ViewLocation,
+          ViewLocation + this->GetActorForwardVector() * range,
+          ECollisionChannel::ECC_Visibility,
+          Params,
+          ResponseParams
+      );
+    }
     
     return HitResult;
 }
