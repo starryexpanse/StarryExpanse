@@ -7,7 +7,6 @@
 #include "Enums/EMarionettist.h"
 #include "Enums/ESubPosRot.h"
 #include "GameFramework/SaveGame.h"
-#include "RivenGameState.h"
 #include "UObjectGlobals.h"
 #include "LoadGroups/ELoadGroups.h"
 #include "SaveGame/ESaveGameField.h"
@@ -15,6 +14,8 @@
 #include <tuple>
 #include <vector>
 #include "RivenSaveGame.generated.h"
+
+class ARivenGameState;
 
 /**
  *
