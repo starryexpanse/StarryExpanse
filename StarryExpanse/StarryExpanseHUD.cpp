@@ -1,10 +1,12 @@
 // Copyright 1998-2017 Epic Games, Inc. All Rights Reserved.
 
 #include "StarryExpanseHUD.h"
+#include "EverPresent/StrangerController.h"
 #include "CanvasItem.h"
 #include "Engine/Canvas.h"
 #include "Engine/Texture2D.h"
 #include "Runtime/HeadMountedDisplay/Public/HeadMountedDisplayFunctionLibrary.h"
+#include "Actors/RivenInteractable.h"
 #include "TextureResource.h"
 #include "UObject/ConstructorHelpers.h"
 #include <algorithm>
@@ -45,15 +47,32 @@ void AStarryExpanseHUD::DrawHUD() {
   int numDivisions = 50;
   float squareSize = std::min(width / numDivisions, height / numDivisions);
 
+  auto controller = Cast<AStrangerController>(this->GetOwningPlayerController());
+
+  bool gotHit, hadError;
+  FHitResult result;
+
   for (int i = 0; i < numDivisions; i++) {
     for (int j = 0; j < numDivisions; j++) {
-      this->DrawRect(
-        FLinearColor(1.0f, 1.0f, 0.0f, 0.3f),
-        width * i / numDivisions,
-        height * j / numDivisions,
-        squareSize,
-        squareSize
+      result = controller->CastInteractionRay(
+        gotHit,
+        hadError,
+        i / float(numDivisions) * 2 - 1,
+        - (j / float(numDivisions) * 2 - 1)
       );
+
+      if (gotHit) {
+        auto actor = result.GetActor();
+        if (actor->GetClass()->ImplementsInterface(URivenInteractable::StaticClass())) {
+          this->DrawRect(
+            FLinearColor(1.0f, 1.0f, 0.0f, 0.3f),
+            width * i / numDivisions,
+            height * j / numDivisions,
+            squareSize,
+            squareSize
+          );
+        }
+      }
     }
   }
 }
