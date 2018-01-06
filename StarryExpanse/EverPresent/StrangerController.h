@@ -22,8 +22,7 @@ public:
   void Interact();
   
   UFUNCTION()
-  FHitResult CastInteractionRay(bool &gotHit, bool &hadError, FVector worldLocation,
-  FVector worldDirection);
+  FHitResult CastInteractionRay(bool &gotHit, FVector worldLocation, FVector worldDirection);
 
 protected:
   virtual void BeginPlay() override;

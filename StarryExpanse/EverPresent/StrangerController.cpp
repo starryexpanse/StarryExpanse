@@ -32,7 +32,6 @@ void AStrangerController::BeginPlay() {
 
 void AStrangerController::Interact() {
   bool gotHit;
-  bool hadError;
 
   FVector ViewLocation;
   FRotator ViewRotation;
@@ -57,7 +56,7 @@ void AStrangerController::Interact() {
   if (!Camera)
     return;
 
-  auto hitResult = this->CastInteractionRay(gotHit, hadError, ViewLocation, Camera->GetForwardVector());
+  auto hitResult = this->CastInteractionRay(gotHit, ViewLocation, Camera->GetForwardVector());
 
   if (gotHit) {
     auto hitActor = hitResult.GetActor();
@@ -72,11 +71,9 @@ void AStrangerController::Interact() {
 
 FHitResult AStrangerController::CastInteractionRay(
   bool &gotHit,
-  bool &hadError,
   FVector worldLocation,
-  FVector worldDirection) {  // screenspace: range -1..1 (with Y pointing up)
+  FVector worldDirection) {
 
-  hadError = true;
   gotHit = false;
     
   struct FHitResult HitResult;
@@ -109,7 +106,6 @@ FHitResult AStrangerController::CastInteractionRay(
     Params,
     ResponseParams
   );
-  hadError = false;
   
   return HitResult;
 }

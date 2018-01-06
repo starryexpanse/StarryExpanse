@@ -51,22 +51,18 @@ void AStarryExpanseHUD::DrawHUD() {
 
   auto controller = Cast<AStrangerController>(this->GetOwningPlayerController());
 
-  bool gotHit, hadError;
+  bool gotHit;
 
   const FLinearColor kSquareColor(1.0f, 1.0f, 0.0f, 0.3f);
 
   for (float x = 0.0f; x < width; x += kSquareWidth) {
     for (float y = 0.0f; y < height; y += kSquareHeight) {
-      const float xCenterOffset = 2.0f * (x / width - width / 2.0f);
-      const float yCenterOffset = 2.0f * (y / height - height / 2.0f);
-
       FVector worldLocation;
       FVector worldDirection;
       controller->DeprojectScreenPositionToWorld(x + kSquareWidth / 2.0f,
         y + kSquareHeight / 2.0f, worldLocation, worldDirection);
       FHitResult result = controller->CastInteractionRay(
         gotHit,
-        hadError,
         worldLocation,
         worldDirection
       );
