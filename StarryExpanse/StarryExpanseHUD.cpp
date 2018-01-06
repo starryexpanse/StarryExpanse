@@ -64,7 +64,7 @@ void AStarryExpanseHUD::DrawHUD() {
 
       if (gotHit) {
         auto actor = result.GetActor();
-        if (actor->GetClass()->ImplementsInterface(URivenInteractable::StaticClass())) {
+        if (actor != nullptr && actor->GetClass()->ImplementsInterface(URivenInteractable::StaticClass())) {
           this->DrawRect(
             FLinearColor(1.0f, 1.0f, 0.0f, 0.3f),
             width * i / numDivisions,
