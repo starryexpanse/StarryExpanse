@@ -44,33 +44,42 @@ void AStarryExpanseHUD::DrawHUD() {
     Canvas->DrawItem(TileItem);
   }
 
-  int numDivisions = 100;
-  float nover2 = numDivisions / float(2);
-  float squareSize = std::min(width / numDivisions, height / numDivisions);
+  const float kNumXDivisions = 100.0f;
+  const float kNumYDivisions = 100.0f;
+  const float kSquareWidth = width / kNumXDivisions;
+  const float kSquareHeight = height / kNumYDivisions;
 
   auto controller = Cast<AStrangerController>(this->GetOwningPlayerController());
 
   bool gotHit, hadError;
-  FHitResult result;
 
-  for (int i = 0; i < numDivisions; i++) {
-    for (int j = 0; j < numDivisions; j++) {
-      result = controller->CastInteractionRay(
+  const FLinearColor kSquareColor(1.0f, 1.0f, 0.0f, 0.3f);
+
+  for (float x = 0.0f; x < width; x += kSquareWidth) {
+    for (float y = 0.0f; y < height; y += kSquareHeight) {
+      const float xCenterOffset = 2.0f * (x / width - width / 2.0f);
+      const float yCenterOffset = 2.0f * (y / height - height / 2.0f);
+
+      FVector worldLocation;
+      FVector worldDirection;
+      controller->DeprojectScreenPositionToWorld(x + kSquareWidth / 2.0f,
+        y + kSquareHeight / 2.0f, worldLocation, worldDirection);
+      FHitResult result = controller->CastInteractionRay(
         gotHit,
         hadError,
-        (i + .5 - nover2) / nover2,
-        - (j + .5 - nover2) / nover2
+        worldLocation,
+        worldDirection
       );
 
       if (gotHit) {
         auto actor = result.GetActor();
         if (actor->GetClass()->ImplementsInterface(URivenInteractable::StaticClass())) {
           this->DrawRect(
-            FLinearColor(1.0f, 1.0f, 0.0f, 0.3f),
-            width * i / numDivisions,
-            height * j / numDivisions,
-            squareSize,
-            squareSize
+            kSquareColor,
+            x,
+            y,
+            kSquareWidth,
+            kSquareHeight
           );
         }
       }
