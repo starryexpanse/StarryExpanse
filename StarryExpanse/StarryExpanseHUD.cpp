@@ -40,6 +40,7 @@ void AStarryExpanseHUD::DrawHUD() {
       CrosshairTex->Resource,
       FLinearColor::White
     );
+    TileItem.PivotPoint = FVector2D(0.5, 0.5);
     TileItem.BlendMode = SE_BLEND_Translucent;
     Canvas->DrawItem(TileItem);
   }
