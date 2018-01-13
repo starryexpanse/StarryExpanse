@@ -43,6 +43,48 @@ ULoadGroupInfo::ULoadGroupInfo(const FObjectInitializer &ObjectInitializer)
      cog.outl('')
   ]]] */
   LoadGroups.insert(Pair(
+      ELoadGroups::MysteriumShowOff,
+      {
+          TEXT("G_BubbleGarden"),
+          TEXT("G_Terrain"),
+          TEXT("G_SpikeGarden")
+      }
+  ));
+
+  LoadGroups.insert(Pair(
+      ELoadGroups::AGeneral,
+      {
+          TEXT("A_Journals"),
+          TEXT("G_BubbleGarden"),
+          TEXT("G_Terrain"),
+          TEXT("G_SpikeGarden")
+      }
+  ));
+
+  LoadGroups.insert(Pair(
+      ELoadGroups::SRivenBase,
+      {
+          TEXT("S_Lighting_Riven"),
+          TEXT("S_PostProcessing_Riven"),
+          TEXT("S_Ocean_Riven")
+      }
+  ));
+
+  LoadGroups.insert(Pair(
+      ELoadGroups::BBase,
+      {
+          TEXT("A_Journals"),
+          TEXT("G_BubbleGarden"),
+          TEXT("G_Terrain"),
+          TEXT("G_SpikeGarden"),
+          TEXT("S_Lighting_Riven"),
+          TEXT("S_PostProcessing_Riven"),
+          TEXT("S_Ocean_Riven"),
+          TEXT("B_Terrain_Structures")
+      }
+  ));
+
+  LoadGroups.insert(Pair(
       ELoadGroups::BEastSide,
       {
           TEXT("A_Journals"),
@@ -63,6 +105,80 @@ ULoadGroupInfo::ULoadGroupInfo(const FObjectInitializer &ObjectInitializer)
   ));
 
   LoadGroups.insert(Pair(
+      ELoadGroups::GBase,
+      {
+          TEXT("A_Journals"),
+          TEXT("G_BubbleGarden"),
+          TEXT("G_Terrain"),
+          TEXT("G_SpikeGarden"),
+          TEXT("S_Lighting_Riven"),
+          TEXT("S_PostProcessing_Riven"),
+          TEXT("S_Ocean_Riven")
+      }
+  ));
+
+  LoadGroups.insert(Pair(
+      ELoadGroups::GUpsideBase,
+      {
+          TEXT("G_Terrain"),
+          TEXT("G_WahrkTankUpper"),
+          TEXT("G_BubbleGarden"),
+          TEXT("G_Connector")
+      }
+  ));
+
+  LoadGroups.insert(Pair(
+      ELoadGroups::GUpsideExterior,
+      {
+          TEXT("A_Journals"),
+          TEXT("G_BubbleGarden"),
+          TEXT("G_Terrain"),
+          TEXT("G_SpikeGarden"),
+          TEXT("S_Lighting_Riven"),
+          TEXT("S_PostProcessing_Riven"),
+          TEXT("S_Ocean_Riven"),
+          TEXT("G_Terrain"),
+          TEXT("G_WahrkTankUpper"),
+          TEXT("G_BubbleGarden"),
+          TEXT("G_Connector"),
+          TEXT("G_SpikeGarden")
+      }
+  ));
+
+  LoadGroups.insert(Pair(
+      ELoadGroups::GUpsideInterior,
+      {
+          TEXT("A_Journals"),
+          TEXT("G_BubbleGarden"),
+          TEXT("G_Terrain"),
+          TEXT("G_SpikeGarden"),
+          TEXT("S_Lighting_Riven"),
+          TEXT("S_PostProcessing_Riven"),
+          TEXT("S_Ocean_Riven"),
+          TEXT("G_Terrain"),
+          TEXT("G_WahrkTankUpper"),
+          TEXT("G_BubbleGarden"),
+          TEXT("G_Connector"),
+          TEXT("G_MaglevDock_B")
+      }
+  ));
+
+  LoadGroups.insert(Pair(
+      ELoadGroups::GDownside,
+      {
+          TEXT("A_Journals"),
+          TEXT("G_BubbleGarden"),
+          TEXT("G_Terrain"),
+          TEXT("G_SpikeGarden"),
+          TEXT("S_Lighting_Riven"),
+          TEXT("S_PostProcessing_Riven"),
+          TEXT("S_Ocean_Riven"),
+          TEXT("G_MaglevDock_J"),
+          TEXT("G_WahrkTankLower")
+      }
+  ));
+
+  LoadGroups.insert(Pair(
       ELoadGroups::TBase,
       {
           TEXT("A_Journals"),
@@ -77,12 +193,58 @@ ULoadGroupInfo::ULoadGroupInfo(const FObjectInitializer &ObjectInitializer)
   ));
 
   LoadGroups.insert(Pair(
-      ELoadGroups::GUpsideBase,
+      ELoadGroups::TWestSide,
       {
-          TEXT("G_Terrain"),
-          TEXT("G_WahrkTankUpper"),
+          TEXT("A_Journals"),
           TEXT("G_BubbleGarden"),
-          TEXT("G_Connector")
+          TEXT("G_Terrain"),
+          TEXT("G_SpikeGarden"),
+          TEXT("S_Lighting_Riven"),
+          TEXT("S_PostProcessing_Riven"),
+          TEXT("S_Ocean_Riven"),
+          TEXT("T_Terrain"),
+          TEXT("B_CartTrack_Structures"),
+          TEXT("B_Terrain_Structures"),
+          TEXT("S_GreatBridge"),
+          TEXT("T_SuperDome"),
+          TEXT("T_GateRoom")
+      }
+  ));
+
+  LoadGroups.insert(Pair(
+      ELoadGroups::TNorthSide,
+      {
+          TEXT("A_Journals"),
+          TEXT("G_BubbleGarden"),
+          TEXT("G_Terrain"),
+          TEXT("G_SpikeGarden"),
+          TEXT("S_Lighting_Riven"),
+          TEXT("S_PostProcessing_Riven"),
+          TEXT("S_Ocean_Riven"),
+          TEXT("T_Terrain"),
+          TEXT("B_CartTrack_Structures"),
+          TEXT("B_Terrain_Structures"),
+          TEXT("S_GreatBridge"),
+          TEXT("T_GateRoom"),
+          TEXT("T_SuperDome")
+      }
+  ));
+
+  LoadGroups.insert(Pair(
+      ELoadGroups::TFissureDistrict,
+      {
+          TEXT("A_Journals"),
+          TEXT("G_BubbleGarden"),
+          TEXT("G_Terrain"),
+          TEXT("G_SpikeGarden"),
+          TEXT("S_Lighting_Riven"),
+          TEXT("S_PostProcessing_Riven"),
+          TEXT("S_Ocean_Riven"),
+          TEXT("T_Terrain"),
+          TEXT("T_GateRoom"),
+          TEXT("T_Plateaus"),
+          TEXT("T_NewTemple"),
+          TEXT("T_SuperDome")
       }
   ));
 
@@ -107,145 +269,6 @@ ULoadGroupInfo::ULoadGroupInfo(const FObjectInitializer &ObjectInitializer)
   ));
 
   LoadGroups.insert(Pair(
-      ELoadGroups::GUpsideInterior,
-      {
-          TEXT("A_Journals"),
-          TEXT("G_BubbleGarden"),
-          TEXT("G_Terrain"),
-          TEXT("G_SpikeGarden"),
-          TEXT("S_Lighting_Riven"),
-          TEXT("S_PostProcessing_Riven"),
-          TEXT("S_Ocean_Riven"),
-          TEXT("G_Terrain"),
-          TEXT("G_WahrkTankUpper"),
-          TEXT("G_BubbleGarden"),
-          TEXT("G_Connector"),
-          TEXT("G_MaglevDock_B")
-      }
-  ));
-
-  LoadGroups.insert(Pair(
-      ELoadGroups::TFissureDistrict,
-      {
-          TEXT("A_Journals"),
-          TEXT("G_BubbleGarden"),
-          TEXT("G_Terrain"),
-          TEXT("G_SpikeGarden"),
-          TEXT("S_Lighting_Riven"),
-          TEXT("S_PostProcessing_Riven"),
-          TEXT("S_Ocean_Riven"),
-          TEXT("T_Terrain"),
-          TEXT("T_GateRoom"),
-          TEXT("T_Plateaus"),
-          TEXT("T_NewTemple"),
-          TEXT("T_SuperDome")
-      }
-  ));
-
-  LoadGroups.insert(Pair(
-      ELoadGroups::GUpsideExterior,
-      {
-          TEXT("A_Journals"),
-          TEXT("G_BubbleGarden"),
-          TEXT("G_Terrain"),
-          TEXT("G_SpikeGarden"),
-          TEXT("S_Lighting_Riven"),
-          TEXT("S_PostProcessing_Riven"),
-          TEXT("S_Ocean_Riven"),
-          TEXT("G_Terrain"),
-          TEXT("G_WahrkTankUpper"),
-          TEXT("G_BubbleGarden"),
-          TEXT("G_Connector"),
-          TEXT("G_SpikeGarden")
-      }
-  ));
-
-  LoadGroups.insert(Pair(
-      ELoadGroups::AGeneral,
-      {
-          TEXT("A_Journals"),
-          TEXT("G_BubbleGarden"),
-          TEXT("G_Terrain"),
-          TEXT("G_SpikeGarden")
-      }
-  ));
-
-  LoadGroups.insert(Pair(
-      ELoadGroups::TNorthSide,
-      {
-          TEXT("A_Journals"),
-          TEXT("G_BubbleGarden"),
-          TEXT("G_Terrain"),
-          TEXT("G_SpikeGarden"),
-          TEXT("S_Lighting_Riven"),
-          TEXT("S_PostProcessing_Riven"),
-          TEXT("S_Ocean_Riven"),
-          TEXT("T_Terrain"),
-          TEXT("B_CartTrack_Structures"),
-          TEXT("B_Terrain_Structures"),
-          TEXT("S_GreatBridge"),
-          TEXT("T_GateRoom"),
-          TEXT("T_SuperDome")
-      }
-  ));
-
-  LoadGroups.insert(Pair(
-      ELoadGroups::TWestSide,
-      {
-          TEXT("A_Journals"),
-          TEXT("G_BubbleGarden"),
-          TEXT("G_Terrain"),
-          TEXT("G_SpikeGarden"),
-          TEXT("S_Lighting_Riven"),
-          TEXT("S_PostProcessing_Riven"),
-          TEXT("S_Ocean_Riven"),
-          TEXT("T_Terrain"),
-          TEXT("B_CartTrack_Structures"),
-          TEXT("B_Terrain_Structures"),
-          TEXT("S_GreatBridge"),
-          TEXT("T_SuperDome"),
-          TEXT("T_GateRoom")
-      }
-  ));
-
-  LoadGroups.insert(Pair(
-      ELoadGroups::GBase,
-      {
-          TEXT("A_Journals"),
-          TEXT("G_BubbleGarden"),
-          TEXT("G_Terrain"),
-          TEXT("G_SpikeGarden"),
-          TEXT("S_Lighting_Riven"),
-          TEXT("S_PostProcessing_Riven"),
-          TEXT("S_Ocean_Riven")
-      }
-  ));
-
-  LoadGroups.insert(Pair(
-      ELoadGroups::GDownside,
-      {
-          TEXT("A_Journals"),
-          TEXT("G_BubbleGarden"),
-          TEXT("G_Terrain"),
-          TEXT("G_SpikeGarden"),
-          TEXT("S_Lighting_Riven"),
-          TEXT("S_PostProcessing_Riven"),
-          TEXT("S_Ocean_Riven"),
-          TEXT("G_MaglevDock_J"),
-          TEXT("G_WahrkTankLower")
-      }
-  ));
-
-  LoadGroups.insert(Pair(
-      ELoadGroups::SRivenBase,
-      {
-          TEXT("S_Lighting_Riven"),
-          TEXT("S_PostProcessing_Riven"),
-          TEXT("S_Ocean_Riven")
-      }
-  ));
-
-  LoadGroups.insert(Pair(
       ELoadGroups::TMaglevDistrict,
       {
           TEXT("A_Journals"),
@@ -259,29 +282,6 @@ ULoadGroupInfo::ULoadGroupInfo(const FObjectInitializer &ObjectInitializer)
           TEXT("B_CartTrack_Structures"),
           TEXT("B_Terrain_Structures"),
           TEXT("S_Maglev_TJ")
-      }
-  ));
-
-  LoadGroups.insert(Pair(
-      ELoadGroups::BBase,
-      {
-          TEXT("A_Journals"),
-          TEXT("G_BubbleGarden"),
-          TEXT("G_Terrain"),
-          TEXT("G_SpikeGarden"),
-          TEXT("S_Lighting_Riven"),
-          TEXT("S_PostProcessing_Riven"),
-          TEXT("S_Ocean_Riven"),
-          TEXT("B_Terrain_Structures")
-      }
-  ));
-
-  LoadGroups.insert(Pair(
-      ELoadGroups::MysteriumShowOff,
-      {
-          TEXT("G_BubbleGarden"),
-          TEXT("G_Terrain"),
-          TEXT("G_SpikeGarden")
       }
   ));
 
