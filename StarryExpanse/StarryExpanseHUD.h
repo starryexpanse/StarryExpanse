@@ -13,6 +13,8 @@ class AStarryExpanseHUD : public AHUD {
 public:
   AStarryExpanseHUD();
 
+  static FVector2D GetCrosshairDrawPosition(float crosshairHeight, FVector2D screenDims, FVector2D cursorPosition);
+
   /** Primary draw call for the HUD */
   virtual void DrawHUD() override;
 

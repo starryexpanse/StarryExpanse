@@ -11,15 +11,49 @@
 
 AStrangerController::AStrangerController() {}
 
+void AStrangerController::PostInitializeComponents() {
+  Super::PostInitializeComponents();
+
+  InputMouseHorizScale = 1;
+  InputMouseVertScale = 1;
+}
+
 void AStrangerController::SetupInputComponent() {
   Super::SetupInputComponent();
 
-  this->InputComponent->BindAction(
+  InputComponent->BindAction(
     "Interact",
     EInputEvent::IE_Pressed,
     this,
     &AStrangerController::Interact
   );
+
+  InputComponent->BindAction(
+    "Toggle Cursor Mode",
+    EInputEvent::IE_Pressed,
+    this,
+    &AStrangerController::RequestSwitchCursorMode
+  );
+
+  InputComponent->BindAxis(
+    "Spectator_Turn",
+    this,
+    &AStrangerController::AddHorizontalMouse
+  );
+
+  InputComponent->BindAxis(
+    "Spectator_LookUp",
+    this,
+    &AStrangerController::AddVerticalMouse
+  );
+}
+
+void AStrangerController::AddHorizontalMouse(float amount) {
+  HorizontalMousePosition = FMath::Clamp(HorizontalMousePosition + amount * InputMouseHorizScale, 0.0f, 1.0f);
+}
+
+void AStrangerController::AddVerticalMouse(float amount) {
+  VerticalMousePosition = FMath::Clamp(VerticalMousePosition + amount * InputMouseVertScale, 0.0f, 1.0f);
 }
 
 void AStrangerController::BeginPlay() {
@@ -28,6 +62,17 @@ void AStrangerController::BeginPlay() {
       this,
       &AStrangerController::PossiblyFreezeOrUnfreeze
   );
+}
+
+void AStrangerController::RequestSwitchCursorMode() {
+  if (this->IsCursorLockedToCenter) {
+    this->IsCursorLockedToCenter = false;
+    this->SetIgnoreLookInput(false);
+  }
+  else {
+    this->IsCursorLockedToCenter = true;
+    this->SetIgnoreLookInput(true);
+  }
 }
 
 void AStrangerController::Interact() {
@@ -120,4 +165,19 @@ void AStrangerController::Destroyed() {
     auto gameInstance = Cast<URivenGameInstance>(GetWorld()->GetGameInstance());
     gameInstance->GameInstanceVarsChanged.RemoveDynamic(
       this, &AStrangerController::PossiblyFreezeOrUnfreeze);
+}
+
+
+/* 
+  Overriding UE4 defaults. Long story short, their implementation does something we should
+  do a little more explicitly, so resetting this to a very simple behavior and we can re-build
+  what they do, later on.
+*/
+
+void AStrangerController::SetIgnoreLookInput(bool bNewLookInput) {
+  this->IgnoreLookInput = (int)bNewLookInput;
+}
+
+void AStrangerController::SetIgnoreMoveInput(bool bNewMoveInput) {
+  this->IgnoreMoveInput = (int)bNewMoveInput;
 }

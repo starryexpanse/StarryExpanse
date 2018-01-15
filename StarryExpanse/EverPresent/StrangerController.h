@@ -15,14 +15,48 @@ class STARRYEXPANSE_API AStrangerController : public APlayerController {
 public:
   AStrangerController();
 
+  UPROPERTY()
+    bool IsCursorLockedToCenter = true;
+  
+  UPROPERTY()
+    float InputMouseVertScale;
+  UPROPERTY()
+    float InputMouseHorizScale;
+
   UFUNCTION()
   void PossiblyFreezeOrUnfreeze();
     
   UFUNCTION()
   void Interact();
+
+  UFUNCTION()
+    void RequestSwitchCursorMode();
   
   UFUNCTION()
   FHitResult CastInteractionRay(bool &gotHit, FVector worldLocation, FVector worldDirection);
+
+  UFUNCTION()
+  void AddHorizontalMouse(float amount);
+  
+  UFUNCTION()
+    void AddVerticalMouse(float amount);
+
+  UPROPERTY()
+    float HorizontalMousePosition = 0;
+
+  UPROPERTY()
+    float VerticalMousePosition = 0;
+
+  // Override defaults
+
+  UFUNCTION()
+  virtual void PostInitializeComponents() override;
+
+  UFUNCTION()
+  void SetIgnoreMoveInput(bool bNewMoveInput) override;
+  
+  UFUNCTION()
+  void SetIgnoreLookInput(bool bNewLookInput) override;
 
 protected:
   virtual void BeginPlay() override;

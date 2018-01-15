@@ -19,18 +19,34 @@ AStarryExpanseHUD::AStarryExpanseHUD() {
   CrosshairTex = CrosshairTexObj.Object;
 }
 
+FVector2D AStarryExpanseHUD::GetCrosshairDrawPosition(float crosshairHeight, FVector2D screenDims, FVector2D cursorPosition) {
+  return screenDims * cursorPosition + FVector2D(0, crosshairHeight / 2.0);
+}
+
 void AStarryExpanseHUD::DrawHUD() {
   float width = Canvas->ClipX;
   float height = Canvas->ClipY;
+  FVector2D screenDims(width, height);
+  auto controller = Cast<AStrangerController>(this->GetOwningPlayerController());
 
   // Draw very simple crosshair
 
-  // find center of the Canvas
-  const FVector2D Center(width * 0.5f, height * 0.5f);
+  FVector2D CursorPosition(FVector2D::ZeroVector);
+
+  bool isLocked;
+  if (controller != nullptr) {
+    isLocked = controller->IsCursorLockedToCenter;
+    if (!isLocked) {
+      CursorPosition = FVector2D(controller->HorizontalMousePosition * 2 - 1, controller->VerticalMousePosition * 2 - 1);
+    }
+  }
+  else {
+    isLocked = true; // initial state of controller as of this writing
+  }
 
   // offset by half the texture's dimensions so that the center of the texture
   // aligns with the center of the Canvas
-  const FVector2D CrosshairDrawPosition((Center.X), (Center.Y + 20.0f));
+  const FVector2D CrosshairDrawPosition = AStarryExpanseHUD::GetCrosshairDrawPosition(40.0f, screenDims, isLocked ? FVector2D(0.5f, 0.5f) : CursorPosition);
 
   // draw the crosshair
 
@@ -49,8 +65,6 @@ void AStarryExpanseHUD::DrawHUD() {
   const float kNumYDivisions = 100.0f;
   const float kSquareWidth = width / kNumXDivisions;
   const float kSquareHeight = height / kNumYDivisions;
-
-  auto controller = Cast<AStrangerController>(this->GetOwningPlayerController());
 
   bool gotHit;
 
