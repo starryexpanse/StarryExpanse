@@ -15,8 +15,8 @@ class STARRYEXPANSE_API AStrangerController : public APlayerController {
 public:
   AStrangerController();
 
-  UPROPERTY()
-    bool IsCursorLockedToCenter = true;
+  UPROPERTY(BlueprintReadOnly)
+    bool IsCursorLockedToCenter;
   
   UPROPERTY()
     float InputMouseVertScale;
@@ -31,21 +31,24 @@ public:
 
   UFUNCTION()
     void RequestSwitchCursorMode();
+
+  UFUNCTION()
+    void EnterCursorMode(bool fixed);
   
   UFUNCTION()
   FHitResult CastInteractionRay(bool &gotHit, FVector worldLocation, FVector worldDirection);
 
-  UFUNCTION()
+  UFUNCTION(BlueprintCallable)
   void AddHorizontalMouse(float amount);
   
-  UFUNCTION()
+  UFUNCTION(BlueprintCallable)
     void AddVerticalMouse(float amount);
 
   UPROPERTY()
-    float HorizontalMousePosition = 0;
+    float HorizontalMousePosition = 0.5;
 
   UPROPERTY()
-    float VerticalMousePosition = 0;
+    float VerticalMousePosition = 0.5;
 
   // Override defaults
 
@@ -53,10 +56,10 @@ public:
   virtual void PostInitializeComponents() override;
 
   UFUNCTION()
-  void SetIgnoreMoveInput(bool bNewMoveInput) override;
+  virtual void SetIgnoreMoveInput(bool bNewMoveInput) override;
   
   UFUNCTION()
-  void SetIgnoreLookInput(bool bNewLookInput) override;
+  virtual void SetIgnoreLookInput(bool bNewLookInput) override;
 
 protected:
   virtual void BeginPlay() override;

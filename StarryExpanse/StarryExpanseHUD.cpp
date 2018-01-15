@@ -20,7 +20,7 @@ AStarryExpanseHUD::AStarryExpanseHUD() {
 }
 
 FVector2D AStarryExpanseHUD::GetCrosshairDrawPosition(float crosshairHeight, FVector2D screenDims, FVector2D cursorPosition) {
-  return screenDims * cursorPosition + FVector2D(0, crosshairHeight / 2.0);
+  return screenDims * cursorPosition - FVector2D(0, crosshairHeight / 2.0);
 }
 
 void AStarryExpanseHUD::DrawHUD() {
@@ -31,13 +31,13 @@ void AStarryExpanseHUD::DrawHUD() {
 
   // Draw very simple crosshair
 
-  FVector2D CursorPosition(FVector2D::ZeroVector);
+  FVector2D CursorPosition(FVector2D(0.5, 0.5f));
 
   bool isLocked;
   if (controller != nullptr) {
     isLocked = controller->IsCursorLockedToCenter;
     if (!isLocked) {
-      CursorPosition = FVector2D(controller->HorizontalMousePosition * 2 - 1, controller->VerticalMousePosition * 2 - 1);
+      CursorPosition = FVector2D(controller->HorizontalMousePosition, controller->VerticalMousePosition);
     }
   }
   else {
@@ -46,7 +46,11 @@ void AStarryExpanseHUD::DrawHUD() {
 
   // offset by half the texture's dimensions so that the center of the texture
   // aligns with the center of the Canvas
-  const FVector2D CrosshairDrawPosition = AStarryExpanseHUD::GetCrosshairDrawPosition(40.0f, screenDims, isLocked ? FVector2D(0.5f, 0.5f) : CursorPosition);
+  const FVector2D CrosshairDrawPosition = AStarryExpanseHUD::GetCrosshairDrawPosition(
+    CrosshairTex->GetSurfaceHeight(),
+    screenDims,
+    isLocked ? FVector2D(0.5, 0.5f) : CursorPosition
+  );
 
   // draw the crosshair
 

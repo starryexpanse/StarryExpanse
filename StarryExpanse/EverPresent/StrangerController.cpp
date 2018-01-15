@@ -6,16 +6,18 @@
 #include "Actors/RivenInteractable.h"
 #include "Camera/CameraActor.h"
 #include "Runtime/Engine/Classes/Camera/CameraComponent.h"
+#include "Kismet/GameplayStatics.h"
 #include "Runtime/Engine/Public/CollisionQueryParams.h"
 #include "RivenGameInstance.h"
+#include "StarryExpanse.h"
 
 AStrangerController::AStrangerController() {}
 
 void AStrangerController::PostInitializeComponents() {
   Super::PostInitializeComponents();
 
-  InputMouseHorizScale = 1;
-  InputMouseVertScale = 1;
+  InputMouseHorizScale = 0.01;
+  InputMouseVertScale = 0.01;
 }
 
 void AStrangerController::SetupInputComponent() {
@@ -62,17 +64,24 @@ void AStrangerController::BeginPlay() {
       this,
       &AStrangerController::PossiblyFreezeOrUnfreeze
   );
+  this->EnterCursorMode(true);
+}
+
+void AStrangerController::EnterCursorMode(bool fixed) {
+  if (fixed) {
+    this->IsCursorLockedToCenter = true;
+    this->IgnoreLookInput = 0;
+    HorizontalMousePosition = 0.5;
+    VerticalMousePosition = 0.5;
+  }
+  else {
+    this->IsCursorLockedToCenter = false;
+    this->IgnoreLookInput = 1;
+  }
 }
 
 void AStrangerController::RequestSwitchCursorMode() {
-  if (this->IsCursorLockedToCenter) {
-    this->IsCursorLockedToCenter = false;
-    this->SetIgnoreLookInput(false);
-  }
-  else {
-    this->IsCursorLockedToCenter = true;
-    this->SetIgnoreLookInput(true);
-  }
+  this->EnterCursorMode(!this->IsCursorLockedToCenter);
 }
 
 void AStrangerController::Interact() {
@@ -169,9 +178,7 @@ void AStrangerController::Destroyed() {
 
 
 /* 
-  Overriding UE4 defaults. Long story short, their implementation does something we should
-  do a little more explicitly, so resetting this to a very simple behavior and we can re-build
-  what they do, later on.
+  Overriding UE4 defaults.
 */
 
 void AStrangerController::SetIgnoreLookInput(bool bNewLookInput) {
@@ -181,3 +188,10 @@ void AStrangerController::SetIgnoreLookInput(bool bNewLookInput) {
 void AStrangerController::SetIgnoreMoveInput(bool bNewMoveInput) {
   this->IgnoreMoveInput = (int)bNewMoveInput;
 }
+
+/*
+  Above two:
+  Long story short, their implementation does something we should
+  do a little more explicitly, so resetting this to a very simple behavior and we can re-build
+  what they do, later on.
+*/
