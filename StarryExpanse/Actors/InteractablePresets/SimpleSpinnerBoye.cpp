@@ -1,7 +1,7 @@
 //
 // Copyright, 59 Volt Entertainment, all rights reserved.
 //
-#include "RivenInteractableActor.h"
+#include "SimpleSpinnerBoye.h"
 #include "Engine/Engine.h"
 #include "Kismet/GameplayStatics.h"
 #include "RivenGameState.h"
@@ -9,7 +9,7 @@
 #include "Runtime/Engine/Classes/Engine/GameViewportClient.h"
 #include "Structs/InteractableSettingsAxial.h"
 
-ARivenInteractableActor::ARivenInteractableActor(
+ASimpleSpinnerBoye::ASimpleSpinnerBoye(
     const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer) {
   PrimaryActorTick.bCanEverTick = true;
@@ -18,7 +18,7 @@ ARivenInteractableActor::ARivenInteractableActor(
   PrimaryActorTick.bAllowTickOnDedicatedServer = true;
 }
 
-void ARivenInteractableActor::SetRotation(float val) {
+void ASimpleSpinnerBoye::SetRotation(float val) {
   FRotator rotator(0, 0, 0);
   switch (m_axis) {
   case EAxis::X:
@@ -34,11 +34,11 @@ void ARivenInteractableActor::SetRotation(float val) {
   m_moveablePart->SetRelativeRotation(rotator);
 }
 
-void ARivenInteractableActor::AnimationProgressCallback(float val) {
+void ASimpleSpinnerBoye::AnimationProgressCallback(float val) {
   SetRotation(val);
 }
 
-void ARivenInteractableActor::AnimationDone() {
+void ASimpleSpinnerBoye::AnimationDone() {
   auto gs = Cast<ARivenGameState>(GetWorld()->GetGameState());
 
   if (!gs) {
@@ -56,14 +56,14 @@ void ARivenInteractableActor::AnimationDone() {
                                       at_end); // TODO: ^ is_false_at_end
 }
 
-void ARivenInteractableActor::BeginPlay() { Super::BeginPlay(); }
+void ASimpleSpinnerBoye::BeginPlay() { Super::BeginPlay(); }
 
-void ARivenInteractableActor::Tick(float DeltaTime) {
+void ASimpleSpinnerBoye::Tick(float DeltaTime) {
   Super::Tick(DeltaTime);
   m_timeline.TickTimeline(DeltaTime);
 }
 
-void ARivenInteractableActor::Initialize(FInteractableSettingsAxial settings) {
+void ASimpleSpinnerBoye::Initialize(FInteractableSettingsAxial settings) {
   m_save_game_field = settings.SaveGameField;
   m_moveablePart = settings.MoveablePart;
   m_axis = settings.Axis;
@@ -119,7 +119,7 @@ void ARivenInteractableActor::Initialize(FInteractableSettingsAxial settings) {
   }
 }
 
-void ARivenInteractableActor::LookingAt_Implementation() {
+void ASimpleSpinnerBoye::LookingAt_Implementation() {
   UGameInstance *game = GetGameInstance();
   if (!game)
     return;
@@ -130,7 +130,7 @@ void ARivenInteractableActor::LookingAt_Implementation() {
   }
 }
 
-void ARivenInteractableActor::Touched_Implementation() {
+void ASimpleSpinnerBoye::Touched_Implementation() {
   if (m_timeline.GetPlaybackPosition() > 0) {
     m_timeline.Reverse();
   } else {

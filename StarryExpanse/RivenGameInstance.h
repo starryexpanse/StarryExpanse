@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "Actors/EInteractable.h"
+#include "Enums/EInteractable.h"
 #include "CoreMinimal.h"
 #include "Engine/GameInstance.h"
 #include "LoadGroups/LoadgroupActor.h"

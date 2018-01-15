@@ -3,7 +3,7 @@
 //
 #pragma once
 
-#include "Actors/EInteractable.h"
+#include "Enums/EInteractable.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "SaveGame/ESaveGameField.h"

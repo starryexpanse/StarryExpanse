@@ -3,7 +3,7 @@
 //
 
 #include "StrangerController.h"
-#include "Actors/RivenInteractable.h"
+#include "Interfaces/RivenInteractable.h"
 #include "Camera/CameraActor.h"
 #include "Runtime/Engine/Classes/Camera/CameraComponent.h"
 #include "Kismet/GameplayStatics.h"

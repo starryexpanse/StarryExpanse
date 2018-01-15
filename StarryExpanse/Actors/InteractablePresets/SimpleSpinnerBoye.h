@@ -3,15 +3,15 @@
 //
 #pragma once
 
-#include "Actors/EInteractable.h"
+#include "Enums/EInteractable.h"
 #include "GameFramework/Actor.h"
-#include "RivenInteractable.h"
+#include "Interfaces/RivenInteractable.h"
 #include "Runtime/Engine/Classes/Components/StaticMeshComponent.h"
 #include "Structs/InteractabilityProbeResponse.h"
 #include "Runtime/Engine/Classes/Components/TimelineComponent.h"
 #include "SaveGame/ESaveGameField.h"
 #include "Structs/InteractableSettingsAxial.h"
-#include "RivenInteractableActor.generated.h"
+#include "SimpleSpinnerBoye.generated.h"
 
 //
 // An actor with a single moveable component (static mesh). This class handles
@@ -20,12 +20,12 @@
 // component to that rotation value when initialized.
 //
 UCLASS()
-class STARRYEXPANSE_API ARivenInteractableActor : public AActor,
+class STARRYEXPANSE_API ASimpleSpinnerBoye : public AActor,
                                                   public IRivenInteractable {
   GENERATED_BODY()
 
 public:
-  ARivenInteractableActor(const FObjectInitializer &ObjectInitializer);
+  ASimpleSpinnerBoye(const FObjectInitializer &ObjectInitializer);
 
   // Methods:
   UFUNCTION(BlueprintCallable)
