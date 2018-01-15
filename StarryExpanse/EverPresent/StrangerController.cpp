@@ -6,20 +6,56 @@
 #include "Actors/RivenInteractable.h"
 #include "Camera/CameraActor.h"
 #include "Runtime/Engine/Classes/Camera/CameraComponent.h"
+#include "Kismet/GameplayStatics.h"
 #include "Runtime/Engine/Public/CollisionQueryParams.h"
 #include "RivenGameInstance.h"
+#include "StarryExpanse.h"
 
 AStrangerController::AStrangerController() {}
+
+void AStrangerController::PostInitializeComponents() {
+  Super::PostInitializeComponents();
+
+  InputMouseHorizScale = 0.01;
+  InputMouseVertScale = 0.01;
+}
 
 void AStrangerController::SetupInputComponent() {
   Super::SetupInputComponent();
 
-  this->InputComponent->BindAction(
+  InputComponent->BindAction(
     "Interact",
     EInputEvent::IE_Pressed,
     this,
     &AStrangerController::Interact
   );
+
+  InputComponent->BindAction(
+    "Toggle Cursor Mode",
+    EInputEvent::IE_Pressed,
+    this,
+    &AStrangerController::RequestSwitchCursorMode
+  );
+
+  InputComponent->BindAxis(
+    "Spectator_Turn",
+    this,
+    &AStrangerController::AddHorizontalMouse
+  );
+
+  InputComponent->BindAxis(
+    "Spectator_LookUp",
+    this,
+    &AStrangerController::AddVerticalMouse
+  );
+}
+
+void AStrangerController::AddHorizontalMouse(float amount) {
+  HorizontalMousePosition = FMath::Clamp(HorizontalMousePosition + amount * InputMouseHorizScale, 0.0f, 1.0f);
+}
+
+void AStrangerController::AddVerticalMouse(float amount) {
+  VerticalMousePosition = FMath::Clamp(VerticalMousePosition + amount * InputMouseVertScale, 0.0f, 1.0f);
 }
 
 void AStrangerController::BeginPlay() {
@@ -28,6 +64,24 @@ void AStrangerController::BeginPlay() {
       this,
       &AStrangerController::PossiblyFreezeOrUnfreeze
   );
+  this->EnterCursorMode(true);
+}
+
+void AStrangerController::EnterCursorMode(bool fixed) {
+  if (fixed) {
+    this->IsCursorLockedToCenter = true;
+    this->IgnoreLookInput = 0;
+    HorizontalMousePosition = 0.5;
+    VerticalMousePosition = 0.5;
+  }
+  else {
+    this->IsCursorLockedToCenter = false;
+    this->IgnoreLookInput = 1;
+  }
+}
+
+void AStrangerController::RequestSwitchCursorMode() {
+  this->EnterCursorMode(!this->IsCursorLockedToCenter);
 }
 
 void AStrangerController::Interact() {
@@ -121,3 +175,23 @@ void AStrangerController::Destroyed() {
     gameInstance->GameInstanceVarsChanged.RemoveDynamic(
       this, &AStrangerController::PossiblyFreezeOrUnfreeze);
 }
+
+
+/* 
+  Overriding UE4 defaults.
+*/
+
+void AStrangerController::SetIgnoreLookInput(bool bNewLookInput) {
+  this->IgnoreLookInput = (int)bNewLookInput;
+}
+
+void AStrangerController::SetIgnoreMoveInput(bool bNewMoveInput) {
+  this->IgnoreMoveInput = (int)bNewMoveInput;
+}
+
+/*
+  Above two:
+  Long story short, their implementation does something we should
+  do a little more explicitly, so resetting this to a very simple behavior and we can re-build
+  what they do, later on.
+*/
