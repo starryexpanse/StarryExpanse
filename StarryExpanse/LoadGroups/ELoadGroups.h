@@ -15,7 +15,7 @@ enum class ELoadGroups : uint8 {
   from io import open
   from yaml import load, dump, Loader, Dumper
 
-  stream = open('LoadGroups/LgConfig.yaml', 'r')
+  stream = open('Config/load_group_definitions.yaml', 'r')
   data = load(stream, Loader=Loader)
 
   def flatten(l):
