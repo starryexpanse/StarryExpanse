@@ -19,22 +19,25 @@ void ARivenGameState::OnConstruction(const FTransform &Transform) {
   gameInstance->Last_Savable_SaveGame = initialSavegame;
 }
 
-void ARivenGameState::SubscribeActorToSavegame(AActor* actor) {
+void ARivenGameState::SubscribeActorToSavegame(AActor *actor) {
   check(actor);
-  if (actor->GetClass()->ImplementsInterface(URivenSavegameAware::StaticClass())) {
+  if (actor->GetClass()->ImplementsInterface(
+          URivenSavegameAware::StaticClass())) {
     uint32 uuid = actor->GetUniqueID();
     if (SubscribedToSavegame.Contains(uuid)) {
       checkf(false, TEXT("Actor subscribing was already subscribed"));
     } else {
       SubscribedToSavegame.Add(uuid, TWeakObjectPtr<AActor>(actor));
-      IRivenSavegameAware::Execute_SavegameInitialNotify(actor, Instantaneous_SaveGame);
+      IRivenSavegameAware::Execute_SavegameInitialNotify(
+          actor, Instantaneous_SaveGame);
     }
   } else {
-    checkf(false, TEXT("Actor subscribing does not implement IRivenSavegameAware interface"));
+    checkf(false, TEXT("Actor subscribing does not implement "
+                       "IRivenSavegameAware interface"));
   }
 }
 
-void ARivenGameState::UnsubscribeActorFromSavegame(AActor* actor) {
+void ARivenGameState::UnsubscribeActorFromSavegame(AActor *actor) {
   check(actor);
   uint32 uuid = actor->GetUniqueID();
   SubscribedToSavegame.FindAndRemoveChecked(uuid);
@@ -42,22 +45,23 @@ void ARivenGameState::UnsubscribeActorFromSavegame(AActor* actor) {
 
 void ARivenGameState::NotifySubscribersOfChange(URivenSaveGame *OldSaveGame) {
   TArray<uint32> IdsToRemove;
-  for (auto& Elem : SubscribedToSavegame) {
+  for (auto &Elem : SubscribedToSavegame) {
     TWeakObjectPtr<AActor> subscriberPointer = Elem.Value;
-    if (
-      subscriberPointer.IsValid() &&
-      subscriberPointer->GetClass()->ImplementsInterface(URivenSavegameAware::StaticClass())
-    ) {
-      AActor* subscriber = subscriberPointer.Get(/* bEvenIfPendingKill = */ true);
+    if (subscriberPointer.IsValid() &&
+        subscriberPointer->GetClass()->ImplementsInterface(
+            URivenSavegameAware::StaticClass())) {
+      AActor *subscriber =
+          subscriberPointer.Get(/* bEvenIfPendingKill = */ true);
       // NOTE(philip) not totally sure on the bEvenIfPendingKill option.
 
-      IRivenSavegameAware::Execute_SavegameUpdateNotify(subscriber, OldSaveGame, Instantaneous_SaveGame);
+      IRivenSavegameAware::Execute_SavegameUpdateNotify(subscriber, OldSaveGame,
+                                                        Instantaneous_SaveGame);
     } else {
       IdsToRemove.Add(Elem.Key);
     }
   }
 
-  for (auto& Id : IdsToRemove) {
+  for (auto &Id : IdsToRemove) {
     SubscribedToSavegame.FindAndRemoveChecked(Id);
   }
 }

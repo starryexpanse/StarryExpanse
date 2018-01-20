@@ -16,39 +16,40 @@ public:
   AStrangerController();
 
   UPROPERTY(BlueprintReadOnly)
-    bool IsCursorLockedToCenter;
-  
+  bool IsCursorLockedToCenter;
+
   UPROPERTY()
-    float InputMouseVertScale;
+  float InputMouseVertScale;
   UPROPERTY()
-    float InputMouseHorizScale;
+  float InputMouseHorizScale;
 
   UFUNCTION()
   void PossiblyFreezeOrUnfreeze();
-    
+
   UFUNCTION()
   void Interact();
 
   UFUNCTION()
-    void RequestSwitchCursorMode();
+  void RequestSwitchCursorMode();
 
   UFUNCTION()
-    void EnterCursorMode(bool fixed);
-  
+  void EnterCursorMode(bool fixed);
+
   UFUNCTION()
-  FHitResult CastInteractionRay(bool &gotHit, FVector worldLocation, FVector worldDirection);
+  FHitResult CastInteractionRay(bool &gotHit, FVector worldLocation,
+                                FVector worldDirection);
 
   UFUNCTION(BlueprintCallable)
   void AddHorizontalMouse(float amount);
-  
+
   UFUNCTION(BlueprintCallable)
-    void AddVerticalMouse(float amount);
+  void AddVerticalMouse(float amount);
 
   UPROPERTY()
-    float HorizontalMousePosition = 0.5;
+  float HorizontalMousePosition = 0.5;
 
   UPROPERTY()
-    float VerticalMousePosition = 0.5;
+  float VerticalMousePosition = 0.5;
 
   // Override defaults
 
@@ -57,7 +58,7 @@ public:
 
   UFUNCTION()
   virtual void SetIgnoreMoveInput(bool bNewMoveInput) override;
-  
+
   UFUNCTION()
   virtual void SetIgnoreLookInput(bool bNewLookInput) override;
 

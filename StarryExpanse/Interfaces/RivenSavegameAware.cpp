@@ -8,6 +8,8 @@ URivenSavegameAware::URivenSavegameAware(
     const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer) {}
 
-void IRivenSavegameAware::SavegameUpdateNotify_Implementation(URivenSaveGame *OldSaveGame, URivenSaveGame *NewSaveGame) {}
+void IRivenSavegameAware::SavegameUpdateNotify_Implementation(
+    URivenSaveGame *OldSaveGame, URivenSaveGame *NewSaveGame) {}
 
-void IRivenSavegameAware::SavegameInitialNotify_Implementation(URivenSaveGame *CurrentSaveGame) {}
+void IRivenSavegameAware::SavegameInitialNotify_Implementation(
+    URivenSaveGame *CurrentSaveGame) {}

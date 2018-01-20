@@ -34,11 +34,9 @@ URivenSaveGame::URivenSaveGame(const FObjectInitializer &ObjectInitializer)
   this->RestoreNewGameDefaults();
 }
 
-void URivenSaveGame::Freeze() {
-  this->IsFrozen = true;
-}
+void URivenSaveGame::Freeze() { this->IsFrozen = true; }
 
-void URivenSaveGame::SetSubscriber(ARivenGameState* NextSubscriber) {
+void URivenSaveGame::SetSubscriber(ARivenGameState *NextSubscriber) {
   this->Subscriber = NextSubscriber;
 }
 
@@ -554,30 +552,44 @@ URivenSaveGame::GetSavegameFields() {
         wrap(var[1])
       ))
   ]]] */
-  vars.push_back(std::make_tuple("ELoadGroups", "A_LoadGroups_CurrentLoadGroup"));
-  vars.push_back(std::make_tuple("EMarionettist", "A_Marionettist_CurrentMarionettist"));
+  vars.push_back(
+      std::make_tuple("ELoadGroups", "A_LoadGroups_CurrentLoadGroup"));
+  vars.push_back(
+      std::make_tuple("EMarionettist", "A_Marionettist_CurrentMarionettist"));
   vars.push_back(std::make_tuple("FTransform", "A_RivenCharacter_Transform"));
-  vars.push_back(std::make_tuple("bool", "A_Books_CatherinesJournal_IsInPlayerPossession"));
-  vars.push_back(std::make_tuple("bool", "A_Books_CurrentZoomedLinkingBook_IsOpen"));
-  vars.push_back(std::make_tuple("bool", "A_Books_TrapBook_IsInPlayerPossession"));
+  vars.push_back(std::make_tuple(
+      "bool", "A_Books_CatherinesJournal_IsInPlayerPossession"));
+  vars.push_back(
+      std::make_tuple("bool", "A_Books_CurrentZoomedLinkingBook_IsOpen"));
+  vars.push_back(
+      std::make_tuple("bool", "A_Books_TrapBook_IsInPlayerPossession"));
   vars.push_back(std::make_tuple("bool", "A_Characters_Catherine_IsFreed"));
   vars.push_back(std::make_tuple("bool", "A_Characters_Cho_IsStillPassedOut"));
   vars.push_back(std::make_tuple("bool", "A_Characters_Gehn_IsTrappedInBook"));
   vars.push_back(std::make_tuple("int32", "A_Characters_Wahrk_TimesBeckoned"));
-  vars.push_back(std::make_tuple("bool", "A_Characters_CatherinesFriend_HasMadeSecondAppearance"));
+  vars.push_back(std::make_tuple(
+      "bool", "A_Characters_CatherinesFriend_HasMadeSecondAppearance"));
   vars.push_back(std::make_tuple("bool", "A_Characters_Scribe_HasBeenSeen"));
-  vars.push_back(std::make_tuple("bool", "A_Characters_JumpscareGirl_HasBeenSeen"));
-  vars.push_back(std::make_tuple("bool", "A_Characters_RecluseWoman_HasBeenSeen"));
-  vars.push_back(std::make_tuple("bool", "A_Characters_TowerGuard_HasBeenSeen"));
-  vars.push_back(std::make_tuple("bool", "A_Characters_FleeingParentAndChild_HaveBeenSeen"));
-  vars.push_back(std::make_tuple("bool", "A_Characters_Sunners_HaveBeenShooed"));
+  vars.push_back(
+      std::make_tuple("bool", "A_Characters_JumpscareGirl_HasBeenSeen"));
+  vars.push_back(
+      std::make_tuple("bool", "A_Characters_RecluseWoman_HasBeenSeen"));
+  vars.push_back(
+      std::make_tuple("bool", "A_Characters_TowerGuard_HasBeenSeen"));
+  vars.push_back(std::make_tuple(
+      "bool", "A_Characters_FleeingParentAndChild_HaveBeenSeen"));
+  vars.push_back(
+      std::make_tuple("bool", "A_Characters_Sunners_HaveBeenShooed"));
   vars.push_back(std::make_tuple("int32", "B_Shore_Valve_Position"));
-  vars.push_back(std::make_tuple("bool", "B_BoilerExterior_SelectorValve_IsTowardsPump"));
-  vars.push_back(std::make_tuple("bool", "B_BoilerExterior_LevelSelector_IsUp"));
+  vars.push_back(
+      std::make_tuple("bool", "B_BoilerExterior_SelectorValve_IsTowardsPump"));
+  vars.push_back(
+      std::make_tuple("bool", "B_BoilerExterior_LevelSelector_IsUp"));
   vars.push_back(std::make_tuple("bool", "B_BoilerExterior_Heater_IsOn"));
   vars.push_back(std::make_tuple("bool", "B_BoilerInterior_Water_IsPresent"));
   vars.push_back(std::make_tuple("bool", "B_BoilerInterior_Platform_IsRaised"));
-  vars.push_back(std::make_tuple("ESubPosRot", "J_Basin_Submarine_PositionAndRotation"));
+  vars.push_back(
+      std::make_tuple("ESubPosRot", "J_Basin_Submarine_PositionAndRotation"));
   vars.push_back(std::make_tuple("bool", "J_Basin_Gallows_IsOpen"));
   vars.push_back(std::make_tuple("bool", "J_Basin_Treehouse_IsLever1Up"));
   vars.push_back(std::make_tuple("bool", "J_Basin_Treehouse_IsLever2Up"));
@@ -587,7 +599,8 @@ URivenSaveGame::GetSavegameFields() {
   vars.push_back(std::make_tuple("bool", "J_Forest_Gate1_IsOpen"));
   vars.push_back(std::make_tuple("bool", "J_Forest_Gate2_IsOpen"));
   vars.push_back(std::make_tuple("bool", "J_Forest_WharkIdol_IsMouthOpen"));
-  vars.push_back(std::make_tuple("int32", "J_Forest_WharkIdol_ElevatorPosition"));
+  vars.push_back(
+      std::make_tuple("int32", "J_Forest_WharkIdol_ElevatorPosition"));
   vars.push_back(std::make_tuple("bool", "J_Forest_GehnsThrone_IsRaised"));
   vars.push_back(std::make_tuple("bool", "J_Forest_Dome_IsOpen"));
   vars.push_back(std::make_tuple("int32", "J_Forest_Dome_SliderA"));
@@ -596,18 +609,24 @@ URivenSaveGame::GetSavegameFields() {
   vars.push_back(std::make_tuple("int32", "J_Forest_Dome_SliderD"));
   vars.push_back(std::make_tuple("int32", "J_Forest_Dome_SliderE"));
   vars.push_back(std::make_tuple("bool", "J_Forest_Ladder_IsLowered"));
-  vars.push_back(std::make_tuple("int32", "J_SecretTunnel_Books_SelectedStoneA"));
-  vars.push_back(std::make_tuple("int32", "J_SecretTunnel_Books_SelectedStoneB"));
-  vars.push_back(std::make_tuple("int32", "J_SecretTunnel_Books_SelectedStoneC"));
-  vars.push_back(std::make_tuple("int32", "J_SecretTunnel_Books_SelectedStoneD"));
-  vars.push_back(std::make_tuple("int32", "J_SecretTunnel_Books_SelectedStoneE"));
+  vars.push_back(
+      std::make_tuple("int32", "J_SecretTunnel_Books_SelectedStoneA"));
+  vars.push_back(
+      std::make_tuple("int32", "J_SecretTunnel_Books_SelectedStoneB"));
+  vars.push_back(
+      std::make_tuple("int32", "J_SecretTunnel_Books_SelectedStoneC"));
+  vars.push_back(
+      std::make_tuple("int32", "J_SecretTunnel_Books_SelectedStoneD"));
+  vars.push_back(
+      std::make_tuple("int32", "J_SecretTunnel_Books_SelectedStoneE"));
   vars.push_back(std::make_tuple("bool", "J_SecretTunnel_Lights_IsLight1On"));
   vars.push_back(std::make_tuple("bool", "J_SecretTunnel_Lights_IsLight2On"));
   vars.push_back(std::make_tuple("bool", "J_SecretTunnel_Lights_IsLight3On"));
   vars.push_back(std::make_tuple("bool", "J_SecretTunnel_Lights_IsLight4On"));
   vars.push_back(std::make_tuple("bool", "J_SecretTunnel_Lights_IsLight5On"));
   vars.push_back(std::make_tuple("bool", "O_Upstairs_Stove_IsOn"));
-  vars.push_back(std::make_tuple("int32", "O_Upstairs_CageButton_TimesPressed"));
+  vars.push_back(
+      std::make_tuple("int32", "O_Upstairs_CageButton_TimesPressed"));
   vars.push_back(std::make_tuple("bool", "O_Upstairs_CageLever_IsUnlocked"));
   vars.push_back(std::make_tuple("bool", "O_Upstairs_Cannen_IsPlaying"));
   vars.push_back(std::make_tuple("bool", "O_Bedroom_Drawer_IsOpen"));
@@ -623,10 +642,14 @@ URivenSaveGame::GetSavegameFields() {
   vars.push_back(std::make_tuple("bool", "S_MaglevBG_IsAtSurvey"));
   vars.push_back(std::make_tuple("bool", "S_MaglevGJ_IsSpinnerToRight"));
   vars.push_back(std::make_tuple("bool", "S_MaglevGJ_IsAtJungle"));
-  vars.push_back(std::make_tuple("bool", "T_FissurePlateau_CageLever_IsInClosedPosition"));
-  vars.push_back(std::make_tuple("int32", "T_FissurePlateau_Gateroom_Rotation"));
-  vars.push_back(std::make_tuple("int32", "T_FissurePlateau_Gateroom_SelectedBeetle"));
-  vars.push_back(std::make_tuple("bool", "T_FissurePlateau_Telescope_IsBlocked"));
+  vars.push_back(
+      std::make_tuple("bool", "T_FissurePlateau_CageLever_IsInClosedPosition"));
+  vars.push_back(
+      std::make_tuple("int32", "T_FissurePlateau_Gateroom_Rotation"));
+  vars.push_back(
+      std::make_tuple("int32", "T_FissurePlateau_Gateroom_SelectedBeetle"));
+  vars.push_back(
+      std::make_tuple("bool", "T_FissurePlateau_Telescope_IsBlocked"));
   vars.push_back(std::make_tuple("int32", "T_FissurePlateau_Telescope_Level"));
   vars.push_back(std::make_tuple("int32", "T_FissurePlateau_Telescope_CodeA"));
   vars.push_back(std::make_tuple("int32", "T_FissurePlateau_Telescope_CodeB"));
@@ -636,7 +659,8 @@ URivenSaveGame::GetSavegameFields() {
   vars.push_back(std::make_tuple("bool", "T_Airlock_OutsideDoor_IsOpen"));
   vars.push_back(std::make_tuple("bool", "T_Airlock_InsideDoor_IsOpen"));
   vars.push_back(std::make_tuple("bool", "T_SteamCave_Door_IsOpen"));
-  vars.push_back(std::make_tuple("bool", "T_SteamCave_Valve_IsPoweringTelescope"));
+  vars.push_back(
+      std::make_tuple("bool", "T_SteamCave_Valve_IsPoweringTelescope"));
   vars.push_back(std::make_tuple("bool", "T_SpiderChairRoom_Microphone_IsOn"));
   vars.push_back(std::make_tuple("bool", "T_NewTemple_DoorMain_IsOpen"));
   vars.push_back(std::make_tuple("bool", "T_NewTemple_DoorSide_IsOpen"));
@@ -646,12 +670,15 @@ URivenSaveGame::GetSavegameFields() {
   vars.push_back(std::make_tuple("int32", "T_Backstage_Dome_SliderC"));
   vars.push_back(std::make_tuple("int32", "T_Backstage_Dome_SliderD"));
   vars.push_back(std::make_tuple("int32", "T_Backstage_Dome_SliderE"));
-  vars.push_back(std::make_tuple("bool", "T_Backstage_BridgeValve_IsWastingSteam"));
+  vars.push_back(
+      std::make_tuple("bool", "T_Backstage_BridgeValve_IsWastingSteam"));
   vars.push_back(std::make_tuple("bool", "T_Backstage_BridgeLever_IsUp"));
   vars.push_back(std::make_tuple("bool", "T_Backstage_Elevator_IsUp"));
-  vars.push_back(std::make_tuple("bool", "T_Backstage_SuperdomeWalkway_IsExtended"));
+  vars.push_back(
+      std::make_tuple("bool", "T_Backstage_SuperdomeWalkway_IsExtended"));
   vars.push_back(std::make_tuple("bool", "T_Backstage_WaffleIron_IsEngaged"));
-  vars.push_back(std::make_tuple("bool", "P_Exterior_Elevator_IsInCaptiveMode"));
+  vars.push_back(
+      std::make_tuple("bool", "P_Exterior_Elevator_IsInCaptiveMode"));
   vars.push_back(std::make_tuple("int32", "P_Exterior_Lock_CodeA"));
   vars.push_back(std::make_tuple("int32", "P_Exterior_Lock_CodeB"));
   vars.push_back(std::make_tuple("int32", "P_Exterior_Lock_CodeC"));
@@ -696,1856 +723,1851 @@ URivenSaveGame::GetSavegameFields() {
 ]]] */
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_A_LoadGroups_CurrentLoadGroup(ELoadGroups NewVal) {
-   if (IsFrozen) return;
-   ELoadGroups OrigVal = this->A_LoadGroups_CurrentLoadGroup;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->A_LoadGroups_CurrentLoadGroup = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  ELoadGroups OrigVal = this->A_LoadGroups_CurrentLoadGroup;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->A_LoadGroups_CurrentLoadGroup = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 ELoadGroups URivenSaveGame::Get_A_LoadGroups_CurrentLoadGroup() {
-   return A_LoadGroups_CurrentLoadGroup;
+  return A_LoadGroups_CurrentLoadGroup;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-void URivenSaveGame::Set_A_Marionettist_CurrentMarionettist(EMarionettist NewVal) {
-   if (IsFrozen) return;
-   EMarionettist OrigVal = this->A_Marionettist_CurrentMarionettist;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->A_Marionettist_CurrentMarionettist = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+void URivenSaveGame::Set_A_Marionettist_CurrentMarionettist(
+    EMarionettist NewVal) {
+  if (IsFrozen)
+    return;
+  EMarionettist OrigVal = this->A_Marionettist_CurrentMarionettist;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->A_Marionettist_CurrentMarionettist = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 EMarionettist URivenSaveGame::Get_A_Marionettist_CurrentMarionettist() {
-   return A_Marionettist_CurrentMarionettist;
+  return A_Marionettist_CurrentMarionettist;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_A_RivenCharacter_Transform(FTransform NewVal) {
-   if (IsFrozen) return;
-   FTransform OrigVal = this->A_RivenCharacter_Transform;
-   if (true) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->A_RivenCharacter_Transform = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  FTransform OrigVal = this->A_RivenCharacter_Transform;
+  if (true) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->A_RivenCharacter_Transform = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 FTransform URivenSaveGame::Get_A_RivenCharacter_Transform() {
-   return A_RivenCharacter_Transform;
+  return A_RivenCharacter_Transform;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-void URivenSaveGame::Set_A_Books_CatherinesJournal_IsInPlayerPossession(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->A_Books_CatherinesJournal_IsInPlayerPossession;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->A_Books_CatherinesJournal_IsInPlayerPossession = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+void URivenSaveGame::Set_A_Books_CatherinesJournal_IsInPlayerPossession(
+    bool NewVal) {
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->A_Books_CatherinesJournal_IsInPlayerPossession;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->A_Books_CatherinesJournal_IsInPlayerPossession = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_A_Books_CatherinesJournal_IsInPlayerPossession() {
-   return A_Books_CatherinesJournal_IsInPlayerPossession;
+  return A_Books_CatherinesJournal_IsInPlayerPossession;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_A_Books_CurrentZoomedLinkingBook_IsOpen(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->A_Books_CurrentZoomedLinkingBook_IsOpen;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->A_Books_CurrentZoomedLinkingBook_IsOpen = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->A_Books_CurrentZoomedLinkingBook_IsOpen;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->A_Books_CurrentZoomedLinkingBook_IsOpen = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_A_Books_CurrentZoomedLinkingBook_IsOpen() {
-   return A_Books_CurrentZoomedLinkingBook_IsOpen;
+  return A_Books_CurrentZoomedLinkingBook_IsOpen;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_A_Books_TrapBook_IsInPlayerPossession(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->A_Books_TrapBook_IsInPlayerPossession;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->A_Books_TrapBook_IsInPlayerPossession = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->A_Books_TrapBook_IsInPlayerPossession;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->A_Books_TrapBook_IsInPlayerPossession = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_A_Books_TrapBook_IsInPlayerPossession() {
-   return A_Books_TrapBook_IsInPlayerPossession;
+  return A_Books_TrapBook_IsInPlayerPossession;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_A_Characters_Catherine_IsFreed(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->A_Characters_Catherine_IsFreed;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->A_Characters_Catherine_IsFreed = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->A_Characters_Catherine_IsFreed;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->A_Characters_Catherine_IsFreed = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_A_Characters_Catherine_IsFreed() {
-   return A_Characters_Catherine_IsFreed;
+  return A_Characters_Catherine_IsFreed;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_A_Characters_Cho_IsStillPassedOut(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->A_Characters_Cho_IsStillPassedOut;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->A_Characters_Cho_IsStillPassedOut = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->A_Characters_Cho_IsStillPassedOut;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->A_Characters_Cho_IsStillPassedOut = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_A_Characters_Cho_IsStillPassedOut() {
-   return A_Characters_Cho_IsStillPassedOut;
+  return A_Characters_Cho_IsStillPassedOut;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_A_Characters_Gehn_IsTrappedInBook(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->A_Characters_Gehn_IsTrappedInBook;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->A_Characters_Gehn_IsTrappedInBook = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->A_Characters_Gehn_IsTrappedInBook;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->A_Characters_Gehn_IsTrappedInBook = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_A_Characters_Gehn_IsTrappedInBook() {
-   return A_Characters_Gehn_IsTrappedInBook;
+  return A_Characters_Gehn_IsTrappedInBook;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_A_Characters_Wahrk_TimesBeckoned(int32 NewVal) {
-   if (IsFrozen) return;
-   int32 OrigVal = this->A_Characters_Wahrk_TimesBeckoned;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->A_Characters_Wahrk_TimesBeckoned = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  int32 OrigVal = this->A_Characters_Wahrk_TimesBeckoned;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->A_Characters_Wahrk_TimesBeckoned = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 int32 URivenSaveGame::Get_A_Characters_Wahrk_TimesBeckoned() {
-   return A_Characters_Wahrk_TimesBeckoned;
+  return A_Characters_Wahrk_TimesBeckoned;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-void URivenSaveGame::Set_A_Characters_CatherinesFriend_HasMadeSecondAppearance(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->A_Characters_CatherinesFriend_HasMadeSecondAppearance;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->A_Characters_CatherinesFriend_HasMadeSecondAppearance = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+void URivenSaveGame::Set_A_Characters_CatherinesFriend_HasMadeSecondAppearance(
+    bool NewVal) {
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->A_Characters_CatherinesFriend_HasMadeSecondAppearance;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->A_Characters_CatherinesFriend_HasMadeSecondAppearance = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
 
-
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-bool URivenSaveGame::Get_A_Characters_CatherinesFriend_HasMadeSecondAppearance() {
-   return A_Characters_CatherinesFriend_HasMadeSecondAppearance;
+bool URivenSaveGame::
+    Get_A_Characters_CatherinesFriend_HasMadeSecondAppearance() {
+  return A_Characters_CatherinesFriend_HasMadeSecondAppearance;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_A_Characters_Scribe_HasBeenSeen(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->A_Characters_Scribe_HasBeenSeen;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->A_Characters_Scribe_HasBeenSeen = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->A_Characters_Scribe_HasBeenSeen;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->A_Characters_Scribe_HasBeenSeen = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_A_Characters_Scribe_HasBeenSeen() {
-   return A_Characters_Scribe_HasBeenSeen;
+  return A_Characters_Scribe_HasBeenSeen;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_A_Characters_JumpscareGirl_HasBeenSeen(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->A_Characters_JumpscareGirl_HasBeenSeen;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->A_Characters_JumpscareGirl_HasBeenSeen = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->A_Characters_JumpscareGirl_HasBeenSeen;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->A_Characters_JumpscareGirl_HasBeenSeen = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_A_Characters_JumpscareGirl_HasBeenSeen() {
-   return A_Characters_JumpscareGirl_HasBeenSeen;
+  return A_Characters_JumpscareGirl_HasBeenSeen;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_A_Characters_RecluseWoman_HasBeenSeen(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->A_Characters_RecluseWoman_HasBeenSeen;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->A_Characters_RecluseWoman_HasBeenSeen = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->A_Characters_RecluseWoman_HasBeenSeen;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->A_Characters_RecluseWoman_HasBeenSeen = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_A_Characters_RecluseWoman_HasBeenSeen() {
-   return A_Characters_RecluseWoman_HasBeenSeen;
+  return A_Characters_RecluseWoman_HasBeenSeen;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_A_Characters_TowerGuard_HasBeenSeen(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->A_Characters_TowerGuard_HasBeenSeen;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->A_Characters_TowerGuard_HasBeenSeen = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->A_Characters_TowerGuard_HasBeenSeen;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->A_Characters_TowerGuard_HasBeenSeen = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_A_Characters_TowerGuard_HasBeenSeen() {
-   return A_Characters_TowerGuard_HasBeenSeen;
+  return A_Characters_TowerGuard_HasBeenSeen;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-void URivenSaveGame::Set_A_Characters_FleeingParentAndChild_HaveBeenSeen(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->A_Characters_FleeingParentAndChild_HaveBeenSeen;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->A_Characters_FleeingParentAndChild_HaveBeenSeen = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+void URivenSaveGame::Set_A_Characters_FleeingParentAndChild_HaveBeenSeen(
+    bool NewVal) {
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->A_Characters_FleeingParentAndChild_HaveBeenSeen;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->A_Characters_FleeingParentAndChild_HaveBeenSeen = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_A_Characters_FleeingParentAndChild_HaveBeenSeen() {
-   return A_Characters_FleeingParentAndChild_HaveBeenSeen;
+  return A_Characters_FleeingParentAndChild_HaveBeenSeen;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_A_Characters_Sunners_HaveBeenShooed(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->A_Characters_Sunners_HaveBeenShooed;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->A_Characters_Sunners_HaveBeenShooed = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->A_Characters_Sunners_HaveBeenShooed;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->A_Characters_Sunners_HaveBeenShooed = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_A_Characters_Sunners_HaveBeenShooed() {
-   return A_Characters_Sunners_HaveBeenShooed;
+  return A_Characters_Sunners_HaveBeenShooed;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_B_Shore_Valve_Position(int32 NewVal) {
-   if (IsFrozen) return;
-   int32 OrigVal = this->B_Shore_Valve_Position;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->B_Shore_Valve_Position = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  int32 OrigVal = this->B_Shore_Valve_Position;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->B_Shore_Valve_Position = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 int32 URivenSaveGame::Get_B_Shore_Valve_Position() {
-   return B_Shore_Valve_Position;
+  return B_Shore_Valve_Position;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-void URivenSaveGame::Set_B_BoilerExterior_SelectorValve_IsTowardsPump(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->B_BoilerExterior_SelectorValve_IsTowardsPump;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->B_BoilerExterior_SelectorValve_IsTowardsPump = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+void URivenSaveGame::Set_B_BoilerExterior_SelectorValve_IsTowardsPump(
+    bool NewVal) {
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->B_BoilerExterior_SelectorValve_IsTowardsPump;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->B_BoilerExterior_SelectorValve_IsTowardsPump = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_B_BoilerExterior_SelectorValve_IsTowardsPump() {
-   return B_BoilerExterior_SelectorValve_IsTowardsPump;
+  return B_BoilerExterior_SelectorValve_IsTowardsPump;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_B_BoilerExterior_LevelSelector_IsUp(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->B_BoilerExterior_LevelSelector_IsUp;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->B_BoilerExterior_LevelSelector_IsUp = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->B_BoilerExterior_LevelSelector_IsUp;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->B_BoilerExterior_LevelSelector_IsUp = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_B_BoilerExterior_LevelSelector_IsUp() {
-   return B_BoilerExterior_LevelSelector_IsUp;
+  return B_BoilerExterior_LevelSelector_IsUp;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_B_BoilerExterior_Heater_IsOn(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->B_BoilerExterior_Heater_IsOn;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->B_BoilerExterior_Heater_IsOn = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->B_BoilerExterior_Heater_IsOn;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->B_BoilerExterior_Heater_IsOn = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_B_BoilerExterior_Heater_IsOn() {
-   return B_BoilerExterior_Heater_IsOn;
+  return B_BoilerExterior_Heater_IsOn;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_B_BoilerInterior_Water_IsPresent(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->B_BoilerInterior_Water_IsPresent;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->B_BoilerInterior_Water_IsPresent = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->B_BoilerInterior_Water_IsPresent;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->B_BoilerInterior_Water_IsPresent = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_B_BoilerInterior_Water_IsPresent() {
-   return B_BoilerInterior_Water_IsPresent;
+  return B_BoilerInterior_Water_IsPresent;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_B_BoilerInterior_Platform_IsRaised(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->B_BoilerInterior_Platform_IsRaised;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->B_BoilerInterior_Platform_IsRaised = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->B_BoilerInterior_Platform_IsRaised;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->B_BoilerInterior_Platform_IsRaised = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_B_BoilerInterior_Platform_IsRaised() {
-   return B_BoilerInterior_Platform_IsRaised;
+  return B_BoilerInterior_Platform_IsRaised;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-void URivenSaveGame::Set_J_Basin_Submarine_PositionAndRotation(ESubPosRot NewVal) {
-   if (IsFrozen) return;
-   ESubPosRot OrigVal = this->J_Basin_Submarine_PositionAndRotation;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->J_Basin_Submarine_PositionAndRotation = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+void URivenSaveGame::Set_J_Basin_Submarine_PositionAndRotation(
+    ESubPosRot NewVal) {
+  if (IsFrozen)
+    return;
+  ESubPosRot OrigVal = this->J_Basin_Submarine_PositionAndRotation;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->J_Basin_Submarine_PositionAndRotation = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 ESubPosRot URivenSaveGame::Get_J_Basin_Submarine_PositionAndRotation() {
-   return J_Basin_Submarine_PositionAndRotation;
+  return J_Basin_Submarine_PositionAndRotation;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_J_Basin_Gallows_IsOpen(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->J_Basin_Gallows_IsOpen;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->J_Basin_Gallows_IsOpen = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->J_Basin_Gallows_IsOpen;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->J_Basin_Gallows_IsOpen = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_J_Basin_Gallows_IsOpen() {
-   return J_Basin_Gallows_IsOpen;
+  return J_Basin_Gallows_IsOpen;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_J_Basin_Treehouse_IsLever1Up(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->J_Basin_Treehouse_IsLever1Up;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->J_Basin_Treehouse_IsLever1Up = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->J_Basin_Treehouse_IsLever1Up;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->J_Basin_Treehouse_IsLever1Up = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_J_Basin_Treehouse_IsLever1Up() {
-   return J_Basin_Treehouse_IsLever1Up;
+  return J_Basin_Treehouse_IsLever1Up;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_J_Basin_Treehouse_IsLever2Up(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->J_Basin_Treehouse_IsLever2Up;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->J_Basin_Treehouse_IsLever2Up = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->J_Basin_Treehouse_IsLever2Up;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->J_Basin_Treehouse_IsLever2Up = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_J_Basin_Treehouse_IsLever2Up() {
-   return J_Basin_Treehouse_IsLever2Up;
+  return J_Basin_Treehouse_IsLever2Up;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_J_Basin_Treehouse_IsLever3Up(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->J_Basin_Treehouse_IsLever3Up;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->J_Basin_Treehouse_IsLever3Up = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->J_Basin_Treehouse_IsLever3Up;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->J_Basin_Treehouse_IsLever3Up = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_J_Basin_Treehouse_IsLever3Up() {
-   return J_Basin_Treehouse_IsLever3Up;
+  return J_Basin_Treehouse_IsLever3Up;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_J_Basin_Treehouse_IsLever4Up(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->J_Basin_Treehouse_IsLever4Up;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->J_Basin_Treehouse_IsLever4Up = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->J_Basin_Treehouse_IsLever4Up;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->J_Basin_Treehouse_IsLever4Up = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_J_Basin_Treehouse_IsLever4Up() {
-   return J_Basin_Treehouse_IsLever4Up;
+  return J_Basin_Treehouse_IsLever4Up;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_J_Basin_Treehouse_IsLever5Up(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->J_Basin_Treehouse_IsLever5Up;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->J_Basin_Treehouse_IsLever5Up = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->J_Basin_Treehouse_IsLever5Up;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->J_Basin_Treehouse_IsLever5Up = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_J_Basin_Treehouse_IsLever5Up() {
-   return J_Basin_Treehouse_IsLever5Up;
+  return J_Basin_Treehouse_IsLever5Up;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_J_Forest_Gate1_IsOpen(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->J_Forest_Gate1_IsOpen;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->J_Forest_Gate1_IsOpen = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->J_Forest_Gate1_IsOpen;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->J_Forest_Gate1_IsOpen = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_J_Forest_Gate1_IsOpen() {
-   return J_Forest_Gate1_IsOpen;
+  return J_Forest_Gate1_IsOpen;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_J_Forest_Gate2_IsOpen(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->J_Forest_Gate2_IsOpen;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->J_Forest_Gate2_IsOpen = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->J_Forest_Gate2_IsOpen;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->J_Forest_Gate2_IsOpen = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_J_Forest_Gate2_IsOpen() {
-   return J_Forest_Gate2_IsOpen;
+  return J_Forest_Gate2_IsOpen;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_J_Forest_WharkIdol_IsMouthOpen(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->J_Forest_WharkIdol_IsMouthOpen;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->J_Forest_WharkIdol_IsMouthOpen = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->J_Forest_WharkIdol_IsMouthOpen;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->J_Forest_WharkIdol_IsMouthOpen = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_J_Forest_WharkIdol_IsMouthOpen() {
-   return J_Forest_WharkIdol_IsMouthOpen;
+  return J_Forest_WharkIdol_IsMouthOpen;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_J_Forest_WharkIdol_ElevatorPosition(int32 NewVal) {
-   if (IsFrozen) return;
-   int32 OrigVal = this->J_Forest_WharkIdol_ElevatorPosition;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->J_Forest_WharkIdol_ElevatorPosition = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  int32 OrigVal = this->J_Forest_WharkIdol_ElevatorPosition;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->J_Forest_WharkIdol_ElevatorPosition = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 int32 URivenSaveGame::Get_J_Forest_WharkIdol_ElevatorPosition() {
-   return J_Forest_WharkIdol_ElevatorPosition;
+  return J_Forest_WharkIdol_ElevatorPosition;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_J_Forest_GehnsThrone_IsRaised(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->J_Forest_GehnsThrone_IsRaised;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->J_Forest_GehnsThrone_IsRaised = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->J_Forest_GehnsThrone_IsRaised;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->J_Forest_GehnsThrone_IsRaised = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_J_Forest_GehnsThrone_IsRaised() {
-   return J_Forest_GehnsThrone_IsRaised;
+  return J_Forest_GehnsThrone_IsRaised;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_J_Forest_Dome_IsOpen(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->J_Forest_Dome_IsOpen;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->J_Forest_Dome_IsOpen = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->J_Forest_Dome_IsOpen;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->J_Forest_Dome_IsOpen = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-bool URivenSaveGame::Get_J_Forest_Dome_IsOpen() {
-   return J_Forest_Dome_IsOpen;
-}
+bool URivenSaveGame::Get_J_Forest_Dome_IsOpen() { return J_Forest_Dome_IsOpen; }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_J_Forest_Dome_SliderA(int32 NewVal) {
-   if (IsFrozen) return;
-   int32 OrigVal = this->J_Forest_Dome_SliderA;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->J_Forest_Dome_SliderA = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  int32 OrigVal = this->J_Forest_Dome_SliderA;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->J_Forest_Dome_SliderA = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 int32 URivenSaveGame::Get_J_Forest_Dome_SliderA() {
-   return J_Forest_Dome_SliderA;
+  return J_Forest_Dome_SliderA;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_J_Forest_Dome_SliderB(int32 NewVal) {
-   if (IsFrozen) return;
-   int32 OrigVal = this->J_Forest_Dome_SliderB;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->J_Forest_Dome_SliderB = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  int32 OrigVal = this->J_Forest_Dome_SliderB;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->J_Forest_Dome_SliderB = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 int32 URivenSaveGame::Get_J_Forest_Dome_SliderB() {
-   return J_Forest_Dome_SliderB;
+  return J_Forest_Dome_SliderB;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_J_Forest_Dome_SliderC(int32 NewVal) {
-   if (IsFrozen) return;
-   int32 OrigVal = this->J_Forest_Dome_SliderC;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->J_Forest_Dome_SliderC = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  int32 OrigVal = this->J_Forest_Dome_SliderC;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->J_Forest_Dome_SliderC = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 int32 URivenSaveGame::Get_J_Forest_Dome_SliderC() {
-   return J_Forest_Dome_SliderC;
+  return J_Forest_Dome_SliderC;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_J_Forest_Dome_SliderD(int32 NewVal) {
-   if (IsFrozen) return;
-   int32 OrigVal = this->J_Forest_Dome_SliderD;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->J_Forest_Dome_SliderD = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  int32 OrigVal = this->J_Forest_Dome_SliderD;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->J_Forest_Dome_SliderD = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 int32 URivenSaveGame::Get_J_Forest_Dome_SliderD() {
-   return J_Forest_Dome_SliderD;
+  return J_Forest_Dome_SliderD;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_J_Forest_Dome_SliderE(int32 NewVal) {
-   if (IsFrozen) return;
-   int32 OrigVal = this->J_Forest_Dome_SliderE;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->J_Forest_Dome_SliderE = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  int32 OrigVal = this->J_Forest_Dome_SliderE;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->J_Forest_Dome_SliderE = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 int32 URivenSaveGame::Get_J_Forest_Dome_SliderE() {
-   return J_Forest_Dome_SliderE;
+  return J_Forest_Dome_SliderE;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_J_Forest_Ladder_IsLowered(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->J_Forest_Ladder_IsLowered;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->J_Forest_Ladder_IsLowered = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->J_Forest_Ladder_IsLowered;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->J_Forest_Ladder_IsLowered = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_J_Forest_Ladder_IsLowered() {
-   return J_Forest_Ladder_IsLowered;
+  return J_Forest_Ladder_IsLowered;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_J_SecretTunnel_Books_SelectedStoneA(int32 NewVal) {
-   if (IsFrozen) return;
-   int32 OrigVal = this->J_SecretTunnel_Books_SelectedStoneA;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->J_SecretTunnel_Books_SelectedStoneA = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  int32 OrigVal = this->J_SecretTunnel_Books_SelectedStoneA;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->J_SecretTunnel_Books_SelectedStoneA = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 int32 URivenSaveGame::Get_J_SecretTunnel_Books_SelectedStoneA() {
-   return J_SecretTunnel_Books_SelectedStoneA;
+  return J_SecretTunnel_Books_SelectedStoneA;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_J_SecretTunnel_Books_SelectedStoneB(int32 NewVal) {
-   if (IsFrozen) return;
-   int32 OrigVal = this->J_SecretTunnel_Books_SelectedStoneB;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->J_SecretTunnel_Books_SelectedStoneB = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  int32 OrigVal = this->J_SecretTunnel_Books_SelectedStoneB;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->J_SecretTunnel_Books_SelectedStoneB = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 int32 URivenSaveGame::Get_J_SecretTunnel_Books_SelectedStoneB() {
-   return J_SecretTunnel_Books_SelectedStoneB;
+  return J_SecretTunnel_Books_SelectedStoneB;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_J_SecretTunnel_Books_SelectedStoneC(int32 NewVal) {
-   if (IsFrozen) return;
-   int32 OrigVal = this->J_SecretTunnel_Books_SelectedStoneC;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->J_SecretTunnel_Books_SelectedStoneC = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  int32 OrigVal = this->J_SecretTunnel_Books_SelectedStoneC;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->J_SecretTunnel_Books_SelectedStoneC = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 int32 URivenSaveGame::Get_J_SecretTunnel_Books_SelectedStoneC() {
-   return J_SecretTunnel_Books_SelectedStoneC;
+  return J_SecretTunnel_Books_SelectedStoneC;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_J_SecretTunnel_Books_SelectedStoneD(int32 NewVal) {
-   if (IsFrozen) return;
-   int32 OrigVal = this->J_SecretTunnel_Books_SelectedStoneD;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->J_SecretTunnel_Books_SelectedStoneD = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  int32 OrigVal = this->J_SecretTunnel_Books_SelectedStoneD;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->J_SecretTunnel_Books_SelectedStoneD = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 int32 URivenSaveGame::Get_J_SecretTunnel_Books_SelectedStoneD() {
-   return J_SecretTunnel_Books_SelectedStoneD;
+  return J_SecretTunnel_Books_SelectedStoneD;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_J_SecretTunnel_Books_SelectedStoneE(int32 NewVal) {
-   if (IsFrozen) return;
-   int32 OrigVal = this->J_SecretTunnel_Books_SelectedStoneE;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->J_SecretTunnel_Books_SelectedStoneE = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  int32 OrigVal = this->J_SecretTunnel_Books_SelectedStoneE;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->J_SecretTunnel_Books_SelectedStoneE = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 int32 URivenSaveGame::Get_J_SecretTunnel_Books_SelectedStoneE() {
-   return J_SecretTunnel_Books_SelectedStoneE;
+  return J_SecretTunnel_Books_SelectedStoneE;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_J_SecretTunnel_Lights_IsLight1On(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->J_SecretTunnel_Lights_IsLight1On;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->J_SecretTunnel_Lights_IsLight1On = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->J_SecretTunnel_Lights_IsLight1On;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->J_SecretTunnel_Lights_IsLight1On = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_J_SecretTunnel_Lights_IsLight1On() {
-   return J_SecretTunnel_Lights_IsLight1On;
+  return J_SecretTunnel_Lights_IsLight1On;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_J_SecretTunnel_Lights_IsLight2On(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->J_SecretTunnel_Lights_IsLight2On;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->J_SecretTunnel_Lights_IsLight2On = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->J_SecretTunnel_Lights_IsLight2On;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->J_SecretTunnel_Lights_IsLight2On = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_J_SecretTunnel_Lights_IsLight2On() {
-   return J_SecretTunnel_Lights_IsLight2On;
+  return J_SecretTunnel_Lights_IsLight2On;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_J_SecretTunnel_Lights_IsLight3On(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->J_SecretTunnel_Lights_IsLight3On;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->J_SecretTunnel_Lights_IsLight3On = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->J_SecretTunnel_Lights_IsLight3On;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->J_SecretTunnel_Lights_IsLight3On = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_J_SecretTunnel_Lights_IsLight3On() {
-   return J_SecretTunnel_Lights_IsLight3On;
+  return J_SecretTunnel_Lights_IsLight3On;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_J_SecretTunnel_Lights_IsLight4On(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->J_SecretTunnel_Lights_IsLight4On;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->J_SecretTunnel_Lights_IsLight4On = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->J_SecretTunnel_Lights_IsLight4On;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->J_SecretTunnel_Lights_IsLight4On = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_J_SecretTunnel_Lights_IsLight4On() {
-   return J_SecretTunnel_Lights_IsLight4On;
+  return J_SecretTunnel_Lights_IsLight4On;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_J_SecretTunnel_Lights_IsLight5On(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->J_SecretTunnel_Lights_IsLight5On;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->J_SecretTunnel_Lights_IsLight5On = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->J_SecretTunnel_Lights_IsLight5On;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->J_SecretTunnel_Lights_IsLight5On = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_J_SecretTunnel_Lights_IsLight5On() {
-   return J_SecretTunnel_Lights_IsLight5On;
+  return J_SecretTunnel_Lights_IsLight5On;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_O_Upstairs_Stove_IsOn(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->O_Upstairs_Stove_IsOn;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->O_Upstairs_Stove_IsOn = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->O_Upstairs_Stove_IsOn;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->O_Upstairs_Stove_IsOn = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_O_Upstairs_Stove_IsOn() {
-   return O_Upstairs_Stove_IsOn;
+  return O_Upstairs_Stove_IsOn;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_O_Upstairs_CageButton_TimesPressed(int32 NewVal) {
-   if (IsFrozen) return;
-   int32 OrigVal = this->O_Upstairs_CageButton_TimesPressed;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->O_Upstairs_CageButton_TimesPressed = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  int32 OrigVal = this->O_Upstairs_CageButton_TimesPressed;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->O_Upstairs_CageButton_TimesPressed = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 int32 URivenSaveGame::Get_O_Upstairs_CageButton_TimesPressed() {
-   return O_Upstairs_CageButton_TimesPressed;
+  return O_Upstairs_CageButton_TimesPressed;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_O_Upstairs_CageLever_IsUnlocked(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->O_Upstairs_CageLever_IsUnlocked;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->O_Upstairs_CageLever_IsUnlocked = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->O_Upstairs_CageLever_IsUnlocked;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->O_Upstairs_CageLever_IsUnlocked = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_O_Upstairs_CageLever_IsUnlocked() {
-   return O_Upstairs_CageLever_IsUnlocked;
+  return O_Upstairs_CageLever_IsUnlocked;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_O_Upstairs_Cannen_IsPlaying(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->O_Upstairs_Cannen_IsPlaying;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->O_Upstairs_Cannen_IsPlaying = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->O_Upstairs_Cannen_IsPlaying;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->O_Upstairs_Cannen_IsPlaying = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_O_Upstairs_Cannen_IsPlaying() {
-   return O_Upstairs_Cannen_IsPlaying;
+  return O_Upstairs_Cannen_IsPlaying;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_O_Bedroom_Drawer_IsOpen(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->O_Bedroom_Drawer_IsOpen;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->O_Bedroom_Drawer_IsOpen = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->O_Bedroom_Drawer_IsOpen;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->O_Bedroom_Drawer_IsOpen = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_O_Bedroom_Drawer_IsOpen() {
-   return O_Bedroom_Drawer_IsOpen;
+  return O_Bedroom_Drawer_IsOpen;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_S_Dome_CodeA(int32 NewVal) {
-   if (IsFrozen) return;
-   int32 OrigVal = this->S_Dome_CodeA;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->S_Dome_CodeA = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  int32 OrigVal = this->S_Dome_CodeA;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->S_Dome_CodeA = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-int32 URivenSaveGame::Get_S_Dome_CodeA() {
-   return S_Dome_CodeA;
-}
+int32 URivenSaveGame::Get_S_Dome_CodeA() { return S_Dome_CodeA; }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_S_Dome_CodeB(int32 NewVal) {
-   if (IsFrozen) return;
-   int32 OrigVal = this->S_Dome_CodeB;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->S_Dome_CodeB = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  int32 OrigVal = this->S_Dome_CodeB;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->S_Dome_CodeB = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-int32 URivenSaveGame::Get_S_Dome_CodeB() {
-   return S_Dome_CodeB;
-}
+int32 URivenSaveGame::Get_S_Dome_CodeB() { return S_Dome_CodeB; }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_S_Dome_CodeC(int32 NewVal) {
-   if (IsFrozen) return;
-   int32 OrigVal = this->S_Dome_CodeC;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->S_Dome_CodeC = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  int32 OrigVal = this->S_Dome_CodeC;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->S_Dome_CodeC = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-int32 URivenSaveGame::Get_S_Dome_CodeC() {
-   return S_Dome_CodeC;
-}
+int32 URivenSaveGame::Get_S_Dome_CodeC() { return S_Dome_CodeC; }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_S_Dome_CodeD(int32 NewVal) {
-   if (IsFrozen) return;
-   int32 OrigVal = this->S_Dome_CodeD;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->S_Dome_CodeD = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  int32 OrigVal = this->S_Dome_CodeD;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->S_Dome_CodeD = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-int32 URivenSaveGame::Get_S_Dome_CodeD() {
-   return S_Dome_CodeD;
-}
+int32 URivenSaveGame::Get_S_Dome_CodeD() { return S_Dome_CodeD; }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_S_Dome_CodeE(int32 NewVal) {
-   if (IsFrozen) return;
-   int32 OrigVal = this->S_Dome_CodeE;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->S_Dome_CodeE = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  int32 OrigVal = this->S_Dome_CodeE;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->S_Dome_CodeE = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-int32 URivenSaveGame::Get_S_Dome_CodeE() {
-   return S_Dome_CodeE;
-}
+int32 URivenSaveGame::Get_S_Dome_CodeE() { return S_Dome_CodeE; }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_S_Cart_IsAtJungle(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->S_Cart_IsAtJungle;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->S_Cart_IsAtJungle = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->S_Cart_IsAtJungle;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->S_Cart_IsAtJungle = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-bool URivenSaveGame::Get_S_Cart_IsAtJungle() {
-   return S_Cart_IsAtJungle;
-}
+bool URivenSaveGame::Get_S_Cart_IsAtJungle() { return S_Cart_IsAtJungle; }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_S_MaglevTJ_IsSpinnerToRight(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->S_MaglevTJ_IsSpinnerToRight;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->S_MaglevTJ_IsSpinnerToRight = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->S_MaglevTJ_IsSpinnerToRight;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->S_MaglevTJ_IsSpinnerToRight = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_S_MaglevTJ_IsSpinnerToRight() {
-   return S_MaglevTJ_IsSpinnerToRight;
+  return S_MaglevTJ_IsSpinnerToRight;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_S_MaglevTJ_IsAtTemple(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->S_MaglevTJ_IsAtTemple;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->S_MaglevTJ_IsAtTemple = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->S_MaglevTJ_IsAtTemple;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->S_MaglevTJ_IsAtTemple = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_S_MaglevTJ_IsAtTemple() {
-   return S_MaglevTJ_IsAtTemple;
+  return S_MaglevTJ_IsAtTemple;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_S_MaglevBG_IsSpinnerToRight(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->S_MaglevBG_IsSpinnerToRight;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->S_MaglevBG_IsSpinnerToRight = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->S_MaglevBG_IsSpinnerToRight;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->S_MaglevBG_IsSpinnerToRight = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_S_MaglevBG_IsSpinnerToRight() {
-   return S_MaglevBG_IsSpinnerToRight;
+  return S_MaglevBG_IsSpinnerToRight;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_S_MaglevBG_IsAtSurvey(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->S_MaglevBG_IsAtSurvey;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->S_MaglevBG_IsAtSurvey = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->S_MaglevBG_IsAtSurvey;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->S_MaglevBG_IsAtSurvey = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_S_MaglevBG_IsAtSurvey() {
-   return S_MaglevBG_IsAtSurvey;
+  return S_MaglevBG_IsAtSurvey;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_S_MaglevGJ_IsSpinnerToRight(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->S_MaglevGJ_IsSpinnerToRight;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->S_MaglevGJ_IsSpinnerToRight = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->S_MaglevGJ_IsSpinnerToRight;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->S_MaglevGJ_IsSpinnerToRight = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_S_MaglevGJ_IsSpinnerToRight() {
-   return S_MaglevGJ_IsSpinnerToRight;
+  return S_MaglevGJ_IsSpinnerToRight;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_S_MaglevGJ_IsAtJungle(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->S_MaglevGJ_IsAtJungle;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->S_MaglevGJ_IsAtJungle = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->S_MaglevGJ_IsAtJungle;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->S_MaglevGJ_IsAtJungle = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_S_MaglevGJ_IsAtJungle() {
-   return S_MaglevGJ_IsAtJungle;
+  return S_MaglevGJ_IsAtJungle;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-void URivenSaveGame::Set_T_FissurePlateau_CageLever_IsInClosedPosition(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->T_FissurePlateau_CageLever_IsInClosedPosition;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->T_FissurePlateau_CageLever_IsInClosedPosition = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+void URivenSaveGame::Set_T_FissurePlateau_CageLever_IsInClosedPosition(
+    bool NewVal) {
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->T_FissurePlateau_CageLever_IsInClosedPosition;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->T_FissurePlateau_CageLever_IsInClosedPosition = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_T_FissurePlateau_CageLever_IsInClosedPosition() {
-   return T_FissurePlateau_CageLever_IsInClosedPosition;
+  return T_FissurePlateau_CageLever_IsInClosedPosition;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_T_FissurePlateau_Gateroom_Rotation(int32 NewVal) {
-   if (IsFrozen) return;
-   int32 OrigVal = this->T_FissurePlateau_Gateroom_Rotation;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->T_FissurePlateau_Gateroom_Rotation = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  int32 OrigVal = this->T_FissurePlateau_Gateroom_Rotation;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->T_FissurePlateau_Gateroom_Rotation = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 int32 URivenSaveGame::Get_T_FissurePlateau_Gateroom_Rotation() {
-   return T_FissurePlateau_Gateroom_Rotation;
+  return T_FissurePlateau_Gateroom_Rotation;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-void URivenSaveGame::Set_T_FissurePlateau_Gateroom_SelectedBeetle(int32 NewVal) {
-   if (IsFrozen) return;
-   int32 OrigVal = this->T_FissurePlateau_Gateroom_SelectedBeetle;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->T_FissurePlateau_Gateroom_SelectedBeetle = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+void URivenSaveGame::Set_T_FissurePlateau_Gateroom_SelectedBeetle(
+    int32 NewVal) {
+  if (IsFrozen)
+    return;
+  int32 OrigVal = this->T_FissurePlateau_Gateroom_SelectedBeetle;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->T_FissurePlateau_Gateroom_SelectedBeetle = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 int32 URivenSaveGame::Get_T_FissurePlateau_Gateroom_SelectedBeetle() {
-   return T_FissurePlateau_Gateroom_SelectedBeetle;
+  return T_FissurePlateau_Gateroom_SelectedBeetle;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_T_FissurePlateau_Telescope_IsBlocked(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->T_FissurePlateau_Telescope_IsBlocked;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->T_FissurePlateau_Telescope_IsBlocked = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->T_FissurePlateau_Telescope_IsBlocked;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->T_FissurePlateau_Telescope_IsBlocked = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_T_FissurePlateau_Telescope_IsBlocked() {
-   return T_FissurePlateau_Telescope_IsBlocked;
+  return T_FissurePlateau_Telescope_IsBlocked;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_T_FissurePlateau_Telescope_Level(int32 NewVal) {
-   if (IsFrozen) return;
-   int32 OrigVal = this->T_FissurePlateau_Telescope_Level;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->T_FissurePlateau_Telescope_Level = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  int32 OrigVal = this->T_FissurePlateau_Telescope_Level;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->T_FissurePlateau_Telescope_Level = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 int32 URivenSaveGame::Get_T_FissurePlateau_Telescope_Level() {
-   return T_FissurePlateau_Telescope_Level;
+  return T_FissurePlateau_Telescope_Level;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_T_FissurePlateau_Telescope_CodeA(int32 NewVal) {
-   if (IsFrozen) return;
-   int32 OrigVal = this->T_FissurePlateau_Telescope_CodeA;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->T_FissurePlateau_Telescope_CodeA = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  int32 OrigVal = this->T_FissurePlateau_Telescope_CodeA;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->T_FissurePlateau_Telescope_CodeA = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 int32 URivenSaveGame::Get_T_FissurePlateau_Telescope_CodeA() {
-   return T_FissurePlateau_Telescope_CodeA;
+  return T_FissurePlateau_Telescope_CodeA;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_T_FissurePlateau_Telescope_CodeB(int32 NewVal) {
-   if (IsFrozen) return;
-   int32 OrigVal = this->T_FissurePlateau_Telescope_CodeB;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->T_FissurePlateau_Telescope_CodeB = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  int32 OrigVal = this->T_FissurePlateau_Telescope_CodeB;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->T_FissurePlateau_Telescope_CodeB = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 int32 URivenSaveGame::Get_T_FissurePlateau_Telescope_CodeB() {
-   return T_FissurePlateau_Telescope_CodeB;
+  return T_FissurePlateau_Telescope_CodeB;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_T_FissurePlateau_Telescope_CodeC(int32 NewVal) {
-   if (IsFrozen) return;
-   int32 OrigVal = this->T_FissurePlateau_Telescope_CodeC;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->T_FissurePlateau_Telescope_CodeC = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  int32 OrigVal = this->T_FissurePlateau_Telescope_CodeC;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->T_FissurePlateau_Telescope_CodeC = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 int32 URivenSaveGame::Get_T_FissurePlateau_Telescope_CodeC() {
-   return T_FissurePlateau_Telescope_CodeC;
+  return T_FissurePlateau_Telescope_CodeC;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_T_FissurePlateau_Telescope_CodeD(int32 NewVal) {
-   if (IsFrozen) return;
-   int32 OrigVal = this->T_FissurePlateau_Telescope_CodeD;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->T_FissurePlateau_Telescope_CodeD = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  int32 OrigVal = this->T_FissurePlateau_Telescope_CodeD;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->T_FissurePlateau_Telescope_CodeD = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 int32 URivenSaveGame::Get_T_FissurePlateau_Telescope_CodeD() {
-   return T_FissurePlateau_Telescope_CodeD;
+  return T_FissurePlateau_Telescope_CodeD;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_T_FissurePlateau_Telescope_CodeE(int32 NewVal) {
-   if (IsFrozen) return;
-   int32 OrigVal = this->T_FissurePlateau_Telescope_CodeE;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->T_FissurePlateau_Telescope_CodeE = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  int32 OrigVal = this->T_FissurePlateau_Telescope_CodeE;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->T_FissurePlateau_Telescope_CodeE = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 int32 URivenSaveGame::Get_T_FissurePlateau_Telescope_CodeE() {
-   return T_FissurePlateau_Telescope_CodeE;
+  return T_FissurePlateau_Telescope_CodeE;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_T_Airlock_OutsideDoor_IsOpen(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->T_Airlock_OutsideDoor_IsOpen;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->T_Airlock_OutsideDoor_IsOpen = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->T_Airlock_OutsideDoor_IsOpen;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->T_Airlock_OutsideDoor_IsOpen = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_T_Airlock_OutsideDoor_IsOpen() {
-   return T_Airlock_OutsideDoor_IsOpen;
+  return T_Airlock_OutsideDoor_IsOpen;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_T_Airlock_InsideDoor_IsOpen(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->T_Airlock_InsideDoor_IsOpen;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->T_Airlock_InsideDoor_IsOpen = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->T_Airlock_InsideDoor_IsOpen;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->T_Airlock_InsideDoor_IsOpen = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_T_Airlock_InsideDoor_IsOpen() {
-   return T_Airlock_InsideDoor_IsOpen;
+  return T_Airlock_InsideDoor_IsOpen;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_T_SteamCave_Door_IsOpen(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->T_SteamCave_Door_IsOpen;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->T_SteamCave_Door_IsOpen = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->T_SteamCave_Door_IsOpen;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->T_SteamCave_Door_IsOpen = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_T_SteamCave_Door_IsOpen() {
-   return T_SteamCave_Door_IsOpen;
+  return T_SteamCave_Door_IsOpen;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_T_SteamCave_Valve_IsPoweringTelescope(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->T_SteamCave_Valve_IsPoweringTelescope;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->T_SteamCave_Valve_IsPoweringTelescope = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->T_SteamCave_Valve_IsPoweringTelescope;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->T_SteamCave_Valve_IsPoweringTelescope = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_T_SteamCave_Valve_IsPoweringTelescope() {
-   return T_SteamCave_Valve_IsPoweringTelescope;
+  return T_SteamCave_Valve_IsPoweringTelescope;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_T_SpiderChairRoom_Microphone_IsOn(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->T_SpiderChairRoom_Microphone_IsOn;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->T_SpiderChairRoom_Microphone_IsOn = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->T_SpiderChairRoom_Microphone_IsOn;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->T_SpiderChairRoom_Microphone_IsOn = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_T_SpiderChairRoom_Microphone_IsOn() {
-   return T_SpiderChairRoom_Microphone_IsOn;
+  return T_SpiderChairRoom_Microphone_IsOn;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_T_NewTemple_DoorMain_IsOpen(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->T_NewTemple_DoorMain_IsOpen;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->T_NewTemple_DoorMain_IsOpen = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->T_NewTemple_DoorMain_IsOpen;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->T_NewTemple_DoorMain_IsOpen = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_T_NewTemple_DoorMain_IsOpen() {
-   return T_NewTemple_DoorMain_IsOpen;
+  return T_NewTemple_DoorMain_IsOpen;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_T_NewTemple_DoorSide_IsOpen(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->T_NewTemple_DoorSide_IsOpen;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->T_NewTemple_DoorSide_IsOpen = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->T_NewTemple_DoorSide_IsOpen;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->T_NewTemple_DoorSide_IsOpen = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_T_NewTemple_DoorSide_IsOpen() {
-   return T_NewTemple_DoorSide_IsOpen;
+  return T_NewTemple_DoorSide_IsOpen;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_T_Backstage_Dome_IsOpen(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->T_Backstage_Dome_IsOpen;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->T_Backstage_Dome_IsOpen = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->T_Backstage_Dome_IsOpen;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->T_Backstage_Dome_IsOpen = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_T_Backstage_Dome_IsOpen() {
-   return T_Backstage_Dome_IsOpen;
+  return T_Backstage_Dome_IsOpen;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_T_Backstage_Dome_SliderA(int32 NewVal) {
-   if (IsFrozen) return;
-   int32 OrigVal = this->T_Backstage_Dome_SliderA;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->T_Backstage_Dome_SliderA = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  int32 OrigVal = this->T_Backstage_Dome_SliderA;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->T_Backstage_Dome_SliderA = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 int32 URivenSaveGame::Get_T_Backstage_Dome_SliderA() {
-   return T_Backstage_Dome_SliderA;
+  return T_Backstage_Dome_SliderA;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_T_Backstage_Dome_SliderB(int32 NewVal) {
-   if (IsFrozen) return;
-   int32 OrigVal = this->T_Backstage_Dome_SliderB;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->T_Backstage_Dome_SliderB = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  int32 OrigVal = this->T_Backstage_Dome_SliderB;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->T_Backstage_Dome_SliderB = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 int32 URivenSaveGame::Get_T_Backstage_Dome_SliderB() {
-   return T_Backstage_Dome_SliderB;
+  return T_Backstage_Dome_SliderB;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_T_Backstage_Dome_SliderC(int32 NewVal) {
-   if (IsFrozen) return;
-   int32 OrigVal = this->T_Backstage_Dome_SliderC;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->T_Backstage_Dome_SliderC = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  int32 OrigVal = this->T_Backstage_Dome_SliderC;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->T_Backstage_Dome_SliderC = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 int32 URivenSaveGame::Get_T_Backstage_Dome_SliderC() {
-   return T_Backstage_Dome_SliderC;
+  return T_Backstage_Dome_SliderC;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_T_Backstage_Dome_SliderD(int32 NewVal) {
-   if (IsFrozen) return;
-   int32 OrigVal = this->T_Backstage_Dome_SliderD;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->T_Backstage_Dome_SliderD = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  int32 OrigVal = this->T_Backstage_Dome_SliderD;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->T_Backstage_Dome_SliderD = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 int32 URivenSaveGame::Get_T_Backstage_Dome_SliderD() {
-   return T_Backstage_Dome_SliderD;
+  return T_Backstage_Dome_SliderD;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_T_Backstage_Dome_SliderE(int32 NewVal) {
-   if (IsFrozen) return;
-   int32 OrigVal = this->T_Backstage_Dome_SliderE;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->T_Backstage_Dome_SliderE = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  int32 OrigVal = this->T_Backstage_Dome_SliderE;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->T_Backstage_Dome_SliderE = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 int32 URivenSaveGame::Get_T_Backstage_Dome_SliderE() {
-   return T_Backstage_Dome_SliderE;
+  return T_Backstage_Dome_SliderE;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_T_Backstage_BridgeValve_IsWastingSteam(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->T_Backstage_BridgeValve_IsWastingSteam;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->T_Backstage_BridgeValve_IsWastingSteam = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->T_Backstage_BridgeValve_IsWastingSteam;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->T_Backstage_BridgeValve_IsWastingSteam = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_T_Backstage_BridgeValve_IsWastingSteam() {
-   return T_Backstage_BridgeValve_IsWastingSteam;
+  return T_Backstage_BridgeValve_IsWastingSteam;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_T_Backstage_BridgeLever_IsUp(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->T_Backstage_BridgeLever_IsUp;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->T_Backstage_BridgeLever_IsUp = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->T_Backstage_BridgeLever_IsUp;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->T_Backstage_BridgeLever_IsUp = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_T_Backstage_BridgeLever_IsUp() {
-   return T_Backstage_BridgeLever_IsUp;
+  return T_Backstage_BridgeLever_IsUp;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_T_Backstage_Elevator_IsUp(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->T_Backstage_Elevator_IsUp;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->T_Backstage_Elevator_IsUp = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->T_Backstage_Elevator_IsUp;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->T_Backstage_Elevator_IsUp = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_T_Backstage_Elevator_IsUp() {
-   return T_Backstage_Elevator_IsUp;
+  return T_Backstage_Elevator_IsUp;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_T_Backstage_SuperdomeWalkway_IsExtended(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->T_Backstage_SuperdomeWalkway_IsExtended;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->T_Backstage_SuperdomeWalkway_IsExtended = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->T_Backstage_SuperdomeWalkway_IsExtended;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->T_Backstage_SuperdomeWalkway_IsExtended = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_T_Backstage_SuperdomeWalkway_IsExtended() {
-   return T_Backstage_SuperdomeWalkway_IsExtended;
+  return T_Backstage_SuperdomeWalkway_IsExtended;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_T_Backstage_WaffleIron_IsEngaged(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->T_Backstage_WaffleIron_IsEngaged;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->T_Backstage_WaffleIron_IsEngaged = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->T_Backstage_WaffleIron_IsEngaged;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->T_Backstage_WaffleIron_IsEngaged = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_T_Backstage_WaffleIron_IsEngaged() {
-   return T_Backstage_WaffleIron_IsEngaged;
+  return T_Backstage_WaffleIron_IsEngaged;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_P_Exterior_Elevator_IsInCaptiveMode(bool NewVal) {
-   if (IsFrozen) return;
-   bool OrigVal = this->P_Exterior_Elevator_IsInCaptiveMode;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->P_Exterior_Elevator_IsInCaptiveMode = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->P_Exterior_Elevator_IsInCaptiveMode;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->P_Exterior_Elevator_IsInCaptiveMode = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_P_Exterior_Elevator_IsInCaptiveMode() {
-   return P_Exterior_Elevator_IsInCaptiveMode;
+  return P_Exterior_Elevator_IsInCaptiveMode;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_P_Exterior_Lock_CodeA(int32 NewVal) {
-   if (IsFrozen) return;
-   int32 OrigVal = this->P_Exterior_Lock_CodeA;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->P_Exterior_Lock_CodeA = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  int32 OrigVal = this->P_Exterior_Lock_CodeA;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->P_Exterior_Lock_CodeA = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 int32 URivenSaveGame::Get_P_Exterior_Lock_CodeA() {
-   return P_Exterior_Lock_CodeA;
+  return P_Exterior_Lock_CodeA;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_P_Exterior_Lock_CodeB(int32 NewVal) {
-   if (IsFrozen) return;
-   int32 OrigVal = this->P_Exterior_Lock_CodeB;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->P_Exterior_Lock_CodeB = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  int32 OrigVal = this->P_Exterior_Lock_CodeB;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->P_Exterior_Lock_CodeB = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 int32 URivenSaveGame::Get_P_Exterior_Lock_CodeB() {
-   return P_Exterior_Lock_CodeB;
+  return P_Exterior_Lock_CodeB;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_P_Exterior_Lock_CodeC(int32 NewVal) {
-   if (IsFrozen) return;
-   int32 OrigVal = this->P_Exterior_Lock_CodeC;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->P_Exterior_Lock_CodeC = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  int32 OrigVal = this->P_Exterior_Lock_CodeC;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->P_Exterior_Lock_CodeC = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 int32 URivenSaveGame::Get_P_Exterior_Lock_CodeC() {
-   return P_Exterior_Lock_CodeC;
+  return P_Exterior_Lock_CodeC;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_P_Exterior_Lock_CodeD(int32 NewVal) {
-   if (IsFrozen) return;
-   int32 OrigVal = this->P_Exterior_Lock_CodeD;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->P_Exterior_Lock_CodeD = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  int32 OrigVal = this->P_Exterior_Lock_CodeD;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->P_Exterior_Lock_CodeD = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 int32 URivenSaveGame::Get_P_Exterior_Lock_CodeD() {
-   return P_Exterior_Lock_CodeD;
+  return P_Exterior_Lock_CodeD;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_P_Exterior_Lock_CodeE(int32 NewVal) {
-   if (IsFrozen) return;
-   int32 OrigVal = this->P_Exterior_Lock_CodeE;
-   if (OrigVal != NewVal) {
-     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);
-     OldSaveGame->Freeze();
-     this->P_Exterior_Lock_CodeE = NewVal;
-     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-   }
+  if (IsFrozen)
+    return;
+  int32 OrigVal = this->P_Exterior_Lock_CodeE;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->P_Exterior_Lock_CodeE = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
 }
-
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 int32 URivenSaveGame::Get_P_Exterior_Lock_CodeE() {
-   return P_Exterior_Lock_CodeE;
+  return P_Exterior_Lock_CodeE;
 }
 
 /* [[[end]]] */

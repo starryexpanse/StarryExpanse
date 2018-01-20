@@ -23,47 +23,34 @@ void AStrangerController::PostInitializeComponents() {
 void AStrangerController::SetupInputComponent() {
   Super::SetupInputComponent();
 
-  InputComponent->BindAction(
-    "Interact",
-    EInputEvent::IE_Pressed,
-    this,
-    &AStrangerController::Interact
-  );
+  InputComponent->BindAction("Interact", EInputEvent::IE_Pressed, this,
+                             &AStrangerController::Interact);
 
-  InputComponent->BindAction(
-    "Toggle Cursor Mode",
-    EInputEvent::IE_Pressed,
-    this,
-    &AStrangerController::RequestSwitchCursorMode
-  );
+  InputComponent->BindAction("Toggle Cursor Mode", EInputEvent::IE_Pressed,
+                             this,
+                             &AStrangerController::RequestSwitchCursorMode);
 
-  InputComponent->BindAxis(
-    "Spectator_Turn",
-    this,
-    &AStrangerController::AddHorizontalMouse
-  );
+  InputComponent->BindAxis("Spectator_Turn", this,
+                           &AStrangerController::AddHorizontalMouse);
 
-  InputComponent->BindAxis(
-    "Spectator_LookUp",
-    this,
-    &AStrangerController::AddVerticalMouse
-  );
+  InputComponent->BindAxis("Spectator_LookUp", this,
+                           &AStrangerController::AddVerticalMouse);
 }
 
 void AStrangerController::AddHorizontalMouse(float amount) {
-  HorizontalMousePosition = FMath::Clamp(HorizontalMousePosition + amount * InputMouseHorizScale, 0.0f, 1.0f);
+  HorizontalMousePosition = FMath::Clamp(
+      HorizontalMousePosition + amount * InputMouseHorizScale, 0.0f, 1.0f);
 }
 
 void AStrangerController::AddVerticalMouse(float amount) {
-  VerticalMousePosition = FMath::Clamp(VerticalMousePosition + amount * InputMouseVertScale, 0.0f, 1.0f);
+  VerticalMousePosition = FMath::Clamp(
+      VerticalMousePosition + amount * InputMouseVertScale, 0.0f, 1.0f);
 }
 
 void AStrangerController::BeginPlay() {
   auto gameInstance = Cast<URivenGameInstance>(GetWorld()->GetGameInstance());
   gameInstance->GameInstanceVarsChanged.AddDynamic(
-      this,
-      &AStrangerController::PossiblyFreezeOrUnfreeze
-  );
+      this, &AStrangerController::PossiblyFreezeOrUnfreeze);
   this->EnterCursorMode(true);
 }
 
@@ -73,8 +60,7 @@ void AStrangerController::EnterCursorMode(bool fixed) {
     this->IgnoreLookInput = 0;
     HorizontalMousePosition = 0.5;
     VerticalMousePosition = 0.5;
-  }
-  else {
+  } else {
     this->IsCursorLockedToCenter = false;
     this->IgnoreLookInput = 1;
   }
@@ -90,18 +76,13 @@ void AStrangerController::Interact() {
   FVector ViewLocation;
   FRotator ViewRotation;
 
-  this->GetPlayerViewPoint(
-    ViewLocation,
-    ViewRotation
-  );
+  this->GetPlayerViewPoint(ViewLocation, ViewRotation);
   auto viewTarget = this->GetViewTarget();
   if (!viewTarget)
     return;
 
-  auto Cameras = viewTarget->GetComponentsByTag(
-    UCameraComponent::StaticClass(),
-    FName("MainCamera")
-  );
+  auto Cameras = viewTarget->GetComponentsByTag(UCameraComponent::StaticClass(),
+                                                FName("MainCamera"));
 
   if (!Cameras.IsValidIndex(0))
     return;
@@ -110,36 +91,33 @@ void AStrangerController::Interact() {
   if (!Camera)
     return;
 
-  auto hitResult = this->CastInteractionRay(gotHit, ViewLocation, Camera->GetForwardVector());
+  auto hitResult = this->CastInteractionRay(gotHit, ViewLocation,
+                                            Camera->GetForwardVector());
 
   if (gotHit) {
     auto hitActor = hitResult.GetActor();
-    if (
-      hitActor != nullptr &&
-      hitActor->GetClass()->ImplementsInterface(URivenInteractable::StaticClass())
-    ) {
+    if (hitActor != nullptr &&
+        hitActor->GetClass()->ImplementsInterface(
+            URivenInteractable::StaticClass())) {
       IRivenInteractable::Execute_Touched(hitActor);
     }
   }
 }
 
-FHitResult AStrangerController::CastInteractionRay(
-  bool &gotHit,
-  FVector worldLocation,
-  FVector worldDirection) {
+FHitResult AStrangerController::CastInteractionRay(bool &gotHit,
+                                                   FVector worldLocation,
+                                                   FVector worldDirection) {
 
   gotHit = false;
-    
+
   struct FHitResult HitResult;
-    
+
   auto viewTarget = this->GetViewTarget();
   if (!viewTarget)
     return HitResult;
-    
-  auto Cameras = viewTarget->GetComponentsByTag(
-    UCameraComponent::StaticClass(),
-    FName("MainCamera")
-  );
+
+  auto Cameras = viewTarget->GetComponentsByTag(UCameraComponent::StaticClass(),
+                                                FName("MainCamera"));
   if (!Cameras.IsValidIndex(0))
     return HitResult;
 
@@ -148,19 +126,15 @@ FHitResult AStrangerController::CastInteractionRay(
     return HitResult;
 
   FCollisionQueryParams Params = FCollisionQueryParams::DefaultQueryParam;
-  FCollisionResponseParams ResponseParams = FCollisionResponseParams::DefaultResponseParam;
+  FCollisionResponseParams ResponseParams =
+      FCollisionResponseParams::DefaultResponseParam;
 
   const float kRange = 500.0f;
 
   gotHit = GetWorld()->LineTraceSingleByChannel(
-    HitResult,
-    worldLocation,
-    worldLocation + worldDirection * kRange,
-    ECollisionChannel::ECC_Visibility,
-    Params,
-    ResponseParams
-  );
-  
+      HitResult, worldLocation, worldLocation + worldDirection * kRange,
+      ECollisionChannel::ECC_Visibility, Params, ResponseParams);
+
   return HitResult;
 }
 
@@ -171,13 +145,12 @@ void AStrangerController::PossiblyFreezeOrUnfreeze() {
 }
 
 void AStrangerController::Destroyed() {
-    auto gameInstance = Cast<URivenGameInstance>(GetWorld()->GetGameInstance());
-    gameInstance->GameInstanceVarsChanged.RemoveDynamic(
+  auto gameInstance = Cast<URivenGameInstance>(GetWorld()->GetGameInstance());
+  gameInstance->GameInstanceVarsChanged.RemoveDynamic(
       this, &AStrangerController::PossiblyFreezeOrUnfreeze);
 }
 
-
-/* 
+/*
   Overriding UE4 defaults.
 */
 
@@ -192,6 +165,7 @@ void AStrangerController::SetIgnoreMoveInput(bool bNewMoveInput) {
 /*
   Above two:
   Long story short, their implementation does something we should
-  do a little more explicitly, so resetting this to a very simple behavior and we can re-build
+  do a little more explicitly, so resetting this to a very simple behavior and
+  we can re-build
   what they do, later on.
 */

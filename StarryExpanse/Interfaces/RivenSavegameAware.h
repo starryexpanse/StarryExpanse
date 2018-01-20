@@ -17,7 +17,8 @@ class IRivenSavegameAware {
 
 public:
   UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Savegame)
-  void SavegameUpdateNotify(URivenSaveGame *OldSaveGame, URivenSaveGame *NewSaveGame);
+  void SavegameUpdateNotify(URivenSaveGame *OldSaveGame,
+                            URivenSaveGame *NewSaveGame);
 
   UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Savegame)
   void SavegameInitialNotify(URivenSaveGame *CurrentSaveGame);

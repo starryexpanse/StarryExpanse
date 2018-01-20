@@ -29,8 +29,8 @@ public:
   void NotifySubscribersOfChange(URivenSaveGame *OldSaveGame);
 
   UFUNCTION(BlueprintCallable)
-  void SubscribeActorToSavegame(AActor* Actor);
+  void SubscribeActorToSavegame(AActor *Actor);
 
   UFUNCTION(BlueprintCallable)
-  void UnsubscribeActorFromSavegame(AActor* Actor);
+  void UnsubscribeActorFromSavegame(AActor *Actor);
 };
