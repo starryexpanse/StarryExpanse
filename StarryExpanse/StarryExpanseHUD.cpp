@@ -12,16 +12,48 @@
 #include <algorithm>
 
 AStarryExpanseHUD::AStarryExpanseHUD() {
-  // Set the crosshair texture
-  static ConstructorHelpers::FObjectFinder<UTexture2D> CrosshairTexObj(
-      TEXT("Texture2D'/Game/FirstPerson/Textures/"
-           "FirstPersonCrosshair.FirstPersonCrosshair'"));
-  CrosshairTex = CrosshairTexObj.Object;
+  // Resolve textures
+  static ConstructorHelpers::FObjectFinder<UTexture2D> TexHollowRingObj(
+      TEXT("Texture2D'/Game/StarryExpanse/Interface/Cursors/"
+           "T_Cursor_Empty_Ring.T_Cursor_Empty_Ring'"));
+  TexHollowRing = TexHollowRingObj.Object;
+
+  static ConstructorHelpers::FObjectFinder<UTexture2D> TexDotObject(
+    TEXT("Texture2D'/Game/StarryExpanse/Interface/Cursors/"
+      "T_Cursor_Dot.T_Cursor_Dot'"));
+  TexDot = TexDotObject.Object;
 }
 
 FVector2D AStarryExpanseHUD::GetCrosshairDrawPosition(
-    float crosshairHeight, FVector2D screenDims, FVector2D cursorPosition) {
-  return screenDims * cursorPosition - FVector2D(0, crosshairHeight / 2.0);
+    FVector2D crosshairDims, FVector2D screenDims, FVector2D cursorPosition) {
+  return screenDims * cursorPosition - crosshairDims / 2.0;
+}
+
+UTexture2D* AStarryExpanseHUD::GetCursorTexture(FVector2D screenDims, FVector2D cursorPosition) {
+  // Test if cursor hit object and inspect properties for determining which cursor texture to display
+  bool gotHit;
+
+  const FLinearColor kSquareColor(1.0f, 1.0f, 0.0f, 0.3f);
+  auto controller =
+    Cast<AStrangerController>(this->GetOwningPlayerController());
+
+  FVector worldLocation;
+  FVector worldDirection;
+  controller->DeprojectScreenPositionToWorld(screenDims.X * cursorPosition.X, screenDims.Y * cursorPosition.Y,
+    worldLocation, worldDirection);
+  FHitResult result =
+    controller->CastInteractionRay(gotHit, worldLocation, worldDirection);
+
+  if (gotHit) {
+    auto actor = result.GetActor();
+    if (actor != nullptr &&
+      actor->GetClass()->ImplementsInterface(
+        URivenInteractable::StaticClass())) {
+      return TexDot;
+    }
+  }
+  
+  return TexHollowRing;
 }
 
 void AStarryExpanseHUD::DrawHUD() {
@@ -33,61 +65,68 @@ void AStarryExpanseHUD::DrawHUD() {
 
   // Draw very simple crosshair
 
-  FVector2D CursorPosition(FVector2D(0.5, 0.5f));
+  FVector2D cursorPosition(FVector2D(0.5, 0.5f));
 
   bool isLocked;
   if (controller != nullptr) {
     isLocked = controller->IsCursorLockedToCenter;
     if (!isLocked) {
-      CursorPosition = FVector2D(controller->HorizontalMousePosition,
+      cursorPosition = FVector2D(controller->HorizontalMousePosition,
                                  controller->VerticalMousePosition);
     }
   } else {
     isLocked = true; // initial state of controller as of this writing
   }
 
+  auto cursorTex = this->GetCursorTexture(screenDims, cursorPosition);
+  auto actualPixelDims = FVector2D(64, 64);
+
   // offset by half the texture's dimensions so that the center of the texture
   // aligns with the center of the Canvas
   const FVector2D CrosshairDrawPosition =
       AStarryExpanseHUD::GetCrosshairDrawPosition(
-          CrosshairTex->GetSurfaceHeight(), screenDims,
-          isLocked ? FVector2D(0.5, 0.5f) : CursorPosition);
+          actualPixelDims, screenDims,
+          isLocked ? FVector2D(0.5, 0.5f) : cursorPosition);
 
   // draw the crosshair
 
   if (!UHeadMountedDisplayFunctionLibrary::IsHeadMountedDisplayEnabled()) {
-    FCanvasTileItem TileItem(CrosshairDrawPosition, CrosshairTex->Resource,
+    FCanvasTileItem TileItem(CrosshairDrawPosition, cursorTex->Resource,
                              FLinearColor::White);
     TileItem.PivotPoint = FVector2D(0.5, 0.5);
     TileItem.BlendMode = SE_BLEND_Translucent;
+    TileItem.Size = actualPixelDims;
     Canvas->DrawItem(TileItem);
   }
 
-  const float kNumXDivisions = 100.0f;
-  const float kNumYDivisions = 100.0f;
-  const float kSquareWidth = width / kNumXDivisions;
-  const float kSquareHeight = height / kNumYDivisions;
+  // Draw grid of colored tiles for debugging whether hits were reached
+  {
+    const float kNumXDivisions = 100.0f;
+    const float kNumYDivisions = 100.0f;
+    const float kSquareWidth = width / kNumXDivisions;
+    const float kSquareHeight = height / kNumYDivisions;
 
-  bool gotHit;
+    bool gotHit;
 
-  const FLinearColor kSquareColor(1.0f, 1.0f, 0.0f, 0.3f);
+    const FLinearColor kSquareColor(1.0f, 1.0f, 0.0f, 0.3f);
 
-  for (float x = 0.0f; x < width; x += kSquareWidth) {
-    for (float y = 0.0f; y < height; y += kSquareHeight) {
-      FVector worldLocation;
-      FVector worldDirection;
-      controller->DeprojectScreenPositionToWorld(x + kSquareWidth / 2.0f,
-                                                 y + kSquareHeight / 2.0f,
-                                                 worldLocation, worldDirection);
-      FHitResult result =
+    for (float x = 0.0f; x < width; x += kSquareWidth) {
+      for (float y = 0.0f; y < height; y += kSquareHeight) {
+        FVector worldLocation;
+        FVector worldDirection;
+        controller->DeprojectScreenPositionToWorld(x + kSquareWidth / 2.0f,
+          y + kSquareHeight / 2.0f,
+          worldLocation, worldDirection);
+        FHitResult result =
           controller->CastInteractionRay(gotHit, worldLocation, worldDirection);
 
-      if (gotHit) {
-        auto actor = result.GetActor();
-        if (actor != nullptr &&
+        if (gotHit) {
+          auto actor = result.GetActor();
+          if (actor != nullptr &&
             actor->GetClass()->ImplementsInterface(
-                URivenInteractable::StaticClass())) {
-          this->DrawRect(kSquareColor, x, y, kSquareWidth, kSquareHeight);
+              URivenInteractable::StaticClass())) {
+            this->DrawRect(kSquareColor, x, y, kSquareWidth, kSquareHeight);
+          }
         }
       }
     }

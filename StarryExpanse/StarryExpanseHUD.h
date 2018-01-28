@@ -13,14 +13,18 @@ class AStarryExpanseHUD : public AHUD {
 public:
   AStarryExpanseHUD();
 
-  static FVector2D GetCrosshairDrawPosition(float crosshairHeight,
+  static FVector2D GetCrosshairDrawPosition(FVector2D crosshairDims,
                                             FVector2D screenDims,
                                             FVector2D cursorPosition);
+
+  UFUNCTION()
+  UTexture2D *GetCursorTexture(FVector2D screenDims, FVector2D cursorPosition);
 
   /** Primary draw call for the HUD */
   virtual void DrawHUD() override;
 
 private:
   /** Crosshair asset pointer */
-  class UTexture2D *CrosshairTex;
+  class UTexture2D *TexHollowRing;
+  class UTexture2D *TexDot;
 };
