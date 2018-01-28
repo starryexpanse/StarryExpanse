@@ -137,3 +137,7 @@ void ARivenInteractableActor::Touched_Implementation() {
     m_timeline.Play();
   }
 }
+
+//FInteractabilityPollResponse PollInteractability_Implementation() {
+//  return FInteractabilityPollResponse::BasicResponse();
+//}
