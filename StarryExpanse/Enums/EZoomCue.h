@@ -1,4 +1,3 @@
-
 //
 // Copyright, 59 Volt Entertainment, all rights reserved.
 //
@@ -8,13 +7,12 @@
 #pragma once
 
 #include "Engine/UserDefinedEnum.h"
-#include "ZoomCue.generated.h"
+#include "EZoomCue.generated.h"
 
 UENUM(BlueprintType)
 enum class EZoomCue : uint8 {
-,
-  NoZoom UMETA(DisplayName = 'ZoomingOut'),,
-  ZoomingOut UMETA(DisplayName = ZoomingOut),,
-  ZoomingIn UMETA(DisplayName = ZoomingIn),
+  NoZoom UMETA(DisplayName = "No Zoom"),
+  ZoomingOut UMETA(DisplayName = "Zooming Out"),
+  ZoomingIn UMETA(DisplayName = "Zooming In")
 };
 

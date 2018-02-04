@@ -1,7 +1,5 @@
-name='ZoomCue'
-desc='Represents capability of being zoomed in on or off of something'
-#name = input('Enum name, PascalCase:')
-#desc = input('Description of what it represents:')
+name = input('Enum name, PascalCase:')
+desc = input('Description of what it represents:')
 
 contents = ''
 i = 0
@@ -18,17 +16,17 @@ while True:
 
 vars = { 'desc': desc, 'name': name, 'contents': contents }
 
-header = u"""
+body = u"""
 //
 // Copyright, 59 Volt Entertainment, all rights reserved.
 //
 
-#include "Enums/{name}.h"
+#include "Enums/E{name}.h"
 #include "StarryExpanse.h"
 
 """
 
-body = u"""
+header = u"""
 //
 // Copyright, 59 Volt Entertainment, all rights reserved.
 //
@@ -38,7 +36,7 @@ body = u"""
 #pragma once
 
 #include "Engine/UserDefinedEnum.h"
-#include "{name}.generated.h"
+#include "E{name}.generated.h"
 
 UENUM(BlueprintType)
 enum class E{name} : uint8 {{
