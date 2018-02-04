@@ -1,5 +1,5 @@
 //
-// Copyright 2017 59 Volt Entertainment, all rights reserved.
+// Copyright, 59 Volt Entertainment, all rights reserved.
 //
 
 #include "SaveGame/RivenSaveGame.h"

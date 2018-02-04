@@ -1,5 +1,5 @@
 //
-// Copyright 2018 59 Volt Entertainment, all rights reserved.
+// Copyright, 59 Volt Entertainment, all rights reserved.
 //
 #pragma once
 
