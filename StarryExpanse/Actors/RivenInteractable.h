@@ -1,9 +1,10 @@
 //
-// Copyright 2017 59 Volt Entertainment, all rights reserved.
+// Copyright, 59 Volt Entertainment, all rights reserved.
 //
 #pragma once
 
 #include "Object.h"
+#include "Structs/InteractabilityPollResponse.h"
 #include "RivenInteractable.generated.h"
 
 // https://wiki.unrealengine.com/Blueprints,_Empower_Your_Entire_Team_With_BlueprintImplementableEvent
@@ -23,4 +24,7 @@ public:
 
   UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Gameplay)
   void Touched();
+
+  UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Gameplay)
+    FInteractabilityPollResponse PollInteractability();
 };

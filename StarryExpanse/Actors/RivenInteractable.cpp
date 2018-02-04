@@ -1,5 +1,5 @@
 //
-// Copyright 2017 59 Volt Entertainment, all rights reserved.
+// Copyright, 59 Volt Entertainment, all rights reserved.
 //
 #include "RivenInteractable.h"
 
@@ -10,3 +10,8 @@ URivenInteractable::URivenInteractable(
 void IRivenInteractable::LookingAt_Implementation() {}
 
 void IRivenInteractable::Touched_Implementation() {}
+
+FInteractabilityPollResponse IRivenInteractable::PollInteractability_Implementation() {
+  return FInteractabilityPollResponse::BasicResponse();
+}
+

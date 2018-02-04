@@ -1,5 +1,5 @@
 //
-// Copyright 2017 59 Volt Entertainment, all rights reserved.
+// Copyright, 59 Volt Entertainment, all rights reserved.
 //
 #include "RivenInteractableActor.h"
 #include "Engine/Engine.h"
@@ -136,4 +136,8 @@ void ARivenInteractableActor::Touched_Implementation() {
   } else {
     m_timeline.Play();
   }
+}
+
+FInteractabilityPollResponse ARivenInteractableActor::PollInteractability_Implementation() {
+  return FInteractabilityPollResponse::BasicResponse();
 }
