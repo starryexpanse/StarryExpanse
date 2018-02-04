@@ -17,18 +17,18 @@ struct FInteractabilityPollResponse {
   // at the actor level, and a poll should be performed using the actual components.
   // Currently not implemented, but might be nice for Artist Engine Specialists. TODO(philip)
   UPROPERTY(BlueprintReadWrite)
-  bool ShouldScanAtComponentLevel;
+  bool ShouldScanAtComponentLevel = false;
 
   UPROPERTY(BlueprintReadWrite)
-  bool CanBeDragged;
+  bool CanBeDragged = false;
 
   // -1 = zooming out;
   //  0 = not zooming;
   // +1 = zooming in
   UPROPERTY(BlueprintReadWrite)
-  int ZoomCue;
+  int ZoomCue = 0;
 
   // Should be FVector::ZeroVector if no drag axis
   UPROPERTY(BlueprintReadWrite)
-  FVector DragAxisObjectSpace;
+  FVector DragAxisObjectSpace = FVector::ZeroVector;
 };
