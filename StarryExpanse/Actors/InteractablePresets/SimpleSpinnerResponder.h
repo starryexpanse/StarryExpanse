@@ -11,7 +11,7 @@
 #include "Runtime/Engine/Classes/Components/TimelineComponent.h"
 #include "SaveGame/ESaveGameField.h"
 #include "Structs/InteractableSettingsAxial.h"
-#include "SimpleSpinnerBoye.generated.h"
+#include "SimpleSpinnerResponder.generated.h"
 
 //
 // An actor with a single moveable component (static mesh). This class handles
@@ -20,12 +20,12 @@
 // component to that rotation value when initialized.
 //
 UCLASS()
-class STARRYEXPANSE_API ASimpleSpinnerBoye : public AActor,
+class STARRYEXPANSE_API ASimpleSpinnerResponder : public AActor,
                                                   public IRivenInteractable {
   GENERATED_BODY()
 
 public:
-  ASimpleSpinnerBoye(const FObjectInitializer &ObjectInitializer);
+  ASimpleSpinnerResponder(const FObjectInitializer &ObjectInitializer);
 
   // Methods:
   UFUNCTION(BlueprintCallable)
