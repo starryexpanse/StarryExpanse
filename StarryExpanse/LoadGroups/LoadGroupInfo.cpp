@@ -17,7 +17,7 @@ ULoadGroupInfo::ULoadGroupInfo(const FObjectInitializer &ObjectInitializer)
   import sys
   from yaml import load, dump, Loader, Dumper
 
-  stream = open('LoadGroups/LgConfig.yaml', 'r')
+  stream = open('Config/load_group_definitions.yaml', 'r')
   data = load(stream, Loader=Loader)
 
   def flatten(l):

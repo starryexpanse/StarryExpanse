@@ -1,7 +1,7 @@
 //
 // Copyright, 59 Volt Entertainment, all rights reserved.
 //
-#include "Actors/EInteractable.h"
+#include "Enums/EInteractable.h"
 
 FString GetInteractableEnumAsString(EInteractable interactable) {
   const UEnum *EnumPtr =

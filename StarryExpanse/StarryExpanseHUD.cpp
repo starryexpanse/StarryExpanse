@@ -6,7 +6,7 @@
 #include "Engine/Canvas.h"
 #include "Engine/Texture2D.h"
 #include "Runtime/HeadMountedDisplay/Public/HeadMountedDisplayFunctionLibrary.h"
-#include "Actors/RivenInteractable.h"
+#include "Interfaces/RivenInteractable.h"
 #include "TextureResource.h"
 #include "UObject/ConstructorHelpers.h"
 #include <algorithm>
