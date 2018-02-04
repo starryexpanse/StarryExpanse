@@ -3,7 +3,7 @@
 //
 #pragma once
 
-#include "Actors/EInteractable.h"
+#include "Enums/EInteractable.h"
 #include "CoreMinimal.h"
 #include "Enums/EZoomCue.h"
 #include "InteractabilityProbeResponse.generated.h"
