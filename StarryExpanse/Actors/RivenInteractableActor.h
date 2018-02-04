@@ -7,7 +7,7 @@
 #include "GameFramework/Actor.h"
 #include "RivenInteractable.h"
 #include "Runtime/Engine/Classes/Components/StaticMeshComponent.h"
-#include "Structs/InteractabilityPollResponse.h"
+#include "Structs/InteractabilityProbeResponse.h"
 #include "Runtime/Engine/Classes/Components/TimelineComponent.h"
 #include "SaveGame/ESaveGameField.h"
 #include "Structs/InteractableSettingsAxial.h"
@@ -38,7 +38,7 @@ public:
   // RivenInteractable:
   void LookingAt_Implementation() override;
   void Touched_Implementation() override;
-  FInteractabilityPollResponse PollInteractability_Implementation() override;
+  FInteractabilityProbeResponse PollInteractability_Implementation() override;
 
 private:
   UFUNCTION(Category = Gameplay)

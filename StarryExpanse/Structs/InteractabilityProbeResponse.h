@@ -5,13 +5,14 @@
 
 #include "Actors/EInteractable.h"
 #include "CoreMinimal.h"
-#include "InteractabilityPollResponse.generated.h"
+#include "Enums/EZoomCue.h"
+#include "InteractabilityProbeResponse.generated.h"
 
 USTRUCT(BlueprintType)
-struct FInteractabilityPollResponse {
+struct FInteractabilityProbeResponse {
   GENERATED_BODY()
 
-  static FInteractabilityPollResponse BasicResponse();
+  static FInteractabilityProbeResponse BasicResponse();
 
   // Truth here indicates that this struct is not necessarily accurate
   // at the actor level, and a poll should be performed using the actual components.
@@ -26,7 +27,7 @@ struct FInteractabilityPollResponse {
   //  0 = not zooming;
   // +1 = zooming in
   UPROPERTY(BlueprintReadWrite)
-  int ZoomCue = 0;
+    EZoomCue ZoomCue = EZoomCue::NoZoom;
 
   // Should be FVector::ZeroVector if no drag axis
   UPROPERTY(BlueprintReadWrite)

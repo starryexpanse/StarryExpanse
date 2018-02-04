@@ -7,6 +7,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "SaveGame/ESaveGameField.h"
+#include "Enums/EZoomCue.h"
 #include "RivenGameInstanceVars.generated.h"
 
 USTRUCT(BlueprintType)

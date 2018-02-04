@@ -4,7 +4,7 @@
 #pragma once
 
 #include "Object.h"
-#include "Structs/InteractabilityPollResponse.h"
+#include "Structs/InteractabilityProbeResponse.h"
 #include "RivenInteractable.generated.h"
 
 // https://wiki.unrealengine.com/Blueprints,_Empower_Your_Entire_Team_With_BlueprintImplementableEvent
@@ -26,5 +26,5 @@ public:
   void Touched();
 
   UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Gameplay)
-    FInteractabilityPollResponse PollInteractability();
+    FInteractabilityProbeResponse PollInteractability();
 };

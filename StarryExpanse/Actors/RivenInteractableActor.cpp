@@ -138,6 +138,6 @@ void ARivenInteractableActor::Touched_Implementation() {
   }
 }
 
-FInteractabilityPollResponse ARivenInteractableActor::PollInteractability_Implementation() {
-  return FInteractabilityPollResponse::BasicResponse();
+FInteractabilityProbeResponse ARivenInteractableActor::PollInteractability_Implementation() {
+  return FInteractabilityProbeResponse::BasicResponse();
 }
