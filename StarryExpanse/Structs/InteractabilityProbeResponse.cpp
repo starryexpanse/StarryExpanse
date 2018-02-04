@@ -10,7 +10,7 @@ FInteractabilityProbeResponse FInteractabilityProbeResponse::BasicResponse() {
 
   response.CanBeDragged = false;
   response.DragAxisObjectSpace = FVector::ZeroVector;
-  response.Zoomyness = EZoomCue::NoZoom;
+  response.ZoomCue = EZoomCue::NoZoom;
   response.ShouldScanAtComponentLevel = false;
 
   return response;
