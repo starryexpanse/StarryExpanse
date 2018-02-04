@@ -4,8 +4,8 @@
 
 #include "InteractabilityPollResponse.h"
 
-FInteractabilityPollResponse FInteractabilityPollResponse::BasicResponse() {
-  FInteractabilityPollResponse response;
+FInteractabilityProbeResponse FInteractabilityProbeResponse::BasicResponse() {
+  FInteractabilityProbeResponse response;
 
   response.CanBeDragged = false;
   response.DragAxisObjectSpace = FVector::ZeroVector;

@@ -1,5 +1,5 @@
 //
-// Copyright 2017 59 Volt Entertainment, all rights reserved.
+// Copyright 2018 59 Volt Entertainment, all rights reserved.
 //
 #pragma once
 
@@ -26,7 +26,7 @@ struct FInteractabilityPollResponse {
   //  0 = not zooming;
   // +1 = zooming in
   UPROPERTY(BlueprintReadWrite)
-  int Zoomyness;
+  int ZoomCue;
 
   // Should be FVector::ZeroVector if no drag axis
   UPROPERTY(BlueprintReadWrite)
