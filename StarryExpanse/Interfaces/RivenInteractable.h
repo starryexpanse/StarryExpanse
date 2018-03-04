@@ -26,5 +26,5 @@ public:
   void Touched();
 
   UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Gameplay)
-    FInteractabilityProbeResponse PollInteractability();
+    FInteractabilityProbeResponse ProbeInteractability();
 };

@@ -38,7 +38,7 @@ public:
   // RivenInteractable:
   void LookingAt_Implementation() override;
   void Touched_Implementation() override;
-  FInteractabilityProbeResponse PollInteractability_Implementation() override;
+  FInteractabilityProbeResponse ProbeInteractability_Implementation() override;
 
 private:
   UFUNCTION(Category = Gameplay)

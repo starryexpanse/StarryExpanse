@@ -27,4 +27,5 @@ private:
   /** Crosshair asset pointer */
   class UTexture2D *TexHollowRing;
   class UTexture2D *TexDot;
+  class UTexture2D *TexZoomOut;
 };

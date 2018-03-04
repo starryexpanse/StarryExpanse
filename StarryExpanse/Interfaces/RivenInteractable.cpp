@@ -11,7 +11,7 @@ void IRivenInteractable::LookingAt_Implementation() {}
 
 void IRivenInteractable::Touched_Implementation() {}
 
-FInteractabilityProbeResponse IRivenInteractable::PollInteractability_Implementation() {
+FInteractabilityProbeResponse IRivenInteractable::ProbeInteractability_Implementation() {
   return FInteractabilityProbeResponse::BasicResponse();
 }
 

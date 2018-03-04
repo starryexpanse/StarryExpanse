@@ -22,6 +22,11 @@ AStarryExpanseHUD::AStarryExpanseHUD() {
     TEXT("Texture2D'/Game/StarryExpanse/Interface/Cursors/"
       "T_Cursor_Dot.T_Cursor_Dot'"));
   TexDot = TexDotObject.Object;
+
+  static ConstructorHelpers::FObjectFinder<UTexture2D> TexZoomOutObject(
+    TEXT("Texture2D'/Game/StarryExpanse/Interface/Cursors/"
+      "T_Cursor_Zoom_Out.T_Cursor_Zoom_Out'"));
+  TexZoomOut = TexZoomOutObject.Object;
 }
 
 FVector2D AStarryExpanseHUD::GetCrosshairDrawPosition(
@@ -49,7 +54,15 @@ UTexture2D* AStarryExpanseHUD::GetCursorTexture(FVector2D screenDims, FVector2D 
     if (actor != nullptr &&
       actor->GetClass()->ImplementsInterface(
         URivenInteractable::StaticClass())) {
-      return TexDot;
+      auto probeResult = IRivenInteractable::Execute_ProbeInteractability(actor);
+      switch (probeResult.ZoomCue) {
+        case EZoomCue::ZoomingOut:
+          return TexZoomOut;
+        case EZoomCue::NoZoom:
+        default:
+          return TexDot;
+      }
+
     }
   }
   
