@@ -10,7 +10,18 @@
 #include "LoadGroupInfo.generated.h"
 
 typedef std::set<FName> SetType;
-typedef std::map<ELoadGroups, SetType> MapType;
+
+struct LoadgroupInfoEntry {
+  SetType Levels;
+  FString Name;
+
+  LoadgroupInfoEntry(FString Name, SetType Levels) {
+    this->Levels = Levels;
+    this->Name = Name;
+  }
+};
+
+typedef std::map<ELoadGroups, LoadgroupInfoEntry> MapType;
 
 static MapType LoadGroups;
 
@@ -20,6 +31,9 @@ class STARRYEXPANSE_API ULoadGroupInfo : public UBlueprintFunctionLibrary {
 
   UFUNCTION(BlueprintPure, BlueprintCallable, Category = "Load Groups")
   static bool IsLevelInLoadGroup(FName level, ELoadGroups lg);
+
+  UFUNCTION(BlueprintPure, BlueprintCallable, Category = "Load Groups")
+  static TArray<FString> GetLoadgroupNamesStartingWith(FString prefix);
 
   static SetType GetLevelsInLoadGroup(ELoadGroups lg);
   static SetType GetLevelsToBeUnloaded(ELoadGroups lgCurrent,
