@@ -5,154 +5,307 @@
 ULoadGroupInfo::ULoadGroupInfo(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer) {
 
-  typedef std::pair<ELoadGroups, std::set<FName>> Pair;
+  typedef std::pair<ELoadGroups, LoadgroupInfoEntry> LgEntry;
 
-  LoadGroups.insert(Pair(ELoadGroups::AAbsoluteZero, {}));
+  LoadGroups.insert(LgEntry(ELoadGroups::AAbsoluteZero, LoadgroupInfoEntry(
+    FString("AAbsoluteZero"),
+    {}
+  )));
 
   /*
-  [[[cog
-  import cog
-  import os
-  from io import open
-  import sys
-  from yaml import load, dump, Loader, Dumper
+    [[[cog
+    import cog
+    import os
+    from io import open
+    import sys
+    from yaml import load, dump, Loader, Dumper
 
-  stream = open('Config/load_group_definitions.yaml', 'r')
-  data = load(stream, Loader=Loader)
+    stream = open('Config/load_group_definitions.yaml', 'r')
+    data = load(stream, Loader=Loader)
 
-  def flatten(l):
-     accum = []
-     for item in l:
-        if type(item) == list:
-           accum = accum + flatten(item)
-        else:
-           accum.append(item)
-     return accum
+    def flatten(l):
+       accum = []
+       for item in l:
+          if type(item) == list:
+             accum = accum + flatten(item)
+          else:
+             accum.append(item)
+       return accum
 
-  for loadgroup, sublevels in data.items():
-     sublevels = flatten(sublevels)
-     cog.outl('LoadGroups.insert(Pair(')
-     cog.outl('    ELoadGroups::%s,' % loadgroup)
-     cog.outl('    {')
-     for i, sublevel in enumerate(sublevels):
-        is_last = i == len(sublevels) - 1
-        comma = ',' if not is_last else ''
-        cog.outl('        TEXT("%s")%s' % (sublevel, comma))
-     cog.outl('    }')
-     cog.outl('));')
-     cog.outl('')
-  ]]] */
-  LoadGroups.insert(
-      Pair(ELoadGroups::MysteriumShowOff,
-           {TEXT("G_BubbleGarden"), TEXT("G_Terrain"), TEXT("G_SpikeGarden")}));
+    for loadgroup, sublevels in data.items():
+       sublevels = flatten(sublevels)
+       cog.outl('LoadGroups.insert(LgEntry(')
+       cog.outl('    ELoadGroups::%s,' % loadgroup)
+       cog.outl('    LoadgroupInfoEntry(FString("%s"),' % loadgroup)
+       cog.outl('    {')
+       for i, sublevel in enumerate(sublevels):
+          is_last = i == len(sublevels) - 1
+          comma = ',' if not is_last else ''
+          cog.outl('        FName("%s")%s' % (sublevel, comma))
+       cog.outl('    }')
+       cog.outl(')));')
+       cog.outl('')
+    ]]] */
+    LoadGroups.insert(LgEntry(
+        ELoadGroups::MysteriumShowOff,
+        LoadgroupInfoEntry(FString("MysteriumShowOff"),
+        {
+            FName("G_BubbleGarden"),
+            FName("G_Terrain"),
+            FName("G_SpikeGarden")
+        }
+    )));
 
-  LoadGroups.insert(Pair(ELoadGroups::AGeneral,
-                         {TEXT("A_Journals"), TEXT("G_BubbleGarden"),
-                          TEXT("G_Terrain"), TEXT("G_SpikeGarden")}));
+    LoadGroups.insert(LgEntry(
+        ELoadGroups::AGeneral,
+        LoadgroupInfoEntry(FString("AGeneral"),
+        {
+            FName("A_Journals"),
+            FName("G_BubbleGarden"),
+            FName("G_Terrain"),
+            FName("G_SpikeGarden")
+        }
+    )));
 
-  LoadGroups.insert(
-      Pair(ELoadGroups::SRivenBase,
-           {TEXT("S_Lighting_Riven"), TEXT("S_PostProcessing_Riven"),
-            TEXT("S_Ocean_Riven")}));
+    LoadGroups.insert(LgEntry(
+        ELoadGroups::SRivenBase,
+        LoadgroupInfoEntry(FString("SRivenBase"),
+        {
+            FName("S_Lighting_Riven"),
+            FName("S_PostProcessing_Riven"),
+            FName("S_Ocean_Riven")
+        }
+    )));
 
-  LoadGroups.insert(
-      Pair(ELoadGroups::BBase,
-           {TEXT("A_Journals"), TEXT("G_BubbleGarden"), TEXT("G_Terrain"),
-            TEXT("G_SpikeGarden"), TEXT("S_Lighting_Riven"),
-            TEXT("S_PostProcessing_Riven"), TEXT("S_Ocean_Riven"),
-            TEXT("B_Terrain_Structures")}));
+    LoadGroups.insert(LgEntry(
+        ELoadGroups::BBase,
+        LoadgroupInfoEntry(FString("BBase"),
+        {
+            FName("A_Journals"),
+            FName("G_BubbleGarden"),
+            FName("G_Terrain"),
+            FName("G_SpikeGarden"),
+            FName("S_Lighting_Riven"),
+            FName("S_PostProcessing_Riven"),
+            FName("S_Ocean_Riven"),
+            FName("B_Terrain_Structures")
+        }
+    )));
 
-  LoadGroups.insert(Pair(
-      ELoadGroups::BEastSide,
-      {TEXT("A_Journals"), TEXT("G_BubbleGarden"), TEXT("G_Terrain"),
-       TEXT("G_SpikeGarden"), TEXT("S_Lighting_Riven"),
-       TEXT("S_PostProcessing_Riven"), TEXT("S_Ocean_Riven"),
-       TEXT("B_Terrain_Structures"), TEXT("S_GreatBridge"), TEXT("T_SuperDome"),
-       TEXT("T_Terrain"), TEXT("B_UpperWalkwayTunnel"),
-       TEXT("B_CartTrack_Structures"), TEXT("B_GehnLab")}));
+    LoadGroups.insert(LgEntry(
+        ELoadGroups::BEastSide,
+        LoadgroupInfoEntry(FString("BEastSide"),
+        {
+            FName("A_Journals"),
+            FName("G_BubbleGarden"),
+            FName("G_Terrain"),
+            FName("G_SpikeGarden"),
+            FName("S_Lighting_Riven"),
+            FName("S_PostProcessing_Riven"),
+            FName("S_Ocean_Riven"),
+            FName("B_Terrain_Structures"),
+            FName("S_GreatBridge"),
+            FName("T_SuperDome"),
+            FName("T_Terrain"),
+            FName("B_UpperWalkwayTunnel"),
+            FName("B_CartTrack_Structures"),
+            FName("B_GehnLab")
+        }
+    )));
 
-  LoadGroups.insert(
-      Pair(ELoadGroups::GBase,
-           {TEXT("A_Journals"), TEXT("G_BubbleGarden"), TEXT("G_Terrain"),
-            TEXT("G_SpikeGarden"), TEXT("S_Lighting_Riven"),
-            TEXT("S_PostProcessing_Riven"), TEXT("S_Ocean_Riven")}));
+    LoadGroups.insert(LgEntry(
+        ELoadGroups::GBase,
+        LoadgroupInfoEntry(FString("GBase"),
+        {
+            FName("A_Journals"),
+            FName("G_BubbleGarden"),
+            FName("G_Terrain"),
+            FName("G_SpikeGarden"),
+            FName("S_Lighting_Riven"),
+            FName("S_PostProcessing_Riven"),
+            FName("S_Ocean_Riven")
+        }
+    )));
 
-  LoadGroups.insert(Pair(ELoadGroups::GUpsideBase,
-                         {TEXT("G_Terrain"), TEXT("G_WahrkTankUpper"),
-                          TEXT("G_BubbleGarden"), TEXT("G_Connector")}));
+    LoadGroups.insert(LgEntry(
+        ELoadGroups::GUpsideBase,
+        LoadgroupInfoEntry(FString("GUpsideBase"),
+        {
+            FName("G_Terrain"),
+            FName("G_WahrkTankUpper"),
+            FName("G_BubbleGarden"),
+            FName("G_Connector")
+        }
+    )));
 
-  LoadGroups.insert(
-      Pair(ELoadGroups::GUpsideExterior,
-           {TEXT("A_Journals"), TEXT("G_BubbleGarden"), TEXT("G_Terrain"),
-            TEXT("G_SpikeGarden"), TEXT("S_Lighting_Riven"),
-            TEXT("S_PostProcessing_Riven"), TEXT("S_Ocean_Riven"),
-            TEXT("G_Terrain"), TEXT("G_WahrkTankUpper"), TEXT("G_BubbleGarden"),
-            TEXT("G_Connector"), TEXT("G_SpikeGarden")}));
+    LoadGroups.insert(LgEntry(
+        ELoadGroups::GUpsideExterior,
+        LoadgroupInfoEntry(FString("GUpsideExterior"),
+        {
+            FName("A_Journals"),
+            FName("G_BubbleGarden"),
+            FName("G_Terrain"),
+            FName("G_SpikeGarden"),
+            FName("S_Lighting_Riven"),
+            FName("S_PostProcessing_Riven"),
+            FName("S_Ocean_Riven"),
+            FName("G_Terrain"),
+            FName("G_WahrkTankUpper"),
+            FName("G_BubbleGarden"),
+            FName("G_Connector"),
+            FName("G_SpikeGarden")
+        }
+    )));
 
-  LoadGroups.insert(
-      Pair(ELoadGroups::GUpsideInterior,
-           {TEXT("A_Journals"), TEXT("G_BubbleGarden"), TEXT("G_Terrain"),
-            TEXT("G_SpikeGarden"), TEXT("S_Lighting_Riven"),
-            TEXT("S_PostProcessing_Riven"), TEXT("S_Ocean_Riven"),
-            TEXT("G_Terrain"), TEXT("G_WahrkTankUpper"), TEXT("G_BubbleGarden"),
-            TEXT("G_Connector"), TEXT("G_MaglevDock_B")}));
+    LoadGroups.insert(LgEntry(
+        ELoadGroups::GUpsideInterior,
+        LoadgroupInfoEntry(FString("GUpsideInterior"),
+        {
+            FName("A_Journals"),
+            FName("G_BubbleGarden"),
+            FName("G_Terrain"),
+            FName("G_SpikeGarden"),
+            FName("S_Lighting_Riven"),
+            FName("S_PostProcessing_Riven"),
+            FName("S_Ocean_Riven"),
+            FName("G_Terrain"),
+            FName("G_WahrkTankUpper"),
+            FName("G_BubbleGarden"),
+            FName("G_Connector"),
+            FName("G_MaglevDock_B")
+        }
+    )));
 
-  LoadGroups.insert(
-      Pair(ELoadGroups::GDownside,
-           {TEXT("A_Journals"), TEXT("G_BubbleGarden"), TEXT("G_Terrain"),
-            TEXT("G_SpikeGarden"), TEXT("S_Lighting_Riven"),
-            TEXT("S_PostProcessing_Riven"), TEXT("S_Ocean_Riven"),
-            TEXT("G_MaglevDock_J"), TEXT("G_WahrkTankLower")}));
+    LoadGroups.insert(LgEntry(
+        ELoadGroups::GDownside,
+        LoadgroupInfoEntry(FString("GDownside"),
+        {
+            FName("A_Journals"),
+            FName("G_BubbleGarden"),
+            FName("G_Terrain"),
+            FName("G_SpikeGarden"),
+            FName("S_Lighting_Riven"),
+            FName("S_PostProcessing_Riven"),
+            FName("S_Ocean_Riven"),
+            FName("G_MaglevDock_J"),
+            FName("G_WahrkTankLower")
+        }
+    )));
 
-  LoadGroups.insert(
-      Pair(ELoadGroups::TBase,
-           {TEXT("A_Journals"), TEXT("G_BubbleGarden"), TEXT("G_Terrain"),
-            TEXT("G_SpikeGarden"), TEXT("S_Lighting_Riven"),
-            TEXT("S_PostProcessing_Riven"), TEXT("S_Ocean_Riven"),
-            TEXT("T_Terrain")}));
+    LoadGroups.insert(LgEntry(
+        ELoadGroups::TBase,
+        LoadgroupInfoEntry(FString("TBase"),
+        {
+            FName("A_Journals"),
+            FName("G_BubbleGarden"),
+            FName("G_Terrain"),
+            FName("G_SpikeGarden"),
+            FName("S_Lighting_Riven"),
+            FName("S_PostProcessing_Riven"),
+            FName("S_Ocean_Riven"),
+            FName("T_Terrain")
+        }
+    )));
 
-  LoadGroups.insert(Pair(
-      ELoadGroups::TWestSide,
-      {TEXT("A_Journals"), TEXT("G_BubbleGarden"), TEXT("G_Terrain"),
-       TEXT("G_SpikeGarden"), TEXT("S_Lighting_Riven"),
-       TEXT("S_PostProcessing_Riven"), TEXT("S_Ocean_Riven"), TEXT("T_Terrain"),
-       TEXT("B_CartTrack_Structures"), TEXT("B_Terrain_Structures"),
-       TEXT("S_GreatBridge"), TEXT("T_SuperDome"), TEXT("T_GateRoom")}));
+    LoadGroups.insert(LgEntry(
+        ELoadGroups::TWestSide,
+        LoadgroupInfoEntry(FString("TWestSide"),
+        {
+            FName("A_Journals"),
+            FName("G_BubbleGarden"),
+            FName("G_Terrain"),
+            FName("G_SpikeGarden"),
+            FName("S_Lighting_Riven"),
+            FName("S_PostProcessing_Riven"),
+            FName("S_Ocean_Riven"),
+            FName("T_Terrain"),
+            FName("B_CartTrack_Structures"),
+            FName("B_Terrain_Structures"),
+            FName("S_GreatBridge"),
+            FName("T_SuperDome"),
+            FName("T_GateRoom")
+        }
+    )));
 
-  LoadGroups.insert(Pair(
-      ELoadGroups::TNorthSide,
-      {TEXT("A_Journals"), TEXT("G_BubbleGarden"), TEXT("G_Terrain"),
-       TEXT("G_SpikeGarden"), TEXT("S_Lighting_Riven"),
-       TEXT("S_PostProcessing_Riven"), TEXT("S_Ocean_Riven"), TEXT("T_Terrain"),
-       TEXT("B_CartTrack_Structures"), TEXT("B_Terrain_Structures"),
-       TEXT("S_GreatBridge"), TEXT("T_GateRoom"), TEXT("T_SuperDome")}));
+    LoadGroups.insert(LgEntry(
+        ELoadGroups::TNorthSide,
+        LoadgroupInfoEntry(FString("TNorthSide"),
+        {
+            FName("A_Journals"),
+            FName("G_BubbleGarden"),
+            FName("G_Terrain"),
+            FName("G_SpikeGarden"),
+            FName("S_Lighting_Riven"),
+            FName("S_PostProcessing_Riven"),
+            FName("S_Ocean_Riven"),
+            FName("T_Terrain"),
+            FName("B_CartTrack_Structures"),
+            FName("B_Terrain_Structures"),
+            FName("S_GreatBridge"),
+            FName("T_GateRoom"),
+            FName("T_SuperDome")
+        }
+    )));
 
-  LoadGroups.insert(
-      Pair(ELoadGroups::TFissureDistrict,
-           {TEXT("A_Journals"), TEXT("G_BubbleGarden"), TEXT("G_Terrain"),
-            TEXT("G_SpikeGarden"), TEXT("S_Lighting_Riven"),
-            TEXT("S_PostProcessing_Riven"), TEXT("S_Ocean_Riven"),
-            TEXT("T_Terrain"), TEXT("T_GateRoom"), TEXT("T_Plateaus"),
-            TEXT("T_NewTemple"), TEXT("T_SuperDome")}));
+    LoadGroups.insert(LgEntry(
+        ELoadGroups::TFissureDistrict,
+        LoadgroupInfoEntry(FString("TFissureDistrict"),
+        {
+            FName("A_Journals"),
+            FName("G_BubbleGarden"),
+            FName("G_Terrain"),
+            FName("G_SpikeGarden"),
+            FName("S_Lighting_Riven"),
+            FName("S_PostProcessing_Riven"),
+            FName("S_Ocean_Riven"),
+            FName("T_Terrain"),
+            FName("T_GateRoom"),
+            FName("T_Plateaus"),
+            FName("T_NewTemple"),
+            FName("T_SuperDome")
+        }
+    )));
 
-  LoadGroups.insert(
-      Pair(ELoadGroups::TSpiderTunnelDistrict,
-           {TEXT("A_Journals"), TEXT("G_BubbleGarden"), TEXT("G_Terrain"),
-            TEXT("G_SpikeGarden"), TEXT("S_Lighting_Riven"),
-            TEXT("S_PostProcessing_Riven"), TEXT("S_Ocean_Riven"),
-            TEXT("T_Terrain"), TEXT("T_GateRoom"), TEXT("T_Plateaus"),
-            TEXT("T_SpiderChairRoomInterior"), TEXT("T_NewTemple"),
-            TEXT("S_Maglev_TJ"), TEXT("T_SuperDome")}));
+    LoadGroups.insert(LgEntry(
+        ELoadGroups::TSpiderTunnelDistrict,
+        LoadgroupInfoEntry(FString("TSpiderTunnelDistrict"),
+        {
+            FName("A_Journals"),
+            FName("G_BubbleGarden"),
+            FName("G_Terrain"),
+            FName("G_SpikeGarden"),
+            FName("S_Lighting_Riven"),
+            FName("S_PostProcessing_Riven"),
+            FName("S_Ocean_Riven"),
+            FName("T_Terrain"),
+            FName("T_GateRoom"),
+            FName("T_Plateaus"),
+            FName("T_SpiderChairRoomInterior"),
+            FName("T_NewTemple"),
+            FName("S_Maglev_TJ"),
+            FName("T_SuperDome")
+        }
+    )));
 
-  LoadGroups.insert(
-      Pair(ELoadGroups::TMaglevDistrict,
-           {TEXT("A_Journals"), TEXT("G_BubbleGarden"), TEXT("G_Terrain"),
-            TEXT("G_SpikeGarden"), TEXT("S_Lighting_Riven"),
-            TEXT("S_PostProcessing_Riven"), TEXT("S_Ocean_Riven"),
-            TEXT("T_Terrain"), TEXT("B_CartTrack_Structures"),
-            TEXT("B_Terrain_Structures"), TEXT("S_Maglev_TJ")}));
+    LoadGroups.insert(LgEntry(
+        ELoadGroups::TMaglevDistrict,
+        LoadgroupInfoEntry(FString("TMaglevDistrict"),
+        {
+            FName("A_Journals"),
+            FName("G_BubbleGarden"),
+            FName("G_Terrain"),
+            FName("G_SpikeGarden"),
+            FName("S_Lighting_Riven"),
+            FName("S_PostProcessing_Riven"),
+            FName("S_Ocean_Riven"),
+            FName("T_Terrain"),
+            FName("B_CartTrack_Structures"),
+            FName("B_Terrain_Structures"),
+            FName("S_Maglev_TJ")
+        }
+    )));
 
-  // [[[end]]]
+    // [[[end]]]
 }
 
 bool ULoadGroupInfo::IsLevelInLoadGroup(FName level, ELoadGroups lg) {
@@ -161,7 +314,7 @@ bool ULoadGroupInfo::IsLevelInLoadGroup(FName level, ELoadGroups lg) {
     return false;
   }
 
-  SetType map = it->second;
+  SetType map = it->second.Levels;
 
   SetType::iterator it2 = map.find(level);
   if (it2 == map.end()) {
@@ -176,7 +329,7 @@ SetType ULoadGroupInfo::GetLevelsInLoadGroup(ELoadGroups lg) {
     return SetType();
   }
 
-  SetType levels = it->second;
+  SetType levels = it->second.Levels;
   return levels;
 }
 
@@ -204,6 +357,17 @@ SetType ULoadGroupInfo::GetLevelsToBeLoaded(ELoadGroups lgCurrent,
     }
   }
   return loadingSet;
+}
+
+TArray<FString> ULoadGroupInfo::GetLoadgroupNamesStartingWith(FString prefix) {
+  TArray<FString> result;
+  for (const auto &pair : LoadGroups) {
+    auto name = pair.second.Name;
+    if (name.StartsWith(prefix)) {
+      result.Add(name);
+    }
+  }
+  return result;
 }
 
 //
