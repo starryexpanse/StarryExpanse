@@ -138,6 +138,6 @@ void ASimpleSpinnerResponder::Touched_Implementation() {
   }
 }
 
-FInteractabilityProbeResponse ASimpleSpinnerResponder::PollInteractability_Implementation() {
+FInteractabilityProbeResponse ASimpleSpinnerResponder::ProbeInteractability_Implementation() {
   return FInteractabilityProbeResponse::BasicResponse();
 }
