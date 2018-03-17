@@ -6,12 +6,13 @@
 #include "Kismet/GameplayStatics.h"
 #include "RivenGameState.h"
 #include "Runtime/CoreUObject/Public/UObject/ConstructorHelpers.h"
+#include "Runtime/Engine/Classes/Engine/EngineTypes.h"
 #include "Runtime/Engine/Classes/Engine/GameViewportClient.h"
 #include "Structs/InteractableSettingsAxial.h"
 
 ASimpleSpinnerResponder::ASimpleSpinnerResponder(
     const FObjectInitializer &ObjectInitializer)
-    : Super(ObjectInitializer) {
+    : AActor(ObjectInitializer) {
   PrimaryActorTick.bCanEverTick = true;
   // TODO(cmumford): Should only enable ticks when animation is running.
   PrimaryActorTick.bStartWithTickEnabled = true;
@@ -56,10 +57,10 @@ void ASimpleSpinnerResponder::AnimationDone() {
                                       at_end); // TODO: ^ is_false_at_end
 }
 
-void ASimpleSpinnerResponder::BeginPlay() { Super::BeginPlay(); }
+void ASimpleSpinnerResponder::BeginPlay() { AActor::BeginPlay(); }
 
 void ASimpleSpinnerResponder::Tick(float DeltaTime) {
-  Super::Tick(DeltaTime);
+  AActor::Tick(DeltaTime);
   m_timeline.TickTimeline(DeltaTime);
 }
 
@@ -119,7 +120,7 @@ void ASimpleSpinnerResponder::Initialize(FInteractableSettingsAxial settings) {
   }
 }
 
-void ASimpleSpinnerResponder::LookingAt_Implementation() {
+void ASimpleSpinnerResponder::LookingAt_Begin_Implementation() {
   UGameInstance *game = GetGameInstance();
   if (!game)
     return;
@@ -128,6 +129,20 @@ void ASimpleSpinnerResponder::LookingAt_Implementation() {
     engine->AddOnScreenDebugMessage(INDEX_NONE, 10, FColor::Yellow,
                                     "Looking at the actor.");
   }
+}
+
+void ASimpleSpinnerResponder::LookingAt_End_Implementation() {
+}
+
+void ASimpleSpinnerResponder::Extra_Drag_Details_Available_Implementation(FHitResult HitInfo) {
+}
+
+FDragCallbackPreferences ASimpleSpinnerResponder::Drag_Begin_Implementation(FHitResult HitInfo, FVector2D Origin, AActor* DragOwner) {
+  return FDragCallbackPreferences::NoUpdates();
+}
+
+void ASimpleSpinnerResponder::Drag_Finished_Implementation(FHitResult HitInfo, FVector2D Origin, FVector2D SmallDelta, FVector2D OverallDelta, bool WasDragCanceled) {
+
 }
 
 void ASimpleSpinnerResponder::Touched_Implementation() {
@@ -141,3 +156,8 @@ void ASimpleSpinnerResponder::Touched_Implementation() {
 FInteractabilityProbeResponse ASimpleSpinnerResponder::ProbeInteractability_Implementation() {
   return FInteractabilityProbeResponse::BasicResponse();
 }
+
+void ASimpleSpinnerResponder::Drag_Update_Implementation(FVector2D Origin, FVector2D SmallDelta, FVector2D OverallDelta) {
+
+}
+
