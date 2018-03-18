@@ -75,7 +75,7 @@ public:
         p("")
 
   ]]] */
-  public:
+public:
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
   ELoadGroups A_LoadGroups_CurrentLoadGroup;
 
@@ -385,7 +385,7 @@ public:
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
   int32 P_Exterior_Lock_CodeE;
 
-  private:
+private:
   UFUNCTION(BlueprintCallable, Category = SaveGame)
   void Set_A_LoadGroups_CurrentLoadGroup(ELoadGroups NewVal);
 

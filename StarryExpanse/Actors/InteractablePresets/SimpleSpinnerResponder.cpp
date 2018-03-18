@@ -131,19 +131,19 @@ void ASimpleSpinnerResponder::LookingAt_Begin_Implementation() {
   }
 }
 
-void ASimpleSpinnerResponder::LookingAt_End_Implementation() {
-}
+void ASimpleSpinnerResponder::LookingAt_End_Implementation() {}
 
-void ASimpleSpinnerResponder::Extra_Drag_Details_Available_Implementation(FHitResult HitInfo) {
-}
+void ASimpleSpinnerResponder::Extra_Drag_Details_Available_Implementation(
+    FHitResult HitInfo) {}
 
-FDragCallbackPreferences ASimpleSpinnerResponder::Drag_Begin_Implementation(FHitResult HitInfo, FVector2D Origin, AActor* DragOwner) {
+FDragCallbackPreferences ASimpleSpinnerResponder::Drag_Begin_Implementation(
+    FHitResult HitInfo, FVector2D Origin, AActor *DragOwner) {
   return FDragCallbackPreferences::NoUpdates();
 }
 
-void ASimpleSpinnerResponder::Drag_Finished_Implementation(FHitResult HitInfo, FVector2D Origin, FVector2D SmallDelta, FVector2D OverallDelta, bool WasDragCanceled) {
-
-}
+void ASimpleSpinnerResponder::Drag_Finished_Implementation(
+    FHitResult HitInfo, FVector2D Origin, FVector2D SmallDelta,
+    FVector2D OverallDelta, bool WasDragCanceled) {}
 
 void ASimpleSpinnerResponder::Touched_Implementation() {
   if (m_timeline.GetPlaybackPosition() > 0) {
@@ -153,11 +153,10 @@ void ASimpleSpinnerResponder::Touched_Implementation() {
   }
 }
 
-FInteractabilityProbeResponse ASimpleSpinnerResponder::ProbeInteractability_Implementation() {
+FInteractabilityProbeResponse
+ASimpleSpinnerResponder::ProbeInteractability_Implementation() {
   return FInteractabilityProbeResponse::BasicResponse();
 }
 
-void ASimpleSpinnerResponder::Drag_Update_Implementation(FVector2D Origin, FVector2D SmallDelta, FVector2D OverallDelta) {
-
-}
-
+void ASimpleSpinnerResponder::Drag_Update_Implementation(
+    FVector2D Origin, FVector2D SmallDelta, FVector2D OverallDelta) {}

@@ -5,12 +5,25 @@ import os
 with open('../Config/LocalConfig.json', 'r') as f:
 	config = json.load(f)
 
-for root, dirs, files in os.walk('Source/StarryExpanse'):
+failed = 0
+succeeded = 0
+
+for root, dirs, files in os.walk('./StarryExpanse'):
 	candidates = [file for file in files if (file.lower().endswith('.cpp') or file.lower().endswith('.h'))]
 	for candidate in candidates:
 		path = os.path.join(root, candidate)
 		print('Formatting', path, '...')
-		subprocess.check_call([config['paths']['clang-format'], '-i', path])
+		for cmd in ([config['paths']['dos2unix'], path], [config['paths']['clang-format'], '-i', path]):
+			result = subprocess.check_call(cmd)
+			if result != 0:
+				print('Failed!')
+				failed += 1
+			else:
+				succeeded += 1
 
-print('All done!')
+if failed > 0:
+	print('Several commands failed (%d).' % failed)
+else:
+	print('Done, no failures.')
+
 while True: pass

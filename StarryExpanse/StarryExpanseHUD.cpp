@@ -19,13 +19,13 @@ AStarryExpanseHUD::AStarryExpanseHUD() {
   TexHollowRing = TexHollowRingObj.Object;
 
   static ConstructorHelpers::FObjectFinder<UTexture2D> TexDotObject(
-    TEXT("Texture2D'/Game/StarryExpanse/Interface/Cursors/"
-      "T_Cursor_Dot.T_Cursor_Dot'"));
+      TEXT("Texture2D'/Game/StarryExpanse/Interface/Cursors/"
+           "T_Cursor_Dot.T_Cursor_Dot'"));
   TexDot = TexDotObject.Object;
 
   static ConstructorHelpers::FObjectFinder<UTexture2D> TexZoomOutObject(
-    TEXT("Texture2D'/Game/StarryExpanse/Interface/Cursors/"
-      "T_Cursor_Zoom_Out.T_Cursor_Zoom_Out'"));
+      TEXT("Texture2D'/Game/StarryExpanse/Interface/Cursors/"
+           "T_Cursor_Zoom_Out.T_Cursor_Zoom_Out'"));
   TexZoomOut = TexZoomOutObject.Object;
 }
 
@@ -34,38 +34,41 @@ FVector2D AStarryExpanseHUD::GetCrosshairDrawPosition(
   return screenDims * cursorPosition - crosshairDims / 2.0;
 }
 
-UTexture2D* AStarryExpanseHUD::GetCursorTexture(FVector2D screenDims, FVector2D cursorPosition) {
-  // Test if cursor hit object and inspect properties for determining which cursor texture to display
+UTexture2D *AStarryExpanseHUD::GetCursorTexture(FVector2D screenDims,
+                                                FVector2D cursorPosition) {
+  // Test if cursor hit object and inspect properties for determining which
+  // cursor texture to display
   bool gotHit;
 
   const FLinearColor kSquareColor(1.0f, 1.0f, 0.0f, 0.3f);
   auto controller =
-    Cast<AStrangerController>(this->GetOwningPlayerController());
+      Cast<AStrangerController>(this->GetOwningPlayerController());
 
   FVector worldLocation;
   FVector worldDirection;
-  controller->DeprojectScreenPositionToWorld(screenDims.X * cursorPosition.X, screenDims.Y * cursorPosition.Y,
-    worldLocation, worldDirection);
+  controller->DeprojectScreenPositionToWorld(screenDims.X * cursorPosition.X,
+                                             screenDims.Y * cursorPosition.Y,
+                                             worldLocation, worldDirection);
   FHitResult result =
-    controller->CastInteractionRay(gotHit, worldLocation, worldDirection);
+      controller->CastInteractionRay(gotHit, worldLocation, worldDirection);
 
   if (gotHit) {
     auto actor = result.GetActor();
     if (actor != nullptr &&
-      actor->GetClass()->ImplementsInterface(
-        URivenInteractable::StaticClass())) {
-      auto probeResult = IRivenInteractable::Execute_ProbeInteractability(actor);
+        actor->GetClass()->ImplementsInterface(
+            URivenInteractable::StaticClass())) {
+      auto probeResult =
+          IRivenInteractable::Execute_ProbeInteractability(actor);
       switch (probeResult.ZoomCue) {
-        case EZoomCue::ZoomingOut:
-          return TexZoomOut;
-        case EZoomCue::NoZoom:
-        default:
-          return TexDot;
+      case EZoomCue::ZoomingOut:
+        return TexZoomOut;
+      case EZoomCue::NoZoom:
+      default:
+        return TexDot;
       }
-
     }
   }
-  
+
   return TexHollowRing;
 }
 
@@ -127,17 +130,17 @@ void AStarryExpanseHUD::DrawHUD() {
       for (float y = 0.0f; y < height; y += kSquareHeight) {
         FVector worldLocation;
         FVector worldDirection;
-        controller->DeprojectScreenPositionToWorld(x + kSquareWidth / 2.0f,
-          y + kSquareHeight / 2.0f,
-          worldLocation, worldDirection);
-        FHitResult result =
-          controller->CastInteractionRay(gotHit, worldLocation, worldDirection);
+        controller->DeprojectScreenPositionToWorld(
+            x + kSquareWidth / 2.0f, y + kSquareHeight / 2.0f, worldLocation,
+            worldDirection);
+        FHitResult result = controller->CastInteractionRay(
+            gotHit, worldLocation, worldDirection);
 
         if (gotHit) {
           auto actor = result.GetActor();
           if (actor != nullptr &&
-            actor->GetClass()->ImplementsInterface(
-              URivenInteractable::StaticClass())) {
+              actor->GetClass()->ImplementsInterface(
+                  URivenInteractable::StaticClass())) {
             this->DrawRect(kSquareColor, x, y, kSquareWidth, kSquareHeight);
           }
         }

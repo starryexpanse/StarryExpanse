@@ -28,13 +28,14 @@ struct FRivenGameInstanceVars {
 
   UPROPERTY(BlueprintReadOnly)
   int32 InventoryBookOpen = 0; // 0 = none, 1 = atrus's journal, 2 = catherine's
-                           // journal, 3 = trap book
+                               // journal, 3 = trap book
 
   UPROPERTY(BlueprintReadOnly)
   int32 InventoryBookPage = 0; // 0 = front cover, 1...N = different pages
 
   UPROPERTY(BlueprintReadOnly)
-  float InventoryBookPageTurnAmount = 0; // 0 = front cover, 1...N = different pages
+  float InventoryBookPageTurnAmount =
+      0; // 0 = front cover, 1...N = different pages
 
   UPROPERTY(BlueprintReadOnly)
   bool IsFrozenForLoading = false;

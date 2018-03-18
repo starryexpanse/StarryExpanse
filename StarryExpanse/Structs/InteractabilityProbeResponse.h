@@ -15,8 +15,10 @@ struct FInteractabilityProbeResponse {
   static FInteractabilityProbeResponse BasicResponse();
 
   // Truth here indicates that this struct is not necessarily accurate
-  // at the actor level, and a poll should be performed using the actual components.
-  // Currently not implemented, but might be nice for Artist Engine Specialists. TODO(philip)
+  // at the actor level, and a poll should be performed using the actual
+  // components.
+  // Currently not implemented, but might be nice for Artist Engine Specialists.
+  // TODO(philip)
   UPROPERTY(BlueprintReadWrite)
   bool ShouldScanAtComponentLevel = false;
 
@@ -27,7 +29,7 @@ struct FInteractabilityProbeResponse {
   //  0 = not zooming;
   // +1 = zooming in
   UPROPERTY(BlueprintReadWrite)
-    EZoomCue ZoomCue = EZoomCue::NoZoom;
+  EZoomCue ZoomCue = EZoomCue::NoZoom;
 
   // Should be FVector::ZeroVector if no drag axis
   UPROPERTY(BlueprintReadWrite)

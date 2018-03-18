@@ -15,4 +15,3 @@ enum class EZoomCue : uint8 {
   ZoomingOut UMETA(DisplayName = "Zooming Out"),
   ZoomingIn UMETA(DisplayName = "Zooming In")
 };
-

@@ -26,25 +26,29 @@ public:
   void LookingAt_Begin();
 
   UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Gameplay)
-    void LookingAt_End();
+  void LookingAt_End();
 
   UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Gameplay)
-    void Touched();
+  void Touched();
 
   UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Gameplay)
-    FDragCallbackPreferences Drag_Begin(FHitResult HitInfo, FVector2D Origin, AActor* DragOwner);
+  FDragCallbackPreferences Drag_Begin(FHitResult HitInfo, FVector2D Origin,
+                                      AActor *DragOwner);
 
-  // This will be called if the drag callback preferences specify that extra details are wanted,
+  // This will be called if the drag callback preferences specify that extra
+  // details are wanted,
   // before every call to Drag_Update.
   UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Gameplay)
-    void Extra_Drag_Details_Available(FHitResult HitInfo);
+  void Extra_Drag_Details_Available(FHitResult HitInfo);
 
   UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Gameplay)
-    void Drag_Update(FVector2D Origin, FVector2D SmallDelta, FVector2D OverallDelta);
+  void Drag_Update(FVector2D Origin, FVector2D SmallDelta,
+                   FVector2D OverallDelta);
 
   UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Gameplay)
-    void Drag_Finished(FHitResult HitInfo, FVector2D Origin, FVector2D SmallDelta, FVector2D OverallDelta, bool WasDragCanceled);
+  void Drag_Finished(FHitResult HitInfo, FVector2D Origin, FVector2D SmallDelta,
+                     FVector2D OverallDelta, bool WasDragCanceled);
 
   UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Gameplay)
-    FInteractabilityProbeResponse ProbeInteractability();
+  FInteractabilityProbeResponse ProbeInteractability();
 };
