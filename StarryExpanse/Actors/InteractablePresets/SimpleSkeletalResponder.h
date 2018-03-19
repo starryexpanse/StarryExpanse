@@ -14,19 +14,13 @@
 #include "Structs/InteractableSettingsAxial.h"
 #include "SimpleSpinnerResponder.generated.h"
 
-//
-// An actor with a single moveable component (static mesh). This class handles
-// animating the component around a single relative axis when touched, and
-// informing the game when the animation is complete. Will also initialize the
-// component to that rotation value when initialized.
-//
 UCLASS()
-class STARRYEXPANSE_API ASimpleSpinnerResponder : public AActor,
+class STARRYEXPANSE_API ASimpleSkeletalResponder : public AActor,
                                                   public IRivenInteractable {
   GENERATED_BODY()
 
 public:
-  ASimpleSpinnerResponder(const FObjectInitializer &ObjectInitializer);
+  ASimpleSkeletalResponder(const FObjectInitializer &ObjectInitializer);
 
   // Methods:
   UFUNCTION(BlueprintCallable)
@@ -75,9 +69,9 @@ private:
 
   ESaveGameField m_save_game_field;
 
-  UPROPERTY()
-  UStaticMeshComponent *m_moveablePart = nullptr;
+  UPROPERTY(BlueprintReadWrite)
+    UAnimationAsset* ForwardsAnimation;
 
-  FTimeline m_timeline;
-  EAxis::Type m_axis = EAxis::None;
+  UPROPERTY(BlueprintReadWrite)
+    UAnimationAsset* BackwardsAnimation;
 };
