@@ -4,29 +4,29 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
 #include "SaveGame/ESaveGameField.h"
-#include "InteractableSettingsAxial.generated.h"
+#include "Runtime/Engine/Classes/Animation/AnimSequence.h"
+#include "InteractableSettingsSkeletal.generated.h"
 
 USTRUCT(BlueprintType)
-struct FInteractableSettingsAxial {
+struct FInteractableSettingsSkeletal {
   GENERATED_BODY()
 
   UPROPERTY(BlueprintReadWrite)
   ESaveGameField SaveGameField;
 
   UPROPERTY(BlueprintReadWrite)
-  UStaticMeshComponent *MoveablePart;
+  UAnimSequence *ForwardsAnimation;
+
+  UPROPERTY(BlueprintReadWrite)
+  UAnimSequence *BackwardsAnimation;
+
+  UPROPERTY(BlueprintReadWrite)
+  USkeletalMeshComponent *MainSkeleton;
 
   UPROPERTY(BlueprintReadWrite)
   float AnimationDuration;
 
   UPROPERTY(BlueprintReadWrite)
-  TEnumAsByte<EAxis::Type> Axis;
-
-  UPROPERTY(BlueprintReadWrite)
-  float AnimationStartValue;
-
-  UPROPERTY(BlueprintReadWrite)
-  float AnimationEndValue;
+  bool IsFalseAtEnd;
 };
