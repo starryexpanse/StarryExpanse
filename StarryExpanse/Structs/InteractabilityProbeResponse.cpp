@@ -5,7 +5,8 @@
 #include "InteractabilityProbeResponse.h"
 #include "Enums/EZoomCue.h"
 
-FInteractabilityProbeResponse FInteractabilityProbeResponse::NotInteractableResponse() {
+FInteractabilityProbeResponse
+FInteractabilityProbeResponse::NotInteractableResponse() {
   FInteractabilityProbeResponse response;
 
   response.CanBeTapped = false;

@@ -75,6 +75,8 @@ bool URivenSaveGame::GetBooleanBySaveGameField(ESaveGameField fieldName) {
     return this->A_Characters_FleeingParentAndChild_HaveBeenSeen;
   case ESaveGameField::A_Characters_Sunners_HaveBeenShooed:
     return this->A_Characters_Sunners_HaveBeenShooed;
+  case ESaveGameField::B_Basin_Balcony_AreDoorsOpen:
+    return this->B_Basin_Balcony_AreDoorsOpen;
   case ESaveGameField::B_BoilerExterior_SelectorValve_IsTowardsPump:
     return this->B_BoilerExterior_SelectorValve_IsTowardsPump;
   case ESaveGameField::B_BoilerExterior_LevelSelector_IsUp:
@@ -232,6 +234,9 @@ void URivenSaveGame::SetBooleanBySaveGameField(ESaveGameField fieldName,
     break;
   case ESaveGameField::A_Characters_Sunners_HaveBeenShooed:
     this->Set_A_Characters_Sunners_HaveBeenShooed(nextVal);
+    break;
+  case ESaveGameField::B_Basin_Balcony_AreDoorsOpen:
+    this->Set_B_Basin_Balcony_AreDoorsOpen(nextVal);
     break;
   case ESaveGameField::B_BoilerExterior_SelectorValve_IsTowardsPump:
     this->Set_B_BoilerExterior_SelectorValve_IsTowardsPump(nextVal);
@@ -413,6 +418,7 @@ void URivenSaveGame::RestoreNewGameDefaults() {
   this->A_Characters_TowerGuard_HasBeenSeen = false;
   this->A_Characters_FleeingParentAndChild_HaveBeenSeen = false;
   this->A_Characters_Sunners_HaveBeenShooed = false;
+  this->B_Basin_Balcony_AreDoorsOpen = false;
   this->B_Shore_Valve_Position = 0;
   this->B_BoilerExterior_SelectorValve_IsTowardsPump = false;
   this->B_BoilerExterior_LevelSelector_IsUp = false;
@@ -580,6 +586,7 @@ URivenSaveGame::GetSavegameFields() {
       "bool", "A_Characters_FleeingParentAndChild_HaveBeenSeen"));
   vars.push_back(
       std::make_tuple("bool", "A_Characters_Sunners_HaveBeenShooed"));
+  vars.push_back(std::make_tuple("bool", "B_Basin_Balcony_AreDoorsOpen"));
   vars.push_back(std::make_tuple("int32", "B_Shore_Valve_Position"));
   vars.push_back(
       std::make_tuple("bool", "B_BoilerExterior_SelectorValve_IsTowardsPump"));
@@ -1030,6 +1037,24 @@ void URivenSaveGame::Set_A_Characters_Sunners_HaveBeenShooed(bool NewVal) {
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_A_Characters_Sunners_HaveBeenShooed() {
   return A_Characters_Sunners_HaveBeenShooed;
+}
+
+UFUNCTION(BlueprintCallable, Category = SaveGame)
+void URivenSaveGame::Set_B_Basin_Balcony_AreDoorsOpen(bool NewVal) {
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->B_Basin_Balcony_AreDoorsOpen;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->B_Basin_Balcony_AreDoorsOpen = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
+}
+
+UFUNCTION(BlueprintCallable, Category = SaveGame)
+bool URivenSaveGame::Get_B_Basin_Balcony_AreDoorsOpen() {
+  return B_Basin_Balcony_AreDoorsOpen;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)

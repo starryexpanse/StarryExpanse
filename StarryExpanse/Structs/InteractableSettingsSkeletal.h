@@ -25,8 +25,5 @@ struct FInteractableSettingsSkeletal {
   USkeletalMeshComponent *MainSkeleton;
 
   UPROPERTY(BlueprintReadWrite)
-  float AnimationDuration;
-
-  UPROPERTY(BlueprintReadWrite)
   bool IsFalseAtEnd;
 };

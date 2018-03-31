@@ -33,6 +33,7 @@ enum class ESaveGameField : uint8 {
   A_Characters_TowerGuard_HasBeenSeen,
   A_Characters_FleeingParentAndChild_HaveBeenSeen,
   A_Characters_Sunners_HaveBeenShooed,
+  B_Basin_Balcony_AreDoorsOpen,
   B_Shore_Valve_Position,
   B_BoilerExterior_SelectorValve_IsTowardsPump,
   B_BoilerExterior_LevelSelector_IsUp,

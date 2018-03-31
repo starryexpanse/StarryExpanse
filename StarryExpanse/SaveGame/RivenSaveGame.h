@@ -128,6 +128,9 @@ public:
   bool A_Characters_Sunners_HaveBeenShooed;
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
+  bool B_Basin_Balcony_AreDoorsOpen;
+
+  UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
   int32 B_Shore_Valve_Position;
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
@@ -487,6 +490,12 @@ private:
 
   UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
   bool Get_A_Characters_Sunners_HaveBeenShooed();
+
+  UFUNCTION(BlueprintCallable, Category = SaveGame)
+  void Set_B_Basin_Balcony_AreDoorsOpen(bool NewVal);
+
+  UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
+  bool Get_B_Basin_Balcony_AreDoorsOpen();
 
   UFUNCTION(BlueprintCallable, Category = SaveGame)
   void Set_B_Shore_Valve_Position(int32 NewVal);

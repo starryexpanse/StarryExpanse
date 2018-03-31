@@ -23,26 +23,6 @@ ASimpleSkeletalResponder::ASimpleSkeletalResponder(
   PrimaryActorTick.bAllowTickOnDedicatedServer = true;
 }
 
-void ASimpleSkeletalResponder::AnimationProgressCallback(float val) {
-  // TODO possible
-}
-
-void ASimpleSkeletalResponder::AnimationDone() {
-  auto gs = Cast<ARivenGameState>(GetWorld()->GetGameState());
-
-  if (!gs) {
-    return;
-  }
-
-  auto saveGame = gs->Instantaneous_SaveGame;
-
-  if (!saveGame) {
-    return;
-  }
-
-  // TODO stuff
-}
-
 void ASimpleSkeletalResponder::BeginPlay() { AActor::BeginPlay(); }
 
 void ASimpleSkeletalResponder::Tick(float DeltaTime) {
@@ -71,10 +51,12 @@ void ASimpleSkeletalResponder::OnAnimationDone() {
     return;
   }
 
-  saveGame->SetBooleanBySaveGameField(m_save_game_field, !IsComingFromEnd ^ IsFalseAtEnd);
+  saveGame->SetBooleanBySaveGameField(m_save_game_field,
+                                      !IsComingFromEnd ^ IsFalseAtEnd);
 }
 
-void ASimpleSkeletalResponder::Initialize(FInteractableSettingsSkeletal settings) {
+void ASimpleSkeletalResponder::Initialize(
+    FInteractableSettingsSkeletal settings) {
   m_save_game_field = settings.SaveGameField;
 
   auto gs = Cast<ARivenGameState>(GetWorld()->GetGameState());
@@ -87,8 +69,9 @@ void ASimpleSkeletalResponder::Initialize(FInteractableSettingsSkeletal settings
     return;
   }
 
-  auto isInInitialPosition = !saveGame->GetBooleanBySaveGameField(
-      m_save_game_field) ^ settings.IsFalseAtEnd;
+  auto isInInitialPosition =
+      !saveGame->GetBooleanBySaveGameField(m_save_game_field) ^
+      settings.IsFalseAtEnd;
 
   this->BackwardsAnimation = settings.BackwardsAnimation;
   this->ForwardsAnimation = settings.ForwardsAnimation;
@@ -102,9 +85,7 @@ void ASimpleSkeletalResponder::Initialize(FInteractableSettingsSkeletal settings
   }
 }
 
-void ASimpleSkeletalResponder::LookingAt_Begin_Implementation() {
-  
-}
+void ASimpleSkeletalResponder::LookingAt_Begin_Implementation() {}
 
 void ASimpleSkeletalResponder::LookingAt_End_Implementation() {}
 
@@ -135,8 +116,7 @@ void ASimpleSkeletalResponder::Touched_Implementation() {
     IsComingFromEnd = false;
     IsPlaying = true;
     MainSkeleton->PlayAnimation(ForwardsAnimation, false);
-  }
-  else {
+  } else {
     IsComingFromEnd = true;
     IsPlaying = true;
     MainSkeleton->PlayAnimation(BackwardsAnimation, false);

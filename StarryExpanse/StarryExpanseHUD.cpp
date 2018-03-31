@@ -61,12 +61,10 @@ UTexture2D *AStarryExpanseHUD::GetCursorTexture(FVector2D screenDims,
           IRivenInteractable::Execute_ProbeInteractability(actor);
       if (probeResult.ZoomCue == EZoomCue::ZoomingOut) {
         return TexZoomOut;
-      }
-      else {
+      } else {
         if (probeResult.CanBeTapped) {
           return TexDot;
-        }
-        else {
+        } else {
           return TexHollowRing;
         }
       }
@@ -145,7 +143,8 @@ void AStarryExpanseHUD::DrawHUD() {
           if (actor != nullptr &&
               actor->GetClass()->ImplementsInterface(
                   URivenInteractable::StaticClass())) {
-            auto probeResponse = IRivenInteractable::Execute_ProbeInteractability(actor);
+            auto probeResponse =
+                IRivenInteractable::Execute_ProbeInteractability(actor);
             if (probeResponse.CanBeTapped) {
               this->DrawRect(kSquareColor, x, y, kSquareWidth, kSquareHeight);
             }

@@ -50,6 +50,10 @@ A:
         Sunners:
             - { type: bool, name: HaveBeenShooed, initial: false }
 B:
+    Basin:
+        Balcony:
+            - { type: bool, name: AreDoorsOpen, initial: false }
+
     Shore:
         Valve:
             - { type: int32, name: Position, initial: 0 } # index of [ UpstairsFan, BoilerTankControls, Woodchipper ] TODO(philip) enumify
@@ -67,6 +71,7 @@ B:
             - { type: bool, name: IsPresent, initial: true } # reactive
         Platform:
             - { type: bool, name: IsRaised, initial: false } # reactive
+    
     # TODO: upper walkway fan state, ytram trap state, drawers, water bubble state, oven door,
     #   boiler door locked
 #G:

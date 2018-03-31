@@ -17,7 +17,7 @@
 
 UCLASS()
 class STARRYEXPANSE_API ASimpleSkeletalResponder : public AActor,
-                                                  public IRivenInteractable {
+                                                   public IRivenInteractable {
   GENERATED_BODY()
 
 public:
@@ -60,12 +60,6 @@ public:
   FInteractabilityProbeResponse ProbeInteractability();
 
 private:
-  UFUNCTION(Category = Gameplay)
-  void AnimationProgressCallback(float val);
-
-  UFUNCTION(Category = Gameplay)
-  void AnimationDone();
-
   UPROPERTY()
   USkeletalMeshComponent *MainSkeleton;
 
