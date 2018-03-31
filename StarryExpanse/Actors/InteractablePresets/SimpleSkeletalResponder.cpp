@@ -1,14 +1,18 @@
 //
 // Copyright, 59 Volt Entertainment, all rights reserved.
 //
-#include "SimpleSpinnerResponder.h"
+#include "SimpleSkeletalResponder.h"
 #include "Engine/Engine.h"
 #include "Kismet/GameplayStatics.h"
 #include "RivenGameState.h"
 #include "Runtime/CoreUObject/Public/UObject/ConstructorHelpers.h"
 #include "Runtime/Engine/Classes/Engine/EngineTypes.h"
 #include "Runtime/Engine/Classes/Engine/GameViewportClient.h"
-#include "Structs/InteractableSettingsAxial.h"
+#include "Runtime/Engine/Classes/Animation/AnimationAsset.h"
+#include "Runtime/Engine/Classes/Animation/AnimSingleNodeInstance.h"
+#include "Runtime/Engine/Public/Animation/AnimNotifyQueue.h"
+#include "Runtime/Engine/Classes/Animation/AnimationAsset.h"
+#include "Structs/InteractableSettingsSkeletal.h"
 
 ASimpleSkeletalResponder::ASimpleSkeletalResponder(
     const FObjectInitializer &ObjectInitializer)
@@ -20,7 +24,7 @@ ASimpleSkeletalResponder::ASimpleSkeletalResponder(
 }
 
 void ASimpleSkeletalResponder::AnimationProgressCallback(float val) {
-  SetRotation(val);
+  // TODO possible
 }
 
 void ASimpleSkeletalResponder::AnimationDone() {
@@ -36,23 +40,42 @@ void ASimpleSkeletalResponder::AnimationDone() {
     return;
   }
 
-  auto at_end = m_timeline.GetPlaybackPosition() > 0; // TODO: "&& isAnimating"
-  saveGame->SetBooleanBySaveGameField(m_save_game_field,
-                                      at_end); // TODO: ^ is_false_at_end
+  // TODO stuff
 }
 
 void ASimpleSkeletalResponder::BeginPlay() { AActor::BeginPlay(); }
 
 void ASimpleSkeletalResponder::Tick(float DeltaTime) {
   AActor::Tick(DeltaTime);
-  m_timeline.TickTimeline(DeltaTime);
+  if (IsPlaying) {
+    UAnimSingleNodeInstance *singleNode = MainSkeleton->GetSingleNodeInstance();
+    if (singleNode) {
+      auto length = singleNode->GetLength();
+      auto time = singleNode->GetCurrentTime();
+      if (time >= length) {
+        OnAnimationDone();
+        IsPlaying = false;
+      }
+    }
+  }
 }
 
-void ASimpleSkeletalResponder::Initialize(FInteractableSettingsAxial settings) {
-  m_save_game_field = settings.SaveGameField;
-  m_moveablePart = settings.MoveablePart;
-  m_axis = settings.Axis;
+void ASimpleSkeletalResponder::OnAnimationDone() {
+  auto gs = Cast<ARivenGameState>(GetWorld()->GetGameState());
+  if (!gs) {
+    return;
+  }
 
+  auto saveGame = gs->Instantaneous_SaveGame;
+  if (!saveGame) {
+    return;
+  }
+
+  saveGame->SetBooleanBySaveGameField(m_save_game_field, !IsComingFromEnd ^ IsFalseAtEnd);
+}
+
+void ASimpleSkeletalResponder::Initialize(FInteractableSettingsSkeletal settings) {
+  m_save_game_field = settings.SaveGameField;
 
   auto gs = Cast<ARivenGameState>(GetWorld()->GetGameState());
   if (!gs) {
@@ -65,14 +88,17 @@ void ASimpleSkeletalResponder::Initialize(FInteractableSettingsAxial settings) {
   }
 
   auto isInInitialPosition = !saveGame->GetBooleanBySaveGameField(
-      m_save_game_field); // TODO: ^ is_false_at_end
+      m_save_game_field) ^ settings.IsFalseAtEnd;
+
+  this->BackwardsAnimation = settings.BackwardsAnimation;
+  this->ForwardsAnimation = settings.ForwardsAnimation;
+  this->MainSkeleton = settings.MainSkeleton;
+  this->IsFalseAtEnd = settings.IsFalseAtEnd;
 
   if (isInInitialPosition) {
-    SetRotation(settings.AnimationStartValue);
-    m_timeline.SetNewTime(0);
+    GoToStart();
   } else {
-    SetRotation(settings.AnimationEndValue);
-    m_timeline.SetNewTime(settings.AnimationDuration);
+    GoToEnd();
   }
 }
 
@@ -95,17 +121,45 @@ void ASimpleSkeletalResponder::Drag_Finished_Implementation(
     FVector2D OverallDelta, bool WasDragCanceled) {}
 
 void ASimpleSkeletalResponder::Touched_Implementation() {
-  if (m_timeline.GetPlaybackPosition() > 0) {
-    m_timeline.Reverse();
-  } else {
-    m_timeline.Play();
+  auto gs = Cast<ARivenGameState>(GetWorld()->GetGameState());
+  if (!gs) {
+    return;
+  }
+
+  auto saveGame = gs->Instantaneous_SaveGame;
+  if (!saveGame) {
+    return;
+  }
+
+  if (!saveGame->GetBooleanBySaveGameField(m_save_game_field) ^ IsFalseAtEnd) {
+    IsComingFromEnd = false;
+    IsPlaying = true;
+    MainSkeleton->PlayAnimation(ForwardsAnimation, false);
+  }
+  else {
+    IsComingFromEnd = true;
+    IsPlaying = true;
+    MainSkeleton->PlayAnimation(BackwardsAnimation, false);
   }
 }
 
 FInteractabilityProbeResponse
 ASimpleSkeletalResponder::ProbeInteractability_Implementation() {
+  if (IsPlaying) {
+    return FInteractabilityProbeResponse::NotInteractableResponse();
+  }
   return FInteractabilityProbeResponse::BasicResponse();
 }
 
 void ASimpleSkeletalResponder::Drag_Update_Implementation(
     FVector2D Origin, FVector2D SmallDelta, FVector2D OverallDelta) {}
+
+void ASimpleSkeletalResponder::GoToStart() {
+  MainSkeleton->PlayAnimation(ForwardsAnimation, false);
+  MainSkeleton->Stop();
+}
+
+void ASimpleSkeletalResponder::GoToEnd() {
+  MainSkeleton->PlayAnimation(BackwardsAnimation, false);
+  MainSkeleton->Stop();
+}

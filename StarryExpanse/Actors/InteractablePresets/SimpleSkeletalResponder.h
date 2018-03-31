@@ -8,11 +8,12 @@
 #include "Interfaces/RivenInteractable.h"
 #include "Runtime/Engine/Classes/Components/StaticMeshComponent.h"
 #include "Structs/InteractabilityProbeResponse.h"
+#include "Runtime/Engine/Classes/Animation/AnimSequence.h"
 #include "Runtime/Engine/Classes/Components/TimelineComponent.h"
 #include "Runtime/Engine/Classes/Engine/EngineTypes.h"
 #include "SaveGame/ESaveGameField.h"
-#include "Structs/InteractableSettingsAxial.h"
-#include "SimpleSpinnerResponder.generated.h"
+#include "Structs/InteractableSettingsSkeletal.h"
+#include "SimpleSkeletalResponder.generated.h"
 
 UCLASS()
 class STARRYEXPANSE_API ASimpleSkeletalResponder : public AActor,
@@ -24,7 +25,7 @@ public:
 
   // Methods:
   UFUNCTION(BlueprintCallable)
-  void Initialize(FInteractableSettingsAxial Settings);
+  void Initialize(FInteractableSettingsSkeletal Settings);
 
   // Actor:
   void BeginPlay() override;
@@ -65,13 +66,24 @@ private:
   UFUNCTION(Category = Gameplay)
   void AnimationDone();
 
-  void SetRotation(float val);
+  UPROPERTY()
+  USkeletalMeshComponent *MainSkeleton;
 
+  UPROPERTY()
+  UAnimSequence *BackwardsAnimation;
+
+  UPROPERTY()
+  UAnimSequence *ForwardsAnimation;
+
+  UPROPERTY()
+  bool IsFalseAtEnd;
+
+  void OnAnimationDone();
+
+  void GoToStart();
+  void GoToEnd();
+
+  bool IsPlaying = false;
+  bool IsComingFromEnd = false;
   ESaveGameField m_save_game_field;
-
-  UPROPERTY(BlueprintReadWrite)
-    UAnimationAsset* ForwardsAnimation;
-
-  UPROPERTY(BlueprintReadWrite)
-    UAnimationAsset* BackwardsAnimation;
 };

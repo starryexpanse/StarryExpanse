@@ -12,6 +12,7 @@ USTRUCT(BlueprintType)
 struct FInteractabilityProbeResponse {
   GENERATED_BODY()
 
+  static FInteractabilityProbeResponse NotInteractableResponse();
   static FInteractabilityProbeResponse BasicResponse();
 
   // Truth here indicates that this struct is not necessarily accurate
@@ -24,6 +25,9 @@ struct FInteractabilityProbeResponse {
 
   UPROPERTY(BlueprintReadWrite)
   bool CanBeDragged = false;
+
+  UPROPERTY(BlueprintReadWrite)
+  bool CanBeTapped = false;
 
   // -1 = zooming out;
   //  0 = not zooming;

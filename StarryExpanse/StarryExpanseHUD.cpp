@@ -141,7 +141,10 @@ void AStarryExpanseHUD::DrawHUD() {
           if (actor != nullptr &&
               actor->GetClass()->ImplementsInterface(
                   URivenInteractable::StaticClass())) {
-            this->DrawRect(kSquareColor, x, y, kSquareWidth, kSquareHeight);
+            auto probeResponse = IRivenInteractable::Execute_ProbeInteractability(actor);
+            if (probeResponse.CanBeTapped) {
+              this->DrawRect(kSquareColor, x, y, kSquareWidth, kSquareHeight);
+            }
           }
         }
       }
