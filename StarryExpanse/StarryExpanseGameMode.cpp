@@ -17,7 +17,7 @@ AStarryExpanseGameMode::AStarryExpanseGameMode() : Super() {
   PlayerControllerClass = AStrangerController::StaticClass();
 
   static ConstructorHelpers::FClassFinder<AHUD> HudClassFinder(
-      TEXT("/Game/StarryExpanse/Core/Engine/Gui/loadingHUD"));
+      TEXT("/Game/StarryExpanse/Interface/Widgets/loadingHUD"));
   HUDClass = HudClassFinder.Class;
 
   GameStateClass = ARivenGameState::StaticClass();
