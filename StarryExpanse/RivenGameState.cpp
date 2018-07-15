@@ -2,21 +2,34 @@
 #include "SaveGame/RivenSaveGame.h"
 #include "Interfaces/RivenSaveGameAware.h"
 #include "Engine/Engine.h"
-#include "Kismet/GameplayStatics.h"
 #include "RivenGameInstance.h"
 #include "StarryExpanse.h"
 #include "Runtime/Core/Public/UObject/WeakObjectPtrTemplates.h"
 #include "Runtime/Core/Public/GenericPlatform/GenericPlatform.h"
+#include "Kismet/GameplayStatics.h"
+
+
 #include "UObject/ConstructorHelpers.h"
 
-ARivenGameState::ARivenGameState() : Super() {}
+ARivenGameState::ARivenGameState() : Super() {
+  //static ConstructorHelpers::FClassFinder<APawn> PlayerPawnClassFinder(
+    //TEXT("/Game/FirstPersonBP/Blueprints/FirstPersonCharacter"));
+}
 
 void ARivenGameState::OnConstruction(const FTransform &Transform) {
   auto initialSavegame = NewObject<URivenSaveGame>();
   initialSavegame->SetSubscriber(this);
   this->Instantaneous_SaveGame = initialSavegame;
+  
   auto gameInstance = GetWorld()->GetGameInstance<URivenGameInstance>();
   gameInstance->Last_Savable_SaveGame = initialSavegame;
+
+  CurrentMenuPage = EGameMenuPage::MainMenu;
+
+  static ConstructorHelpers::FClassFinder<UUserWidget> WidgetClassFinder(
+    TEXT("/Game/StarryExpanse/Interface/Widgets/BP_MainMenu"));
+
+  // MenuWidget = UWidgetBlueprintLibrary::Create(this, WidgetClassFinder.Class, nullptr);
 }
 
 void ARivenGameState::SubscribeActorToSavegame(AActor *actor) {
