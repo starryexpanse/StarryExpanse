@@ -6,6 +6,7 @@
 #include "StarryExpanse.h"
 #include "Runtime/Core/Public/UObject/WeakObjectPtrTemplates.h"
 #include "Runtime/Core/Public/GenericPlatform/GenericPlatform.h"
+#include "Runtime/UMG/Public/Blueprint/WidgetBlueprintLibrary.h"
 #include "Kismet/GameplayStatics.h"
 
 
@@ -14,6 +15,13 @@
 ARivenGameState::ARivenGameState() : Super() {
   //static ConstructorHelpers::FClassFinder<APawn> PlayerPawnClassFinder(
     //TEXT("/Game/FirstPersonBP/Blueprints/FirstPersonCharacter"));
+
+  CurrentMenuPage = EGameMenuPage::MainMenu;
+
+  static ConstructorHelpers::FClassFinder<UUserWidget> WidgetClassFinder(
+    TEXT("/Game/StarryExpanse/Interface/Widgets/BP_MainMenu.BP_MainMenu_C"));
+
+  WidgetClass = WidgetClassFinder.Class;
 }
 
 void ARivenGameState::OnConstruction(const FTransform &Transform) {
@@ -24,12 +32,14 @@ void ARivenGameState::OnConstruction(const FTransform &Transform) {
   auto gameInstance = GetWorld()->GetGameInstance<URivenGameInstance>();
   gameInstance->Last_Savable_SaveGame = initialSavegame;
 
-  CurrentMenuPage = EGameMenuPage::MainMenu;
+  auto controller = UGameplayStatics::GetPlayerController(GetWorld(), 0);
 
-  static ConstructorHelpers::FClassFinder<UUserWidget> WidgetClassFinder(
-    TEXT("/Game/StarryExpanse/Interface/Widgets/BP_MainMenu"));
+  MenuWidget = UWidgetBlueprintLibrary::Create(this, WidgetClass, controller);
+  check(MenuWidget);
+  MenuWidget->AddToViewport(0);
+  MenuWidget->SetRenderOpacity(0);
 
-  // MenuWidget = UWidgetBlueprintLibrary::Create(this, WidgetClassFinder.Class, nullptr);
+  CurrentMenuPage = EGameMenuPage::NoPage;
 }
 
 void ARivenGameState::SubscribeActorToSavegame(AActor *actor) {
@@ -77,4 +87,15 @@ void ARivenGameState::NotifySubscribersOfChange(URivenSaveGame *OldSaveGame) {
   for (auto &Id : IdsToRemove) {
     SubscribedToSavegame.FindAndRemoveChecked(Id);
   }
+}
+
+void ARivenGameState::SetMenuPage(EGameMenuPage MenuPage) {
+  this->CurrentMenuPage = MenuPage;
+  if (MenuPage == EGameMenuPage::NoPage) {
+    MenuWidget->SetRenderOpacity(0);
+  }
+  else {
+    MenuWidget->SetRenderOpacity(1);
+  }
+  MenuStateChangedEvent.Broadcast();
 }

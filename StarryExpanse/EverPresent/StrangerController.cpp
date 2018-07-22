@@ -7,17 +7,46 @@
 #include "Camera/CameraActor.h"
 #include "Runtime/Engine/Classes/Camera/CameraComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "RivenGameState.h"
 #include "Runtime/Engine/Public/CollisionQueryParams.h"
+#include "Engine/Engine.h"
 #include "RivenGameInstance.h"
 #include "StarryExpanse.h"
 
-AStrangerController::AStrangerController() {}
+AStrangerController::AStrangerController() {
+  MenuStateChanged.BindUFunction(this, "Cbk_MenuStateChanged");
+}
+
+void AStrangerController::BeginPlay() {
+  auto gs = Cast<ARivenGameState>(GetWorld()->GetGameState());
+  this->ReactToMenuState(gs->CurrentMenuPage, gs->MenuWidget);
+  gs->MenuStateChangedEvent.Add(MenuStateChanged);
+
+  auto gameInstance = Cast<URivenGameInstance>(GetWorld()->GetGameInstance());
+  gameInstance->GameInstanceVarsChanged.AddDynamic(
+    this, &AStrangerController::PossiblyFreezeOrUnfreeze);
+  this->EnterCursorMode(true);
+}
+
+void AStrangerController::Cbk_MenuStateChanged() {
+  auto gs = Cast<ARivenGameState>(GetWorld()->GetGameState());
+  this->ReactToMenuState(gs->CurrentMenuPage, gs->MenuWidget);
+}
+
+void AStrangerController::ReactToMenuState(EGameMenuPage menuPage, UUserWidget* widgetNonShared) {
+  if (menuPage != EGameMenuPage::NoPage) {
+    FInputModeUIOnly mode;
+
+    auto widget = widgetNonShared->TakeWidget();
+
+    mode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
+    mode.SetWidgetToFocus(widget);
+    this->SetInputMode(mode);
+  }
+}
 
 void AStrangerController::PostInitializeComponents() {
   Super::PostInitializeComponents();
-
-  InputMouseHorizScale = 0.01;
-  InputMouseVertScale = 0.01;
 }
 
 void AStrangerController::SetupInputComponent() {
@@ -30,28 +59,43 @@ void AStrangerController::SetupInputComponent() {
                              this,
                              &AStrangerController::RequestSwitchCursorMode);
 
-  InputComponent->BindAxis("Spectator_Turn", this,
-                           &AStrangerController::AddHorizontalMouse);
+  InputComponent->BindAxis("CursorMoveX", this,
+                           &AStrangerController::AddHorizontalMouseScan);
 
-  InputComponent->BindAxis("Spectator_LookUp", this,
-                           &AStrangerController::AddVerticalMouse);
+  InputComponent->BindAxis("CursorMoveY", this,
+                           &AStrangerController::AddVerticalMouseScan);
+
+  InputComponent->BindAxis("Turn", this,
+                           &AStrangerController::AddHorizontalMousePan);
+
+  InputComponent->BindAxis("LookUp", this,
+                           &AStrangerController::AddVerticalMousePan);
 }
 
-void AStrangerController::AddHorizontalMouse(float amount) {
-  HorizontalMousePosition = FMath::Clamp(
-      HorizontalMousePosition + amount * InputMouseHorizScale, 0.0f, 1.0f);
+void AStrangerController::AddHorizontalMousePan(float amount) {
+  if (IsCursorLockedToCenter) {
+    this->AddYawInput(amount);
+  }
 }
 
-void AStrangerController::AddVerticalMouse(float amount) {
-  VerticalMousePosition = FMath::Clamp(
-      VerticalMousePosition + amount * InputMouseVertScale, 0.0f, 1.0f);
+void AStrangerController::AddVerticalMousePan(float amount) {
+  if (IsCursorLockedToCenter) {
+    this->AddPitchInput(amount);
+  }
 }
 
-void AStrangerController::BeginPlay() {
-  auto gameInstance = Cast<URivenGameInstance>(GetWorld()->GetGameInstance());
-  gameInstance->GameInstanceVarsChanged.AddDynamic(
-      this, &AStrangerController::PossiblyFreezeOrUnfreeze);
-  this->EnterCursorMode(true);
+void AStrangerController::AddHorizontalMouseScan(float amount) {
+  if (!IsCursorLockedToCenter) {
+    HorizontalMousePosition = FMath::Clamp(
+      HorizontalMousePosition + amount, 0.0f, 1.0f);
+  }
+}
+
+void AStrangerController::AddVerticalMouseScan(float amount) {
+  if (!IsCursorLockedToCenter) {
+    VerticalMousePosition = FMath::Clamp(
+      VerticalMousePosition + amount, 0.0f, 1.0f);
+  }
 }
 
 void AStrangerController::EnterCursorMode(bool fixed) {
@@ -148,6 +192,9 @@ void AStrangerController::Destroyed() {
   auto gameInstance = Cast<URivenGameInstance>(GetWorld()->GetGameInstance());
   gameInstance->GameInstanceVarsChanged.RemoveDynamic(
       this, &AStrangerController::PossiblyFreezeOrUnfreeze);
+
+  auto gs = Cast<ARivenGameState>(GetWorld()->GetGameState());
+  gs->MenuStateChangedEvent.Remove(MenuStateChanged);
 }
 
 /*

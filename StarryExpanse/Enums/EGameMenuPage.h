@@ -11,11 +11,11 @@
 
 UENUM(BlueprintType)
 enum class EGameMenuPage : uint8 {
-  NoPage UMETA(DisplayName = 'No menu page open'),
-  MainMenu UMETA(DisplayName = 'Main Menu'),
-  NewGame UMETA(DisplayName = 'New Game'),
-  SaveGame UMETA(DisplayName = 'Save Game'),
-  LoadGame UMETA(DisplayName = 'Load Game'),
-  Options UMETA(DisplayName = 'Options')
+  NoPage UMETA(DisplayName = "No menu page open"),
+  MainMenu UMETA(DisplayName = "Main Menu"),
+  NewGame UMETA(DisplayName = "New Game"),
+  SaveGame UMETA(DisplayName = "Save Game"),
+  LoadGame UMETA(DisplayName = "Load Game"),
+  Options UMETA(DisplayName = "Options")
 };
 

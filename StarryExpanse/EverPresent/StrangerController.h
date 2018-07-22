@@ -6,6 +6,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
+#include "Enums/EGameMenuPage.h"
+#include "Templates/SharedPointer.h"
 #include "StrangerController.generated.h"
 
 UCLASS()
@@ -17,11 +19,6 @@ public:
 
   UPROPERTY(BlueprintReadOnly)
   bool IsCursorLockedToCenter;
-
-  UPROPERTY()
-  float InputMouseVertScale;
-  UPROPERTY()
-  float InputMouseHorizScale;
 
   UFUNCTION()
   void PossiblyFreezeOrUnfreeze();
@@ -40,16 +37,30 @@ public:
                                 FVector worldDirection);
 
   UFUNCTION(BlueprintCallable)
-  void AddHorizontalMouse(float amount);
+  void AddHorizontalMousePan(float amount);
 
   UFUNCTION(BlueprintCallable)
-  void AddVerticalMouse(float amount);
+  void AddVerticalMousePan(float amount);
+
+  UFUNCTION(BlueprintCallable)
+  void AddHorizontalMouseScan(float amount);
+
+  UFUNCTION(BlueprintCallable)
+  void AddVerticalMouseScan(float amount);
+
+  UFUNCTION()
+  void ReactToMenuState(EGameMenuPage menuPage, UUserWidget* widget);
 
   UPROPERTY()
   float HorizontalMousePosition = 0.5;
 
   UPROPERTY()
   float VerticalMousePosition = 0.5;
+
+  UFUNCTION()
+  void Cbk_MenuStateChanged();
+
+  TScriptDelegate<FWeakObjectPtr> MenuStateChanged;
 
   // Override defaults
 

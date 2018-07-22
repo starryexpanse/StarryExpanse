@@ -27,6 +27,10 @@ public:
 
   void OnConstruction(const FTransform &Transform) override;
 
+  DECLARE_DYNAMIC_MULTICAST_DELEGATE(FMenuStateChangedEvent);
+
+  FMenuStateChangedEvent MenuStateChangedEvent;
+
   UPROPERTY(BlueprintReadOnly)
   EGameMenuPage CurrentMenuPage;
 
@@ -38,9 +42,14 @@ public:
 
   UPROPERTY()
   UUserWidget *MenuWidget;
+  
+  TSubclassOf<UUserWidget> WidgetClass;
 
   UFUNCTION()
   void NotifySubscribersOfChange(URivenSaveGame *OldSaveGame);
+
+  UFUNCTION(BlueprintCallable)
+  void SetMenuPage(EGameMenuPage MenuPage);
 
   UFUNCTION(BlueprintCallable)
   void SubscribeActorToSavegame(AActor *Actor);
