@@ -3,7 +3,8 @@
 // Copyright, 59 Volt Entertainment, all rights reserved.
 //
 
-// Description: Which page the user is seeing right now (main menu, options, etc.)
+// Description: Which page the user is seeing right now (main menu, options,
+// etc.)
 
 #pragma once
 
@@ -18,4 +19,3 @@ enum class EGameMenuPage : uint8 {
   LoadGame UMETA(DisplayName = "Load Game"),
   Options UMETA(DisplayName = "Options")
 };
-

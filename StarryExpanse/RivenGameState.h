@@ -42,7 +42,7 @@ public:
 
   UPROPERTY()
   UUserWidget *MenuWidget;
-  
+
   TSubclassOf<UUserWidget> WidgetClass;
 
   UFUNCTION()

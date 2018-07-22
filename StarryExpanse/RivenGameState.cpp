@@ -9,17 +9,16 @@
 #include "Runtime/UMG/Public/Blueprint/WidgetBlueprintLibrary.h"
 #include "Kismet/GameplayStatics.h"
 
-
 #include "UObject/ConstructorHelpers.h"
 
 ARivenGameState::ARivenGameState() : Super() {
-  //static ConstructorHelpers::FClassFinder<APawn> PlayerPawnClassFinder(
-    //TEXT("/Game/FirstPersonBP/Blueprints/FirstPersonCharacter"));
+  // static ConstructorHelpers::FClassFinder<APawn> PlayerPawnClassFinder(
+  // TEXT("/Game/FirstPersonBP/Blueprints/FirstPersonCharacter"));
 
   CurrentMenuPage = EGameMenuPage::MainMenu;
 
   static ConstructorHelpers::FClassFinder<UUserWidget> WidgetClassFinder(
-    TEXT("/Game/StarryExpanse/Interface/Widgets/BP_MainMenu.BP_MainMenu_C"));
+      TEXT("/Game/StarryExpanse/Interface/Widgets/BP_MainMenu.BP_MainMenu_C"));
 
   WidgetClass = WidgetClassFinder.Class;
 }
@@ -28,7 +27,7 @@ void ARivenGameState::OnConstruction(const FTransform &Transform) {
   auto initialSavegame = NewObject<URivenSaveGame>();
   initialSavegame->SetSubscriber(this);
   this->Instantaneous_SaveGame = initialSavegame;
-  
+
   auto gameInstance = GetWorld()->GetGameInstance<URivenGameInstance>();
   gameInstance->Last_Savable_SaveGame = initialSavegame;
 
@@ -93,8 +92,7 @@ void ARivenGameState::SetMenuPage(EGameMenuPage MenuPage) {
   this->CurrentMenuPage = MenuPage;
   if (MenuPage == EGameMenuPage::NoPage) {
     MenuWidget->SetRenderOpacity(0);
-  }
-  else {
+  } else {
     MenuWidget->SetRenderOpacity(1);
   }
   MenuStateChangedEvent.Broadcast();

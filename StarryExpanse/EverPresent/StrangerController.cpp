@@ -24,7 +24,7 @@ void AStrangerController::BeginPlay() {
 
   auto gameInstance = Cast<URivenGameInstance>(GetWorld()->GetGameInstance());
   gameInstance->GameInstanceVarsChanged.AddDynamic(
-    this, &AStrangerController::PossiblyFreezeOrUnfreeze);
+      this, &AStrangerController::PossiblyFreezeOrUnfreeze);
   this->EnterCursorMode(true);
 }
 
@@ -33,7 +33,8 @@ void AStrangerController::Cbk_MenuStateChanged() {
   this->ReactToMenuState(gs->CurrentMenuPage, gs->MenuWidget);
 }
 
-void AStrangerController::ReactToMenuState(EGameMenuPage menuPage, UUserWidget* widgetNonShared) {
+void AStrangerController::ReactToMenuState(EGameMenuPage menuPage,
+                                           UUserWidget *widgetNonShared) {
   if (menuPage != EGameMenuPage::NoPage) {
     FInputModeUIOnly mode;
 
@@ -86,15 +87,15 @@ void AStrangerController::AddVerticalMousePan(float amount) {
 
 void AStrangerController::AddHorizontalMouseScan(float amount) {
   if (!IsCursorLockedToCenter) {
-    HorizontalMousePosition = FMath::Clamp(
-      HorizontalMousePosition + amount, 0.0f, 1.0f);
+    HorizontalMousePosition =
+        FMath::Clamp(HorizontalMousePosition + amount, 0.0f, 1.0f);
   }
 }
 
 void AStrangerController::AddVerticalMouseScan(float amount) {
   if (!IsCursorLockedToCenter) {
-    VerticalMousePosition = FMath::Clamp(
-      VerticalMousePosition + amount, 0.0f, 1.0f);
+    VerticalMousePosition =
+        FMath::Clamp(VerticalMousePosition + amount, 0.0f, 1.0f);
   }
 }
 
