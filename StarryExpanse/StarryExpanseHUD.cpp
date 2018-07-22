@@ -114,6 +114,7 @@ void AStarryExpanseHUD::DrawHUD() {
     TileItem.PivotPoint = FVector2D(0.5, 0.5);
     TileItem.BlendMode = SE_BLEND_Translucent;
     TileItem.Size = actualPixelDims;
+    TileItem.Z = 1000;
     Canvas->DrawItem(TileItem);
   }
 

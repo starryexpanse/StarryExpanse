@@ -10,14 +10,13 @@ while True:
 		break
 	comp_disp = input('In-Editor display name for component #' + str(i) + ':')
 	disp = repr(comp_disp) if comp_disp != '' else comp_desc
-	if i != 0:
+	if i != 1:
 		contents += ',\n'
-	contents += '  ' + '%s UMETA(DisplayName = %s),' % (comp_desc, disp)
+	contents += '  ' + '%s UMETA(DisplayName = %s)' % (comp_desc, disp)
 
 vars = { 'desc': desc, 'name': name, 'contents': contents }
 
-body = u"""
-//
+body = u"""//
 // Copyright, 59 Volt Entertainment, all rights reserved.
 //
 
@@ -36,7 +35,6 @@ header = u"""
 #pragma once
 
 #include "Engine/UserDefinedEnum.h"
-#include "E{name}.generated.h"
 
 UENUM(BlueprintType)
 enum class E{name} : uint8 {{

@@ -16,8 +16,9 @@ AStarryExpanseGameMode::AStarryExpanseGameMode() : Super() {
   // set default pawn class to our Blueprinted character
   PlayerControllerClass = AStrangerController::StaticClass();
 
-  static ConstructorHelpers::FClassFinder<AHUD> HudClassFinder(
-      TEXT("/Game/StarryExpanse/Interface/Widgets/loadingHUD"));
+  static ConstructorHelpers::FClassFinder<AStarryExpanseHUD> HudClassFinder(
+      TEXT("/Game/StarryExpanse/Interface/Widgets/BP_HUD_Root.BP_HUD_Root_C"));
+
   HUDClass = HudClassFinder.Class;
 
   GameStateClass = ARivenGameState::StaticClass();
