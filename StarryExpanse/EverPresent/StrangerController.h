@@ -64,13 +64,10 @@ public:
 
   // Override defaults
 
-  UFUNCTION()
   virtual void PostInitializeComponents() override;
 
-  UFUNCTION()
   virtual void SetIgnoreMoveInput(bool bNewMoveInput) override;
 
-  UFUNCTION()
   virtual void SetIgnoreLookInput(bool bNewLookInput) override;
 
 protected:
