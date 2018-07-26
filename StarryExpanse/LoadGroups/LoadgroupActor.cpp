@@ -34,7 +34,7 @@ void ALoadgroupActor::LevelLoaded() {
         // level = level;
       }
       if (level != nullptr) {
-        level->bShouldBeVisible = true;
+        level->SetShouldBeVisible(true);
       }
     }
 
@@ -96,7 +96,8 @@ void ALoadgroupActor::LoadLoadGroup(ELoadGroups groupToLoad) {
       LatentInfo.CallbackTarget = this;
       LatentInfo.ExecutionFunction = FName("LevelUnloaded");
 
-      UGameplayStatics::UnloadStreamLevel(this, FName(levelName), LatentInfo);
+      UGameplayStatics::UnloadStreamLevel(this, FName(levelName), LatentInfo,
+		                                  /*bShouldBlockOnUnload=*/false);
     }
   }
 }
