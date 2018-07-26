@@ -9,11 +9,11 @@
 
 UINTERFACE()
 class STARRYEXPANSE_API URivenSavegameAware : public UInterface {
-  GENERATED_UINTERFACE_BODY()
+  GENERATED_BODY()
 };
 
 class IRivenSavegameAware {
-  GENERATED_IINTERFACE_BODY()
+  GENERATED_BODY()
 
 public:
   UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Savegame)
