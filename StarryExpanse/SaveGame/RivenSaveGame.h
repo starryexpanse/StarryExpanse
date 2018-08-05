@@ -149,6 +149,39 @@ public:
   bool B_BoilerInterior_Platform_IsRaised;
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
+  bool B_Lab_BookPress_IsToTheRight;
+
+  UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
+  bool B_Lab_NorthDoor_IsLocked;
+
+  UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
+  bool B_Lab_NorthDoor_IsOpen;
+
+  UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
+  bool B_Lab_SouthDoor_IsOpen;
+
+  UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
+  bool B_Lab_Furnace_IsOpen;
+
+  UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
+  bool B_Lab_Drawers_IsDrawer1Open;
+
+  UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
+  bool B_Lab_Drawers_IsDrawer2Open;
+
+  UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
+  bool B_Lab_Drawers_IsDrawer3Open;
+
+  UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
+  bool B_Lab_Drawers_IsDrawer4Open;
+
+  UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
+  bool B_Lab_Drawers_IsDrawer5Open;
+
+  UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
+  bool B_Lab_DuctGrate_IsOpen;
+
+  UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
   ESubPosRot J_Basin_Submarine_PositionAndRotation;
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
@@ -532,6 +565,72 @@ private:
 
   UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
   bool Get_B_BoilerInterior_Platform_IsRaised();
+
+  UFUNCTION(BlueprintCallable, Category = SaveGame)
+  void Set_B_Lab_BookPress_IsToTheRight(bool NewVal);
+
+  UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
+  bool Get_B_Lab_BookPress_IsToTheRight();
+
+  UFUNCTION(BlueprintCallable, Category = SaveGame)
+  void Set_B_Lab_NorthDoor_IsLocked(bool NewVal);
+
+  UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
+  bool Get_B_Lab_NorthDoor_IsLocked();
+
+  UFUNCTION(BlueprintCallable, Category = SaveGame)
+  void Set_B_Lab_NorthDoor_IsOpen(bool NewVal);
+
+  UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
+  bool Get_B_Lab_NorthDoor_IsOpen();
+
+  UFUNCTION(BlueprintCallable, Category = SaveGame)
+  void Set_B_Lab_SouthDoor_IsOpen(bool NewVal);
+
+  UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
+  bool Get_B_Lab_SouthDoor_IsOpen();
+
+  UFUNCTION(BlueprintCallable, Category = SaveGame)
+  void Set_B_Lab_Furnace_IsOpen(bool NewVal);
+
+  UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
+  bool Get_B_Lab_Furnace_IsOpen();
+
+  UFUNCTION(BlueprintCallable, Category = SaveGame)
+  void Set_B_Lab_Drawers_IsDrawer1Open(bool NewVal);
+
+  UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
+  bool Get_B_Lab_Drawers_IsDrawer1Open();
+
+  UFUNCTION(BlueprintCallable, Category = SaveGame)
+  void Set_B_Lab_Drawers_IsDrawer2Open(bool NewVal);
+
+  UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
+  bool Get_B_Lab_Drawers_IsDrawer2Open();
+
+  UFUNCTION(BlueprintCallable, Category = SaveGame)
+  void Set_B_Lab_Drawers_IsDrawer3Open(bool NewVal);
+
+  UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
+  bool Get_B_Lab_Drawers_IsDrawer3Open();
+
+  UFUNCTION(BlueprintCallable, Category = SaveGame)
+  void Set_B_Lab_Drawers_IsDrawer4Open(bool NewVal);
+
+  UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
+  bool Get_B_Lab_Drawers_IsDrawer4Open();
+
+  UFUNCTION(BlueprintCallable, Category = SaveGame)
+  void Set_B_Lab_Drawers_IsDrawer5Open(bool NewVal);
+
+  UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
+  bool Get_B_Lab_Drawers_IsDrawer5Open();
+
+  UFUNCTION(BlueprintCallable, Category = SaveGame)
+  void Set_B_Lab_DuctGrate_IsOpen(bool NewVal);
+
+  UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
+  bool Get_B_Lab_DuctGrate_IsOpen();
 
   UFUNCTION(BlueprintCallable, Category = SaveGame)
   void Set_J_Basin_Submarine_PositionAndRotation(ESubPosRot NewVal);

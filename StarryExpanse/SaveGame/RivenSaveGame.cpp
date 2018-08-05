@@ -87,6 +87,28 @@ bool URivenSaveGame::GetBooleanBySaveGameField(ESaveGameField fieldName) {
     return this->B_BoilerInterior_Water_IsPresent;
   case ESaveGameField::B_BoilerInterior_Platform_IsRaised:
     return this->B_BoilerInterior_Platform_IsRaised;
+  case ESaveGameField::B_Lab_BookPress_IsToTheRight:
+    return this->B_Lab_BookPress_IsToTheRight;
+  case ESaveGameField::B_Lab_NorthDoor_IsLocked:
+    return this->B_Lab_NorthDoor_IsLocked;
+  case ESaveGameField::B_Lab_NorthDoor_IsOpen:
+    return this->B_Lab_NorthDoor_IsOpen;
+  case ESaveGameField::B_Lab_SouthDoor_IsOpen:
+    return this->B_Lab_SouthDoor_IsOpen;
+  case ESaveGameField::B_Lab_Furnace_IsOpen:
+    return this->B_Lab_Furnace_IsOpen;
+  case ESaveGameField::B_Lab_Drawers_IsDrawer1Open:
+    return this->B_Lab_Drawers_IsDrawer1Open;
+  case ESaveGameField::B_Lab_Drawers_IsDrawer2Open:
+    return this->B_Lab_Drawers_IsDrawer2Open;
+  case ESaveGameField::B_Lab_Drawers_IsDrawer3Open:
+    return this->B_Lab_Drawers_IsDrawer3Open;
+  case ESaveGameField::B_Lab_Drawers_IsDrawer4Open:
+    return this->B_Lab_Drawers_IsDrawer4Open;
+  case ESaveGameField::B_Lab_Drawers_IsDrawer5Open:
+    return this->B_Lab_Drawers_IsDrawer5Open;
+  case ESaveGameField::B_Lab_DuctGrate_IsOpen:
+    return this->B_Lab_DuctGrate_IsOpen;
   case ESaveGameField::J_Basin_Gallows_IsOpen:
     return this->J_Basin_Gallows_IsOpen;
   case ESaveGameField::J_Basin_Treehouse_IsLever1Up:
@@ -252,6 +274,39 @@ void URivenSaveGame::SetBooleanBySaveGameField(ESaveGameField fieldName,
     break;
   case ESaveGameField::B_BoilerInterior_Platform_IsRaised:
     this->Set_B_BoilerInterior_Platform_IsRaised(nextVal);
+    break;
+  case ESaveGameField::B_Lab_BookPress_IsToTheRight:
+    this->Set_B_Lab_BookPress_IsToTheRight(nextVal);
+    break;
+  case ESaveGameField::B_Lab_NorthDoor_IsLocked:
+    this->Set_B_Lab_NorthDoor_IsLocked(nextVal);
+    break;
+  case ESaveGameField::B_Lab_NorthDoor_IsOpen:
+    this->Set_B_Lab_NorthDoor_IsOpen(nextVal);
+    break;
+  case ESaveGameField::B_Lab_SouthDoor_IsOpen:
+    this->Set_B_Lab_SouthDoor_IsOpen(nextVal);
+    break;
+  case ESaveGameField::B_Lab_Furnace_IsOpen:
+    this->Set_B_Lab_Furnace_IsOpen(nextVal);
+    break;
+  case ESaveGameField::B_Lab_Drawers_IsDrawer1Open:
+    this->Set_B_Lab_Drawers_IsDrawer1Open(nextVal);
+    break;
+  case ESaveGameField::B_Lab_Drawers_IsDrawer2Open:
+    this->Set_B_Lab_Drawers_IsDrawer2Open(nextVal);
+    break;
+  case ESaveGameField::B_Lab_Drawers_IsDrawer3Open:
+    this->Set_B_Lab_Drawers_IsDrawer3Open(nextVal);
+    break;
+  case ESaveGameField::B_Lab_Drawers_IsDrawer4Open:
+    this->Set_B_Lab_Drawers_IsDrawer4Open(nextVal);
+    break;
+  case ESaveGameField::B_Lab_Drawers_IsDrawer5Open:
+    this->Set_B_Lab_Drawers_IsDrawer5Open(nextVal);
+    break;
+  case ESaveGameField::B_Lab_DuctGrate_IsOpen:
+    this->Set_B_Lab_DuctGrate_IsOpen(nextVal);
     break;
   case ESaveGameField::J_Basin_Gallows_IsOpen:
     this->Set_J_Basin_Gallows_IsOpen(nextVal);
@@ -425,6 +480,17 @@ void URivenSaveGame::RestoreNewGameDefaults() {
   this->B_BoilerExterior_Heater_IsOn = false;
   this->B_BoilerInterior_Water_IsPresent = true;
   this->B_BoilerInterior_Platform_IsRaised = false;
+  this->B_Lab_BookPress_IsToTheRight = true;
+  this->B_Lab_NorthDoor_IsLocked = true;
+  this->B_Lab_NorthDoor_IsOpen = false;
+  this->B_Lab_SouthDoor_IsOpen = false;
+  this->B_Lab_Furnace_IsOpen = false;
+  this->B_Lab_Drawers_IsDrawer1Open = false;
+  this->B_Lab_Drawers_IsDrawer2Open = false;
+  this->B_Lab_Drawers_IsDrawer3Open = false;
+  this->B_Lab_Drawers_IsDrawer4Open = false;
+  this->B_Lab_Drawers_IsDrawer5Open = false;
+  this->B_Lab_DuctGrate_IsOpen = false;
   this->J_Basin_Submarine_PositionAndRotation = ESubPosRot::Plat_N;
   this->J_Basin_Gallows_IsOpen = false;
   this->J_Basin_Treehouse_IsLever1Up = false;
@@ -595,6 +661,17 @@ URivenSaveGame::GetSavegameFields() {
   vars.push_back(std::make_tuple("bool", "B_BoilerExterior_Heater_IsOn"));
   vars.push_back(std::make_tuple("bool", "B_BoilerInterior_Water_IsPresent"));
   vars.push_back(std::make_tuple("bool", "B_BoilerInterior_Platform_IsRaised"));
+  vars.push_back(std::make_tuple("bool", "B_Lab_BookPress_IsToTheRight"));
+  vars.push_back(std::make_tuple("bool", "B_Lab_NorthDoor_IsLocked"));
+  vars.push_back(std::make_tuple("bool", "B_Lab_NorthDoor_IsOpen"));
+  vars.push_back(std::make_tuple("bool", "B_Lab_SouthDoor_IsOpen"));
+  vars.push_back(std::make_tuple("bool", "B_Lab_Furnace_IsOpen"));
+  vars.push_back(std::make_tuple("bool", "B_Lab_Drawers_IsDrawer1Open"));
+  vars.push_back(std::make_tuple("bool", "B_Lab_Drawers_IsDrawer2Open"));
+  vars.push_back(std::make_tuple("bool", "B_Lab_Drawers_IsDrawer3Open"));
+  vars.push_back(std::make_tuple("bool", "B_Lab_Drawers_IsDrawer4Open"));
+  vars.push_back(std::make_tuple("bool", "B_Lab_Drawers_IsDrawer5Open"));
+  vars.push_back(std::make_tuple("bool", "B_Lab_DuctGrate_IsOpen"));
   vars.push_back(
       std::make_tuple("ESubPosRot", "J_Basin_Submarine_PositionAndRotation"));
   vars.push_back(std::make_tuple("bool", "J_Basin_Gallows_IsOpen"));
@@ -1164,6 +1241,202 @@ void URivenSaveGame::Set_B_BoilerInterior_Platform_IsRaised(bool NewVal) {
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_B_BoilerInterior_Platform_IsRaised() {
   return B_BoilerInterior_Platform_IsRaised;
+}
+
+UFUNCTION(BlueprintCallable, Category = SaveGame)
+void URivenSaveGame::Set_B_Lab_BookPress_IsToTheRight(bool NewVal) {
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->B_Lab_BookPress_IsToTheRight;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->B_Lab_BookPress_IsToTheRight = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
+}
+
+UFUNCTION(BlueprintCallable, Category = SaveGame)
+bool URivenSaveGame::Get_B_Lab_BookPress_IsToTheRight() {
+  return B_Lab_BookPress_IsToTheRight;
+}
+
+UFUNCTION(BlueprintCallable, Category = SaveGame)
+void URivenSaveGame::Set_B_Lab_NorthDoor_IsLocked(bool NewVal) {
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->B_Lab_NorthDoor_IsLocked;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->B_Lab_NorthDoor_IsLocked = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
+}
+
+UFUNCTION(BlueprintCallable, Category = SaveGame)
+bool URivenSaveGame::Get_B_Lab_NorthDoor_IsLocked() {
+  return B_Lab_NorthDoor_IsLocked;
+}
+
+UFUNCTION(BlueprintCallable, Category = SaveGame)
+void URivenSaveGame::Set_B_Lab_NorthDoor_IsOpen(bool NewVal) {
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->B_Lab_NorthDoor_IsOpen;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->B_Lab_NorthDoor_IsOpen = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
+}
+
+UFUNCTION(BlueprintCallable, Category = SaveGame)
+bool URivenSaveGame::Get_B_Lab_NorthDoor_IsOpen() {
+  return B_Lab_NorthDoor_IsOpen;
+}
+
+UFUNCTION(BlueprintCallable, Category = SaveGame)
+void URivenSaveGame::Set_B_Lab_SouthDoor_IsOpen(bool NewVal) {
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->B_Lab_SouthDoor_IsOpen;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->B_Lab_SouthDoor_IsOpen = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
+}
+
+UFUNCTION(BlueprintCallable, Category = SaveGame)
+bool URivenSaveGame::Get_B_Lab_SouthDoor_IsOpen() {
+  return B_Lab_SouthDoor_IsOpen;
+}
+
+UFUNCTION(BlueprintCallable, Category = SaveGame)
+void URivenSaveGame::Set_B_Lab_Furnace_IsOpen(bool NewVal) {
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->B_Lab_Furnace_IsOpen;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->B_Lab_Furnace_IsOpen = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
+}
+
+UFUNCTION(BlueprintCallable, Category = SaveGame)
+bool URivenSaveGame::Get_B_Lab_Furnace_IsOpen() { return B_Lab_Furnace_IsOpen; }
+
+UFUNCTION(BlueprintCallable, Category = SaveGame)
+void URivenSaveGame::Set_B_Lab_Drawers_IsDrawer1Open(bool NewVal) {
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->B_Lab_Drawers_IsDrawer1Open;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->B_Lab_Drawers_IsDrawer1Open = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
+}
+
+UFUNCTION(BlueprintCallable, Category = SaveGame)
+bool URivenSaveGame::Get_B_Lab_Drawers_IsDrawer1Open() {
+  return B_Lab_Drawers_IsDrawer1Open;
+}
+
+UFUNCTION(BlueprintCallable, Category = SaveGame)
+void URivenSaveGame::Set_B_Lab_Drawers_IsDrawer2Open(bool NewVal) {
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->B_Lab_Drawers_IsDrawer2Open;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->B_Lab_Drawers_IsDrawer2Open = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
+}
+
+UFUNCTION(BlueprintCallable, Category = SaveGame)
+bool URivenSaveGame::Get_B_Lab_Drawers_IsDrawer2Open() {
+  return B_Lab_Drawers_IsDrawer2Open;
+}
+
+UFUNCTION(BlueprintCallable, Category = SaveGame)
+void URivenSaveGame::Set_B_Lab_Drawers_IsDrawer3Open(bool NewVal) {
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->B_Lab_Drawers_IsDrawer3Open;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->B_Lab_Drawers_IsDrawer3Open = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
+}
+
+UFUNCTION(BlueprintCallable, Category = SaveGame)
+bool URivenSaveGame::Get_B_Lab_Drawers_IsDrawer3Open() {
+  return B_Lab_Drawers_IsDrawer3Open;
+}
+
+UFUNCTION(BlueprintCallable, Category = SaveGame)
+void URivenSaveGame::Set_B_Lab_Drawers_IsDrawer4Open(bool NewVal) {
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->B_Lab_Drawers_IsDrawer4Open;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->B_Lab_Drawers_IsDrawer4Open = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
+}
+
+UFUNCTION(BlueprintCallable, Category = SaveGame)
+bool URivenSaveGame::Get_B_Lab_Drawers_IsDrawer4Open() {
+  return B_Lab_Drawers_IsDrawer4Open;
+}
+
+UFUNCTION(BlueprintCallable, Category = SaveGame)
+void URivenSaveGame::Set_B_Lab_Drawers_IsDrawer5Open(bool NewVal) {
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->B_Lab_Drawers_IsDrawer5Open;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->B_Lab_Drawers_IsDrawer5Open = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
+}
+
+UFUNCTION(BlueprintCallable, Category = SaveGame)
+bool URivenSaveGame::Get_B_Lab_Drawers_IsDrawer5Open() {
+  return B_Lab_Drawers_IsDrawer5Open;
+}
+
+UFUNCTION(BlueprintCallable, Category = SaveGame)
+void URivenSaveGame::Set_B_Lab_DuctGrate_IsOpen(bool NewVal) {
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->B_Lab_DuctGrate_IsOpen;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->B_Lab_DuctGrate_IsOpen = NewVal;
+    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+  }
+}
+
+UFUNCTION(BlueprintCallable, Category = SaveGame)
+bool URivenSaveGame::Get_B_Lab_DuctGrate_IsOpen() {
+  return B_Lab_DuctGrate_IsOpen;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)

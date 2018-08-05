@@ -72,6 +72,26 @@ B:
         Platform:
             - { type: bool, name: IsRaised, initial: false } # reactive
     
+    # LAB
+    Lab:
+        BookPress:
+            - { type: bool, name: IsToTheRight, initial: true } # check initial state
+        NorthDoor:
+            - { type: bool, name: IsLocked, initial: true }
+            - { type: bool, name: IsOpen, initial: false }
+        SouthDoor:
+            - { type: bool, name: IsOpen, initial: false } # TODO is it possible to lock this one?
+        Furnace:
+            - { type: bool, name: IsOpen, initial: false }
+        Drawers:
+            - { type: bool, name: IsDrawer1Open, initial: false }
+            - { type: bool, name: IsDrawer2Open, initial: false }
+            - { type: bool, name: IsDrawer3Open, initial: false }
+            - { type: bool, name: IsDrawer4Open, initial: false }
+            - { type: bool, name: IsDrawer5Open, initial: false }
+        DuctGrate:
+            - { type: bool, name: IsOpen, initial: false }
+    
     # TODO: upper walkway fan state, ytram trap state, drawers, water bubble state, oven door,
     #   boiler door locked
 #G:
