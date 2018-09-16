@@ -1,3 +1,6 @@
+import os
+import sys
+
 try:
 	from builtins import input
 except:
@@ -9,7 +12,8 @@ cog_command = []
 if sys.platform == 'darwin':
     cog_command = ['cog.py']
 else:
-    cog_command = ['python', r'C:\Python36\Scripts\cog.py']
+    cog_py_path = os.path.join(os.path.dirname(sys.executable), 'Scripts', 'cog.py')
+    cog_command = ['python', cog_py_path]
 
 files = [
     'LoadGroups/LoadGroupInfo.cpp',
