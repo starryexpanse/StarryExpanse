@@ -141,9 +141,8 @@ void AStrangerController::Interact() {
 
   if (gotHit) {
     auto hitActor = hitResult.GetActor();
-    if (hitActor != nullptr &&
-        hitActor->GetClass()->ImplementsInterface(
-            URivenInteractable::StaticClass())) {
+    if (hitActor != nullptr && hitActor->GetClass()->ImplementsInterface(
+                                   URivenInteractable::StaticClass())) {
       IRivenInteractable::Execute_Touched(hitActor);
     }
   }

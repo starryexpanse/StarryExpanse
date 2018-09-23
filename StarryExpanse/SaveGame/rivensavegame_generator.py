@@ -42,5 +42,5 @@ for island, areas in root.items():
     path.pop()
 
 def p(x):
-    # Easy hack to make the line endings consistently DOS-style
-    cog.outl(x)
+    # Easy hack to make the line endings consistently unix-style
+    cog.out(x + '\n')

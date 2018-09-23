@@ -69,6 +69,8 @@ void ASimpleSpinnerResponder::Initialize(FInteractableSettingsAxial settings) {
   m_moveablePart = settings.MoveablePart;
   m_axis = settings.Axis;
 
+  check(m_moveablePart);
+
   FOnTimelineFloat progressCallback{};
   progressCallback.BindUFunction(this,
                                  FName{TEXT("AnimationProgressCallback")});

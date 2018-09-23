@@ -54,9 +54,8 @@ UTexture2D *AStarryExpanseHUD::GetCursorTexture(FVector2D screenDims,
 
   if (gotHit) {
     auto actor = result.GetActor();
-    if (actor != nullptr &&
-        actor->GetClass()->ImplementsInterface(
-            URivenInteractable::StaticClass())) {
+    if (actor != nullptr && actor->GetClass()->ImplementsInterface(
+                                URivenInteractable::StaticClass())) {
       auto probeResult =
           IRivenInteractable::Execute_ProbeInteractability(actor);
       if (probeResult.ZoomCue == EZoomCue::ZoomingOut) {
@@ -141,9 +140,8 @@ void AStarryExpanseHUD::DrawHUD() {
 
         if (gotHit) {
           auto actor = result.GetActor();
-          if (actor != nullptr &&
-              actor->GetClass()->ImplementsInterface(
-                  URivenInteractable::StaticClass())) {
+          if (actor != nullptr && actor->GetClass()->ImplementsInterface(
+                                      URivenInteractable::StaticClass())) {
             auto probeResponse =
                 IRivenInteractable::Execute_ProbeInteractability(actor);
             if (probeResponse.CanBeTapped) {

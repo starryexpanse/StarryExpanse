@@ -97,7 +97,7 @@ void ALoadgroupActor::LoadLoadGroup(ELoadGroups groupToLoad) {
       LatentInfo.ExecutionFunction = FName("LevelUnloaded");
 
       UGameplayStatics::UnloadStreamLevel(this, FName(levelName), LatentInfo,
-		                                  /*bShouldBlockOnUnload=*/false);
+                                          false);
     }
   }
 }

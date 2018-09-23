@@ -13,6 +13,7 @@ if sys.platform == 'darwin':
     cog_command = ['cog.py']
 else:
     cog_py_path = os.path.join(os.path.dirname(sys.executable), 'Scripts', 'cog.py')
+    print(cog_py_path)
     cog_command = ['python', cog_py_path]
 
 files = [
@@ -24,10 +25,13 @@ files = [
     'SaveGame/ESaveGameField.h',
 ]
 
+realpath_here = os.path.dirname(os.path.realpath(__file__))
+os.chdir(realpath_here)
+
 try:
     subprocess.check_call(cog_command + ['-r'] + files)
 except Exception as e:
-    print(e.message)
+    print(str(e))
 
 print("Complete!")
 
