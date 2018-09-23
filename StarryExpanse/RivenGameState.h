@@ -56,4 +56,9 @@ public:
 
   UFUNCTION(BlueprintCallable)
   void UnsubscribeActorFromSavegame(AActor *Actor);
+
+  // Developer flags
+
+  UPROPERTY(BlueprintReadOnly)
+  bool IsShowingDebugHitScreenOverlay = false;
 };

@@ -9,6 +9,7 @@
 #include "Interfaces/RivenInteractable.h"
 #include "TextureResource.h"
 #include "UObject/ConstructorHelpers.h"
+#include "RivenGameState.h"
 #include <algorithm>
 
 AStarryExpanseHUD::AStarryExpanseHUD() {
@@ -118,7 +119,13 @@ void AStarryExpanseHUD::DrawHUD() {
   }
 
   // Draw grid of colored tiles for debugging whether hits were reached
-  {
+
+  auto gs = Cast<ARivenGameState>(GetWorld()->GetGameState());
+  if (!gs) {
+    return;
+  }
+
+  if (gs->IsShowingDebugHitScreenOverlay) {
     const float kNumXDivisions = 100.0f;
     const float kNumYDivisions = 100.0f;
     const float kSquareWidth = width / kNumXDivisions;
