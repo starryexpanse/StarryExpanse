@@ -39,7 +39,7 @@ ALevelLoadingTwoWayBox::ALevelLoadingTwoWayBox(
   ALoaded_AfterBLoaded_AfterIntersectFromA.BindUFunction(
       this, "Cbk_ALoaded_AfterBLoaded_AfterIntersectFromA");
   ALoaded_AfterIntersectFromB.BindUFunction(
-      this, "Cbk_AfterALoaded_AfterIntersectFromB");
+      this, "Cbk_ALoaded_AfterIntersectFromB");
   ALoaded_AfterLeaveToA.BindUFunction(this, "Cbk_ALoaded_AfterLeaveToA");
 }
 
