@@ -21,15 +21,35 @@ ARivenGameState::ARivenGameState() : Super() {
       TEXT("/Game/StarryExpanse/Interface/Widgets/BP_MainMenu.BP_MainMenu_C"));
 
   WidgetClass = WidgetClassFinder.Class;
+
+  bListedInSceneOutliner = true;
+}
+
+void ARivenGameState::PostInitializeComponents() {
+  Super::PostInitializeComponents();
+  FActorSpawnParameters params;
+  params.Name = FName("LoadgroupQueen");
+  params.Owner = this;
+  this->LoadgroupQueen = this->GetWorld()->SpawnActor<ALoadgroupActor>(
+      FVector::ZeroVector, FRotator::ZeroRotator, params);
+}
+
+void ARivenGameState::SetNewCurrentSavegame(URivenSaveGame *nextSavegame) {
+  if (this->Instantaneous_SaveGame) {
+    this->Instantaneous_SaveGame->SetSubscriber(nullptr);
+  }
+
+  if (nextSavegame) {
+    nextSavegame->SetSubscriber(this);
+  }
+  this->Instantaneous_SaveGame = nextSavegame;
 }
 
 void ARivenGameState::OnConstruction(const FTransform &Transform) {
-  auto initialSavegame = NewObject<URivenSaveGame>();
-  initialSavegame->SetSubscriber(this);
-  this->Instantaneous_SaveGame = initialSavegame;
+  // Set savegame to just a stub, so that PIE works.
+  SetNewCurrentSavegame(NewObject<URivenSaveGame>());
 
-  auto gameInstance = GetWorld()->GetGameInstance<URivenGameInstance>();
-  gameInstance->Last_Savable_SaveGame = initialSavegame;
+  // Initialize controller with main menu screen
 
   auto controller = UGameplayStatics::GetPlayerController(GetWorld(), 0);
 

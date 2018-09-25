@@ -37,8 +37,12 @@ enum class ELoadGroups : uint8 {
      cog.outl('%s\t\tUMETA(DisplayName = "%s")%s' % (loadgroup, display, comma))
   ]]] */
   AGeneral UMETA(DisplayName = "A: General"),
+  BBalcony UMETA(DisplayName = "B: Balcony"),
   BBase UMETA(DisplayName = "B: Base"),
+  BCentral UMETA(DisplayName = "B: Central"),
   BEastSide UMETA(DisplayName = "B: East Side"),
+  BFiremarbleDistrict UMETA(DisplayName = "B: Firemarble District"),
+  BLabDistrict UMETA(DisplayName = "B: Lab District"),
   GBase UMETA(DisplayName = "G: Base"),
   GDownside UMETA(DisplayName = "G: Downside"),
   GUpsideBase UMETA(DisplayName = "G: Upside Base"),

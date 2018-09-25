@@ -53,14 +53,14 @@ public:
     import cog
     from rivensavegame_generator import vars, p
 
-    p("public:")
+    p("private:")
 
     for var in vars:
         p("UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)")
         p("%s %s;" % (var[0], var[1]))
         p("")
 
-    p("private:")
+    p("public:")
 
     for var in vars:
 
@@ -75,7 +75,7 @@ public:
         p("")
 
   ]]] */
-public:
+private:
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
   ELoadGroups A_LoadGroups_CurrentLoadGroup;
 
@@ -421,7 +421,7 @@ public:
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
   int32 P_Exterior_Lock_CodeE;
 
-private:
+public:
   UFUNCTION(BlueprintCallable, Category = SaveGame)
   void Set_A_LoadGroups_CurrentLoadGroup(ELoadGroups NewVal);
 

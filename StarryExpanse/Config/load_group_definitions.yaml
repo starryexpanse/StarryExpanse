@@ -7,7 +7,6 @@ MysteriumShowOff: &MysteriumShowOff
 ## A: All-Encompassing
 AGeneral: &AGeneral
    - A_Journals
-   - *MysteriumShowOff
 
 ## S: Shared
 SRivenBase: &SRivenBase
@@ -19,15 +18,42 @@ SRivenBase: &SRivenBase
 BBase: &BBase
    - *AGeneral
    - *SRivenBase
-   - B_Terrain_Structures
+   - B_Terrain
 BEastSide:
    - *BBase
    - S_GreatBridge
    - T_SuperDome
    - T_Terrain
-   - B_UpperWalkwayTunnel
-   - B_CartTrack_Structures
-   - B_GehnLab
+BCentral:
+   - *BBase
+   - B_Balcony
+   - B_RaisedWalkway
+   - B_YtramCave # TODO - We can downgrade to just the outermost part
+   - B_Lab # TODO - downgrade to low-fi version
+   - B_CartTunnel # TODO - split into terminus, interior, and exterior
+   - B_Basin
+BBalcony:
+   - *BBase
+   - B_Balcony
+   - B_RaisedWalkway
+   - B_YtramCave
+   - B_Lab
+   - B_Basin
+   - B_FireMarbleChamber
+BFiremarbleDistrict:
+   - *BBase
+   - B_Balcony
+   - B_RaisedWalkway
+   - B_YtramCave
+   - B_Basin
+   - B_FireMarbleChamber
+BLabDistrict:
+   - *BBase
+   - B_Balcony
+   - B_RaisedWalkway
+   - B_Lab
+   - B_MaglevDock
+   - B_Basin
 
 ## G: Garden Island
 # Bases

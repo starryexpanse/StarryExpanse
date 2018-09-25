@@ -50,11 +50,9 @@ ULoadGroupInfo::ULoadGroupInfo(const FObjectInitializer &ObjectInitializer)
                                  {FName("G_BubbleGarden"), FName("G_Terrain"),
                                   FName("G_SpikeGarden")})));
 
-  LoadGroups.insert(LgEntry(
-      ELoadGroups::AGeneral,
-      LoadgroupInfoEntry(FString("AGeneral"),
-                         {FName("A_Journals"), FName("G_BubbleGarden"),
-                          FName("G_Terrain"), FName("G_SpikeGarden")})));
+  LoadGroups.insert(
+      LgEntry(ELoadGroups::AGeneral,
+              LoadgroupInfoEntry(FString("AGeneral"), {FName("A_Journals")})));
 
   LoadGroups.insert(LgEntry(ELoadGroups::SRivenBase,
                             LoadgroupInfoEntry(FString("SRivenBase"),
@@ -62,34 +60,67 @@ ULoadGroupInfo::ULoadGroupInfo(const FObjectInitializer &ObjectInitializer)
                                                 FName("S_PostProcessing_Riven"),
                                                 FName("S_Ocean_Riven")})));
 
-  LoadGroups.insert(
-      LgEntry(ELoadGroups::BBase,
-              LoadgroupInfoEntry(
-                  FString("BBase"),
-                  {FName("A_Journals"), FName("G_BubbleGarden"),
-                   FName("G_Terrain"), FName("G_SpikeGarden"),
-                   FName("S_Lighting_Riven"), FName("S_PostProcessing_Riven"),
-                   FName("S_Ocean_Riven"), FName("B_Terrain_Structures")})));
+  LoadGroups.insert(LgEntry(
+      ELoadGroups::BBase,
+      LoadgroupInfoEntry(FString("BBase"),
+                         {FName("A_Journals"), FName("S_Lighting_Riven"),
+                          FName("S_PostProcessing_Riven"),
+                          FName("S_Ocean_Riven"), FName("B_Terrain")})));
 
   LoadGroups.insert(
       LgEntry(ELoadGroups::BEastSide,
               LoadgroupInfoEntry(
                   FString("BEastSide"),
-                  {FName("A_Journals"), FName("G_BubbleGarden"),
-                   FName("G_Terrain"), FName("G_SpikeGarden"),
-                   FName("S_Lighting_Riven"), FName("S_PostProcessing_Riven"),
-                   FName("S_Ocean_Riven"), FName("B_Terrain_Structures"),
-                   FName("S_GreatBridge"), FName("T_SuperDome"),
-                   FName("T_Terrain"), FName("B_UpperWalkwayTunnel"),
-                   FName("B_CartTrack_Structures"), FName("B_GehnLab")})));
+                  {FName("A_Journals"), FName("S_Lighting_Riven"),
+                   FName("S_PostProcessing_Riven"), FName("S_Ocean_Riven"),
+                   FName("B_Terrain"), FName("S_GreatBridge"),
+                   FName("T_SuperDome"), FName("T_Terrain")})));
+
+  LoadGroups.insert(
+      LgEntry(ELoadGroups::BCentral,
+              LoadgroupInfoEntry(
+                  FString("BCentral"),
+                  {FName("A_Journals"), FName("S_Lighting_Riven"),
+                   FName("S_PostProcessing_Riven"), FName("S_Ocean_Riven"),
+                   FName("B_Terrain"), FName("B_Balcony"),
+                   FName("B_RaisedWalkway"), FName("B_YtramCave"),
+                   FName("B_Lab"), FName("B_CartTunnel"), FName("B_Basin")})));
 
   LoadGroups.insert(LgEntry(
-      ELoadGroups::GBase,
+      ELoadGroups::BBalcony,
+      LoadgroupInfoEntry(FString("BBalcony"),
+                         {FName("A_Journals"), FName("S_Lighting_Riven"),
+                          FName("S_PostProcessing_Riven"),
+                          FName("S_Ocean_Riven"), FName("B_Terrain"),
+                          FName("B_Balcony"), FName("B_RaisedWalkway"),
+                          FName("B_YtramCave"), FName("B_Lab"),
+                          FName("B_Basin"), FName("B_FireMarbleChamber")})));
+
+  LoadGroups.insert(
+      LgEntry(ELoadGroups::BFiremarbleDistrict,
+              LoadgroupInfoEntry(
+                  FString("BFiremarbleDistrict"),
+                  {FName("A_Journals"), FName("S_Lighting_Riven"),
+                   FName("S_PostProcessing_Riven"), FName("S_Ocean_Riven"),
+                   FName("B_Terrain"), FName("B_Balcony"),
+                   FName("B_RaisedWalkway"), FName("B_YtramCave"),
+                   FName("B_Basin"), FName("B_FireMarbleChamber")})));
+
+  LoadGroups.insert(LgEntry(
+      ELoadGroups::BLabDistrict,
       LoadgroupInfoEntry(
-          FString("GBase"),
-          {FName("A_Journals"), FName("G_BubbleGarden"), FName("G_Terrain"),
-           FName("G_SpikeGarden"), FName("S_Lighting_Riven"),
-           FName("S_PostProcessing_Riven"), FName("S_Ocean_Riven")})));
+          FString("BLabDistrict"),
+          {FName("A_Journals"), FName("S_Lighting_Riven"),
+           FName("S_PostProcessing_Riven"), FName("S_Ocean_Riven"),
+           FName("B_Terrain"), FName("B_Balcony"), FName("B_RaisedWalkway"),
+           FName("B_Lab"), FName("B_MaglevDock"), FName("B_Basin")})));
+
+  LoadGroups.insert(
+      LgEntry(ELoadGroups::GBase,
+              LoadgroupInfoEntry(
+                  FString("GBase"),
+                  {FName("A_Journals"), FName("S_Lighting_Riven"),
+                   FName("S_PostProcessing_Riven"), FName("S_Ocean_Riven")})));
 
   LoadGroups.insert(LgEntry(
       ELoadGroups::GUpsideBase,
@@ -97,98 +128,86 @@ ULoadGroupInfo::ULoadGroupInfo(const FObjectInitializer &ObjectInitializer)
                          {FName("G_Terrain"), FName("G_WahrkTankUpper"),
                           FName("G_BubbleGarden"), FName("G_Connector")})));
 
-  LoadGroups.insert(
-      LgEntry(ELoadGroups::GUpsideExterior,
-              LoadgroupInfoEntry(
-                  FString("GUpsideExterior"),
-                  {FName("A_Journals"), FName("G_BubbleGarden"),
-                   FName("G_Terrain"), FName("G_SpikeGarden"),
-                   FName("S_Lighting_Riven"), FName("S_PostProcessing_Riven"),
-                   FName("S_Ocean_Riven"), FName("G_Terrain"),
-                   FName("G_WahrkTankUpper"), FName("G_BubbleGarden"),
-                   FName("G_Connector"), FName("G_SpikeGarden")})));
-
-  LoadGroups.insert(
-      LgEntry(ELoadGroups::GUpsideInterior,
-              LoadgroupInfoEntry(
-                  FString("GUpsideInterior"),
-                  {FName("A_Journals"), FName("G_BubbleGarden"),
-                   FName("G_Terrain"), FName("G_SpikeGarden"),
-                   FName("S_Lighting_Riven"), FName("S_PostProcessing_Riven"),
-                   FName("S_Ocean_Riven"), FName("G_Terrain"),
-                   FName("G_WahrkTankUpper"), FName("G_BubbleGarden"),
-                   FName("G_Connector"), FName("G_MaglevDock_B")})));
+  LoadGroups.insert(LgEntry(
+      ELoadGroups::GUpsideExterior,
+      LoadgroupInfoEntry(FString("GUpsideExterior"),
+                         {FName("A_Journals"), FName("S_Lighting_Riven"),
+                          FName("S_PostProcessing_Riven"),
+                          FName("S_Ocean_Riven"), FName("G_Terrain"),
+                          FName("G_WahrkTankUpper"), FName("G_BubbleGarden"),
+                          FName("G_Connector"), FName("G_SpikeGarden")})));
 
   LoadGroups.insert(LgEntry(
-      ELoadGroups::GDownside,
-      LoadgroupInfoEntry(
-          FString("GDownside"),
-          {FName("A_Journals"), FName("G_BubbleGarden"), FName("G_Terrain"),
-           FName("G_SpikeGarden"), FName("S_Lighting_Riven"),
-           FName("S_PostProcessing_Riven"), FName("S_Ocean_Riven"),
-           FName("G_MaglevDock_J"), FName("G_WahrkTankLower")})));
+      ELoadGroups::GUpsideInterior,
+      LoadgroupInfoEntry(FString("GUpsideInterior"),
+                         {FName("A_Journals"), FName("S_Lighting_Riven"),
+                          FName("S_PostProcessing_Riven"),
+                          FName("S_Ocean_Riven"), FName("G_Terrain"),
+                          FName("G_WahrkTankUpper"), FName("G_BubbleGarden"),
+                          FName("G_Connector"), FName("G_MaglevDock_B")})));
 
   LoadGroups.insert(
-      LgEntry(ELoadGroups::TBase,
+      LgEntry(ELoadGroups::GDownside,
               LoadgroupInfoEntry(
-                  FString("TBase"),
-                  {FName("A_Journals"), FName("G_BubbleGarden"),
-                   FName("G_Terrain"), FName("G_SpikeGarden"),
-                   FName("S_Lighting_Riven"), FName("S_PostProcessing_Riven"),
-                   FName("S_Ocean_Riven"), FName("T_Terrain")})));
+                  FString("GDownside"),
+                  {FName("A_Journals"), FName("S_Lighting_Riven"),
+                   FName("S_PostProcessing_Riven"), FName("S_Ocean_Riven"),
+                   FName("G_MaglevDock_J"), FName("G_WahrkTankLower")})));
 
   LoadGroups.insert(LgEntry(
-      ELoadGroups::TWestSide,
-      LoadgroupInfoEntry(
-          FString("TWestSide"),
-          {FName("A_Journals"), FName("G_BubbleGarden"), FName("G_Terrain"),
-           FName("G_SpikeGarden"), FName("S_Lighting_Riven"),
-           FName("S_PostProcessing_Riven"), FName("S_Ocean_Riven"),
-           FName("T_Terrain"), FName("B_CartTrack_Structures"),
-           FName("B_Terrain_Structures"), FName("S_GreatBridge"),
-           FName("T_SuperDome"), FName("T_GateRoom")})));
+      ELoadGroups::TBase,
+      LoadgroupInfoEntry(FString("TBase"),
+                         {FName("A_Journals"), FName("S_Lighting_Riven"),
+                          FName("S_PostProcessing_Riven"),
+                          FName("S_Ocean_Riven"), FName("T_Terrain")})));
 
-  LoadGroups.insert(LgEntry(
-      ELoadGroups::TNorthSide,
-      LoadgroupInfoEntry(
-          FString("TNorthSide"),
-          {FName("A_Journals"), FName("G_BubbleGarden"), FName("G_Terrain"),
-           FName("G_SpikeGarden"), FName("S_Lighting_Riven"),
-           FName("S_PostProcessing_Riven"), FName("S_Ocean_Riven"),
-           FName("T_Terrain"), FName("B_CartTrack_Structures"),
-           FName("B_Terrain_Structures"), FName("S_GreatBridge"),
-           FName("T_GateRoom"), FName("T_SuperDome")})));
+  LoadGroups.insert(
+      LgEntry(ELoadGroups::TWestSide,
+              LoadgroupInfoEntry(
+                  FString("TWestSide"),
+                  {FName("A_Journals"), FName("S_Lighting_Riven"),
+                   FName("S_PostProcessing_Riven"), FName("S_Ocean_Riven"),
+                   FName("T_Terrain"), FName("B_CartTrack_Structures"),
+                   FName("B_Terrain_Structures"), FName("S_GreatBridge"),
+                   FName("T_SuperDome"), FName("T_GateRoom")})));
 
-  LoadGroups.insert(LgEntry(
-      ELoadGroups::TFissureDistrict,
-      LoadgroupInfoEntry(
-          FString("TFissureDistrict"),
-          {FName("A_Journals"), FName("G_BubbleGarden"), FName("G_Terrain"),
-           FName("G_SpikeGarden"), FName("S_Lighting_Riven"),
-           FName("S_PostProcessing_Riven"), FName("S_Ocean_Riven"),
-           FName("T_Terrain"), FName("T_GateRoom"), FName("T_Plateaus"),
-           FName("T_NewTemple"), FName("T_SuperDome")})));
+  LoadGroups.insert(
+      LgEntry(ELoadGroups::TNorthSide,
+              LoadgroupInfoEntry(
+                  FString("TNorthSide"),
+                  {FName("A_Journals"), FName("S_Lighting_Riven"),
+                   FName("S_PostProcessing_Riven"), FName("S_Ocean_Riven"),
+                   FName("T_Terrain"), FName("B_CartTrack_Structures"),
+                   FName("B_Terrain_Structures"), FName("S_GreatBridge"),
+                   FName("T_GateRoom"), FName("T_SuperDome")})));
 
-  LoadGroups.insert(LgEntry(
-      ELoadGroups::TSpiderTunnelDistrict,
-      LoadgroupInfoEntry(
-          FString("TSpiderTunnelDistrict"),
-          {FName("A_Journals"), FName("G_BubbleGarden"), FName("G_Terrain"),
-           FName("G_SpikeGarden"), FName("S_Lighting_Riven"),
-           FName("S_PostProcessing_Riven"), FName("S_Ocean_Riven"),
-           FName("T_Terrain"), FName("T_GateRoom"), FName("T_Plateaus"),
-           FName("T_SpiderChairRoomInterior"), FName("T_NewTemple"),
-           FName("S_Maglev_TJ"), FName("T_SuperDome")})));
+  LoadGroups.insert(
+      LgEntry(ELoadGroups::TFissureDistrict,
+              LoadgroupInfoEntry(
+                  FString("TFissureDistrict"),
+                  {FName("A_Journals"), FName("S_Lighting_Riven"),
+                   FName("S_PostProcessing_Riven"), FName("S_Ocean_Riven"),
+                   FName("T_Terrain"), FName("T_GateRoom"), FName("T_Plateaus"),
+                   FName("T_NewTemple"), FName("T_SuperDome")})));
 
-  LoadGroups.insert(LgEntry(
-      ELoadGroups::TMaglevDistrict,
-      LoadgroupInfoEntry(
-          FString("TMaglevDistrict"),
-          {FName("A_Journals"), FName("G_BubbleGarden"), FName("G_Terrain"),
-           FName("G_SpikeGarden"), FName("S_Lighting_Riven"),
-           FName("S_PostProcessing_Riven"), FName("S_Ocean_Riven"),
-           FName("T_Terrain"), FName("B_CartTrack_Structures"),
-           FName("B_Terrain_Structures"), FName("S_Maglev_TJ")})));
+  LoadGroups.insert(
+      LgEntry(ELoadGroups::TSpiderTunnelDistrict,
+              LoadgroupInfoEntry(
+                  FString("TSpiderTunnelDistrict"),
+                  {FName("A_Journals"), FName("S_Lighting_Riven"),
+                   FName("S_PostProcessing_Riven"), FName("S_Ocean_Riven"),
+                   FName("T_Terrain"), FName("T_GateRoom"), FName("T_Plateaus"),
+                   FName("T_SpiderChairRoomInterior"), FName("T_NewTemple"),
+                   FName("S_Maglev_TJ"), FName("T_SuperDome")})));
+
+  LoadGroups.insert(
+      LgEntry(ELoadGroups::TMaglevDistrict,
+              LoadgroupInfoEntry(
+                  FString("TMaglevDistrict"),
+                  {FName("A_Journals"), FName("S_Lighting_Riven"),
+                   FName("S_PostProcessing_Riven"), FName("S_Ocean_Riven"),
+                   FName("T_Terrain"), FName("B_CartTrack_Structures"),
+                   FName("B_Terrain_Structures"), FName("S_Maglev_TJ")})));
 
   // [[[end]]]
 }

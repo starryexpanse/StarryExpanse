@@ -5,6 +5,7 @@
 #include "GameFramework/GameStateBase.h"
 #include "Interfaces/RivenSavegameAware.h"
 #include "Enums/EGameMenuPage.h"
+#include "LoadGroups/LoadgroupActor.h"
 #include "Runtime/Core/Public/UObject/WeakObjectPtrTemplates.h"
 #include "Runtime/Core/Public/GenericPlatform/GenericPlatform.h"
 
@@ -25,11 +26,16 @@ class ARivenGameState : public AGameStateBase {
 public:
   ARivenGameState();
 
+  void PostInitializeComponents() override;
+
   void OnConstruction(const FTransform &Transform) override;
 
   DECLARE_DYNAMIC_MULTICAST_DELEGATE(FMenuStateChangedEvent);
 
   FMenuStateChangedEvent MenuStateChangedEvent;
+
+  UFUNCTION()
+  void SetNewCurrentSavegame(URivenSaveGame *nextSavegame);
 
   UPROPERTY(BlueprintReadOnly)
   EGameMenuPage CurrentMenuPage;
@@ -37,8 +43,10 @@ public:
   UPROPERTY(BlueprintReadOnly)
   URivenSaveGame *Instantaneous_SaveGame;
 
-  UPROPERTY()
-  TMap<uint32, TWeakObjectPtr<AActor>> SubscribedToSavegame;
+  UPROPERTY(BlueprintReadOnly)
+  ALoadgroupActor *LoadgroupQueen;
+
+  UPROPERTY() TMap<uint32, TWeakObjectPtr<AActor>> SubscribedToSavegame;
 
   UPROPERTY()
   UUserWidget *MenuWidget;
