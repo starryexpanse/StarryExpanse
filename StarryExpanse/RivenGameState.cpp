@@ -21,8 +21,6 @@ ARivenGameState::ARivenGameState() : Super() {
       TEXT("/Game/StarryExpanse/Interface/Widgets/BP_MainMenu.BP_MainMenu_C"));
 
   WidgetClass = WidgetClassFinder.Class;
-
-  bListedInSceneOutliner = true;
 }
 
 void ARivenGameState::PostInitializeComponents() {
