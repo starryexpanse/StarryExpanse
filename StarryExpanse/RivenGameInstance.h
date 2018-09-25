@@ -39,6 +39,7 @@ public:
   UPROPERTY(BlueprintReadOnly)
   ALoadgroupActor *LoadgroupQueen;
 
+  // Reserved for future use:
   UPROPERTY(BlueprintReadOnly)
   URivenSaveGame *Last_Savable_SaveGame;
 

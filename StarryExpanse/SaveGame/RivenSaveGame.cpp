@@ -791,7 +791,9 @@ URivenSaveGame::GetSavegameFields() {
       p("     URivenSaveGame* OldSaveGame = DuplicateObject(this, NULL);")
       p("     OldSaveGame->Freeze();")
       p("     this->%s = NewVal;" % var[1])
-      p("     this->Subscriber->NotifySubscribersOfChange(OldSaveGame);")
+      p("     if (this->Subscriber) {")
+      p("       this->Subscriber->NotifySubscribersOfChange(OldSaveGame);")
+      p("     }")
       p("   }")
       p("}")
       p("")
@@ -814,7 +816,9 @@ void URivenSaveGame::Set_A_LoadGroups_CurrentLoadGroup(ELoadGroups NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->A_LoadGroups_CurrentLoadGroup = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -833,7 +837,9 @@ void URivenSaveGame::Set_A_Marionettist_CurrentMarionettist(
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->A_Marionettist_CurrentMarionettist = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -851,7 +857,9 @@ void URivenSaveGame::Set_A_RivenCharacter_Transform(FTransform NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->A_RivenCharacter_Transform = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -870,7 +878,9 @@ void URivenSaveGame::Set_A_Books_CatherinesJournal_IsInPlayerPossession(
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->A_Books_CatherinesJournal_IsInPlayerPossession = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -888,7 +898,9 @@ void URivenSaveGame::Set_A_Books_CurrentZoomedLinkingBook_IsOpen(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->A_Books_CurrentZoomedLinkingBook_IsOpen = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -906,7 +918,9 @@ void URivenSaveGame::Set_A_Books_TrapBook_IsInPlayerPossession(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->A_Books_TrapBook_IsInPlayerPossession = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -924,7 +938,9 @@ void URivenSaveGame::Set_A_Characters_Catherine_IsFreed(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->A_Characters_Catherine_IsFreed = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -942,7 +958,9 @@ void URivenSaveGame::Set_A_Characters_Cho_IsStillPassedOut(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->A_Characters_Cho_IsStillPassedOut = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -960,7 +978,9 @@ void URivenSaveGame::Set_A_Characters_Gehn_IsTrappedInBook(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->A_Characters_Gehn_IsTrappedInBook = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -978,7 +998,9 @@ void URivenSaveGame::Set_A_Characters_Wahrk_TimesBeckoned(int32 NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->A_Characters_Wahrk_TimesBeckoned = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -997,7 +1019,9 @@ void URivenSaveGame::Set_A_Characters_CatherinesFriend_HasMadeSecondAppearance(
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->A_Characters_CatherinesFriend_HasMadeSecondAppearance = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1016,7 +1040,9 @@ void URivenSaveGame::Set_A_Characters_Scribe_HasBeenSeen(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->A_Characters_Scribe_HasBeenSeen = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1034,7 +1060,9 @@ void URivenSaveGame::Set_A_Characters_JumpscareGirl_HasBeenSeen(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->A_Characters_JumpscareGirl_HasBeenSeen = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1052,7 +1080,9 @@ void URivenSaveGame::Set_A_Characters_RecluseWoman_HasBeenSeen(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->A_Characters_RecluseWoman_HasBeenSeen = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1070,7 +1100,9 @@ void URivenSaveGame::Set_A_Characters_TowerGuard_HasBeenSeen(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->A_Characters_TowerGuard_HasBeenSeen = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1089,7 +1121,9 @@ void URivenSaveGame::Set_A_Characters_FleeingParentAndChild_HaveBeenSeen(
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->A_Characters_FleeingParentAndChild_HaveBeenSeen = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1107,7 +1141,9 @@ void URivenSaveGame::Set_A_Characters_Sunners_HaveBeenShooed(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->A_Characters_Sunners_HaveBeenShooed = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1125,7 +1161,9 @@ void URivenSaveGame::Set_B_Basin_Balcony_AreDoorsOpen(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->B_Basin_Balcony_AreDoorsOpen = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1143,7 +1181,9 @@ void URivenSaveGame::Set_B_Shore_Valve_Position(int32 NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->B_Shore_Valve_Position = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1162,7 +1202,9 @@ void URivenSaveGame::Set_B_BoilerExterior_SelectorValve_IsTowardsPump(
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->B_BoilerExterior_SelectorValve_IsTowardsPump = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1180,7 +1222,9 @@ void URivenSaveGame::Set_B_BoilerExterior_LevelSelector_IsUp(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->B_BoilerExterior_LevelSelector_IsUp = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1198,7 +1242,9 @@ void URivenSaveGame::Set_B_BoilerExterior_Heater_IsOn(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->B_BoilerExterior_Heater_IsOn = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1216,7 +1262,9 @@ void URivenSaveGame::Set_B_BoilerInterior_Water_IsPresent(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->B_BoilerInterior_Water_IsPresent = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1234,7 +1282,9 @@ void URivenSaveGame::Set_B_BoilerInterior_Platform_IsRaised(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->B_BoilerInterior_Platform_IsRaised = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1252,7 +1302,9 @@ void URivenSaveGame::Set_B_Lab_BookPress_IsToTheRight(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->B_Lab_BookPress_IsToTheRight = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1270,7 +1322,9 @@ void URivenSaveGame::Set_B_Lab_NorthDoor_IsLocked(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->B_Lab_NorthDoor_IsLocked = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1288,7 +1342,9 @@ void URivenSaveGame::Set_B_Lab_NorthDoor_IsOpen(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->B_Lab_NorthDoor_IsOpen = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1306,7 +1362,9 @@ void URivenSaveGame::Set_B_Lab_SouthDoor_IsOpen(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->B_Lab_SouthDoor_IsOpen = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1324,7 +1382,9 @@ void URivenSaveGame::Set_B_Lab_Furnace_IsOpen(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->B_Lab_Furnace_IsOpen = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1340,7 +1400,9 @@ void URivenSaveGame::Set_B_Lab_Drawers_IsDrawer1Open(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->B_Lab_Drawers_IsDrawer1Open = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1358,7 +1420,9 @@ void URivenSaveGame::Set_B_Lab_Drawers_IsDrawer2Open(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->B_Lab_Drawers_IsDrawer2Open = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1376,7 +1440,9 @@ void URivenSaveGame::Set_B_Lab_Drawers_IsDrawer3Open(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->B_Lab_Drawers_IsDrawer3Open = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1394,7 +1460,9 @@ void URivenSaveGame::Set_B_Lab_Drawers_IsDrawer4Open(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->B_Lab_Drawers_IsDrawer4Open = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1412,7 +1480,9 @@ void URivenSaveGame::Set_B_Lab_Drawers_IsDrawer5Open(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->B_Lab_Drawers_IsDrawer5Open = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1430,7 +1500,9 @@ void URivenSaveGame::Set_B_Lab_DuctGrate_IsOpen(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->B_Lab_DuctGrate_IsOpen = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1449,7 +1521,9 @@ void URivenSaveGame::Set_J_Basin_Submarine_PositionAndRotation(
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->J_Basin_Submarine_PositionAndRotation = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1467,7 +1541,9 @@ void URivenSaveGame::Set_J_Basin_Gallows_IsOpen(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->J_Basin_Gallows_IsOpen = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1485,7 +1561,9 @@ void URivenSaveGame::Set_J_Basin_Treehouse_IsLever1Up(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->J_Basin_Treehouse_IsLever1Up = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1503,7 +1581,9 @@ void URivenSaveGame::Set_J_Basin_Treehouse_IsLever2Up(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->J_Basin_Treehouse_IsLever2Up = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1521,7 +1601,9 @@ void URivenSaveGame::Set_J_Basin_Treehouse_IsLever3Up(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->J_Basin_Treehouse_IsLever3Up = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1539,7 +1621,9 @@ void URivenSaveGame::Set_J_Basin_Treehouse_IsLever4Up(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->J_Basin_Treehouse_IsLever4Up = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1557,7 +1641,9 @@ void URivenSaveGame::Set_J_Basin_Treehouse_IsLever5Up(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->J_Basin_Treehouse_IsLever5Up = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1575,7 +1661,9 @@ void URivenSaveGame::Set_J_Forest_Gate1_IsOpen(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->J_Forest_Gate1_IsOpen = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1593,7 +1681,9 @@ void URivenSaveGame::Set_J_Forest_Gate2_IsOpen(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->J_Forest_Gate2_IsOpen = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1611,7 +1701,9 @@ void URivenSaveGame::Set_J_Forest_WharkIdol_IsMouthOpen(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->J_Forest_WharkIdol_IsMouthOpen = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1629,7 +1721,9 @@ void URivenSaveGame::Set_J_Forest_WharkIdol_ElevatorPosition(int32 NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->J_Forest_WharkIdol_ElevatorPosition = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1647,7 +1741,9 @@ void URivenSaveGame::Set_J_Forest_GehnsThrone_IsRaised(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->J_Forest_GehnsThrone_IsRaised = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1665,7 +1761,9 @@ void URivenSaveGame::Set_J_Forest_Dome_IsOpen(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->J_Forest_Dome_IsOpen = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1681,7 +1779,9 @@ void URivenSaveGame::Set_J_Forest_Dome_SliderA(int32 NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->J_Forest_Dome_SliderA = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1699,7 +1799,9 @@ void URivenSaveGame::Set_J_Forest_Dome_SliderB(int32 NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->J_Forest_Dome_SliderB = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1717,7 +1819,9 @@ void URivenSaveGame::Set_J_Forest_Dome_SliderC(int32 NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->J_Forest_Dome_SliderC = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1735,7 +1839,9 @@ void URivenSaveGame::Set_J_Forest_Dome_SliderD(int32 NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->J_Forest_Dome_SliderD = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1753,7 +1859,9 @@ void URivenSaveGame::Set_J_Forest_Dome_SliderE(int32 NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->J_Forest_Dome_SliderE = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1771,7 +1879,9 @@ void URivenSaveGame::Set_J_Forest_Ladder_IsLowered(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->J_Forest_Ladder_IsLowered = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1789,7 +1899,9 @@ void URivenSaveGame::Set_J_SecretTunnel_Books_SelectedStoneA(int32 NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->J_SecretTunnel_Books_SelectedStoneA = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1807,7 +1919,9 @@ void URivenSaveGame::Set_J_SecretTunnel_Books_SelectedStoneB(int32 NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->J_SecretTunnel_Books_SelectedStoneB = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1825,7 +1939,9 @@ void URivenSaveGame::Set_J_SecretTunnel_Books_SelectedStoneC(int32 NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->J_SecretTunnel_Books_SelectedStoneC = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1843,7 +1959,9 @@ void URivenSaveGame::Set_J_SecretTunnel_Books_SelectedStoneD(int32 NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->J_SecretTunnel_Books_SelectedStoneD = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1861,7 +1979,9 @@ void URivenSaveGame::Set_J_SecretTunnel_Books_SelectedStoneE(int32 NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->J_SecretTunnel_Books_SelectedStoneE = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1879,7 +1999,9 @@ void URivenSaveGame::Set_J_SecretTunnel_Lights_IsLight1On(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->J_SecretTunnel_Lights_IsLight1On = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1897,7 +2019,9 @@ void URivenSaveGame::Set_J_SecretTunnel_Lights_IsLight2On(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->J_SecretTunnel_Lights_IsLight2On = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1915,7 +2039,9 @@ void URivenSaveGame::Set_J_SecretTunnel_Lights_IsLight3On(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->J_SecretTunnel_Lights_IsLight3On = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1933,7 +2059,9 @@ void URivenSaveGame::Set_J_SecretTunnel_Lights_IsLight4On(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->J_SecretTunnel_Lights_IsLight4On = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1951,7 +2079,9 @@ void URivenSaveGame::Set_J_SecretTunnel_Lights_IsLight5On(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->J_SecretTunnel_Lights_IsLight5On = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1969,7 +2099,9 @@ void URivenSaveGame::Set_O_Upstairs_Stove_IsOn(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->O_Upstairs_Stove_IsOn = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -1987,7 +2119,9 @@ void URivenSaveGame::Set_O_Upstairs_CageButton_TimesPressed(int32 NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->O_Upstairs_CageButton_TimesPressed = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2005,7 +2139,9 @@ void URivenSaveGame::Set_O_Upstairs_CageLever_IsUnlocked(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->O_Upstairs_CageLever_IsUnlocked = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2023,7 +2159,9 @@ void URivenSaveGame::Set_O_Upstairs_Cannen_IsPlaying(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->O_Upstairs_Cannen_IsPlaying = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2041,7 +2179,9 @@ void URivenSaveGame::Set_O_Bedroom_Drawer_IsOpen(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->O_Bedroom_Drawer_IsOpen = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2059,7 +2199,9 @@ void URivenSaveGame::Set_S_Dome_CodeA(int32 NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->S_Dome_CodeA = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2075,7 +2217,9 @@ void URivenSaveGame::Set_S_Dome_CodeB(int32 NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->S_Dome_CodeB = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2091,7 +2235,9 @@ void URivenSaveGame::Set_S_Dome_CodeC(int32 NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->S_Dome_CodeC = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2107,7 +2253,9 @@ void URivenSaveGame::Set_S_Dome_CodeD(int32 NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->S_Dome_CodeD = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2123,7 +2271,9 @@ void URivenSaveGame::Set_S_Dome_CodeE(int32 NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->S_Dome_CodeE = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2139,7 +2289,9 @@ void URivenSaveGame::Set_S_Cart_IsAtJungle(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->S_Cart_IsAtJungle = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2155,7 +2307,9 @@ void URivenSaveGame::Set_S_MaglevTJ_IsSpinnerToRight(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->S_MaglevTJ_IsSpinnerToRight = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2173,7 +2327,9 @@ void URivenSaveGame::Set_S_MaglevTJ_IsAtTemple(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->S_MaglevTJ_IsAtTemple = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2191,7 +2347,9 @@ void URivenSaveGame::Set_S_MaglevBG_IsSpinnerToRight(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->S_MaglevBG_IsSpinnerToRight = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2209,7 +2367,9 @@ void URivenSaveGame::Set_S_MaglevBG_IsAtSurvey(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->S_MaglevBG_IsAtSurvey = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2227,7 +2387,9 @@ void URivenSaveGame::Set_S_MaglevGJ_IsSpinnerToRight(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->S_MaglevGJ_IsSpinnerToRight = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2245,7 +2407,9 @@ void URivenSaveGame::Set_S_MaglevGJ_IsAtJungle(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->S_MaglevGJ_IsAtJungle = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2264,7 +2428,9 @@ void URivenSaveGame::Set_T_FissurePlateau_CageLever_IsInClosedPosition(
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->T_FissurePlateau_CageLever_IsInClosedPosition = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2282,7 +2448,9 @@ void URivenSaveGame::Set_T_FissurePlateau_Gateroom_Rotation(int32 NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->T_FissurePlateau_Gateroom_Rotation = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2301,7 +2469,9 @@ void URivenSaveGame::Set_T_FissurePlateau_Gateroom_SelectedBeetle(
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->T_FissurePlateau_Gateroom_SelectedBeetle = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2319,7 +2489,9 @@ void URivenSaveGame::Set_T_FissurePlateau_Telescope_IsBlocked(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->T_FissurePlateau_Telescope_IsBlocked = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2337,7 +2509,9 @@ void URivenSaveGame::Set_T_FissurePlateau_Telescope_Level(int32 NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->T_FissurePlateau_Telescope_Level = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2355,7 +2529,9 @@ void URivenSaveGame::Set_T_FissurePlateau_Telescope_CodeA(int32 NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->T_FissurePlateau_Telescope_CodeA = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2373,7 +2549,9 @@ void URivenSaveGame::Set_T_FissurePlateau_Telescope_CodeB(int32 NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->T_FissurePlateau_Telescope_CodeB = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2391,7 +2569,9 @@ void URivenSaveGame::Set_T_FissurePlateau_Telescope_CodeC(int32 NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->T_FissurePlateau_Telescope_CodeC = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2409,7 +2589,9 @@ void URivenSaveGame::Set_T_FissurePlateau_Telescope_CodeD(int32 NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->T_FissurePlateau_Telescope_CodeD = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2427,7 +2609,9 @@ void URivenSaveGame::Set_T_FissurePlateau_Telescope_CodeE(int32 NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->T_FissurePlateau_Telescope_CodeE = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2445,7 +2629,9 @@ void URivenSaveGame::Set_T_Airlock_OutsideDoor_IsOpen(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->T_Airlock_OutsideDoor_IsOpen = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2463,7 +2649,9 @@ void URivenSaveGame::Set_T_Airlock_InsideDoor_IsOpen(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->T_Airlock_InsideDoor_IsOpen = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2481,7 +2669,9 @@ void URivenSaveGame::Set_T_SteamCave_Door_IsOpen(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->T_SteamCave_Door_IsOpen = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2499,7 +2689,9 @@ void URivenSaveGame::Set_T_SteamCave_Valve_IsPoweringTelescope(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->T_SteamCave_Valve_IsPoweringTelescope = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2517,7 +2709,9 @@ void URivenSaveGame::Set_T_SpiderChairRoom_Microphone_IsOn(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->T_SpiderChairRoom_Microphone_IsOn = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2535,7 +2729,9 @@ void URivenSaveGame::Set_T_NewTemple_DoorMain_IsOpen(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->T_NewTemple_DoorMain_IsOpen = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2553,7 +2749,9 @@ void URivenSaveGame::Set_T_NewTemple_DoorSide_IsOpen(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->T_NewTemple_DoorSide_IsOpen = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2571,7 +2769,9 @@ void URivenSaveGame::Set_T_Backstage_Dome_IsOpen(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->T_Backstage_Dome_IsOpen = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2589,7 +2789,9 @@ void URivenSaveGame::Set_T_Backstage_Dome_SliderA(int32 NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->T_Backstage_Dome_SliderA = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2607,7 +2809,9 @@ void URivenSaveGame::Set_T_Backstage_Dome_SliderB(int32 NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->T_Backstage_Dome_SliderB = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2625,7 +2829,9 @@ void URivenSaveGame::Set_T_Backstage_Dome_SliderC(int32 NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->T_Backstage_Dome_SliderC = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2643,7 +2849,9 @@ void URivenSaveGame::Set_T_Backstage_Dome_SliderD(int32 NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->T_Backstage_Dome_SliderD = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2661,7 +2869,9 @@ void URivenSaveGame::Set_T_Backstage_Dome_SliderE(int32 NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->T_Backstage_Dome_SliderE = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2679,7 +2889,9 @@ void URivenSaveGame::Set_T_Backstage_BridgeValve_IsWastingSteam(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->T_Backstage_BridgeValve_IsWastingSteam = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2697,7 +2909,9 @@ void URivenSaveGame::Set_T_Backstage_BridgeLever_IsUp(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->T_Backstage_BridgeLever_IsUp = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2715,7 +2929,9 @@ void URivenSaveGame::Set_T_Backstage_Elevator_IsUp(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->T_Backstage_Elevator_IsUp = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2733,7 +2949,9 @@ void URivenSaveGame::Set_T_Backstage_SuperdomeWalkway_IsExtended(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->T_Backstage_SuperdomeWalkway_IsExtended = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2751,7 +2969,9 @@ void URivenSaveGame::Set_T_Backstage_WaffleIron_IsEngaged(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->T_Backstage_WaffleIron_IsEngaged = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2769,7 +2989,9 @@ void URivenSaveGame::Set_P_Exterior_Elevator_IsInCaptiveMode(bool NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->P_Exterior_Elevator_IsInCaptiveMode = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2787,7 +3009,9 @@ void URivenSaveGame::Set_P_Exterior_Lock_CodeA(int32 NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->P_Exterior_Lock_CodeA = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2805,7 +3029,9 @@ void URivenSaveGame::Set_P_Exterior_Lock_CodeB(int32 NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->P_Exterior_Lock_CodeB = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2823,7 +3049,9 @@ void URivenSaveGame::Set_P_Exterior_Lock_CodeC(int32 NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->P_Exterior_Lock_CodeC = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2841,7 +3069,9 @@ void URivenSaveGame::Set_P_Exterior_Lock_CodeD(int32 NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->P_Exterior_Lock_CodeD = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 
@@ -2859,7 +3089,9 @@ void URivenSaveGame::Set_P_Exterior_Lock_CodeE(int32 NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
     this->P_Exterior_Lock_CodeE = NewVal;
-    this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
   }
 }
 

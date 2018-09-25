@@ -4,5 +4,7 @@
 
 #include "CoreMinimal.h"
 
-// Debugging Log
+// Logs
 DECLARE_LOG_CATEGORY_EXTERN(StarryDebug, Log, All);
+
+#define STARRY_CRITICAL(msg) UE_LOG(StarryDebug, Error, TEXT(msg))
