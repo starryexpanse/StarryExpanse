@@ -6,6 +6,7 @@
 #include "Interfaces/RivenSavegameAware.h"
 #include "Enums/EGameMenuPage.h"
 #include "LoadGroups/LoadgroupActor.h"
+#include "StarryExpanseHUD.h"
 #include "Runtime/Core/Public/UObject/WeakObjectPtrTemplates.h"
 #include "Runtime/Core/Public/GenericPlatform/GenericPlatform.h"
 
@@ -32,6 +33,7 @@ public:
 
   DECLARE_DYNAMIC_MULTICAST_DELEGATE(FMenuStateChangedEvent);
 
+  UPROPERTY(BlueprintAssignable, Category = "Menu State")
   FMenuStateChangedEvent MenuStateChangedEvent;
 
   UFUNCTION()
@@ -47,11 +49,6 @@ public:
   ALoadgroupActor *LoadgroupQueen;
 
   UPROPERTY() TMap<uint32, TWeakObjectPtr<AActor>> SubscribedToSavegame;
-
-  UPROPERTY()
-  UUserWidget *MenuWidget;
-
-  TSubclassOf<UUserWidget> WidgetClass;
 
   UFUNCTION()
   void NotifySubscribersOfChange(URivenSaveGame *OldSaveGame);

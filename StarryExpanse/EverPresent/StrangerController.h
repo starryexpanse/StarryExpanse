@@ -49,7 +49,7 @@ public:
   void AddVerticalMouseScan(float amount);
 
   UFUNCTION()
-  void ReactToMenuState(EGameMenuPage menuPage, UUserWidget *widget);
+  void ReactToMenuState(EGameMenuPage menuPage);
 
   UPROPERTY()
   float HorizontalMousePosition = 0.5;
