@@ -160,3 +160,7 @@ void AStarryExpanseHUD::DrawHUD() {
     }
   }
 }
+
+UWidget* AStarryExpanseHUD::GetLoadingGuiWidget_Implementation() {
+  return nullptr;
+}

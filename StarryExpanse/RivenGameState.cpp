@@ -16,11 +16,6 @@ ARivenGameState::ARivenGameState() : Super() {
   // TEXT("/Game/FirstPersonBP/Blueprints/FirstPersonCharacter"));
 
   CurrentMenuPage = EGameMenuPage::MainMenu;
-
-  static ConstructorHelpers::FClassFinder<UUserWidget> WidgetClassFinder(
-      TEXT("/Game/StarryExpanse/Interface/Widgets/BP_MainMenu.BP_MainMenu_C"));
-
-  WidgetClass = WidgetClassFinder.Class;
 }
 
 void ARivenGameState::PostInitializeComponents() {
@@ -47,16 +42,8 @@ void ARivenGameState::OnConstruction(const FTransform &Transform) {
   // Set savegame to just a stub, so that PIE works.
   SetNewCurrentSavegame(NewObject<URivenSaveGame>());
 
-  // Initialize controller with main menu screen
-
-  auto controller = UGameplayStatics::GetPlayerController(GetWorld(), 0);
-
-  MenuWidget = UWidgetBlueprintLibrary::Create(this, WidgetClass, controller);
-  check(MenuWidget);
-  MenuWidget->AddToViewport(0);
-  MenuWidget->SetRenderOpacity(0);
-
-  CurrentMenuPage = EGameMenuPage::NoPage;
+  // Initial Level will override with main menu screen
+  SetMenuPage(EGameMenuPage::NoPage);
 }
 
 void ARivenGameState::SubscribeActorToSavegame(AActor *actor) {
@@ -108,10 +95,5 @@ void ARivenGameState::NotifySubscribersOfChange(URivenSaveGame *OldSaveGame) {
 
 void ARivenGameState::SetMenuPage(EGameMenuPage MenuPage) {
   this->CurrentMenuPage = MenuPage;
-  if (MenuPage == EGameMenuPage::NoPage) {
-    MenuWidget->SetRenderOpacity(0);
-  } else {
-    MenuWidget->SetRenderOpacity(1);
-  }
   MenuStateChangedEvent.Broadcast();
 }

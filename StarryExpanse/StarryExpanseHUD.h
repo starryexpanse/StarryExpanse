@@ -23,6 +23,9 @@ public:
   /** Primary draw call for the HUD */
   virtual void DrawHUD() override;
 
+  UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+  UWidget* GetLoadingGuiWidget();
+
 private:
   /** Crosshair asset pointer */
   class UTexture2D *TexHollowRing;

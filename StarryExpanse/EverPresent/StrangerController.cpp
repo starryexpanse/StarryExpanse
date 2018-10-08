@@ -19,7 +19,9 @@ AStrangerController::AStrangerController() {
 
 void AStrangerController::BeginPlay() {
   auto gs = Cast<ARivenGameState>(GetWorld()->GetGameState());
-  this->ReactToMenuState(gs->CurrentMenuPage, gs->MenuWidget);
+  check(gs);
+
+  this->ReactToMenuState(gs->CurrentMenuPage);
   gs->MenuStateChangedEvent.Add(MenuStateChanged);
 
   auto gameInstance = Cast<URivenGameInstance>(GetWorld()->GetGameInstance());
@@ -30,15 +32,17 @@ void AStrangerController::BeginPlay() {
 
 void AStrangerController::Cbk_MenuStateChanged() {
   auto gs = Cast<ARivenGameState>(GetWorld()->GetGameState());
-  this->ReactToMenuState(gs->CurrentMenuPage, gs->MenuWidget);
+  this->ReactToMenuState(gs->CurrentMenuPage);
 }
 
-void AStrangerController::ReactToMenuState(EGameMenuPage menuPage,
-                                           UUserWidget *widgetNonShared) {
+void AStrangerController::ReactToMenuState(EGameMenuPage menuPage) {
+  auto hud = Cast<AStarryExpanseHUD>(this->GetHUD());
+  check(hud);
+
   if (menuPage != EGameMenuPage::NoPage) {
     FInputModeUIOnly mode;
 
-    auto widget = widgetNonShared->TakeWidget();
+    auto widget = hud->GetLoadingGuiWidget()->TakeWidget();
 
     mode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
     mode.SetWidgetToFocus(widget);
