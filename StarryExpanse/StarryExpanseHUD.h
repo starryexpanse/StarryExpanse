@@ -24,7 +24,7 @@ public:
   virtual void DrawHUD() override;
 
   UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-  UWidget* GetLoadingGuiWidget();
+  UWidget *GetLoadingGuiWidget();
 
 private:
   /** Crosshair asset pointer */

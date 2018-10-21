@@ -161,6 +161,6 @@ void AStarryExpanseHUD::DrawHUD() {
   }
 }
 
-UWidget* AStarryExpanseHUD::GetLoadingGuiWidget_Implementation() {
+UWidget *AStarryExpanseHUD::GetLoadingGuiWidget_Implementation() {
   return nullptr;
 }
