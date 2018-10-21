@@ -1,4 +1,6 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+//
+// Copyright, 59 Volt Entertainment, all rights reserved.
+//
 
 #pragma once
 
@@ -13,15 +15,25 @@ class STARRYEXPANSE_API ALoadgroupActor : public AActor {
   GENERATED_BODY()
 
 public:
-  // Sets default values for this actor's properties
   ALoadgroupActor();
+
+  // Events / Delegates
 
   DECLARE_DYNAMIC_MULTICAST_DELEGATE(FLoadgroupLoadedEvent);
 
-  virtual void BeginPlay() override;
+  TScriptDelegate<FWeakObjectPtr> LevelShownEvent;
 
   UPROPERTY(BlueprintAssignable, Category = "LoadGroups")
   FLoadgroupLoadedEvent LoadgroupLoadedEvent;
+
+  // UE4 Lifecycle
+
+  virtual void BeginPlay() override;
+
+  // Methods
+
+  UFUNCTION(Category = "LoadGroups")
+  void LevelShown();
 
   UFUNCTION(Category = "LoadGroups")
   void LevelLoaded();
@@ -38,11 +50,16 @@ public:
   UFUNCTION(Category = "LoadGroups", BlueprintCallable)
   bool IsLoading();
 
+  // Properties
+
   UPROPERTY(BlueprintReadOnly, Category = "LoadGroups")
   int levelsWaitingOnUnload = 0;
 
   UPROPERTY(BlueprintReadOnly, Category = "LoadGroups")
   int levelsWaitingOnLoad = 0;
+
+  UPROPERTY(BlueprintReadOnly, Category = "LoadGroups")
+  int levelsWaitingOnShow = 0;
 
   UPROPERTY(BlueprintReadOnly, Category = "LoadGroups")
   int levelLatentActionInfoCounter = 0;

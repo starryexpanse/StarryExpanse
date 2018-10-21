@@ -1,20 +1,30 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+//
+// Copyright, 59 Volt Entertainment, all rights reserved.
+//
 
 #include "LoadgroupActor.h"
+
 #include "Classes/Engine/World.h"
 #include "Classes/Kismet/GameplayStatics.h"
 #include "Engine/LatentActionManager.h"
 #include "Engine/LevelStreaming.h"
 #include "Kismet/GameplayStatics.h"
+#include "Runtime/Engine/Public/LevelUtils.h"
+#include "EngineUtils.h"
+
 #include "LoadGroups/ELoadGroups.h"
 #include "LoadGroups/LoadGroupInfo.h"
+#include "Interfaces/RivenSavegameAware.h"
 #include "RivenGameInstance.h"
-#include "Runtime/Engine/Public/LevelUtils.h"
+#include "RivenGameState.h"
 #include "StarryExpanse.h"
+
 #include <algorithm>
 
 // Sets default values
-ALoadgroupActor::ALoadgroupActor() {}
+ALoadgroupActor::ALoadgroupActor() {
+  LevelShownEvent.BindUFunction(this, "LevelShown");
+}
 
 void ALoadgroupActor::BeginPlay() {
   auto gameInstance = Cast<URivenGameInstance>(GetWorld()->GetGameInstance());
@@ -34,10 +44,44 @@ void ALoadgroupActor::LevelLoaded() {
         // level = level;
       }
       if (level != nullptr) {
+        level->OnLevelShown.Add(LevelShownEvent);
         level->SetShouldBeVisible(true);
       }
     }
+  }
+}
 
+void ALoadgroupActor::LevelShown() {
+  this->levelsWaitingOnShow--;
+
+  auto gs = Cast<ARivenGameState>(GetWorld()->GetGameState());
+  check(gs);
+
+  auto saveGame = gs->Instantaneous_SaveGame;
+  check(saveGame);
+
+  if (this->levelsWaitingOnShow == 0) {
+
+    auto levels = ULoadGroupInfo::GetLevelsInLoadGroup(this->wantedLoadGroup);
+    for (const auto &levelName : levels) {
+      auto level = UGameplayStatics::GetStreamingLevel(this, levelName);
+      level->OnLevelShown.Remove(LevelShownEvent);
+      auto loadedLevel = level->GetLoadedLevel();
+     
+      if (loadedLevel) {
+        TArray<AActor *> actors = loadedLevel->Actors;
+
+        for (auto actor : actors) {
+          if (actor->GetClass()->ImplementsInterface(
+                  URivenSavegameAware::StaticClass())) {
+            IRivenSavegameAware::Execute_SavegameInitialNotify(actor, saveGame);
+          }
+        }
+      } else {
+        STARRY_CRITICAL(
+            "Tried to get world for a newly loaded level but it was null.");
+      }
+    }
     LoadgroupLoadedEvent.Broadcast();
   }
 }
@@ -53,7 +97,9 @@ void ALoadgroupActor::LoadLevelsNow() {
   auto levels = ULoadGroupInfo::GetLevelsToBeLoaded(
       this->previouslyLoadedLoadGroup, this->wantedLoadGroup);
 
-  this->levelsWaitingOnLoad = levels.size();
+  auto numLevelsToLoad = levels.size();
+  this->levelsWaitingOnLoad = numLevelsToLoad;
+  this->levelsWaitingOnShow = numLevelsToLoad;
 
   if (this->levelsWaitingOnLoad == 0) {
     this->currentLoadGroup = this->wantedLoadGroup;
