@@ -67,7 +67,7 @@ void ALoadgroupActor::LevelShown() {
       auto level = UGameplayStatics::GetStreamingLevel(this, levelName);
       level->OnLevelShown.Remove(LevelShownEvent);
       auto loadedLevel = level->GetLoadedLevel();
-     
+
       if (loadedLevel) {
         TArray<AActor *> actors = loadedLevel->Actors;
 

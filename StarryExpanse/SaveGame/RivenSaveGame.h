@@ -128,7 +128,13 @@ private:
   bool A_Characters_Sunners_HaveBeenShooed;
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
-  bool B_Basin_Balcony_AreDoorsOpen;
+  bool B_Basin_BalconyHatch_IsOpen;
+
+  UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
+  bool B_Basin_BalconyDoors_AreOpen;
+
+  UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
+  bool B_Shore_CartTunnelHatch_IsOpen;
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
   int32 B_Shore_Valve_Position;
@@ -149,6 +155,12 @@ private:
   bool B_BoilerInterior_Platform_IsRaised;
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
+  bool B_FiremarbleTunnel_Door_IsOpen;
+
+  UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
+  bool B_Lab_EyeNote_IsRolledToRight;
+
+  UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
   bool B_Lab_BookPress_IsToTheRight;
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
@@ -158,10 +170,16 @@ private:
   bool B_Lab_NorthDoor_IsOpen;
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
+  bool B_Lab_SouthDoor_IsLocked;
+
+  UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
   bool B_Lab_SouthDoor_IsOpen;
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
   bool B_Lab_Furnace_IsOpen;
+
+  UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
+  bool B_Lab_Press_IsCompressed;
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
   bool B_Lab_Drawers_IsDrawer1Open;
@@ -525,10 +543,22 @@ public:
   bool Get_A_Characters_Sunners_HaveBeenShooed();
 
   UFUNCTION(BlueprintCallable, Category = SaveGame)
-  void Set_B_Basin_Balcony_AreDoorsOpen(bool NewVal);
+  void Set_B_Basin_BalconyHatch_IsOpen(bool NewVal);
 
   UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
-  bool Get_B_Basin_Balcony_AreDoorsOpen();
+  bool Get_B_Basin_BalconyHatch_IsOpen();
+
+  UFUNCTION(BlueprintCallable, Category = SaveGame)
+  void Set_B_Basin_BalconyDoors_AreOpen(bool NewVal);
+
+  UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
+  bool Get_B_Basin_BalconyDoors_AreOpen();
+
+  UFUNCTION(BlueprintCallable, Category = SaveGame)
+  void Set_B_Shore_CartTunnelHatch_IsOpen(bool NewVal);
+
+  UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
+  bool Get_B_Shore_CartTunnelHatch_IsOpen();
 
   UFUNCTION(BlueprintCallable, Category = SaveGame)
   void Set_B_Shore_Valve_Position(int32 NewVal);
@@ -567,6 +597,18 @@ public:
   bool Get_B_BoilerInterior_Platform_IsRaised();
 
   UFUNCTION(BlueprintCallable, Category = SaveGame)
+  void Set_B_FiremarbleTunnel_Door_IsOpen(bool NewVal);
+
+  UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
+  bool Get_B_FiremarbleTunnel_Door_IsOpen();
+
+  UFUNCTION(BlueprintCallable, Category = SaveGame)
+  void Set_B_Lab_EyeNote_IsRolledToRight(bool NewVal);
+
+  UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
+  bool Get_B_Lab_EyeNote_IsRolledToRight();
+
+  UFUNCTION(BlueprintCallable, Category = SaveGame)
   void Set_B_Lab_BookPress_IsToTheRight(bool NewVal);
 
   UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
@@ -585,6 +627,12 @@ public:
   bool Get_B_Lab_NorthDoor_IsOpen();
 
   UFUNCTION(BlueprintCallable, Category = SaveGame)
+  void Set_B_Lab_SouthDoor_IsLocked(bool NewVal);
+
+  UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
+  bool Get_B_Lab_SouthDoor_IsLocked();
+
+  UFUNCTION(BlueprintCallable, Category = SaveGame)
   void Set_B_Lab_SouthDoor_IsOpen(bool NewVal);
 
   UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
@@ -595,6 +643,12 @@ public:
 
   UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
   bool Get_B_Lab_Furnace_IsOpen();
+
+  UFUNCTION(BlueprintCallable, Category = SaveGame)
+  void Set_B_Lab_Press_IsCompressed(bool NewVal);
+
+  UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
+  bool Get_B_Lab_Press_IsCompressed();
 
   UFUNCTION(BlueprintCallable, Category = SaveGame)
   void Set_B_Lab_Drawers_IsDrawer1Open(bool NewVal);

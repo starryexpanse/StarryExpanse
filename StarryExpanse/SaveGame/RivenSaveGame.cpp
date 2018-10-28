@@ -75,8 +75,12 @@ bool URivenSaveGame::GetBooleanBySaveGameField(ESaveGameField fieldName) {
     return this->A_Characters_FleeingParentAndChild_HaveBeenSeen;
   case ESaveGameField::A_Characters_Sunners_HaveBeenShooed:
     return this->A_Characters_Sunners_HaveBeenShooed;
-  case ESaveGameField::B_Basin_Balcony_AreDoorsOpen:
-    return this->B_Basin_Balcony_AreDoorsOpen;
+  case ESaveGameField::B_Basin_BalconyHatch_IsOpen:
+    return this->B_Basin_BalconyHatch_IsOpen;
+  case ESaveGameField::B_Basin_BalconyDoors_AreOpen:
+    return this->B_Basin_BalconyDoors_AreOpen;
+  case ESaveGameField::B_Shore_CartTunnelHatch_IsOpen:
+    return this->B_Shore_CartTunnelHatch_IsOpen;
   case ESaveGameField::B_BoilerExterior_SelectorValve_IsTowardsPump:
     return this->B_BoilerExterior_SelectorValve_IsTowardsPump;
   case ESaveGameField::B_BoilerExterior_LevelSelector_IsUp:
@@ -87,16 +91,24 @@ bool URivenSaveGame::GetBooleanBySaveGameField(ESaveGameField fieldName) {
     return this->B_BoilerInterior_Water_IsPresent;
   case ESaveGameField::B_BoilerInterior_Platform_IsRaised:
     return this->B_BoilerInterior_Platform_IsRaised;
+  case ESaveGameField::B_FiremarbleTunnel_Door_IsOpen:
+    return this->B_FiremarbleTunnel_Door_IsOpen;
+  case ESaveGameField::B_Lab_EyeNote_IsRolledToRight:
+    return this->B_Lab_EyeNote_IsRolledToRight;
   case ESaveGameField::B_Lab_BookPress_IsToTheRight:
     return this->B_Lab_BookPress_IsToTheRight;
   case ESaveGameField::B_Lab_NorthDoor_IsLocked:
     return this->B_Lab_NorthDoor_IsLocked;
   case ESaveGameField::B_Lab_NorthDoor_IsOpen:
     return this->B_Lab_NorthDoor_IsOpen;
+  case ESaveGameField::B_Lab_SouthDoor_IsLocked:
+    return this->B_Lab_SouthDoor_IsLocked;
   case ESaveGameField::B_Lab_SouthDoor_IsOpen:
     return this->B_Lab_SouthDoor_IsOpen;
   case ESaveGameField::B_Lab_Furnace_IsOpen:
     return this->B_Lab_Furnace_IsOpen;
+  case ESaveGameField::B_Lab_Press_IsCompressed:
+    return this->B_Lab_Press_IsCompressed;
   case ESaveGameField::B_Lab_Drawers_IsDrawer1Open:
     return this->B_Lab_Drawers_IsDrawer1Open;
   case ESaveGameField::B_Lab_Drawers_IsDrawer2Open:
@@ -257,8 +269,14 @@ void URivenSaveGame::SetBooleanBySaveGameField(ESaveGameField fieldName,
   case ESaveGameField::A_Characters_Sunners_HaveBeenShooed:
     this->Set_A_Characters_Sunners_HaveBeenShooed(nextVal);
     break;
-  case ESaveGameField::B_Basin_Balcony_AreDoorsOpen:
-    this->Set_B_Basin_Balcony_AreDoorsOpen(nextVal);
+  case ESaveGameField::B_Basin_BalconyHatch_IsOpen:
+    this->Set_B_Basin_BalconyHatch_IsOpen(nextVal);
+    break;
+  case ESaveGameField::B_Basin_BalconyDoors_AreOpen:
+    this->Set_B_Basin_BalconyDoors_AreOpen(nextVal);
+    break;
+  case ESaveGameField::B_Shore_CartTunnelHatch_IsOpen:
+    this->Set_B_Shore_CartTunnelHatch_IsOpen(nextVal);
     break;
   case ESaveGameField::B_BoilerExterior_SelectorValve_IsTowardsPump:
     this->Set_B_BoilerExterior_SelectorValve_IsTowardsPump(nextVal);
@@ -275,6 +293,12 @@ void URivenSaveGame::SetBooleanBySaveGameField(ESaveGameField fieldName,
   case ESaveGameField::B_BoilerInterior_Platform_IsRaised:
     this->Set_B_BoilerInterior_Platform_IsRaised(nextVal);
     break;
+  case ESaveGameField::B_FiremarbleTunnel_Door_IsOpen:
+    this->Set_B_FiremarbleTunnel_Door_IsOpen(nextVal);
+    break;
+  case ESaveGameField::B_Lab_EyeNote_IsRolledToRight:
+    this->Set_B_Lab_EyeNote_IsRolledToRight(nextVal);
+    break;
   case ESaveGameField::B_Lab_BookPress_IsToTheRight:
     this->Set_B_Lab_BookPress_IsToTheRight(nextVal);
     break;
@@ -284,11 +308,17 @@ void URivenSaveGame::SetBooleanBySaveGameField(ESaveGameField fieldName,
   case ESaveGameField::B_Lab_NorthDoor_IsOpen:
     this->Set_B_Lab_NorthDoor_IsOpen(nextVal);
     break;
+  case ESaveGameField::B_Lab_SouthDoor_IsLocked:
+    this->Set_B_Lab_SouthDoor_IsLocked(nextVal);
+    break;
   case ESaveGameField::B_Lab_SouthDoor_IsOpen:
     this->Set_B_Lab_SouthDoor_IsOpen(nextVal);
     break;
   case ESaveGameField::B_Lab_Furnace_IsOpen:
     this->Set_B_Lab_Furnace_IsOpen(nextVal);
+    break;
+  case ESaveGameField::B_Lab_Press_IsCompressed:
+    this->Set_B_Lab_Press_IsCompressed(nextVal);
     break;
   case ESaveGameField::B_Lab_Drawers_IsDrawer1Open:
     this->Set_B_Lab_Drawers_IsDrawer1Open(nextVal);
@@ -473,18 +503,24 @@ void URivenSaveGame::RestoreNewGameDefaults() {
   this->A_Characters_TowerGuard_HasBeenSeen = false;
   this->A_Characters_FleeingParentAndChild_HaveBeenSeen = false;
   this->A_Characters_Sunners_HaveBeenShooed = false;
-  this->B_Basin_Balcony_AreDoorsOpen = false;
+  this->B_Basin_BalconyHatch_IsOpen = false;
+  this->B_Basin_BalconyDoors_AreOpen = false;
+  this->B_Shore_CartTunnelHatch_IsOpen = false;
   this->B_Shore_Valve_Position = 0;
   this->B_BoilerExterior_SelectorValve_IsTowardsPump = false;
   this->B_BoilerExterior_LevelSelector_IsUp = false;
   this->B_BoilerExterior_Heater_IsOn = false;
   this->B_BoilerInterior_Water_IsPresent = true;
   this->B_BoilerInterior_Platform_IsRaised = false;
+  this->B_FiremarbleTunnel_Door_IsOpen = true;
+  this->B_Lab_EyeNote_IsRolledToRight = false;
   this->B_Lab_BookPress_IsToTheRight = true;
   this->B_Lab_NorthDoor_IsLocked = true;
   this->B_Lab_NorthDoor_IsOpen = false;
+  this->B_Lab_SouthDoor_IsLocked = true;
   this->B_Lab_SouthDoor_IsOpen = false;
   this->B_Lab_Furnace_IsOpen = false;
+  this->B_Lab_Press_IsCompressed = true;
   this->B_Lab_Drawers_IsDrawer1Open = false;
   this->B_Lab_Drawers_IsDrawer2Open = false;
   this->B_Lab_Drawers_IsDrawer3Open = false;
@@ -652,7 +688,9 @@ URivenSaveGame::GetSavegameFields() {
       "bool", "A_Characters_FleeingParentAndChild_HaveBeenSeen"));
   vars.push_back(
       std::make_tuple("bool", "A_Characters_Sunners_HaveBeenShooed"));
-  vars.push_back(std::make_tuple("bool", "B_Basin_Balcony_AreDoorsOpen"));
+  vars.push_back(std::make_tuple("bool", "B_Basin_BalconyHatch_IsOpen"));
+  vars.push_back(std::make_tuple("bool", "B_Basin_BalconyDoors_AreOpen"));
+  vars.push_back(std::make_tuple("bool", "B_Shore_CartTunnelHatch_IsOpen"));
   vars.push_back(std::make_tuple("int32", "B_Shore_Valve_Position"));
   vars.push_back(
       std::make_tuple("bool", "B_BoilerExterior_SelectorValve_IsTowardsPump"));
@@ -661,11 +699,15 @@ URivenSaveGame::GetSavegameFields() {
   vars.push_back(std::make_tuple("bool", "B_BoilerExterior_Heater_IsOn"));
   vars.push_back(std::make_tuple("bool", "B_BoilerInterior_Water_IsPresent"));
   vars.push_back(std::make_tuple("bool", "B_BoilerInterior_Platform_IsRaised"));
+  vars.push_back(std::make_tuple("bool", "B_FiremarbleTunnel_Door_IsOpen"));
+  vars.push_back(std::make_tuple("bool", "B_Lab_EyeNote_IsRolledToRight"));
   vars.push_back(std::make_tuple("bool", "B_Lab_BookPress_IsToTheRight"));
   vars.push_back(std::make_tuple("bool", "B_Lab_NorthDoor_IsLocked"));
   vars.push_back(std::make_tuple("bool", "B_Lab_NorthDoor_IsOpen"));
+  vars.push_back(std::make_tuple("bool", "B_Lab_SouthDoor_IsLocked"));
   vars.push_back(std::make_tuple("bool", "B_Lab_SouthDoor_IsOpen"));
   vars.push_back(std::make_tuple("bool", "B_Lab_Furnace_IsOpen"));
+  vars.push_back(std::make_tuple("bool", "B_Lab_Press_IsCompressed"));
   vars.push_back(std::make_tuple("bool", "B_Lab_Drawers_IsDrawer1Open"));
   vars.push_back(std::make_tuple("bool", "B_Lab_Drawers_IsDrawer2Open"));
   vars.push_back(std::make_tuple("bool", "B_Lab_Drawers_IsDrawer3Open"));
@@ -1153,14 +1195,14 @@ bool URivenSaveGame::Get_A_Characters_Sunners_HaveBeenShooed() {
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-void URivenSaveGame::Set_B_Basin_Balcony_AreDoorsOpen(bool NewVal) {
+void URivenSaveGame::Set_B_Basin_BalconyHatch_IsOpen(bool NewVal) {
   if (IsFrozen)
     return;
-  bool OrigVal = this->B_Basin_Balcony_AreDoorsOpen;
+  bool OrigVal = this->B_Basin_BalconyHatch_IsOpen;
   if (OrigVal != NewVal) {
     URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
     OldSaveGame->Freeze();
-    this->B_Basin_Balcony_AreDoorsOpen = NewVal;
+    this->B_Basin_BalconyHatch_IsOpen = NewVal;
     if (this->Subscriber) {
       this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
     }
@@ -1168,8 +1210,48 @@ void URivenSaveGame::Set_B_Basin_Balcony_AreDoorsOpen(bool NewVal) {
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
-bool URivenSaveGame::Get_B_Basin_Balcony_AreDoorsOpen() {
-  return B_Basin_Balcony_AreDoorsOpen;
+bool URivenSaveGame::Get_B_Basin_BalconyHatch_IsOpen() {
+  return B_Basin_BalconyHatch_IsOpen;
+}
+
+UFUNCTION(BlueprintCallable, Category = SaveGame)
+void URivenSaveGame::Set_B_Basin_BalconyDoors_AreOpen(bool NewVal) {
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->B_Basin_BalconyDoors_AreOpen;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->B_Basin_BalconyDoors_AreOpen = NewVal;
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
+  }
+}
+
+UFUNCTION(BlueprintCallable, Category = SaveGame)
+bool URivenSaveGame::Get_B_Basin_BalconyDoors_AreOpen() {
+  return B_Basin_BalconyDoors_AreOpen;
+}
+
+UFUNCTION(BlueprintCallable, Category = SaveGame)
+void URivenSaveGame::Set_B_Shore_CartTunnelHatch_IsOpen(bool NewVal) {
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->B_Shore_CartTunnelHatch_IsOpen;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->B_Shore_CartTunnelHatch_IsOpen = NewVal;
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
+  }
+}
+
+UFUNCTION(BlueprintCallable, Category = SaveGame)
+bool URivenSaveGame::Get_B_Shore_CartTunnelHatch_IsOpen() {
+  return B_Shore_CartTunnelHatch_IsOpen;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
@@ -1294,6 +1376,46 @@ bool URivenSaveGame::Get_B_BoilerInterior_Platform_IsRaised() {
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
+void URivenSaveGame::Set_B_FiremarbleTunnel_Door_IsOpen(bool NewVal) {
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->B_FiremarbleTunnel_Door_IsOpen;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->B_FiremarbleTunnel_Door_IsOpen = NewVal;
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
+  }
+}
+
+UFUNCTION(BlueprintCallable, Category = SaveGame)
+bool URivenSaveGame::Get_B_FiremarbleTunnel_Door_IsOpen() {
+  return B_FiremarbleTunnel_Door_IsOpen;
+}
+
+UFUNCTION(BlueprintCallable, Category = SaveGame)
+void URivenSaveGame::Set_B_Lab_EyeNote_IsRolledToRight(bool NewVal) {
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->B_Lab_EyeNote_IsRolledToRight;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->B_Lab_EyeNote_IsRolledToRight = NewVal;
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
+  }
+}
+
+UFUNCTION(BlueprintCallable, Category = SaveGame)
+bool URivenSaveGame::Get_B_Lab_EyeNote_IsRolledToRight() {
+  return B_Lab_EyeNote_IsRolledToRight;
+}
+
+UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_B_Lab_BookPress_IsToTheRight(bool NewVal) {
   if (IsFrozen)
     return;
@@ -1354,6 +1476,26 @@ bool URivenSaveGame::Get_B_Lab_NorthDoor_IsOpen() {
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
+void URivenSaveGame::Set_B_Lab_SouthDoor_IsLocked(bool NewVal) {
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->B_Lab_SouthDoor_IsLocked;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->B_Lab_SouthDoor_IsLocked = NewVal;
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
+  }
+}
+
+UFUNCTION(BlueprintCallable, Category = SaveGame)
+bool URivenSaveGame::Get_B_Lab_SouthDoor_IsLocked() {
+  return B_Lab_SouthDoor_IsLocked;
+}
+
+UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_B_Lab_SouthDoor_IsOpen(bool NewVal) {
   if (IsFrozen)
     return;
@@ -1390,6 +1532,26 @@ void URivenSaveGame::Set_B_Lab_Furnace_IsOpen(bool NewVal) {
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_B_Lab_Furnace_IsOpen() { return B_Lab_Furnace_IsOpen; }
+
+UFUNCTION(BlueprintCallable, Category = SaveGame)
+void URivenSaveGame::Set_B_Lab_Press_IsCompressed(bool NewVal) {
+  if (IsFrozen)
+    return;
+  bool OrigVal = this->B_Lab_Press_IsCompressed;
+  if (OrigVal != NewVal) {
+    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
+    OldSaveGame->Freeze();
+    this->B_Lab_Press_IsCompressed = NewVal;
+    if (this->Subscriber) {
+      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
+    }
+  }
+}
+
+UFUNCTION(BlueprintCallable, Category = SaveGame)
+bool URivenSaveGame::Get_B_Lab_Press_IsCompressed() {
+  return B_Lab_Press_IsCompressed;
+}
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 void URivenSaveGame::Set_B_Lab_Drawers_IsDrawer1Open(bool NewVal) {
