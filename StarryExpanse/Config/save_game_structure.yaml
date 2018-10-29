@@ -81,8 +81,6 @@ B:
     Lab:
         EyeNote:
             - { type: bool, name: IsRolledToRight, initial: false } # check initial state
-        BookPress:
-            - { type: bool, name: IsToTheRight, initial: true } # check initial state
         NorthDoor:
             - { type: bool, name: IsLocked, initial: true }
             - { type: bool, name: IsOpen, initial: false }

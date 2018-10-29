@@ -44,4 +44,7 @@ if failed > 0:
 else:
     print('Done, no failures.')
 
-while True: pass
+if len(sys.argv) >= 2 and sys.argv[1] == '--no-interactive':
+    pass
+else:
+    while True: pass
