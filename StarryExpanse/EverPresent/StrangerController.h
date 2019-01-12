@@ -57,6 +57,14 @@ public:
   UPROPERTY()
   float VerticalMousePosition = 0.5;
 
+  //how close (%) to the edge of the left/right of the screen you can get (in cursor mode) before the camera begins to pan
+  UPROPERTY(BlueprintReadWrite)
+  float HorizontalMouseNudgeThreshold = 0.25;
+
+  //how close (%) to the edge of the top/bottom of the screen you can get (in cursor mode) before the camera begins to pan
+  UPROPERTY(BlueprintReadWrite)
+  float VerticalMouseNudgeThreshold = 0.25;
+
   UFUNCTION()
   void Cbk_MenuStateChanged();
 
