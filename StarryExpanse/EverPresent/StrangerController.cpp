@@ -95,20 +95,22 @@ void AStrangerController::AddHorizontalMouseScan(float amount) {
         FMath::Clamp(HorizontalMousePosition + amount, 0.0f, 1.0f);
 
     // check to see if we're within +tolerance for screen border
-    if (1 - HorizontalMousePosition < HorizontalMouseNudgeThreshold) 
-	{
-		//rotate the camera in accordance with how close the cursor is to the edge of the screen
-      this->AddYawInput(HorizontalMouseNudgeThreshold -
-                        (1 - HorizontalMousePosition));
+    if (1 - HorizontalMousePosition < HorizontalMouseNudgeThreshold) {
+      // rotate the camera in accordance with how close the cursor is to the
+      // edge of the screen
+      this->AddYawInput(
+          (HorizontalMouseNudgeThreshold - (1 - HorizontalMousePosition)) *
+          HorizontalMouseNudgeMultiplier);
     }
 
-	// check to see if we're within -tolerance for screen border
-	if (HorizontalMousePosition < HorizontalMouseNudgeThreshold)
-	{
-      // rotate the camera in accordance with how close the cursor is to the edge of the screen
+    // check to see if we're within -tolerance for screen border
+    if (HorizontalMousePosition < HorizontalMouseNudgeThreshold) {
+      // rotate the camera in accordance with how close the cursor is to the
+      // edge of the screen
       this->AddYawInput(
-              -(HorizontalMouseNudgeThreshold - HorizontalMousePosition));
-	}
+          (-(HorizontalMouseNudgeThreshold - HorizontalMousePosition)) *
+          HorizontalMouseNudgeMultiplier);
+    }
   }
 }
 
@@ -118,19 +120,22 @@ void AStrangerController::AddVerticalMouseScan(float amount) {
         FMath::Clamp(VerticalMousePosition + amount, 0.0f, 1.0f);
 
     // check to see if we're within +tolerance for screen border
-    if (1 - VerticalMousePosition < VerticalMouseNudgeThreshold) 
-	{
-      // rotate the camera in accordance with how close the cursor is to the edge of the screen
+    if (1 - VerticalMousePosition < VerticalMouseNudgeThreshold) {
+      // rotate the camera in accordance with how close the cursor is to the
+      // edge of the screen
       this->AddPitchInput(
-          VerticalMouseNudgeThreshold - (1 - VerticalMousePosition));
+          (VerticalMouseNudgeThreshold - (1 - VerticalMousePosition)) *
+          VerticalMouseNudgeMultiplier);
     }
 
-	// check to see if we're within -tolerance for screen border
-	if (VerticalMousePosition < VerticalMouseNudgeThreshold)
-	{
-      // rotate the camera in accordance with how close the cursor is to the edge of the screen
-      this->AddPitchInput(-(VerticalMouseNudgeThreshold - VerticalMousePosition));
-	}
+    // check to see if we're within -tolerance for screen border
+    if (VerticalMousePosition < VerticalMouseNudgeThreshold) {
+      // rotate the camera in accordance with how close the cursor is to the
+      // edge of the screen
+      this->AddPitchInput(
+          (-(VerticalMouseNudgeThreshold - VerticalMousePosition)) *
+          VerticalMouseNudgeMultiplier);
+    }
   }
 }
 
@@ -142,7 +147,6 @@ void AStrangerController::EnterCursorMode(bool fixed) {
     VerticalMousePosition = 0.5;
   } else {
     this->IsCursorLockedToCenter = false;
-    //this->IgnoreLookInput = 1;
   }
 }
 
