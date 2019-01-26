@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "StrangerPawn.h"
+#include "StarryExpanse.h"
 
 // Sets default values
 AStrangerPawn::AStrangerPawn() {
@@ -19,4 +20,8 @@ void AStrangerPawn::Tick(float DeltaTime) { Super::Tick(DeltaTime); }
 void AStrangerPawn::SetupPlayerInputComponent(
     UInputComponent *PlayerInputComponent) {
   Super::SetupPlayerInputComponent(PlayerInputComponent);
+}
+
+void AStrangerPawn::Destroyed() {
+  STARRY_WARNING("Starry Pawn destroyed");
 }

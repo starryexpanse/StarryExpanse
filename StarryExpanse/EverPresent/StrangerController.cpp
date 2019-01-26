@@ -199,6 +199,8 @@ void AStrangerController::Destroyed() {
 
   auto gs = Cast<ARivenGameState>(GetWorld()->GetGameState());
   gs->MenuStateChangedEvent.Remove(MenuStateChanged);
+
+  STARRY_CRITICAL("Controller destroyed");
 }
 
 /*
