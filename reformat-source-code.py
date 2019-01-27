@@ -7,6 +7,10 @@ import sys
 
 platform = sys.platform
 
+
+if platform.startswith('linux'):
+    platform = 'linux'
+
 with open('../Config/LocalConfig.json', 'r') as f:
         config = json.load(f)
 

@@ -22,6 +22,4 @@ void AStrangerPawn::SetupPlayerInputComponent(
   Super::SetupPlayerInputComponent(PlayerInputComponent);
 }
 
-void AStrangerPawn::Destroyed() {
-  STARRY_WARNING("Starry Pawn destroyed");
-}
+void AStrangerPawn::Destroyed() { STARRY_WARNING("Starry Pawn destroyed"); }

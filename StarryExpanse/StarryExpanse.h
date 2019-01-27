@@ -7,5 +7,7 @@
 // Logs
 DECLARE_LOG_CATEGORY_EXTERN(StarryDebug, Log, All);
 
-#define STARRY_CRITICAL(msg, ...) UE_LOG(StarryDebug, Error, TEXT(msg) ,##__VA_ARGS__ )
-#define STARRY_WARNING(msg, ...) UE_LOG(StarryDebug, Warning, TEXT(msg) ,##__VA_ARGS__ )
+#define STARRY_CRITICAL(msg, ...)                                              \
+  UE_LOG(StarryDebug, Error, TEXT(msg), ##__VA_ARGS__)
+#define STARRY_WARNING(msg, ...)                                               \
+  UE_LOG(StarryDebug, Warning, TEXT(msg), ##__VA_ARGS__)
