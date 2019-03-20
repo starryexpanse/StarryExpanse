@@ -52,10 +52,8 @@ void AStrangerPawn::Tick(float DeltaTime) { Super::Tick(DeltaTime); }
 
 // Called to bind functionality to input
 void AStrangerPawn::SetupPlayerInputComponent(
-  UInputComponent *PlayerInputComponent) {
+    UInputComponent *PlayerInputComponent) {
   Super::SetupPlayerInputComponent(PlayerInputComponent);
 }
 
-void AStrangerPawn::Destroyed() {
-	STARRY_WARNING("Starry Pawn destroyed");
-}
+void AStrangerPawn::Destroyed() { STARRY_WARNING("Starry Pawn destroyed"); }

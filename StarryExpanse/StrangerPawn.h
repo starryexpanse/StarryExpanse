@@ -13,41 +13,41 @@
 /** MovementBaseUtility provides utilities for working with movement bases, for
  * which we may need relative positioning info. */
 namespace StrangerPawnMovementBaseUtility {
-	/** Determine whether MovementBase can possibly move. */
-	ENGINE_API bool IsDynamicBase(const UPrimitiveComponent *MovementBase);
+/** Determine whether MovementBase can possibly move. */
+ENGINE_API bool IsDynamicBase(const UPrimitiveComponent *MovementBase);
 
-	/** Determine if we should use relative positioning when based on a component
-	 * (because it may move). */
-	FORCEINLINE bool UseRelativeLocation(const UPrimitiveComponent *MovementBase) {
-	  return IsDynamicBase(MovementBase);
-	}
+/** Determine if we should use relative positioning when based on a component
+ * (because it may move). */
+FORCEINLINE bool UseRelativeLocation(const UPrimitiveComponent *MovementBase) {
+  return IsDynamicBase(MovementBase);
+}
 
-	/** Ensure that BasedObjectTick ticks after NewBase */
-	ENGINE_API void AddTickDependency(FTickFunction &BasedObjectTick,
-									  UPrimitiveComponent *NewBase);
+/** Ensure that BasedObjectTick ticks after NewBase */
+ENGINE_API void AddTickDependency(FTickFunction &BasedObjectTick,
+                                  UPrimitiveComponent *NewBase);
 
-	/** Remove tick dependency of BasedObjectTick on OldBase */
-	ENGINE_API void RemoveTickDependency(FTickFunction &BasedObjectTick,
-										 UPrimitiveComponent *OldBase);
+/** Remove tick dependency of BasedObjectTick on OldBase */
+ENGINE_API void RemoveTickDependency(FTickFunction &BasedObjectTick,
+                                     UPrimitiveComponent *OldBase);
 
-	/** Get the velocity of the given component, first checking the
-	 * ComponentVelocity and falling back to the physics velocity if necessary. */
-	ENGINE_API FVector GetMovementBaseVelocity(
-		const UPrimitiveComponent *MovementBase, const FName BoneName);
+/** Get the velocity of the given component, first checking the
+ * ComponentVelocity and falling back to the physics velocity if necessary. */
+ENGINE_API FVector GetMovementBaseVelocity(
+    const UPrimitiveComponent *MovementBase, const FName BoneName);
 
-	/** Get the tangential velocity at WorldLocation for the given component. */
-	ENGINE_API FVector GetMovementBaseTangentialVelocity(
-		const UPrimitiveComponent *MovementBase, const FName BoneName,
-		const FVector &WorldLocation);
+/** Get the tangential velocity at WorldLocation for the given component. */
+ENGINE_API FVector GetMovementBaseTangentialVelocity(
+    const UPrimitiveComponent *MovementBase, const FName BoneName,
+    const FVector &WorldLocation);
 
-	/** Get the transforms for the given MovementBase, optionally at the location of
-	 * a bone. Returns false if MovementBase is nullptr, or if BoneName is not a
-	 * valid bone. */
-	ENGINE_API bool
-	GetMovementBaseTransform(const UPrimitiveComponent *MovementBase,
-							 const FName BoneName, FVector &OutLocation,
-							 FQuat &OutQuat);
-} // namespace MovementBaseUtility
+/** Get the transforms for the given MovementBase, optionally at the location of
+ * a bone. Returns false if MovementBase is nullptr, or if BoneName is not a
+ * valid bone. */
+ENGINE_API bool
+GetMovementBaseTransform(const UPrimitiveComponent *MovementBase,
+                         const FName BoneName, FVector &OutLocation,
+                         FQuat &OutQuat);
+} // namespace StrangerPawnMovementBaseUtility
 
 USTRUCT()
 struct FStrangerPawnBasedMovementInfo {
@@ -115,8 +115,6 @@ public:
   static FName MeshComponentName;
   static FName CharacterMovementComponentName;
   static FName CapsuleComponentName;
-
-
 
   /** The CapsuleComponent being used for movement collision (by
    * CharacterMovement). Always treated as being vertically aligned in simple
