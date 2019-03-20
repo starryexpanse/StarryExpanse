@@ -27,7 +27,9 @@ ALoadgroupActor::ALoadgroupActor() {
 }
 
 void ALoadgroupActor::BeginPlay() {
-  auto gameInstance = Cast<URivenGameInstance>(GetWorld()->GetGameInstance());
+  auto world = GetWorld();
+  auto gi = world->GetGameInstance();
+  auto gameInstance = Cast<URivenGameInstance>(gi);
   gameInstance->RegisterLoadgroupQueen(this);
 }
 

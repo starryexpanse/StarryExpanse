@@ -44,7 +44,6 @@ enum class ESaveGameField : uint8 {
   B_BoilerInterior_Platform_IsRaised,
   B_FiremarbleTunnel_Door_IsOpen,
   B_Lab_EyeNote_IsRolledToRight,
-  B_Lab_BookPress_IsToTheRight,
   B_Lab_NorthDoor_IsLocked,
   B_Lab_NorthDoor_IsOpen,
   B_Lab_SouthDoor_IsLocked,

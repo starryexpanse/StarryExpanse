@@ -75,7 +75,7 @@ public:
         p("")
 
   ]]] */
-private:
+  private:
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
   ELoadGroups A_LoadGroups_CurrentLoadGroup;
 
@@ -159,9 +159,6 @@ private:
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
   bool B_Lab_EyeNote_IsRolledToRight;
-
-  UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
-  bool B_Lab_BookPress_IsToTheRight;
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
   bool B_Lab_NorthDoor_IsLocked;
@@ -439,7 +436,7 @@ private:
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
   int32 P_Exterior_Lock_CodeE;
 
-public:
+  public:
   UFUNCTION(BlueprintCallable, Category = SaveGame)
   void Set_A_LoadGroups_CurrentLoadGroup(ELoadGroups NewVal);
 
@@ -607,12 +604,6 @@ public:
 
   UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
   bool Get_B_Lab_EyeNote_IsRolledToRight();
-
-  UFUNCTION(BlueprintCallable, Category = SaveGame)
-  void Set_B_Lab_BookPress_IsToTheRight(bool NewVal);
-
-  UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
-  bool Get_B_Lab_BookPress_IsToTheRight();
 
   UFUNCTION(BlueprintCallable, Category = SaveGame)
   void Set_B_Lab_NorthDoor_IsLocked(bool NewVal);
