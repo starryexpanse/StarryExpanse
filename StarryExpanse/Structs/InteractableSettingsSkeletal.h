@@ -4,8 +4,9 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "SaveGame/ESaveGameField.h"
 #include "Runtime/Engine/Classes/Animation/AnimSequence.h"
+#include "SaveGame/ESaveGameField.h"
+#include "Actors//Info/ASoundConfigurationBase.h"
 #include "InteractableSettingsSkeletal.generated.h"
 
 USTRUCT(BlueprintType)
@@ -26,4 +27,7 @@ struct FInteractableSettingsSkeletal {
 
   UPROPERTY(BlueprintReadWrite)
   bool IsFalseAtEnd;
+
+  UPROPERTY(BlueprintReadWrite)
+  ASoundConfigurationBase *SoundConfiguration;
 };

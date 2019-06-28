@@ -6,8 +6,10 @@
 #include "Enums/EInteractable.h"
 #include "GameFramework/Actor.h"
 #include "Interfaces/RivenInteractable.h"
-#include "Runtime/Engine/Classes/Components/StaticMeshComponent.h"
 #include "Structs/InteractabilityProbeResponse.h"
+#include "Actors//Info/ASoundConfigurationBase.h"
+#include "Runtime/Engine/Classes/Components/StaticMeshComponent.h"
+#include "Runtime/Engine/Classes/Components/AudioComponent.h"
 #include "Runtime/Engine/Classes/Animation/AnimSequence.h"
 #include "Runtime/Engine/Classes/Components/TimelineComponent.h"
 #include "Runtime/Engine/Classes/Engine/EngineTypes.h"
@@ -61,13 +63,16 @@ public:
 
 private:
   UPROPERTY()
-  USkeletalMeshComponent *MainSkeleton;
+  USkeletalMeshComponent *MainSkeleton = nullptr;
 
   UPROPERTY()
-  UAnimSequence *BackwardsAnimation;
+  UAnimSequence *BackwardsAnimation = nullptr;
 
   UPROPERTY()
-  UAnimSequence *ForwardsAnimation;
+  UAnimSequence *ForwardsAnimation = nullptr;
+
+  UPROPERTY()
+  ASoundConfigurationBase *SoundConfiguration;
 
   UPROPERTY()
   bool IsFalseAtEnd;

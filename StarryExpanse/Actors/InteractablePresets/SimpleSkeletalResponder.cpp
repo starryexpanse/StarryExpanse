@@ -78,6 +78,12 @@ void ASimpleSkeletalResponder::Initialize(
   this->MainSkeleton = settings.MainSkeleton;
   this->IsFalseAtEnd = settings.IsFalseAtEnd;
 
+  // if (settings.SoundConfiguration) {
+  //  this->SoundConfiguration = settings.SoundConfiguration;
+
+  //  // Audio = CreateDefaultSubobject<UAudioComponent>(FName("AudioSource"));
+  //}
+
   if (isInInitialPosition) {
     GoToStart();
   } else {
