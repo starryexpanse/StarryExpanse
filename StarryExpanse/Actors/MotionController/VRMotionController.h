@@ -9,9 +9,6 @@
 class IMotionController;
 class UStaticMeshComponent;
 
-UENUM(Blueprintable)
-enum class ETrackingMode : uint8 { None, Tracked, Replicated };
-
 /**
  *
  */
@@ -25,19 +22,10 @@ public:
   // Called every frame
   virtual void Tick(float DeltaTime) override;
 
-  void EnableTracking(bool bEnabled) {
-    m_bTrackingEnabled = bEnabled;
-  } // Possibility to (temporarily) disable tracking tracking while it should be
-    // tracked on this client
-  void SetTrackingMode(ETrackingMode trackingMode);
+  void SetIsTracking(bool isTracking);
   void SetTrackingHand(EControllerHand hand);
   UFUNCTION(BlueprintCallable)
   EControllerHand GetTrackingHand() { return m_ControllerHand; }
-
-  UFUNCTION(BlueprintCallable)
-  bool GetIsTrackedOnClient() {
-    return m_TrackingMode == ETrackingMode::Tracked;
-  }
 
 protected:
   // Called when the game starts or when spawned
@@ -53,21 +41,6 @@ private:
 
   IMotionController *m_pController;
 
-  ETrackingMode m_TrackingMode{ETrackingMode::None};
+  bool m_bIsTracking = false;
   EControllerHand m_ControllerHand{EControllerHand::Left};
-  bool m_bTrackingEnabled{true};
-
-  // ======================
-  // ---- Replication -----
-  UFUNCTION(Server, Unreliable, WithValidation)
-  void Server_BroadcastTransform(FTransform replicatedTransform);
-  UFUNCTION(NetMulticast, Unreliable, WithValidation)
-  void Multicast_ReplicateTransform(FTransform replicatedTransform);
-
-protected:
-  UFUNCTION(BlueprintNativeEvent)
-  void DoReplication();
-
-  UPROPERTY(BlueprintReadOnly)
-  FTransform m_RepTransformTarget{};
 };

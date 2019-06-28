@@ -28,7 +28,7 @@ public:
 protected:
   virtual void BeginPlay() override;
   bool m_bVirtualRealityMode = false; // True if HMD is detected.
-                                      // do vr mode first > than pc mode
+                                      // do vr mode first > then pc mode
 
 private:
   // Init default components
@@ -64,7 +64,6 @@ private:
   UPROPERTY()
   USteamVRChaperoneComponent *m_pChaperone;
 
-  // ---- Hands/MotionControllers ----
 protected:
   UPROPERTY(BlueprintReadOnly)
   AVRHand *m_pLeftHand;
@@ -79,18 +78,13 @@ private:
   void InitializeNewMotionController(AVRHand *pVRHand,
                                      EControllerHand trackedHand);
 
-  UFUNCTION()
-  void OnRep_LeftHandController();
-  UFUNCTION()
-  void OnRep_RightHandController();
-
 public:
   UFUNCTION(BlueprintCallable)
   AVRHand *GetLeftHand() { return m_pLeftHand; }
+
   UFUNCTION(BlueprintCallable)
   AVRHand *GetRightHand() { return m_pRightHand; }
 
-private:
 protected:
   UPROPERTY(EditAnywhere)
   bool m_bAllowTeleporting{true};
@@ -100,14 +94,8 @@ protected:
   UFUNCTION()
   void ToggleStereo();
 
-  // =====================
-  // ---- Replication ----
-  // For replicated properties
-  // virtual void GetLifetimeReplicatedProps(
-  //     TArray<FLifetimeProperty> &OutLifetimeProps) const override;
-
 public:
-  UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite)
+  UPROPERTY(EditAnywhere, BlueprintReadWrite)
   UCapsuleComponent *m_pCapsuleTrigger = nullptr;
 
   bool m_ToldTheGameModeIAmReady = false;

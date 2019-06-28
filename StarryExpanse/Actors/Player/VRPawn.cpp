@@ -239,14 +239,6 @@ void AVRPawn::ToggleStereo() {
   }
 }
 
-void AVRPawn::OnRep_LeftHandController() {
-  InitializeNewMotionController(m_pLeftHand, EControllerHand::Left);
-}
-
-void AVRPawn::OnRep_RightHandController() {
-  InitializeNewMotionController(m_pRightHand, EControllerHand::Right);
-}
-
 void AVRPawn::InitializeNewMotionController(AVRHand *pVRHand,
                                             EControllerHand trackedHand) {
   if (!pVRHand) {
@@ -265,5 +257,5 @@ void AVRPawn::InitializeNewMotionController(AVRHand *pVRHand,
   pVRHand->AttachToComponent(m_pVRPawnOrigin, attachRules);
 
   pVRHand->SetTrackingHand(trackedHand);
-  pVRHand->SetTrackingMode(ETrackingMode::Tracked);
+  pVRHand->SetIsTracking(true);
 }

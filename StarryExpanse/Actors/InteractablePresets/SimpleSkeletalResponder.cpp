@@ -20,7 +20,6 @@ ASimpleSkeletalResponder::ASimpleSkeletalResponder(
   PrimaryActorTick.bCanEverTick = true;
   // TODO(cmumford): Should only enable ticks when animation is running.
   PrimaryActorTick.bStartWithTickEnabled = true;
-  PrimaryActorTick.bAllowTickOnDedicatedServer = true;
 }
 
 void ASimpleSkeletalResponder::BeginPlay() { AActor::BeginPlay(); }
