@@ -17,5 +17,4 @@ class IPositionDetector {
 public:
   UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Framework)
   int32 GetRegionNumberFromPosition(FVector position);
-
 };
