@@ -38,6 +38,12 @@ private:
   USceneComponent *m_pVRWorldOrigin;
 
 public:
+  UPROPERTY(BlueprintReadWrite)
+  AVRHand *LeftHand;
+
+  UPROPERTY(BlueprintReadWrite)
+  AVRHand *RightHand;
+
   UPROPERTY(BlueprintReadOnly)
   USceneComponent *m_pVRPawnOrigin;
 

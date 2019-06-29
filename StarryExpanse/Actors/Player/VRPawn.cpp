@@ -70,16 +70,13 @@ void AVRPawn::BeginPlay() {
     m_pVRControllerClass = AVRHand::StaticClass();
   }
 
-  FActorSpawnParameters spawnParams;
-  spawnParams.Owner = this;
+  if (LeftHand) {
+    InitializeNewMotionController(LeftHand, EControllerHand::Left);
+  }
 
-  m_pLeftHand = pWorld->SpawnActor<AVRHand>(m_pVRControllerClass,
-                                            spawnTransform, spawnParams);
-  m_pRightHand = pWorld->SpawnActor<AVRHand>(m_pVRControllerClass,
-                                             spawnTransform, spawnParams);
-
-  InitializeNewMotionController(m_pLeftHand, EControllerHand::Left);
-  InitializeNewMotionController(m_pRightHand, EControllerHand::Right);
+  if (RightHand) {
+    InitializeNewMotionController(RightHand, EControllerHand::Right);
+  }
 
   // End
 
