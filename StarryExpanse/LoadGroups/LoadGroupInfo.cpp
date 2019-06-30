@@ -129,6 +129,10 @@ ULoadGroupInfo::ULoadGroupInfo(const FObjectInitializer &ObjectInitializer)
                           FName("G_BubbleGarden"), FName("G_Connector")})));
 
   LoadGroups.insert(LgEntry(
+      ELoadGroups::GInteriorBase,
+      LoadgroupInfoEntry(FString("GInteriorBase"), {FName("G_Elevator")})));
+
+  LoadGroups.insert(LgEntry(
       ELoadGroups::GUpsideExterior,
       LoadgroupInfoEntry(FString("GUpsideExterior"),
                          {FName("A_Journals"), FName("S_Lighting_Riven"),
@@ -137,22 +141,24 @@ ULoadGroupInfo::ULoadGroupInfo(const FObjectInitializer &ObjectInitializer)
                           FName("G_WahrkTankUpper"), FName("G_BubbleGarden"),
                           FName("G_Connector"), FName("G_SpikeGarden")})));
 
-  LoadGroups.insert(LgEntry(
-      ELoadGroups::GUpsideInterior,
-      LoadgroupInfoEntry(FString("GUpsideInterior"),
-                         {FName("A_Journals"), FName("S_Lighting_Riven"),
-                          FName("S_PostProcessing_Riven"),
-                          FName("S_Ocean_Riven"), FName("G_Terrain"),
-                          FName("G_WahrkTankUpper"), FName("G_BubbleGarden"),
-                          FName("G_Connector"), FName("G_MaglevDock_B")})));
-
   LoadGroups.insert(
-      LgEntry(ELoadGroups::GDownside,
+      LgEntry(ELoadGroups::GUpsideInterior,
               LoadgroupInfoEntry(
-                  FString("GDownside"),
+                  FString("GUpsideInterior"),
                   {FName("A_Journals"), FName("S_Lighting_Riven"),
                    FName("S_PostProcessing_Riven"), FName("S_Ocean_Riven"),
-                   FName("G_MaglevDock_J"), FName("G_WahrkTankLower")})));
+                   FName("G_Terrain"), FName("G_WahrkTankUpper"),
+                   FName("G_BubbleGarden"), FName("G_Connector"),
+                   FName("G_Elevator"), FName("G_MaglevDock_B")})));
+
+  LoadGroups.insert(
+      LgEntry(ELoadGroups::GDownsideInterior,
+              LoadgroupInfoEntry(
+                  FString("GDownsideInterior"),
+                  {FName("A_Journals"), FName("S_Lighting_Riven"),
+                   FName("S_PostProcessing_Riven"), FName("S_Ocean_Riven"),
+                   FName("G_Elevator"), FName("G_MaglevDock_J"),
+                   FName("G_WahrkTankLower")})));
 
   LoadGroups.insert(LgEntry(
       ELoadGroups::TBase,

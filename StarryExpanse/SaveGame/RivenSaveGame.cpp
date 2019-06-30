@@ -95,8 +95,6 @@ bool URivenSaveGame::GetBooleanBySaveGameField(ESaveGameField fieldName) {
     return this->B_FiremarbleTunnel_Door_IsOpen;
   case ESaveGameField::B_Lab_EyeNote_IsRolledToRight:
     return this->B_Lab_EyeNote_IsRolledToRight;
-  case ESaveGameField::B_Lab_BookPress_IsToTheRight:
-    return this->B_Lab_BookPress_IsToTheRight;
   case ESaveGameField::B_Lab_NorthDoor_IsLocked:
     return this->B_Lab_NorthDoor_IsLocked;
   case ESaveGameField::B_Lab_NorthDoor_IsOpen:
@@ -298,9 +296,6 @@ void URivenSaveGame::SetBooleanBySaveGameField(ESaveGameField fieldName,
     break;
   case ESaveGameField::B_Lab_EyeNote_IsRolledToRight:
     this->Set_B_Lab_EyeNote_IsRolledToRight(nextVal);
-    break;
-  case ESaveGameField::B_Lab_BookPress_IsToTheRight:
-    this->Set_B_Lab_BookPress_IsToTheRight(nextVal);
     break;
   case ESaveGameField::B_Lab_NorthDoor_IsLocked:
     this->Set_B_Lab_NorthDoor_IsLocked(nextVal);
@@ -514,7 +509,6 @@ void URivenSaveGame::RestoreNewGameDefaults() {
   this->B_BoilerInterior_Platform_IsRaised = false;
   this->B_FiremarbleTunnel_Door_IsOpen = true;
   this->B_Lab_EyeNote_IsRolledToRight = false;
-  this->B_Lab_BookPress_IsToTheRight = true;
   this->B_Lab_NorthDoor_IsLocked = true;
   this->B_Lab_NorthDoor_IsOpen = false;
   this->B_Lab_SouthDoor_IsLocked = true;
@@ -701,7 +695,6 @@ URivenSaveGame::GetSavegameFields() {
   vars.push_back(std::make_tuple("bool", "B_BoilerInterior_Platform_IsRaised"));
   vars.push_back(std::make_tuple("bool", "B_FiremarbleTunnel_Door_IsOpen"));
   vars.push_back(std::make_tuple("bool", "B_Lab_EyeNote_IsRolledToRight"));
-  vars.push_back(std::make_tuple("bool", "B_Lab_BookPress_IsToTheRight"));
   vars.push_back(std::make_tuple("bool", "B_Lab_NorthDoor_IsLocked"));
   vars.push_back(std::make_tuple("bool", "B_Lab_NorthDoor_IsOpen"));
   vars.push_back(std::make_tuple("bool", "B_Lab_SouthDoor_IsLocked"));
@@ -1413,26 +1406,6 @@ void URivenSaveGame::Set_B_Lab_EyeNote_IsRolledToRight(bool NewVal) {
 UFUNCTION(BlueprintCallable, Category = SaveGame)
 bool URivenSaveGame::Get_B_Lab_EyeNote_IsRolledToRight() {
   return B_Lab_EyeNote_IsRolledToRight;
-}
-
-UFUNCTION(BlueprintCallable, Category = SaveGame)
-void URivenSaveGame::Set_B_Lab_BookPress_IsToTheRight(bool NewVal) {
-  if (IsFrozen)
-    return;
-  bool OrigVal = this->B_Lab_BookPress_IsToTheRight;
-  if (OrigVal != NewVal) {
-    URivenSaveGame *OldSaveGame = DuplicateObject(this, NULL);
-    OldSaveGame->Freeze();
-    this->B_Lab_BookPress_IsToTheRight = NewVal;
-    if (this->Subscriber) {
-      this->Subscriber->NotifySubscribersOfChange(OldSaveGame);
-    }
-  }
-}
-
-UFUNCTION(BlueprintCallable, Category = SaveGame)
-bool URivenSaveGame::Get_B_Lab_BookPress_IsToTheRight() {
-  return B_Lab_BookPress_IsToTheRight;
 }
 
 UFUNCTION(BlueprintCallable, Category = SaveGame)

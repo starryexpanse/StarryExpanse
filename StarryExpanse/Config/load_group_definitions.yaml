@@ -65,6 +65,8 @@ GUpsideBase: &GUpsideBase
    - G_WahrkTankUpper
    - G_BubbleGarden
    - G_Connector
+GInteriorBase: &GInteriorBase
+   - G_Elevator
 # Specifics
 GUpsideExterior:
    - *GBase
@@ -73,9 +75,11 @@ GUpsideExterior:
 GUpsideInterior:
    - *GBase
    - *GUpsideBase
+   - *GInteriorBase
    - G_MaglevDock_B
-GDownside:
+GDownsideInterior:
    - *GBase
+   - *GInteriorBase
    - G_MaglevDock_J
    - G_WahrkTankLower
 ## T: Temple Island

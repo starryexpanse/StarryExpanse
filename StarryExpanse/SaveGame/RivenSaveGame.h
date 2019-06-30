@@ -161,9 +161,6 @@ private:
   bool B_Lab_EyeNote_IsRolledToRight;
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
-  bool B_Lab_BookPress_IsToTheRight;
-
-  UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
   bool B_Lab_NorthDoor_IsLocked;
 
   UPROPERTY(VisibleAnywhere, SaveGame, Category = SaveGame)
@@ -607,12 +604,6 @@ public:
 
   UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
   bool Get_B_Lab_EyeNote_IsRolledToRight();
-
-  UFUNCTION(BlueprintCallable, Category = SaveGame)
-  void Set_B_Lab_BookPress_IsToTheRight(bool NewVal);
-
-  UFUNCTION(BlueprintPure, BlueprintCallable, Category = SaveGame)
-  bool Get_B_Lab_BookPress_IsToTheRight();
 
   UFUNCTION(BlueprintCallable, Category = SaveGame)
   void Set_B_Lab_NorthDoor_IsLocked(bool NewVal);
