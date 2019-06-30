@@ -6,15 +6,33 @@ try:
 except:
 	pass
 import subprocess
-import sys
 
-cog_command = []
-if sys.platform == 'darwin':
-    cog_command = ['cog.py']
-else:
-    cog_py_path = os.path.join(os.path.dirname(sys.executable), 'Scripts', 'cog.py')
-    print(cog_py_path)
+def find_how_to_run_cog():
+    script_path = cog_py_path = os.path.join(os.path.dirname(sys.executable), 'Scripts', 'cog.py')
+    possible_commands = [
+        'cog.py',
+        'cog'
+    ]
+    if os.path.isfile(script_path):
+        return ('using_python', script_path)
+
+    if sys.platform.startswith('win'):
+        test_func = 'where'
+    else:
+        test_func = 'which'
+    
+    for command in possible_commands:
+        if os.popen('%s %s' % (test_func, command)):
+            return ('command', command)
+
+cog_approach = find_how_to_run_cog()
+if not cog_approach:
+    print('Could not find cog :(')
+
+if cog_approach[0] == 'using_python':
     cog_command = ['python', cog_py_path]
+elif cog_approach[0] == 'command':
+    cog_command = [cog_approach[1]]
 
 files = [
     'LoadGroups/LoadGroupInfo.cpp',
