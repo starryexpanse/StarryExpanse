@@ -51,4 +51,8 @@ else:
 if len(sys.argv) >= 2 and sys.argv[1] == '--no-interactive':
     pass
 else:
-    while True: pass
+    try:
+        input = raw_input
+    except NameError:
+        pass
+    input('[Enter] to close')
