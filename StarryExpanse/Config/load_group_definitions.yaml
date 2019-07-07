@@ -62,15 +62,16 @@ GBase: &GBase
    - *SRivenBase
 GUpsideBase: &GUpsideBase
    - G_Terrain
-   - G_WahrkTankUpper
    - G_BubbleGarden
    - G_Connector
 GInteriorBase: &GInteriorBase
    - G_Elevator
+   - G_Elevator_Lighting
 # Specifics
 GUpsideExterior:
    - *GBase
    - *GUpsideBase
+   - G_WahrkTankUpper
    - G_SpikeGarden
 GUpsideInterior:
    - *GBase

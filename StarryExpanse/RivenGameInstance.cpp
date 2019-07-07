@@ -8,6 +8,10 @@
 
 void URivenGameInstance::Init() {}
 
+void URivenGameInstance::SetWasAppStartedInVRMode(bool value) {
+  this->bWasAppStartedInVRMode = value;
+}
+
 void URivenGameInstance::SetIsFrozenForLoading(bool newFrozen) {
   bool changed = newFrozen != GameInstanceVars.IsFrozenForLoading;
   if (changed) {

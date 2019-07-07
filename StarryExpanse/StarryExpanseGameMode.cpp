@@ -13,6 +13,10 @@ AStarryExpanseGameMode::AStarryExpanseGameMode() : Super() {
       TEXT("/Game/FirstPersonBP/Blueprints/FirstPersonCharacter"));
   DefaultPawnClass = PlayerPawnClassFinder.Class;
 
+  static ConstructorHelpers::FClassFinder<APawn> VrPawnClassFinder(
+      TEXT("/Game/Developers/philip/BP/BP_VRFunPawn"));
+  VrPawnClass = VrPawnClassFinder.Class;
+
   // set default pawn class to our Blueprinted character
   PlayerControllerClass = AStrangerController::StaticClass();
 

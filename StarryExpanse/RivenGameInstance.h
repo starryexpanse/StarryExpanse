@@ -34,6 +34,9 @@ public:
   std::set<FName> OutstandingSaveGameBlockers;
 
   UPROPERTY(BlueprintReadOnly)
+  bool bWasAppStartedInVRMode;
+
+  UPROPERTY(BlueprintReadOnly)
   bool bIsFrozenForLoading;
 
   UPROPERTY(BlueprintReadOnly)
@@ -46,6 +49,9 @@ public:
   // Methods
 
   void Init() override;
+
+  UFUNCTION(BlueprintCallable, Category = "StarryExpanse VR")
+  void SetWasAppStartedInVRMode(bool value);
 
   UFUNCTION(BlueprintCallable, Category = "SaveGame")
   void RegisterSaveGameBlocker(FName blockerName);

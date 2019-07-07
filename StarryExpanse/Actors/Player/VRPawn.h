@@ -30,12 +30,11 @@ protected:
   bool m_bVirtualRealityMode = false; // True if HMD is detected.
                                       // do vr mode first > then pc mode
 
-private:
-  // Init default components
-  void SetupVRComponents();
-  // Moves with ship
-  UPROPERTY()
+  UPROPERTY(BlueprintReadWrite, EditAnywhere)
   USceneComponent *m_pVRWorldOrigin;
+
+private:
+  void SetupVRComponents();
 
 public:
   UPROPERTY(BlueprintReadWrite)

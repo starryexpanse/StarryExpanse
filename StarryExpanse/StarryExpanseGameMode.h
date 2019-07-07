@@ -10,4 +10,7 @@ class AStarryExpanseGameMode : public AGameModeBase {
 
 public:
   AStarryExpanseGameMode();
+
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Classes)
+  TSubclassOf<APawn> VrPawnClass;
 };

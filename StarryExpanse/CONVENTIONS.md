@@ -27,3 +27,18 @@ check(gs);
 ```
 auto gameMode = GetWorld()->GetAuthGameMode();
 ```
+
+or
+
+
+```
+auto gameMode = Cast<AStarryExpanseGameMode>(GetWorld()->GetAuthGameMode());
+check(gameMode);
+```
+
+# Getting GameInstance
+
+```
+auto ginst = Cast<URivenGameInstance>(GetWorld()->GetGameInstance());
+check(ginst);
+```

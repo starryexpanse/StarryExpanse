@@ -10,7 +10,9 @@
 #include "LoadGroups/LoadGroupInfo.h"
 #include "SaveGame/RivenSaveGame.h"
 #include "RivenGameInstance.h"
+#include "StarryExpanseGameMode.h"
 #include "RivenGameState.h"
+#include "Runtime/Core/Public/Misc/ConfigCacheIni.h"
 #include "Runtime/Engine/Public/LevelUtils.h"
 #include "StarryExpanse.h"
 #include <algorithm>
@@ -98,8 +100,12 @@ void ASavegameManager::Cbk_OurLoadgroupLoaded() {
   params.SpawnCollisionHandlingOverride =
       ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
 
-  auto gameMode = GetWorld()->GetAuthGameMode();
-  auto pawnClass = gameMode->DefaultPawnClass;
+  auto gameMode = Cast<AStarryExpanseGameMode>(GetWorld()->GetAuthGameMode());
+  check(gameMode);
+  auto ginst = Cast<URivenGameInstance>(GetWorld()->GetGameInstance());
+  check(ginst);
+  auto pawnClass = ginst->bWasAppStartedInVRMode ? gameMode->VrPawnClass
+                                                 : gameMode->DefaultPawnClass;
 
   auto transform = gs->Instantaneous_SaveGame->Get_A_RivenCharacter_Transform();
 
@@ -117,12 +123,31 @@ void ASavegameManager::StartNewGame() {
   auto blankSavegame = NewObject<URivenSaveGame>();
   blankSavegame->RestoreNewGameDefaults();
 
+  FConfigFile config;
+  FConfigCacheIni::LoadLocalIniFile(config, TEXT("StarryExpanse"), false,
+                                    nullptr, true);
+
+  auto initialSpawn = config.Find("InitialSpawn");
+
+  float x = 0;
+  float y = 0;
+  float z = 0;
+
+  if (initialSpawn) {
+    auto xUnchecked = initialSpawn->Find("LocationX");
+    auto yUnchecked = initialSpawn->Find("LocationY");
+    auto zUnchecked = initialSpawn->Find("LocationZ");
+    x = xUnchecked ? FCString::Atof(*xUnchecked->GetValue()) : 0;
+    y = yUnchecked ? FCString::Atof(*yUnchecked->GetValue()) : 0;
+    z = zUnchecked ? FCString::Atof(*zUnchecked->GetValue()) : 0;
+  }
+
   // HACK: some overrides for easier debugging. Will be removed by release.
   // We have this because right now, Temple is not possible to walk through
   // due to incorrect scale.
-  blankSavegame->Set_A_LoadGroups_CurrentLoadGroup(ELoadGroups::BCentral);
-  blankSavegame->Set_A_RivenCharacter_Transform(
-      FTransform(FVector(-964.43, -2220, 886.8)));
+  blankSavegame->Set_A_LoadGroups_CurrentLoadGroup(
+      ELoadGroups::GUpsideInterior);
+  blankSavegame->Set_A_RivenCharacter_Transform(FTransform(FVector(x, y, z)));
 
   // TODO: Generate telescope code & dome code here
 
