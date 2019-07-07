@@ -1,4 +1,5 @@
 #include "VRPawn.h"
+#include "GameFramework/CharacterMovementComponent.h"
 #include "Runtime/Engine/Classes/Camera/CameraComponent.h"
 #include "Runtime/HeadMountedDisplay/Public/IHeadMountedDisplay.h"
 #include "Runtime/HeadMountedDisplay/Public/IXRTrackingSystem.h" // XRSystem
@@ -19,20 +20,14 @@
 
 #include "Components/CapsuleComponent.h"
 
+FName AVRPawn::CharacterMovementComponentName(TEXT("CharMoveComp"));
+
 AVRPawn::AVRPawn() {
   // Look into Instanced Stereo Rendering for perf
   // https://forum.unity.com/threads/instanced-stereo-rendering-vr-implemented-already.468815/
 
   PrimaryActorTick.bCanEverTick = true;
-  SetupVRComponents();
 
-  m_pCapsuleTrigger =
-      CreateDefaultSubobject<UCapsuleComponent>(TEXT("Capsule Trigger"));
-  m_pCapsuleTrigger->SetupAttachment(m_pCamera);
-}
-
-void AVRPawn::SetupVRComponents() {
-  // VR World Origin scene cmp
   m_pVRWorldOrigin =
       CreateDefaultSubobject<USceneComponent>(TEXT("VRWorldOrigin"));
   RootComponent = m_pVRWorldOrigin;
@@ -55,6 +50,21 @@ void AVRPawn::SetupVRComponents() {
       CreateDefaultSubobject<USteamVRChaperoneComponent>(TEXT("Chaperone"));
   m_pChaperone->OnLeaveBounds.AddDynamic(this, &AVRPawn::OnLeaveVRBounds);
   m_pChaperone->OnReturnToBounds.AddDynamic(this, &AVRPawn::OnReenterVRBounds);
+
+  CharacterMovement = CreateDefaultSubobject<UCharacterMovementComponent>(
+      AVRPawn::CharacterMovementComponentName);
+
+  if (CharacterMovement) {
+    CharacterMovement->UpdatedComponent = RootComponent;
+  }
+
+  m_pCapsuleTrigger =
+      CreateDefaultSubobject<UCapsuleComponent>(TEXT("Capsule Trigger"));
+  m_pCapsuleTrigger->SetupAttachment(m_pCamera);
+}
+
+UPawnMovementComponent *AVRPawn::GetMovementComponent() const {
+  return CharacterMovement;
 }
 
 void AVRPawn::BeginPlay() {

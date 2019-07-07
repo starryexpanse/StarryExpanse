@@ -3,6 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GameFramework/CharacterMovementComponent.h"
+#include "GameFramework/Pawn.h"
 #include "GameFramework/Pawn.h"
 #include "VRPawn.generated.h"
 
@@ -13,6 +15,8 @@ class AMotionControllerHand;
 class AVRHand;
 class AVRMotionController;
 class UCapsuleComponent;
+
+class UPawnMovementComponent;
 
 UCLASS()
 class STARRYEXPANSE_API AVRPawn : public APawn {
@@ -33,9 +37,6 @@ protected:
   UPROPERTY(BlueprintReadWrite, EditAnywhere)
   USceneComponent *m_pVRWorldOrigin;
 
-private:
-  void SetupVRComponents();
-
 public:
   UPROPERTY(BlueprintReadWrite)
   AVRHand *LeftHand;
@@ -46,8 +47,14 @@ public:
   UPROPERTY(BlueprintReadOnly)
   USceneComponent *m_pVRPawnOrigin;
 
-private:
-  UPROPERTY()
+  UPROPERTY(Category = Character, VisibleAnywhere, BlueprintReadOnly)
+  UCharacterMovementComponent *CharacterMovement;
+
+  static FName CharacterMovementComponentName;
+
+  virtual UPawnMovementComponent *GetMovementComponent() const override;
+
+  UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
   UCameraComponent *m_pCamera;
 
 private:

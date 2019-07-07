@@ -33,7 +33,7 @@ public:
 
   std::set<FName> OutstandingSaveGameBlockers;
 
-  UPROPERTY(BlueprintReadOnly)
+  UPROPERTY(BlueprintReadWrite)
   bool bWasAppStartedInVRMode;
 
   UPROPERTY(BlueprintReadOnly)

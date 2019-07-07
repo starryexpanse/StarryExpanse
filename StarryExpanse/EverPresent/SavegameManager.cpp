@@ -95,8 +95,6 @@ void ASavegameManager::Cbk_OurLoadgroupLoaded() {
   // Set up player
 
   FActorSpawnParameters params;
-  params.Name = FName("Pawn");
-  params.Owner = this;
   params.SpawnCollisionHandlingOverride =
       ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
 
