@@ -44,46 +44,45 @@ public:
   UPROPERTY(BlueprintReadWrite)
   AVRHand *RightHand;
 
-  UPROPERTY(BlueprintReadOnly)
+  UPROPERTY(EditAnywhere, BlueprintReadWrite)
   USceneComponent *m_pVRPawnOrigin;
 
-  UPROPERTY(Category = Character, VisibleAnywhere, BlueprintReadOnly)
+  UPROPERTY(Category = Character, EditAnywhere, BlueprintReadWrite)
   UCharacterMovementComponent *CharacterMovement;
 
   static FName CharacterMovementComponentName;
 
   virtual UPawnMovementComponent *GetMovementComponent() const override;
 
-  UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+  UPROPERTY(EditAnywhere, BlueprintReadWrite)
   UCameraComponent *m_pCamera;
 
-private:
-  UPROPERTY(VisibleAnywhere)
+  UPROPERTY(EditAnywhere, BlueprintReadWrite)
   UStaticMeshComponent *m_pHeadMesh;
 
   // VR setup
-
-  bool m_bHMDIsSetup = false;
 
   UFUNCTION()
   void SetupHMD();
 
   UFUNCTION()
   void OnLeaveVRBounds();
+
   UFUNCTION()
   void OnReenterVRBounds();
 
   UPROPERTY()
   USteamVRChaperoneComponent *m_pChaperone;
 
-protected:
-  UPROPERTY(BlueprintReadOnly)
+  UPROPERTY(EditAnywhere, BlueprintReadWrite)
   AVRHand *m_pLeftHand;
 
-  UPROPERTY(BlueprintReadOnly)
+  UPROPERTY(EditAnywhere, BlueprintReadWrite)
   AVRHand *m_pRightHand;
 
 private:
+  bool m_bHMDIsSetup = false;
+
   UPROPERTY(EditAnywhere)
   TSubclassOf<AVRHand> m_pVRControllerClass;
 
@@ -103,6 +102,7 @@ protected:
 
   UFUNCTION()
   void ToggleVR();
+
   UFUNCTION()
   void ToggleStereo();
 

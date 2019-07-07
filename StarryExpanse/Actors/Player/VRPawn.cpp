@@ -54,13 +54,13 @@ AVRPawn::AVRPawn() {
   CharacterMovement = CreateDefaultSubobject<UCharacterMovementComponent>(
       AVRPawn::CharacterMovementComponentName);
 
-  if (CharacterMovement) {
-    CharacterMovement->UpdatedComponent = RootComponent;
-  }
-
   m_pCapsuleTrigger =
       CreateDefaultSubobject<UCapsuleComponent>(TEXT("Capsule Trigger"));
   m_pCapsuleTrigger->SetupAttachment(m_pCamera);
+
+  if (CharacterMovement) {
+    CharacterMovement->UpdatedComponent = m_pCapsuleTrigger;
+  }
 }
 
 UPawnMovementComponent *AVRPawn::GetMovementComponent() const {
