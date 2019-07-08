@@ -5,8 +5,8 @@
 #include "CoreMinimal.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Pawn.h"
-#include "GameFramework/Pawn.h"
-#include "VRPawn.generated.h"
+#include "GameFramework/Character.h"
+#include "VRCharacter.generated.h"
 
 class UCameraComponent;
 class USteamVRChaperoneComponent;
@@ -19,18 +19,18 @@ class UCapsuleComponent;
 class UPawnMovementComponent;
 
 UCLASS()
-class STARRYEXPANSE_API AVRPawn : public APawn {
+class STARRYEXPANSE_API AVRCharacter : public ACharacter {
   GENERATED_BODY()
 
 public:
-  AVRPawn();
+  AVRCharacter(const FObjectInitializer &ObjectInitializer);
 
-  virtual void Tick(float DeltaTime) override;
-  virtual void SetupPlayerInputComponent(
-      class UInputComponent *PlayerInputComponent) override;
+  virtual void Tick(float DeltaTime);
+  virtual void
+  SetupPlayerInputComponent(class UInputComponent *PlayerInputComponent);
 
 protected:
-  virtual void BeginPlay() override;
+  virtual void BeginPlay();
 
   UPROPERTY(BlueprintReadWrite, EditAnywhere)
   USceneComponent *m_pVRWorldOrigin;
@@ -43,14 +43,7 @@ public:
   AVRHand *RightHand;
 
   UPROPERTY(EditAnywhere, BlueprintReadWrite)
-  USceneComponent *m_pVRPawnOrigin;
-
-  UPROPERTY(Category = Character, EditAnywhere, BlueprintReadWrite)
-  UCharacterMovementComponent *CharacterMovement;
-
-  static FName CharacterMovementComponentName;
-
-  virtual UPawnMovementComponent *GetMovementComponent() const override;
+  USceneComponent *m_pVRCharacterOrigin;
 
   UPROPERTY(EditAnywhere, BlueprintReadWrite)
   UCameraComponent *m_pCamera;
