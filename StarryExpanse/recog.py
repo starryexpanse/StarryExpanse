@@ -9,12 +9,16 @@ import subprocess
 import sys
 
 cog_command = []
-if sys.platform == 'darwin':
-    cog_command = ['cog.py']
+
+if 'COG_BIN' in os.environ:
+    cog_py_path = os.environ['COG_BIN']
+    cog_command = [sys.executable, cog_py_path]
 else:
-    cog_py_path = os.path.join(os.path.dirname(sys.executable), 'Scripts', 'cog.py')
-    print(cog_py_path)
-    cog_command = ['python', cog_py_path]
+    if sys.platform == 'darwin':
+        cog_command = ['cog.py']
+    else:
+        cog_py_path = os.path.join(os.path.dirname(sys.executable), 'Scripts', 'cog.py')
+        cog_command = [sys.executable, cog_py_path]
 
 files = [
     'LoadGroups/LoadGroupInfo.cpp',
