@@ -185,20 +185,14 @@ void AVRCharacter::SetupPlayerInputComponent(
                                    &AVRCharacter::OnResetVR);
 
   // Bind movement events
-  PlayerInputComponent->BindAxis("MoveForward", this,
-                                 &AVRCharacter::MoveForward);
-  PlayerInputComponent->BindAxis("MoveRight", this, &AVRCharacter::MoveRight);
+  // PlayerInputComponent->BindAxis("MoveForward", this,
+  //                                &AVRCharacter::MoveForward);
+  // PlayerInputComponent->BindAxis("MoveRight", this, &AVRCharacter::MoveRight);
 
   // We have 2 versions of the rotation bindings to handle different kinds of
   // devices differently "turn" handles devices that provide an absolute delta,
   // such as a mouse. "turnrate" is for devices that we choose to treat as a
   // rate of change, such as an analog joystick
-  PlayerInputComponent->BindAxis("Turn", this, &APawn::AddControllerYawInput);
-  PlayerInputComponent->BindAxis("TurnRate", this, &AVRCharacter::TurnAtRate);
-  PlayerInputComponent->BindAxis("LookUp", this,
-                                 &APawn::AddControllerPitchInput);
-  PlayerInputComponent->BindAxis("LookUpRate", this,
-                                 &AVRCharacter::LookUpAtRate);
 }
 
 void AVRCharacter::OnFire() {}
@@ -227,31 +221,6 @@ void AVRCharacter::EndTouch(const ETouchIndex::Type FingerIndex,
     return;
   }
   TouchItem.bIsPressed = false;
-}
-
-void AVRCharacter::MoveForward(float Value) {
-  if (Value != 0.0f) {
-    // add movement in that direction
-    AddMovementInput(GetActorForwardVector(), Value);
-  }
-}
-
-void AVRCharacter::MoveRight(float Value) {
-  if (Value != 0.0f) {
-    // add movement in that direction
-    AddMovementInput(GetActorRightVector(), Value);
-  }
-}
-
-void AVRCharacter::TurnAtRate(float Rate) {
-  // calculate delta for this frame from the rate information
-  AddControllerYawInput(Rate * BaseTurnRate * GetWorld()->GetDeltaSeconds());
-}
-
-void AVRCharacter::LookUpAtRate(float Rate) {
-  // calculate delta for this frame from the rate information
-  AddControllerPitchInput(Rate * BaseLookUpRate *
-                          GetWorld()->GetDeltaSeconds());
 }
 
 bool AVRCharacter::EnableTouchscreenMovement(
