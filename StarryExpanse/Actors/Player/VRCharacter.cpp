@@ -1,255 +1,222 @@
 #include "VRCharacter.h"
-#include "GameFramework/Character.h"
-#include "GameFramework/CharacterMovementComponent.h"
-#include "Runtime/Engine/Classes/Camera/CameraComponent.h"
-#include "Runtime/HeadMountedDisplay/Public/IHeadMountedDisplay.h"
-#include "Runtime/HeadMountedDisplay/Public/IXRTrackingSystem.h" // XRSystem
-#include "Runtime/HeadMountedDisplay/Public/HeadMountedDisplayFunctionLibrary.h"
-#include "SteamVRChaperoneComponent.h"
-#include "Runtime/Engine/Classes/Kismet/KismetMathLibrary.h" // MinimumAreaRectangle
-#include "Engine/World.h"
-#include "Kismet/GameplayStatics.h"
-
-#include "Components/StaticMeshComponent.h"
-
-#include "UnrealNetwork.h"
-#include "Kismet/GameplayStatics.h"
-#include "Engine/Engine.h"
-
-#include "Actors/MotionController/VRHand.h"
-#include "Runtime/HeadMountedDisplay/Public/MotionControllerComponent.h"
-
+#include "Animation/AnimInstance.h"
+#include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "Components/InputComponent.h"
+#include "GameFramework/InputSettings.h"
+#include "HeadMountedDisplayFunctionLibrary.h"
+#include "Kismet/GameplayStatics.h"
+#include "MotionControllerComponent.h"
+#include "XRMotionControllerBase.h" // for FXRMotionControllerBase::RightHandSourceId
 
-AVRCharacter::AVRCharacter(const FObjectInitializer &ObjectInitializer)
-    : ACharacter(ObjectInitializer) {
-  // Look into Instanced Stereo Rendering for perf
-  // https://forum.unity.com/threads/instanced-stereo-rendering-vr-implemented-already.468815/
+//////////////////////////////////////////////////////////////////////////
+// AVRCharacter
 
-  PrimaryActorTick.bCanEverTick = true;
+AVRCharacter::AVRCharacter() {
+  // Set size for collision capsule
+  GetCapsuleComponent()->InitCapsuleSize(55.f, 96.0f);
 
-  m_pVRWorldOrigin =
-      CreateDefaultSubobject<USceneComponent>(TEXT("VRWorldOrigin"));
-  m_pVRWorldOrigin->SetupAttachment(GetCapsuleComponent());
+  // set our turn rates for input
+  BaseTurnRate = 45.f;
+  BaseLookUpRate = 45.f;
 
-  // VR Player Origin scene cmp
-  m_pVRCharacterOrigin =
-      CreateDefaultSubobject<USceneComponent>(TEXT("VRCharacterOrigin"));
-  m_pVRCharacterOrigin->SetupAttachment(m_pVRWorldOrigin);
+  // Create a CameraComponent
+  FirstPersonCameraComponent =
+      CreateDefaultSubobject<UCameraComponent>(TEXT("FirstPersonCamera"));
+  FirstPersonCameraComponent->SetupAttachment(GetCapsuleComponent());
+  FirstPersonCameraComponent->RelativeLocation =
+      FVector(-39.56f, 1.75f, 64.f); // Position the camera
+  FirstPersonCameraComponent->bUsePawnControlRotation = true;
 
-  // Camera child of root
-  m_pCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
-  m_pCamera->SetupAttachment(m_pVRCharacterOrigin);
+  // Create a mesh component that will be used when being viewed from a '1st
+  // person' view (when controlling this pawn)
+  Mesh1P =
+      CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("CharacterMesh1P"));
+  Mesh1P->SetOnlyOwnerSee(true);
+  Mesh1P->SetupAttachment(FirstPersonCameraComponent);
+  Mesh1P->bCastDynamicShadow = false;
+  Mesh1P->CastShadow = false;
+  Mesh1P->RelativeRotation = FRotator(1.9f, -19.19f, 5.2f);
+  Mesh1P->RelativeLocation = FVector(-0.5f, -4.4f, -155.7f);
 
-  // Head mesh
-  m_pHeadMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("SM_Head"));
-  m_pHeadMesh->SetupAttachment(m_pCamera);
+  // Create a gun mesh component
+  FP_Gun = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("FP_Gun"));
+  FP_Gun->SetOnlyOwnerSee(true); // only the owning player will see this mesh
+  FP_Gun->bCastDynamicShadow = false;
+  FP_Gun->CastShadow = false;
+  // FP_Gun->SetupAttachment(Mesh1P, TEXT("GripPoint"));
+  FP_Gun->SetupAttachment(RootComponent);
 
-  // Chaperone
-  m_pChaperone =
-      CreateDefaultSubobject<USteamVRChaperoneComponent>(TEXT("Chaperone"));
-  m_pChaperone->OnLeaveBounds.AddDynamic(this, &AVRCharacter::OnLeaveVRBounds);
-  m_pChaperone->OnReturnToBounds.AddDynamic(this,
-                                            &AVRCharacter::OnReenterVRBounds);
+  FP_MuzzleLocation =
+      CreateDefaultSubobject<USceneComponent>(TEXT("MuzzleLocation"));
+  FP_MuzzleLocation->SetupAttachment(FP_Gun);
+  FP_MuzzleLocation->SetRelativeLocation(FVector(0.2f, 48.4f, -10.6f));
+
+  // Default offset from the character location for projectiles to spawn
+  GunOffset = FVector(100.0f, 0.0f, 10.0f);
+
+  // Note: The ProjectileClass and the skeletal mesh/anim blueprints for Mesh1P,
+  // FP_Gun, and VR_Gun are set in the derived blueprint asset named MyCharacter
+  // to avoid direct content references in C++.
+
+  // Create VR Controllers.
+  R_MotionController = CreateDefaultSubobject<UMotionControllerComponent>(
+      TEXT("R_MotionController"));
+  R_MotionController->MotionSource = FXRMotionControllerBase::RightHandSourceId;
+  R_MotionController->SetupAttachment(RootComponent);
+  L_MotionController = CreateDefaultSubobject<UMotionControllerComponent>(
+      TEXT("L_MotionController"));
+  L_MotionController->SetupAttachment(RootComponent);
+
+  // Create a gun and attach it to the right-hand VR controller.
+  // Create a gun mesh component
+  VR_Gun = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("VR_Gun"));
+  VR_Gun->SetOnlyOwnerSee(true); // only the owning player will see this mesh
+  VR_Gun->bCastDynamicShadow = false;
+  VR_Gun->CastShadow = false;
+  VR_Gun->SetupAttachment(R_MotionController);
+  VR_Gun->SetRelativeRotation(FRotator(0.0f, -90.0f, 0.0f));
+
+  VR_MuzzleLocation =
+      CreateDefaultSubobject<USceneComponent>(TEXT("VR_MuzzleLocation"));
+  VR_MuzzleLocation->SetupAttachment(VR_Gun);
+  VR_MuzzleLocation->SetRelativeLocation(
+      FVector(0.000004, 53.999992, 10.000000));
+  VR_MuzzleLocation->SetRelativeRotation(FRotator(
+      0.0f, 90.0f, 0.0f)); // Counteract the rotation of the VR gun model.
+
+  // Uncomment the following line to turn motion controllers on by default:
+  // bUsingMotionControllers = true;
 }
 
 void AVRCharacter::BeginPlay() {
-  // spawn hands
-
-  auto pWorld = GetWorld();
-  FTransform spawnTransform;
-  spawnTransform.SetLocation(m_pCamera->GetComponentLocation() +
-                             FVector(0.f, 0.f, 200.f));
-  spawnTransform.SetRotation(FQuat(90, 0, 0, 0));
-
-  if (!m_pVRControllerClass) {
-    m_pVRControllerClass = AVRHand::StaticClass();
-  }
-
-  if (LeftHand) {
-    InitializeNewMotionController(LeftHand, EControllerHand::Left);
-  }
-
-  if (RightHand) {
-    InitializeNewMotionController(RightHand, EControllerHand::Right);
-  }
-
-  // End
-
-  SetupHMD();
-
+  // Call the base class
   Super::BeginPlay();
+
+  // Attach gun mesh component to Skeleton, doing it here because the skeleton
+  // is not yet created in the constructor
+  FP_Gun->AttachToComponent(
+      Mesh1P, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true),
+      TEXT("GripPoint"));
+
+  // Show or hide the two versions of the gun based on whether or not we're
+  // using motion controllers.
+  if (bUsingMotionControllers) {
+    VR_Gun->SetHiddenInGame(false, true);
+    Mesh1P->SetHiddenInGame(true, true);
+  } else {
+    VR_Gun->SetHiddenInGame(true, true);
+    Mesh1P->SetHiddenInGame(false, true);
+  }
 }
+
+//////////////////////////////////////////////////////////////////////////
+// Input
 
 void AVRCharacter::SetupPlayerInputComponent(
-    UInputComponent *PlayerInputComponent) {
-  Super::SetupPlayerInputComponent(PlayerInputComponent);
+    class UInputComponent *PlayerInputComponent) {
+  // set up gameplay key bindings
+  check(PlayerInputComponent);
+
+  // Bind jump events
+  PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
+  PlayerInputComponent->BindAction("Jump", IE_Released, this,
+                                   &ACharacter::StopJumping);
+
+  // Bind fire event
+  PlayerInputComponent->BindAction("Fire", IE_Pressed, this,
+                                   &AVRCharacter::OnFire);
+
+  // Enable touchscreen input
+  EnableTouchscreenMovement(PlayerInputComponent);
+
+  PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this,
+                                   &AVRCharacter::OnResetVR);
+
+  // Bind movement events
+  PlayerInputComponent->BindAxis("MoveForward", this,
+                                 &AVRCharacter::MoveForward);
+  PlayerInputComponent->BindAxis("MoveRight", this, &AVRCharacter::MoveRight);
+
+  // We have 2 versions of the rotation bindings to handle different kinds of
+  // devices differently "turn" handles devices that provide an absolute delta,
+  // such as a mouse. "turnrate" is for devices that we choose to treat as a
+  // rate of change, such as an analog joystick
+  PlayerInputComponent->BindAxis("Turn", this, &APawn::AddControllerYawInput);
+  PlayerInputComponent->BindAxis("TurnRate", this, &AVRCharacter::TurnAtRate);
+  PlayerInputComponent->BindAxis("LookUp", this,
+                                 &APawn::AddControllerPitchInput);
+  PlayerInputComponent->BindAxis("LookUpRate", this,
+                                 &AVRCharacter::LookUpAtRate);
 }
 
-void AVRCharacter::Tick(float DeltaTime) {
-  Super::Tick(DeltaTime);
+void AVRCharacter::OnFire() {}
 
-  if (!m_bHMDIsSetup) {
-    SetupHMD();
-  }
+void AVRCharacter::OnResetVR() {
+  UHeadMountedDisplayFunctionLibrary::ResetOrientationAndPosition();
 }
 
-void AVRCharacter::SetupHMD() {
-  // Sets correct eye height or defaults to PC-Mode if no VR device detected
-  if (GEngine) {
-    // Check if XRSystem is ok before continuing
-    TSharedPtr<IXRTrackingSystem, ESPMode::ThreadSafe> pXRSystem{
-        GEngine->XRSystem};
-
-    if (pXRSystem) {
-      IHeadMountedDisplay *pHMD{GEngine->XRSystem->GetHMDDevice()};
-      TSharedPtr<IStereoRendering, ESPMode::ThreadSafe> pStereo{
-          GEngine->XRSystem->GetStereoRenderingDevice()};
-
-      bool bHMDEnabled{pHMD->IsHMDEnabled()};
-      bool bStereoEnabled{pStereo->IsStereoEnabled()};
-
-      if (!bHMDEnabled) {
-        pHMD->EnableHMD(true);
-      }
-      if (!pStereo->IsStereoEnabled()) {
-        pStereo->EnableStereo(true);
-      }
-
-      bool bInVR{pHMD != nullptr && pHMD->IsHMDEnabled() &&
-                 pStereo->IsStereoEnabled()};
-      if (bInVR) {
-        // Set Eye height depending on Vive, Oculus, PSVR (Most likely Vive)
-        {
-          FName vrDeviceName = GEngine->XRSystem->GetSystemName();
-          const FName oculusName{"OculusHMD"};
-          const FName viveName{"SteamVR"};
-          const FName psvrName{"PSVR"};
-
-          if (vrDeviceName == viveName || vrDeviceName == oculusName) {
-            // VROrigin is at floor level
-            UHeadMountedDisplayFunctionLibrary::SetTrackingOrigin(
-                EHMDTrackingOrigin::Floor);
-            if (GEngine)
-              GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Cyan,
-                                               TEXT("HMD set to floor"));
-          } else if (vrDeviceName == psvrName) {
-            // VROrigin is at eye level
-            UHeadMountedDisplayFunctionLibrary::SetTrackingOrigin(
-                EHMDTrackingOrigin::Eye);
-
-            // Match VROrigin to eye level
-            const float defaultPlayerHeight{180.f};
-            FVector psvrEyeOffset{0.f, 0.f, defaultPlayerHeight};
-            m_pVRCharacterOrigin->AddLocalOffset(psvrEyeOffset);
-          }
-        }
-        m_bHMDIsSetup = true;
-
-      } else {
-        if (GEngine)
-          GEngine->AddOnScreenDebugMessage(
-              1, 0.1f, FColor::White,
-              TEXT("AVRCharacter::AVRCharacter() > XRSystem did not find HMD. "
-                   "Pawn set "
-                   "to PC-Mode"));
-      }
-    } else {
-      if (GEngine)
-        GEngine->AddOnScreenDebugMessage(
-            1, 0.1f, FColor::White,
-            TEXT("AVRCharacter::AVRCharacter() > XRSystem was nullptr. Pawn "
-                 "set to "
-                 "PC-Mode"));
-    }
-  } else {
-    // If ue4 auto possesses HMD, then it is possible
-    // that GEngine == nullptr AND player will use HMD >>> PC-Mode wrongfully
-    // selected.
-    if (GEngine)
-      GEngine->AddOnScreenDebugMessage(
-          1, 0.1f, FColor::Red,
-          TEXT("[ERROR] GEngine was nullptr. Fix this << "
-               "AVRCharacter::SetupHMD()"));
-  }
-}
-
-#pragma region VRBounds
-
-void AVRCharacter::OnLeaveVRBounds() {
-  if (GEngine)
-    GEngine->AddOnScreenDebugMessage(
-        -1, 5.f, FColor::Cyan,
-        TEXT("[AVRCharacter] Player has left VR bounds"));
-}
-
-void AVRCharacter::OnReenterVRBounds() {
-  if (GEngine)
-    GEngine->AddOnScreenDebugMessage(
-        -1, 5.f, FColor::Cyan,
-        TEXT("[AVRCharacter] Player has reentered VR bounds"));
-}
-#pragma endregion VRBounds
-
-// void AVRCharacter::GetLifetimeReplicatedProps(
-//     TArray<FLifetimeProperty> &OutLifetimeProps) const {
-//   Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-
-//   DOREPLIFETIME(AVRCharacter, m_pLeftHand);
-//   DOREPLIFETIME(AVRCharacter, m_pRightHand);
-//   DOREPLIFETIME(AVRCharacter, m_pCapsuleTrigger);
-// }
-
-void AVRCharacter::ToggleVR() {
-  TSharedPtr<IXRTrackingSystem, ESPMode::ThreadSafe> pXRSystem{
-      GEngine->XRSystem};
-  if (pXRSystem) {
-    IHeadMountedDisplay *pHMD{GEngine->XRSystem->GetHMDDevice()};
-    bool bHMDEnabled{pHMD->IsHMDEnabled()};
-    pHMD->EnableHMD(!pHMD->IsHMDEnabled());
-    if (bHMDEnabled) {
-      if (GEngine)
-        GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Cyan,
-                                         ("HMD WAS ON"));
-    } else {
-      if (GEngine)
-        GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Cyan,
-                                         ("HMD WAS OFF"));
-    }
-  }
-}
-
-void AVRCharacter::ToggleStereo() {
-  TSharedPtr<IXRTrackingSystem, ESPMode::ThreadSafe> pXRSystem{
-      GEngine->XRSystem};
-  if (pXRSystem) {
-    TSharedPtr<IStereoRendering, ESPMode::ThreadSafe> pStereo{
-        pXRSystem->GetStereoRenderingDevice()};
-    pStereo->EnableStereo(!pStereo->IsStereoEnabled());
-    if (GEngine)
-      GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Cyan,
-                                       TEXT("Toggle Stereo VR"));
-  }
-}
-
-void AVRCharacter::InitializeNewMotionController(AVRHand *pVRHand,
-                                                 EControllerHand trackedHand) {
-  if (!pVRHand) {
-    if (GEngine)
-      GEngine->AddOnScreenDebugMessage(
-          -1, 15.f, FColor::Red,
-          TEXT(
-              "VRCharacter could not initilaize motion controller. pVRHand was "
-              "nullptr. Exited function. << "
-              "AVRCharacter::InitializeNewMotionController()"));
+void AVRCharacter::BeginTouch(const ETouchIndex::Type FingerIndex,
+                              const FVector Location) {
+  if (TouchItem.bIsPressed == true) {
     return;
   }
+  if ((FingerIndex == TouchItem.FingerIndex) && (TouchItem.bMoved == false)) {
+    OnFire();
+  }
+  TouchItem.bIsPressed = true;
+  TouchItem.FingerIndex = FingerIndex;
+  TouchItem.Location = Location;
+  TouchItem.bMoved = false;
+}
 
-  FAttachmentTransformRules attachRules{EAttachmentRule::SnapToTarget,
-                                        EAttachmentRule::SnapToTarget,
-                                        EAttachmentRule::KeepWorld, false};
-  pVRHand->AttachToComponent(m_pVRCharacterOrigin, attachRules);
+void AVRCharacter::EndTouch(const ETouchIndex::Type FingerIndex,
+                            const FVector Location) {
+  if (TouchItem.bIsPressed == false) {
+    return;
+  }
+  TouchItem.bIsPressed = false;
+}
 
-  pVRHand->SetTrackingHand(trackedHand);
-  pVRHand->SetIsTracking(true);
+void AVRCharacter::MoveForward(float Value) {
+  if (Value != 0.0f) {
+    // add movement in that direction
+    AddMovementInput(GetActorForwardVector(), Value);
+  }
+}
+
+void AVRCharacter::MoveRight(float Value) {
+  if (Value != 0.0f) {
+    // add movement in that direction
+    AddMovementInput(GetActorRightVector(), Value);
+  }
+}
+
+void AVRCharacter::TurnAtRate(float Rate) {
+  // calculate delta for this frame from the rate information
+  AddControllerYawInput(Rate * BaseTurnRate * GetWorld()->GetDeltaSeconds());
+}
+
+void AVRCharacter::LookUpAtRate(float Rate) {
+  // calculate delta for this frame from the rate information
+  AddControllerPitchInput(Rate * BaseLookUpRate *
+                          GetWorld()->GetDeltaSeconds());
+}
+
+bool AVRCharacter::EnableTouchscreenMovement(
+    class UInputComponent *PlayerInputComponent) {
+  if (FPlatformMisc::SupportsTouchInput() ||
+      GetDefault<UInputSettings>()->bUseMouseForTouch) {
+    PlayerInputComponent->BindTouch(EInputEvent::IE_Pressed, this,
+                                    &AVRCharacter::BeginTouch);
+    PlayerInputComponent->BindTouch(EInputEvent::IE_Released, this,
+                                    &AVRCharacter::EndTouch);
+
+    // Commenting this out to be more consistent with FPS BP template.
+    // PlayerInputComponent->BindTouch(EInputEvent::IE_Repeat, this,
+    // &AVRCharacter::TouchUpdate);
+    return true;
+  }
+
+  return false;
 }
