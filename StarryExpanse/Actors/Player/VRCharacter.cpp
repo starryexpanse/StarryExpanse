@@ -26,7 +26,7 @@ AVRCharacter::AVRCharacter() {
   FirstPersonCameraComponent->SetupAttachment(GetCapsuleComponent());
   FirstPersonCameraComponent->RelativeLocation =
       FVector(-39.56f, 1.75f, 64.f); // Position the camera
-  FirstPersonCameraComponent->bUsePawnControlRotation = true;
+  FirstPersonCameraComponent->bUsePawnControlRotation = false;
 
   // Create a mesh component that will be used when being viewed from a '1st
   // person' view (when controlling this pawn)
@@ -38,26 +38,6 @@ AVRCharacter::AVRCharacter() {
   Mesh1P->CastShadow = false;
   Mesh1P->RelativeRotation = FRotator(1.9f, -19.19f, 5.2f);
   Mesh1P->RelativeLocation = FVector(-0.5f, -4.4f, -155.7f);
-
-  // Create a gun mesh component
-  FP_Gun = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("FP_Gun"));
-  FP_Gun->SetOnlyOwnerSee(true); // only the owning player will see this mesh
-  FP_Gun->bCastDynamicShadow = false;
-  FP_Gun->CastShadow = false;
-  // FP_Gun->SetupAttachment(Mesh1P, TEXT("GripPoint"));
-  FP_Gun->SetupAttachment(RootComponent);
-
-  FP_MuzzleLocation =
-      CreateDefaultSubobject<USceneComponent>(TEXT("MuzzleLocation"));
-  FP_MuzzleLocation->SetupAttachment(FP_Gun);
-  FP_MuzzleLocation->SetRelativeLocation(FVector(0.2f, 48.4f, -10.6f));
-
-  // Default offset from the character location for projectiles to spawn
-  GunOffset = FVector(100.0f, 0.0f, 10.0f);
-
-  // Note: The ProjectileClass and the skeletal mesh/anim blueprints for Mesh1P,
-  // FP_Gun, and VR_Gun are set in the derived blueprint asset named MyCharacter
-  // to avoid direct content references in C++.
 
   // Create VR Controllers.
   R_MotionController = CreateDefaultSubobject<UMotionControllerComponent>(
@@ -77,27 +57,96 @@ AVRCharacter::AVRCharacter() {
   VR_Gun->SetupAttachment(R_MotionController);
   VR_Gun->SetRelativeRotation(FRotator(0.0f, -90.0f, 0.0f));
 
-  VR_MuzzleLocation =
-      CreateDefaultSubobject<USceneComponent>(TEXT("VR_MuzzleLocation"));
-  VR_MuzzleLocation->SetupAttachment(VR_Gun);
-  VR_MuzzleLocation->SetRelativeLocation(
-      FVector(0.000004, 53.999992, 10.000000));
-  VR_MuzzleLocation->SetRelativeRotation(FRotator(
-      0.0f, 90.0f, 0.0f)); // Counteract the rotation of the VR gun model.
-
   // Uncomment the following line to turn motion controllers on by default:
   // bUsingMotionControllers = true;
+
+  PrimaryActorTick.bCanEverTick = true;
+}
+
+void AVRCharacter::Tick(float DeltaTime) {
+  Super::Tick(DeltaTime);
+
+  if (!IsHMDSetUp) {
+    SetupHMD();
+  }
+}
+
+void AVRCharacter::SetupHMD() {
+  // Sets correct eye height or defaults to PC-Mode if no VR device detected
+  if (GEngine) {
+    // Check if XRSystem is ok before continuing
+    TSharedPtr<IXRTrackingSystem, ESPMode::ThreadSafe> pXRSystem{
+        GEngine->XRSystem};
+
+    if (pXRSystem) {
+      IHeadMountedDisplay *pHMD{GEngine->XRSystem->GetHMDDevice()};
+      TSharedPtr<IStereoRendering, ESPMode::ThreadSafe> pStereo{
+          GEngine->XRSystem->GetStereoRenderingDevice()};
+
+      bool bHMDEnabled{pHMD->IsHMDEnabled()};
+      bool bStereoEnabled{pStereo->IsStereoEnabled()};
+
+      if (!bHMDEnabled) {
+        pHMD->EnableHMD(true);
+      }
+      if (!pStereo->IsStereoEnabled()) {
+        pStereo->EnableStereo(true);
+      }
+
+      bool bInVR =
+          pHMD != nullptr && pHMD->IsHMDEnabled() && pStereo->IsStereoEnabled();
+      if (bInVR) {
+        // Set Eye height depending on Vive, Oculus, PSVR (Most likely Vive)
+        {
+          FName vrDeviceName = GEngine->XRSystem->GetSystemName();
+          const FName oculusName{"OculusHMD"};
+          const FName viveName{"SteamVR"};
+          const FName psvrName{"PSVR"};
+
+          if (vrDeviceName == viveName || vrDeviceName == oculusName) {
+            // VROrigin is at floor level
+            UHeadMountedDisplayFunctionLibrary::SetTrackingOrigin(
+                EHMDTrackingOrigin::Floor);
+            if (GEngine)
+              GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Cyan,
+                                               TEXT("HMD set to floor"));
+          }
+        }
+        IsHMDSetUp = true;
+
+      } else {
+        if (GEngine)
+          GEngine->AddOnScreenDebugMessage(
+              1, 0.1f, FColor::White,
+              TEXT("AOldVRCharacter::AOldVRCharacter() > XRSystem did not find "
+                   "HMD. "
+                   "Pawn set "
+                   "to PC-Mode"));
+      }
+    } else {
+      if (GEngine)
+        GEngine->AddOnScreenDebugMessage(
+            1, 0.1f, FColor::White,
+            TEXT("AOldVRCharacter::AOldVRCharacter() > XRSystem was nullptr. "
+                 "Pawn "
+                 "set to "
+                 "PC-Mode"));
+    }
+  } else {
+    // If ue4 auto possesses HMD, then it is possible
+    // that GEngine == nullptr AND player will use HMD >>> PC-Mode wrongfully
+    // selected.
+    if (GEngine)
+      GEngine->AddOnScreenDebugMessage(
+          1, 0.1f, FColor::Red,
+          TEXT("[ERROR] GEngine was nullptr. Fix this << "
+               "AOldVRCharacter::SetupHMD()"));
+  }
 }
 
 void AVRCharacter::BeginPlay() {
   // Call the base class
   Super::BeginPlay();
-
-  // Attach gun mesh component to Skeleton, doing it here because the skeleton
-  // is not yet created in the constructor
-  FP_Gun->AttachToComponent(
-      Mesh1P, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true),
-      TEXT("GripPoint"));
 
   // Show or hide the two versions of the gun based on whether or not we're
   // using motion controllers.
@@ -108,6 +157,8 @@ void AVRCharacter::BeginPlay() {
     VR_Gun->SetHiddenInGame(true, true);
     Mesh1P->SetHiddenInGame(false, true);
   }
+
+  SetupHMD();
 }
 
 //////////////////////////////////////////////////////////////////////////
