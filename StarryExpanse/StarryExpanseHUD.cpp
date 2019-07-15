@@ -49,8 +49,8 @@ UTexture2D *AStarryExpanseHUD::GetCursorTexture(FVector2D screenDims,
     FVector worldLocation;
     FVector worldDirection;
     controller->DeprojectScreenPositionToWorld(screenDims.X * cursorPosition.X,
-                                              screenDims.Y * cursorPosition.Y,
-                                              worldLocation, worldDirection);
+                                               screenDims.Y * cursorPosition.Y,
+                                               worldLocation, worldDirection);
     FHitResult result =
         controller->CastInteractionRay(gotHit, worldLocation, worldDirection);
 
@@ -93,7 +93,7 @@ void AStarryExpanseHUD::DrawHUD() {
       isLocked = controller->IsCursorLockedToCenter;
       if (!isLocked) {
         cursorPosition = FVector2D(controller->HorizontalMousePosition,
-                                  controller->VerticalMousePosition);
+                                   controller->VerticalMousePosition);
       }
     } else {
       isLocked = true; // initial state of controller as of this writing
@@ -113,7 +113,7 @@ void AStarryExpanseHUD::DrawHUD() {
 
     if (!UHeadMountedDisplayFunctionLibrary::IsHeadMountedDisplayEnabled()) {
       FCanvasTileItem TileItem(CrosshairDrawPosition, cursorTex->Resource,
-                              FLinearColor::White);
+                               FLinearColor::White);
       TileItem.PivotPoint = FVector2D(0.5, 0.5);
       TileItem.BlendMode = SE_BLEND_Translucent;
       TileItem.Size = actualPixelDims;
@@ -162,7 +162,6 @@ void AStarryExpanseHUD::DrawHUD() {
         }
       }
     }
-
   }
 }
 
