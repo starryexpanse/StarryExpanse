@@ -45,27 +45,29 @@ UTexture2D *AStarryExpanseHUD::GetCursorTexture(FVector2D screenDims,
   auto controller =
       Cast<AStrangerController>(this->GetOwningPlayerController());
 
-  FVector worldLocation;
-  FVector worldDirection;
-  controller->DeprojectScreenPositionToWorld(screenDims.X * cursorPosition.X,
-                                             screenDims.Y * cursorPosition.Y,
-                                             worldLocation, worldDirection);
-  FHitResult result =
-      controller->CastInteractionRay(gotHit, worldLocation, worldDirection);
+  if (controller) {
+    FVector worldLocation;
+    FVector worldDirection;
+    controller->DeprojectScreenPositionToWorld(screenDims.X * cursorPosition.X,
+                                              screenDims.Y * cursorPosition.Y,
+                                              worldLocation, worldDirection);
+    FHitResult result =
+        controller->CastInteractionRay(gotHit, worldLocation, worldDirection);
 
-  if (gotHit) {
-    auto actor = result.GetActor();
-    if (actor != nullptr && actor->GetClass()->ImplementsInterface(
-                                URivenInteractable::StaticClass())) {
-      auto probeResult =
-          IRivenInteractable::Execute_ProbeInteractability(actor);
-      if (probeResult.ZoomCue == EZoomCue::ZoomingOut) {
-        return TexZoomOut;
-      } else {
-        if (probeResult.CanBeTapped) {
-          return TexDot;
+    if (gotHit) {
+      auto actor = result.GetActor();
+      if (actor != nullptr && actor->GetClass()->ImplementsInterface(
+                                  URivenInteractable::StaticClass())) {
+        auto probeResult =
+            IRivenInteractable::Execute_ProbeInteractability(actor);
+        if (probeResult.ZoomCue == EZoomCue::ZoomingOut) {
+          return TexZoomOut;
         } else {
-          return TexHollowRing;
+          if (probeResult.CanBeTapped) {
+            return TexDot;
+          } else {
+            return TexHollowRing;
+          }
         }
       }
     }
@@ -81,83 +83,86 @@ void AStarryExpanseHUD::DrawHUD() {
   auto controller =
       Cast<AStrangerController>(this->GetOwningPlayerController());
 
-  // Draw very simple crosshair
+  if (controller) {
+    // Draw very simple crosshair
 
-  FVector2D cursorPosition(FVector2D(0.5, 0.5f));
+    FVector2D cursorPosition(FVector2D(0.5, 0.5f));
 
-  bool isLocked;
-  if (controller != nullptr) {
-    isLocked = controller->IsCursorLockedToCenter;
-    if (!isLocked) {
-      cursorPosition = FVector2D(controller->HorizontalMousePosition,
-                                 controller->VerticalMousePosition);
+    bool isLocked;
+    if (controller != nullptr) {
+      isLocked = controller->IsCursorLockedToCenter;
+      if (!isLocked) {
+        cursorPosition = FVector2D(controller->HorizontalMousePosition,
+                                  controller->VerticalMousePosition);
+      }
+    } else {
+      isLocked = true; // initial state of controller as of this writing
     }
-  } else {
-    isLocked = true; // initial state of controller as of this writing
-  }
 
-  auto cursorTex = this->GetCursorTexture(screenDims, cursorPosition);
-  auto actualPixelDims = FVector2D(64, 64);
+    auto cursorTex = this->GetCursorTexture(screenDims, cursorPosition);
+    auto actualPixelDims = FVector2D(64, 64);
 
-  // offset by half the texture's dimensions so that the center of the texture
-  // aligns with the center of the Canvas
-  const FVector2D CrosshairDrawPosition =
-      AStarryExpanseHUD::GetCrosshairDrawPosition(
-          actualPixelDims, screenDims,
-          isLocked ? FVector2D(0.5, 0.5f) : cursorPosition);
+    // offset by half the texture's dimensions so that the center of the texture
+    // aligns with the center of the Canvas
+    const FVector2D CrosshairDrawPosition =
+        AStarryExpanseHUD::GetCrosshairDrawPosition(
+            actualPixelDims, screenDims,
+            isLocked ? FVector2D(0.5, 0.5f) : cursorPosition);
 
-  // draw the crosshair
+    // draw the crosshair
 
-  if (!UHeadMountedDisplayFunctionLibrary::IsHeadMountedDisplayEnabled()) {
-    FCanvasTileItem TileItem(CrosshairDrawPosition, cursorTex->Resource,
-                             FLinearColor::White);
-    TileItem.PivotPoint = FVector2D(0.5, 0.5);
-    TileItem.BlendMode = SE_BLEND_Translucent;
-    TileItem.Size = actualPixelDims;
-    TileItem.Z = 1000;
-    Canvas->DrawItem(TileItem);
-  }
+    if (!UHeadMountedDisplayFunctionLibrary::IsHeadMountedDisplayEnabled()) {
+      FCanvasTileItem TileItem(CrosshairDrawPosition, cursorTex->Resource,
+                              FLinearColor::White);
+      TileItem.PivotPoint = FVector2D(0.5, 0.5);
+      TileItem.BlendMode = SE_BLEND_Translucent;
+      TileItem.Size = actualPixelDims;
+      TileItem.Z = 1000;
+      Canvas->DrawItem(TileItem);
+    }
 
-  // Draw grid of colored tiles for debugging whether hits were reached
+    // Draw grid of colored tiles for debugging whether hits were reached
 
-  auto gs = Cast<ARivenGameState>(GetWorld()->GetGameState());
-  if (!gs) {
-    return;
-  }
+    auto gs = Cast<ARivenGameState>(GetWorld()->GetGameState());
+    if (!gs) {
+      return;
+    }
 
-  if (gs->IsShowingDebugHitScreenOverlay) {
-    const float kNumXDivisions = 100.0f;
-    const float kNumYDivisions = 100.0f;
-    const float kSquareWidth = width / kNumXDivisions;
-    const float kSquareHeight = height / kNumYDivisions;
+    if (gs->IsShowingDebugHitScreenOverlay) {
+      const float kNumXDivisions = 100.0f;
+      const float kNumYDivisions = 100.0f;
+      const float kSquareWidth = width / kNumXDivisions;
+      const float kSquareHeight = height / kNumYDivisions;
 
-    bool gotHit;
+      bool gotHit;
 
-    const FLinearColor kSquareColor(1.0f, 1.0f, 0.0f, 0.3f);
+      const FLinearColor kSquareColor(1.0f, 1.0f, 0.0f, 0.3f);
 
-    for (float x = 0.0f; x < width; x += kSquareWidth) {
-      for (float y = 0.0f; y < height; y += kSquareHeight) {
-        FVector worldLocation;
-        FVector worldDirection;
-        controller->DeprojectScreenPositionToWorld(
-            x + kSquareWidth / 2.0f, y + kSquareHeight / 2.0f, worldLocation,
-            worldDirection);
-        FHitResult result = controller->CastInteractionRay(
-            gotHit, worldLocation, worldDirection);
+      for (float x = 0.0f; x < width; x += kSquareWidth) {
+        for (float y = 0.0f; y < height; y += kSquareHeight) {
+          FVector worldLocation;
+          FVector worldDirection;
+          controller->DeprojectScreenPositionToWorld(
+              x + kSquareWidth / 2.0f, y + kSquareHeight / 2.0f, worldLocation,
+              worldDirection);
+          FHitResult result = controller->CastInteractionRay(
+              gotHit, worldLocation, worldDirection);
 
-        if (gotHit) {
-          auto actor = result.GetActor();
-          if (actor != nullptr && actor->GetClass()->ImplementsInterface(
-                                      URivenInteractable::StaticClass())) {
-            auto probeResponse =
-                IRivenInteractable::Execute_ProbeInteractability(actor);
-            if (probeResponse.CanBeTapped) {
-              this->DrawRect(kSquareColor, x, y, kSquareWidth, kSquareHeight);
+          if (gotHit) {
+            auto actor = result.GetActor();
+            if (actor != nullptr && actor->GetClass()->ImplementsInterface(
+                                        URivenInteractable::StaticClass())) {
+              auto probeResponse =
+                  IRivenInteractable::Execute_ProbeInteractability(actor);
+              if (probeResponse.CanBeTapped) {
+                this->DrawRect(kSquareColor, x, y, kSquareWidth, kSquareHeight);
+              }
             }
           }
         }
       }
     }
+
   }
 }
 

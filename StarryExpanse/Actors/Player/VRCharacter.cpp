@@ -184,11 +184,6 @@ void AVRCharacter::SetupPlayerInputComponent(
   PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this,
                                    &AVRCharacter::OnResetVR);
 
-  // Bind movement events
-  // PlayerInputComponent->BindAxis("MoveForward", this,
-  //                                &AVRCharacter::MoveForward);
-  // PlayerInputComponent->BindAxis("MoveRight", this, &AVRCharacter::MoveRight);
-
   // We have 2 versions of the rotation bindings to handle different kinds of
   // devices differently "turn" handles devices that provide an absolute delta,
   // such as a mouse. "turnrate" is for devices that we choose to treat as a
