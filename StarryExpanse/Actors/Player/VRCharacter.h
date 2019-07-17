@@ -3,7 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Engine/Engine.h"
 #include "GameFramework/Character.h"
+#include "GameFramework/CharacterMovementComponent.h"
+#include "Runtime/Engine/Classes/Camera/CameraComponent.h"
+#include "Runtime/HeadMountedDisplay/Public/IHeadMountedDisplay.h"
+#include "Runtime/HeadMountedDisplay/Public/IXRTrackingSystem.h" // XRSystem
+#include "Runtime/HeadMountedDisplay/Public/HeadMountedDisplayFunctionLibrary.h"
+#include "SteamVRChaperoneComponent.h"
 #include "VRCharacter.generated.h"
 
 class UInputComponent;
