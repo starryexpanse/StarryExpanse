@@ -14,7 +14,8 @@ AStarryExpanseGameMode::AStarryExpanseGameMode() : Super() {
   DefaultPawnClass = PlayerPawnClassFinder.Class;
 
   static ConstructorHelpers::FClassFinder<APawn> VrPawnClassFinder(
-      TEXT("/Game/StarryExpanse/Core/Player/VR/BP_VRCharacter"));
+      //    TEXT("/Game/StarryExpanse/Core/Player/VR/BP_VRCharacter"));
+      TEXT("/Game/VirtualRealityBP/Blueprints/MotionControllerPawn"));
   VrPawnClass = VrPawnClassFinder.Class;
 
   // set default pawn class to our Blueprinted character
