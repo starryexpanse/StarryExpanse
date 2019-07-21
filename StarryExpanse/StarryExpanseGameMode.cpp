@@ -18,7 +18,14 @@ AStarryExpanseGameMode::AStarryExpanseGameMode() : Super() {
   VrPawnClass = VrPawnClassFinder.Class;
 
   // set default pawn class to our Blueprinted character
-  PlayerControllerClass = AStrangerController::StaticClass();
+
+  static ConstructorHelpers::FClassFinder<AStrangerController>
+      ControllerClassFinder(
+          TEXT("/Game/StarryExpanse/Core/Player/BP_StrangerController"));
+  PlayerControllerClass = ControllerClassFinder.Class;
+
+  // // Comment this out to just use AStrangerController no matter what (for
+  // debugging): PlayerControllerClass = AStrangerController::StaticClass();
 
   static ConstructorHelpers::FClassFinder<AStarryExpanseHUD> HudClassFinder(
       TEXT("/Game/StarryExpanse/Interface/Widgets/BP_HUD_Root.BP_HUD_Root_C"));

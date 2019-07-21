@@ -193,14 +193,21 @@ void AStrangerController::PossiblyFreezeOrUnfreeze() {
 }
 
 void AStrangerController::Destroyed() {
-  auto gameInstance = Cast<URivenGameInstance>(GetWorld()->GetGameInstance());
-  gameInstance->GameInstanceVarsChanged.RemoveDynamic(
-      this, &AStrangerController::PossiblyFreezeOrUnfreeze);
+  auto world = GetWorld();
 
-  auto gs = Cast<ARivenGameState>(GetWorld()->GetGameState());
-  gs->MenuStateChangedEvent.Remove(MenuStateChanged);
+  if (world) {
+    auto gameInstance = Cast<URivenGameInstance>(GetWorld()->GetGameInstance());
+    auto gs = Cast<ARivenGameState>(GetWorld()->GetGameState());
 
-  STARRY_CRITICAL("Controller destroyed");
+    if (gameInstance && gs) {
+      gameInstance->GameInstanceVarsChanged.RemoveDynamic(
+          this, &AStrangerController::PossiblyFreezeOrUnfreeze);
+
+      gs->MenuStateChangedEvent.Remove(MenuStateChanged);
+
+      STARRY_CRITICAL("Controller destroyed");
+    }
+  }
 }
 
 /*
