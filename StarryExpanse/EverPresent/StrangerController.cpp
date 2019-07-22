@@ -78,8 +78,13 @@ void AStrangerController::SetupInputComponent() {
 }
 
 void AStrangerController::AddHorizontalMousePan(float amount) {
-  if (IsCursorLockedToCenter) {
-    this->AddYawInput(amount);
+  auto gameMode = Cast<AStarryExpanseGameMode>(GetWorld()->GetAuthGameMode());
+  auto ginst = Cast<URivenGameInstance>(GetWorld()->GetGameInstance());
+
+  if (gameMode && ginst && !ginst->bWasAppStartedInVRMode) {
+    if (IsCursorLockedToCenter) {
+      this->AddYawInput(amount);
+    }
   }
 }
 
