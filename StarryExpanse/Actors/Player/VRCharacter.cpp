@@ -144,6 +144,34 @@ void AVRCharacter::SetupHMD() {
   }
 }
 
+FVector2D AVRCharacter::FindCentroidOfPolygon(TArray<FVector2D> RingPoints) {
+    FVector2D centroid = FVector2D::ZeroVector;
+
+    double netArea = 0.0;
+	  int length = RingPoints.Num();
+    int i = 0;
+
+    for (i = 0; i < length; i++)
+    {
+      double x0 = RingPoints[i % length].X;
+      double y0 = RingPoints[i % length].Y;
+      double x1 = RingPoints[(i + 1) % length].X;
+      double y1 = RingPoints[(i + 1) % length].Y;
+
+      double signedArea = x0*y1 - x1*y0;
+      netArea += signedArea;
+	    centroid.X += (x0 + x1) * signedArea;
+      centroid.Y += (y0 + y1) * signedArea;
+    }
+
+    netArea *= 0.5;
+
+    centroid.X /= (6.0 * netArea);
+    centroid.Y /= (6.0 * netArea);
+
+    return centroid;
+}
+
 void AVRCharacter::BeginPlay() {
   // Call the base class
   Super::BeginPlay();

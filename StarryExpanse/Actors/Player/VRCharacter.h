@@ -11,6 +11,7 @@
 #include "Runtime/HeadMountedDisplay/Public/IXRTrackingSystem.h" // XRSystem
 #include "Runtime/HeadMountedDisplay/Public/HeadMountedDisplayFunctionLibrary.h"
 #include "SteamVRChaperoneComponent.h"
+
 #include "VRCharacter.generated.h"
 
 class UInputComponent;
@@ -82,6 +83,9 @@ public:
 
   UFUNCTION()
   void SetupHMD();
+
+  UFUNCTION(BlueprintPure, BlueprintCallable)
+  FVector2D FindCentroidOfPolygon(TArray<FVector2D> RingPoints);
 
 protected:
   /** Fires a projectile. */
