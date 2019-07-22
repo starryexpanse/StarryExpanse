@@ -1,6 +1,7 @@
 // Copyright 1998-2017 Epic Games, Inc. All Rights Reserved.
 
 using UnrealBuildTool;
+using System.IO;
 
 public class StarryExpanse : ModuleRules
 {
@@ -22,5 +23,11 @@ public class StarryExpanse : ModuleRules
 			"SteamVR",
 			"SteamVRController"
 		});
+
+		var ThirdPartyPath = Path.Combine( ModuleDirectory, "../../ThirdParty/" );
+		var IncludesPath = Path.Combine(ThirdPartyPath, "BoostInternalLibrary", "includes");
+
+		PublicIncludePaths.Add(IncludesPath);
+		PublicSystemIncludePaths.Add(IncludesPath);
 	}
 }
