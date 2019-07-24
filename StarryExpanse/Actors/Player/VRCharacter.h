@@ -87,6 +87,9 @@ public:
   UFUNCTION(BlueprintPure, BlueprintCallable)
   FVector2D FindCentroidOfPolygon(TArray<FVector2D> RingPoints);
 
+  UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+  void OnTurn(float Amount);
+
 protected:
   /** Fires a projectile. */
   void OnFire();

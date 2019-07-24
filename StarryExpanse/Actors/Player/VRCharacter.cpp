@@ -245,6 +245,8 @@ void AVRCharacter::EndTouch(const ETouchIndex::Type FingerIndex,
   TouchItem.bIsPressed = false;
 }
 
+void AVRCharacter::OnTurn_Implementation(float Amount) {}
+
 bool AVRCharacter::EnableTouchscreenMovement(
     class UInputComponent *PlayerInputComponent) {
   if (FPlatformMisc::SupportsTouchInput() ||

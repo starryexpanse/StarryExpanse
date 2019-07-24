@@ -11,6 +11,7 @@
 #include "Runtime/Engine/Public/CollisionQueryParams.h"
 #include "Engine/Engine.h"
 #include "RivenGameInstance.h"
+#include "Actors/Player/VRCharacter.h"
 #include "StarryExpanse.h"
 
 AStrangerController::AStrangerController() {
@@ -81,9 +82,17 @@ void AStrangerController::AddHorizontalMousePan(float amount) {
   auto gameMode = Cast<AStarryExpanseGameMode>(GetWorld()->GetAuthGameMode());
   auto ginst = Cast<URivenGameInstance>(GetWorld()->GetGameInstance());
 
-  if (gameMode && ginst && !ginst->bWasAppStartedInVRMode) {
-    if (IsCursorLockedToCenter) {
-      this->AddYawInput(amount);
+  if (gameMode && ginst) {
+    if (!ginst->bWasAppStartedInVRMode) {
+      if (IsCursorLockedToCenter) {
+        this->AddYawInput(amount);
+      }
+    } else {
+      auto Character = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
+      auto VrCharacter = Cast<AVRCharacter>(Character);
+      if (VrCharacter) {
+        VrCharacter->OnTurn(amount);
+      }
     }
   }
 }
