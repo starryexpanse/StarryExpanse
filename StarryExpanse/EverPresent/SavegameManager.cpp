@@ -111,7 +111,9 @@ void ASavegameManager::Cbk_OurLoadgroupLoaded() {
       pawnClass, transform.GetLocation(), transform.Rotator(), params);
 
   auto controller = UGameplayStatics::GetPlayerController(GetWorld(), 0);
-  controller->Possess(pawn);
+  if (controller) {
+    controller->Possess(pawn);
+  }
 
   gs->SetMenuPage(EGameMenuPage::NoPage);
   this->GameLoadedEvent.Broadcast();

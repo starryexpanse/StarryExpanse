@@ -8,6 +8,8 @@ auto controller = UGameplayStatics::GetPlayerController(GetWorld(), 0);
 check(controller);
 ```
 
+Note that the controller is often NULL if the game doesn't fully start (e.g. simulating).
+
 # Getting HUD
 
 ```
