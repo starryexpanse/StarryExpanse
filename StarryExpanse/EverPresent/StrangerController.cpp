@@ -16,6 +16,59 @@
 
 AStrangerController::AStrangerController() {
   MenuStateChanged.BindUFunction(this, "Cbk_MenuStateChanged");
+
+  auto world = GetWorld();
+  if (world) {
+    auto gameMode = Cast<AStarryExpanseGameMode>(world->GetAuthGameMode());
+    auto ginst = Cast<URivenGameInstance>(world->GetGameInstance());
+
+    if (gameMode && ginst && ginst->bWasAppStartedInVRMode) {
+      PrimaryActorTick.bCanEverTick = true;
+    }
+  }
+}
+
+void AStrangerController::Tick(float DeltaTime) {
+  Super::Tick(DeltaTime);
+
+  auto Character = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
+  auto VrCharacter = Cast<AVRCharacter>(Character);
+  if (VrCharacter) {
+    auto handTransform = VrCharacter->GetPointerHandTransform();
+
+    bool gotHit;
+    auto handForward = handTransform.TransformVector(FVector::ForwardVector);
+    handForward.Normalize();
+
+    auto params = FCollisionQueryParams::DefaultQueryParam;
+    params.AddIgnoredActor(VrCharacter);
+
+    auto hitResult = this->CastInteractionRay(
+        gotHit, handTransform.TransformPosition(FVector::ZeroVector),
+        handForward, params);
+
+    AActor *hitActor = nullptr;
+
+    if (gotHit) {
+      hitActor = hitResult.GetActor();
+    }
+
+    if (hitActor && hitActor->GetClass()->ImplementsInterface(
+                        URivenInteractable::StaticClass())) {
+      if (PreviouslyLookingAtInteractable) {
+        IRivenInteractable::Execute_LookingAt_End(
+            PreviouslyLookingAtInteractable);
+      }
+      PreviouslyLookingAtInteractable = hitActor;
+      IRivenInteractable::Execute_LookingAt_Begin(hitActor, hitResult);
+    } else {
+      if (PreviouslyLookingAtInteractable) {
+        IRivenInteractable::Execute_LookingAt_End(
+            PreviouslyLookingAtInteractable);
+        PreviouslyLookingAtInteractable = nullptr;
+      }
+    }
+  }
 }
 
 void AStrangerController::BeginPlay() {
@@ -154,8 +207,9 @@ void AStrangerController::Interact() {
   if (!Camera)
     return;
 
-  auto hitResult = this->CastInteractionRay(gotHit, ViewLocation,
-                                            Camera->GetForwardVector());
+  auto hitResult =
+      this->CastInteractionRay(gotHit, ViewLocation, Camera->GetForwardVector(),
+                               FCollisionQueryParams::DefaultQueryParam);
 
   if (gotHit) {
     auto hitActor = hitResult.GetActor();
@@ -166,15 +220,16 @@ void AStrangerController::Interact() {
   }
 }
 
-FHitResult AStrangerController::CastInteractionRay(bool &gotHit,
-                                                   FVector worldLocation,
-                                                   FVector worldDirection) {
+FHitResult
+AStrangerController::CastInteractionRay(bool &gotHit, FVector worldLocation,
+                                        FVector worldDirection,
+                                        FCollisionQueryParams Params) {
 
   gotHit = false;
 
   struct FHitResult HitResult;
 
-  auto viewTarget = this->GetViewTarget();
+  /*auto viewTarget = this->GetViewTarget();
   if (!viewTarget)
     return HitResult;
 
@@ -185,9 +240,7 @@ FHitResult AStrangerController::CastInteractionRay(bool &gotHit,
 
   auto Camera = Cast<UCameraComponent>(Cameras[0]);
   if (!Camera)
-    return HitResult;
-
-  FCollisionQueryParams Params = FCollisionQueryParams::DefaultQueryParam;
+    return HitResult;*/
   FCollisionResponseParams ResponseParams =
       FCollisionResponseParams::DefaultResponseParam;
 

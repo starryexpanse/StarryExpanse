@@ -90,6 +90,9 @@ public:
   UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
   void OnTurn(float Amount);
 
+  UFUNCTION()
+  FTransform GetPointerHandTransform();
+
 protected:
   /** Fires a projectile. */
   void OnFire();

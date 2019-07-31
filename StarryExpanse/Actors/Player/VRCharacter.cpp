@@ -63,6 +63,14 @@ AVRCharacter::AVRCharacter() {
   PrimaryActorTick.bCanEverTick = true;
 }
 
+FTransform AVRCharacter::GetPointerHandTransform() {
+  if (R_MotionController) {
+    return R_MotionController->GetComponentTransform();
+  } else {
+    return FTransform::Identity;
+  }
+}
+
 void AVRCharacter::Tick(float DeltaTime) {
   Super::Tick(DeltaTime);
 

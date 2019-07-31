@@ -35,7 +35,7 @@ public:
 
   // RivenInteractable:
   UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-  void LookingAt_Begin();
+  void LookingAt_Begin(FHitResult HitInfo);
 
   UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
   void LookingAt_End();

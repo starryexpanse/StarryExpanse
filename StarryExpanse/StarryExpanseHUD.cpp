@@ -6,6 +6,7 @@
 #include "Engine/Canvas.h"
 #include "Engine/Texture2D.h"
 #include "Runtime/HeadMountedDisplay/Public/HeadMountedDisplayFunctionLibrary.h"
+#include "Runtime/Engine/Public/CollisionQueryParams.h"
 #include "Interfaces/RivenInteractable.h"
 #include "TextureResource.h"
 #include "UObject/ConstructorHelpers.h"
@@ -51,8 +52,9 @@ UTexture2D *AStarryExpanseHUD::GetCursorTexture(FVector2D screenDims,
     controller->DeprojectScreenPositionToWorld(screenDims.X * cursorPosition.X,
                                                screenDims.Y * cursorPosition.Y,
                                                worldLocation, worldDirection);
-    FHitResult result =
-        controller->CastInteractionRay(gotHit, worldLocation, worldDirection);
+    FHitResult result = controller->CastInteractionRay(
+        gotHit, worldLocation, worldDirection,
+        FCollisionQueryParams::DefaultQueryParam);
 
     if (gotHit) {
       auto actor = result.GetActor();
@@ -146,7 +148,8 @@ void AStarryExpanseHUD::DrawHUD() {
               x + kSquareWidth / 2.0f, y + kSquareHeight / 2.0f, worldLocation,
               worldDirection);
           FHitResult result = controller->CastInteractionRay(
-              gotHit, worldLocation, worldDirection);
+              gotHit, worldLocation, worldDirection,
+              FCollisionQueryParams::DefaultQueryParam);
 
           if (gotHit) {
             auto actor = result.GetActor();

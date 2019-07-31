@@ -90,7 +90,8 @@ void ASimpleSkeletalResponder::Initialize(
   }
 }
 
-void ASimpleSkeletalResponder::LookingAt_Begin_Implementation() {}
+void ASimpleSkeletalResponder::LookingAt_Begin_Implementation(
+    FHitResult HitInfo) {}
 
 void ASimpleSkeletalResponder::LookingAt_End_Implementation() {}
 

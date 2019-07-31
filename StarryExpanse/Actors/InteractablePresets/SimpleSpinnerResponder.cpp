@@ -121,7 +121,8 @@ void ASimpleSpinnerResponder::Initialize(FInteractableSettingsAxial settings) {
   }
 }
 
-void ASimpleSpinnerResponder::LookingAt_Begin_Implementation() {
+void ASimpleSpinnerResponder::LookingAt_Begin_Implementation(
+    FHitResult HitInfo) {
   UGameInstance *game = GetGameInstance();
   if (!game)
     return;

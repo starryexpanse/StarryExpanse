@@ -7,6 +7,7 @@
 #include "Structs/InteractabilityProbeResponse.h"
 #include "Structs/DragCallbackPreferences.h"
 #include "Runtime/Engine/Public/CollisionQueryParams.h"
+#include "Runtime/Engine/Classes/Engine/EngineTypes.h"
 #include "Runtime/CoreUObject/Public/UObject/Interface.h"
 #include "RivenInteractable.generated.h"
 
@@ -23,7 +24,7 @@ class IRivenInteractable {
 
 public:
   UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Gameplay)
-  void LookingAt_Begin();
+  void LookingAt_Begin(FHitResult HitInfo);
 
   UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Gameplay)
   void LookingAt_End();

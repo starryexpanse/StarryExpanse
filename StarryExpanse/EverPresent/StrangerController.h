@@ -8,6 +8,8 @@
 #include "GameFramework/PlayerController.h"
 #include "Enums/EGameMenuPage.h"
 #include "Templates/SharedPointer.h"
+#include "Interfaces/RivenInteractable.h"
+#include "Runtime/Engine/Public/CollisionQueryParams.h"
 #include "StrangerController.generated.h"
 
 UCLASS()
@@ -17,8 +19,13 @@ class STARRYEXPANSE_API AStrangerController : public APlayerController {
 public:
   AStrangerController();
 
+  virtual void Tick(float DeltaTime) override;
+
   UPROPERTY(BlueprintReadOnly)
   bool IsCursorLockedToCenter;
+
+  UPROPERTY()
+  AActor *PreviouslyLookingAtInteractable;
 
   UFUNCTION()
   void PossiblyFreezeOrUnfreeze();
@@ -32,9 +39,9 @@ public:
   UFUNCTION()
   void EnterCursorMode(bool fixed);
 
-  UFUNCTION()
   FHitResult CastInteractionRay(bool &gotHit, FVector worldLocation,
-                                FVector worldDirection);
+                                FVector worldDirection,
+                                FCollisionQueryParams collisionParams);
 
   UFUNCTION(BlueprintCallable)
   void AddHorizontalMousePan(float amount);
