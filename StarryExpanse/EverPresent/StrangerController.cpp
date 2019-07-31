@@ -55,12 +55,14 @@ void AStrangerController::Tick(float DeltaTime) {
 
     if (hitActor && hitActor->GetClass()->ImplementsInterface(
                         URivenInteractable::StaticClass())) {
-      if (PreviouslyLookingAtInteractable) {
+      if (PreviouslyLookingAtInteractable && PreviouslyLookingAtInteractable != hitActor) {
         IRivenInteractable::Execute_LookingAt_End(
             PreviouslyLookingAtInteractable);
       }
-      PreviouslyLookingAtInteractable = hitActor;
-      IRivenInteractable::Execute_LookingAt_Begin(hitActor, hitResult);
+      if (PreviouslyLookingAtInteractable != hitActor) {
+        PreviouslyLookingAtInteractable = hitActor;
+        IRivenInteractable::Execute_LookingAt_Begin(hitActor, hitResult);
+      }
     } else {
       if (PreviouslyLookingAtInteractable) {
         IRivenInteractable::Execute_LookingAt_End(
