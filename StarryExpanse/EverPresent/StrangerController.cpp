@@ -223,6 +223,36 @@ void AStrangerController::Interact() {
   }
 }
 
+void AStrangerController::InteractVR() {
+  auto Character = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
+  auto VrCharacter = Cast<AVRCharacter>(Character);
+  if (VrCharacter) {
+    auto handTransform = VrCharacter->GetPointerHandTransform();
+
+    bool gotHit;
+    auto handForward = handTransform.TransformVector(FVector::ForwardVector);
+    handForward.Normalize();
+
+    auto params = FCollisionQueryParams::DefaultQueryParam;
+    params.AddIgnoredActor(VrCharacter);
+
+    auto hitResult = this->CastInteractionRay(
+        gotHit, handTransform.TransformPosition(FVector::ZeroVector),
+        handForward, params);
+
+    AActor *hitActor = nullptr;
+
+    if (gotHit) {
+      hitActor = hitResult.GetActor();
+    }
+
+    if (hitActor && hitActor->GetClass()->ImplementsInterface(
+                        URivenInteractable::StaticClass())) {
+      IRivenInteractable::Execute_Touched(hitActor);
+    }
+  }
+}
+
 FHitResult
 AStrangerController::CastInteractionRay(bool &gotHit, FVector worldLocation,
                                         FVector worldDirection,

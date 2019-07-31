@@ -3,6 +3,7 @@
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/InputComponent.h"
+#include "EverPresent/StrangerController.h"
 #include "GameFramework/InputSettings.h"
 #include "HeadMountedDisplayFunctionLibrary.h"
 #include "Kismet/GameplayStatics.h"
@@ -210,11 +211,8 @@ void AVRCharacter::SetupPlayerInputComponent(
                                    &ACharacter::StopJumping);
 
   // Bind fire event
-  PlayerInputComponent->BindAction("Fire", IE_Pressed, this,
+  PlayerInputComponent->BindAction("Interact", IE_Pressed, this,
                                    &AVRCharacter::OnFire);
-
-  // Enable touchscreen input
-  EnableTouchscreenMovement(PlayerInputComponent);
 
   PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this,
                                    &AVRCharacter::OnResetVR);
@@ -225,50 +223,22 @@ void AVRCharacter::SetupPlayerInputComponent(
   // rate of change, such as an analog joystick
 }
 
-void AVRCharacter::OnFire() {}
+void AVRCharacter::OnFire() {
+  auto world = GetWorld();
+
+  if (world) {
+    auto controller = UGameplayStatics::GetPlayerController(world, 0);
+    if (controller) {
+      auto strangerController = Cast<AStrangerController>(controller);
+      if (strangerController) {
+        strangerController->InteractVR();
+      }
+    }
+  }
+}
 
 void AVRCharacter::OnResetVR() {
   UHeadMountedDisplayFunctionLibrary::ResetOrientationAndPosition();
 }
 
-void AVRCharacter::BeginTouch(const ETouchIndex::Type FingerIndex,
-                              const FVector Location) {
-  if (TouchItem.bIsPressed == true) {
-    return;
-  }
-  if ((FingerIndex == TouchItem.FingerIndex) && (TouchItem.bMoved == false)) {
-    OnFire();
-  }
-  TouchItem.bIsPressed = true;
-  TouchItem.FingerIndex = FingerIndex;
-  TouchItem.Location = Location;
-  TouchItem.bMoved = false;
-}
-
-void AVRCharacter::EndTouch(const ETouchIndex::Type FingerIndex,
-                            const FVector Location) {
-  if (TouchItem.bIsPressed == false) {
-    return;
-  }
-  TouchItem.bIsPressed = false;
-}
-
 void AVRCharacter::OnTurn_Implementation(float Amount) {}
-
-bool AVRCharacter::EnableTouchscreenMovement(
-    class UInputComponent *PlayerInputComponent) {
-  if (FPlatformMisc::SupportsTouchInput() ||
-      GetDefault<UInputSettings>()->bUseMouseForTouch) {
-    PlayerInputComponent->BindTouch(EInputEvent::IE_Pressed, this,
-                                    &AVRCharacter::BeginTouch);
-    PlayerInputComponent->BindTouch(EInputEvent::IE_Released, this,
-                                    &AVRCharacter::EndTouch);
-
-    // Commenting this out to be more consistent with FPS BP template.
-    // PlayerInputComponent->BindTouch(EInputEvent::IE_Repeat, this,
-    // &AVRCharacter::TouchUpdate);
-    return true;
-  }
-
-  return false;
-}

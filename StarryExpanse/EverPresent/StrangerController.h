@@ -34,6 +34,9 @@ public:
   void Interact();
 
   UFUNCTION()
+  void InteractVR();
+
+  UFUNCTION()
   void RequestSwitchCursorMode();
 
   UFUNCTION()
