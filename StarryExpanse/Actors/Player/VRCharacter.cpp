@@ -211,7 +211,7 @@ void AVRCharacter::SetupPlayerInputComponent(
                                    &ACharacter::StopJumping);
 
   // Bind fire event
-  PlayerInputComponent->BindAction("Interact", IE_Pressed, this,
+  PlayerInputComponent->BindAction("InteractVR", IE_Pressed, this,
                                    &AVRCharacter::OnFire);
 
   PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this,
