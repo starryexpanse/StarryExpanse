@@ -13,4 +13,7 @@ public:
 
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Classes)
   TSubclassOf<APawn> VrPawnClass;
+
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Classes)
+  TSubclassOf<APawn> VrTeleportPawnClass;
 };

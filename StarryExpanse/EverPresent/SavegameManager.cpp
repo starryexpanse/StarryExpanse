@@ -102,8 +102,11 @@ void ASavegameManager::Cbk_OurLoadgroupLoaded() {
   check(gameMode);
   auto ginst = Cast<URivenGameInstance>(GetWorld()->GetGameInstance());
   check(ginst);
-  auto pawnClass = ginst->bWasAppStartedInVRMode ? gameMode->VrPawnClass
-                                                 : gameMode->DefaultPawnClass;
+  auto pawnClass = ginst->bWasAppStartedInVRMode ? 
+                      ginst->bWasAppStartedInVRTeleportMode
+                          ? gameMode->VrTeleportPawnClass
+                          : gameMode->VrPawnClass
+                      : gameMode->DefaultPawnClass;
 
   auto transform = gs->Instantaneous_SaveGame->Get_A_RivenCharacter_Transform();
 

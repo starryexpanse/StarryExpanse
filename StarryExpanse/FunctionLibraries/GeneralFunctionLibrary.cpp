@@ -51,3 +51,21 @@ bool UGeneralFunctionLibrary::GetIsVrGame() {
 
   return value;
 }
+
+
+bool UGeneralFunctionLibrary::GetIsVrTeleportGame() {
+  if (!GetIsVrGame()) {
+    return false;
+  }
+
+  FConfigFile config;
+  FConfigCacheIni::LoadLocalIniFile(config, TEXT("StarryExpanse"), false,
+                                    nullptr, true);
+
+  auto entry = config.Find("Game");
+  auto valueUnchecked = entry->Find("IsUsingTeleport");
+  bool value =
+      valueUnchecked ? valueUnchecked->GetValue().ToLower() == "true" : false;
+
+  return value;
+}

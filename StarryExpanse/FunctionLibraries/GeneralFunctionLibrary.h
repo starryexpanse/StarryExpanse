@@ -23,4 +23,7 @@ public:
 
   UFUNCTION(BlueprintCallable, Category = "General Function Library")
   static bool GetIsVrGame();
+
+  UFUNCTION(BlueprintCallable, Category = "General Function Library")
+  static bool GetIsVrTeleportGame();
 };

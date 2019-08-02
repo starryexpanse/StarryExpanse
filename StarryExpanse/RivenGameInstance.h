@@ -36,6 +36,9 @@ public:
   UPROPERTY(BlueprintReadWrite)
   bool bWasAppStartedInVRMode;
 
+  UPROPERTY(BlueprintReadWrite)
+  bool bWasAppStartedInVRTeleportMode;
+
   UPROPERTY(BlueprintReadOnly)
   bool bIsFrozenForLoading;
 
@@ -52,6 +55,9 @@ public:
 
   UFUNCTION(BlueprintCallable, Category = "StarryExpanse VR")
   void SetWasAppStartedInVRMode(bool value);
+
+  UFUNCTION(BlueprintCallable, Category = "StarryExpanse VR")
+  void SetWasAppStartedInVRTeleportMode(bool value);
 
   UFUNCTION(BlueprintCallable, Category = "SaveGame")
   void RegisterSaveGameBlocker(FName blockerName);
