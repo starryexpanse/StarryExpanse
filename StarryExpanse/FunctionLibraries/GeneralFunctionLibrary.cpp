@@ -52,7 +52,6 @@ bool UGeneralFunctionLibrary::GetIsVrGame() {
   return value;
 }
 
-
 bool UGeneralFunctionLibrary::GetIsVrTeleportGame() {
   if (!GetIsVrGame()) {
     return false;

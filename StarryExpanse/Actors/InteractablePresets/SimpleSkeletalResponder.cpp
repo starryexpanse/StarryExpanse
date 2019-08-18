@@ -5,6 +5,7 @@
 #include "Engine/Engine.h"
 #include "Kismet/GameplayStatics.h"
 #include "RivenGameState.h"
+#include "Runtime/Engine/Public/ComponentInstanceDataCache.h"
 #include "Runtime/CoreUObject/Public/UObject/ConstructorHelpers.h"
 #include "Runtime/Engine/Classes/Engine/EngineTypes.h"
 #include "Runtime/Engine/Classes/Engine/GameViewportClient.h"
@@ -20,6 +21,15 @@ ASimpleSkeletalResponder::ASimpleSkeletalResponder(
   PrimaryActorTick.bCanEverTick = true;
   // TODO(cmumford): Should only enable ticks when animation is running.
   PrimaryActorTick.bStartWithTickEnabled = true;
+
+  auto sceneComponent =
+      ObjectInitializer.CreateDefaultSubobject<USceneComponent>(
+          this, TEXT("RootComponent"));
+  RootComponent = sceneComponent;
+
+  MainSkeleton =
+      ObjectInitializer.CreateDefaultSubobject<USkeletalMeshComponent>(
+          this, TEXT("MainSkeleton"));
 }
 
 void ASimpleSkeletalResponder::BeginPlay() { AActor::BeginPlay(); }
@@ -76,6 +86,25 @@ void ASimpleSkeletalResponder::Initialize(
   this->ForwardsAnimation = settings.ForwardsAnimation;
   this->MainSkeleton = settings.MainSkeleton;
   this->IsFalseAtEnd = settings.IsFalseAtEnd;
+
+  // Configure Main Skeleton's collision
+
+  this->MainSkeleton->SetCollisionProfileName(FName(TEXT("Custom")));
+
+  auto bodyInst = this->MainSkeleton->GetBodyInstance();
+  TArray<FResponseChannel> ResponsesArray{
+      FResponseChannel{FName(TEXT("Visibility")),
+                       ECollisionResponse::ECR_Ignore},
+      FResponseChannel{FName(TEXT("Camera")), ECollisionResponse::ECR_Ignore},
+      FResponseChannel{FName(TEXT("StarryInteract")),
+                       ECollisionResponse::ECR_Overlap}};
+
+  if (bodyInst) {
+    auto collisionResponse = bodyInst->GetCollisionResponse();
+    collisionResponse.SetResponsesArray(ResponsesArray);
+  }
+
+  ////
 
   // if (settings.SoundConfiguration) {
   //  this->SoundConfiguration = settings.SoundConfiguration;
